@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://d4mksw1nihjx5"]
 
+[ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scenes/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cgj1gif3gkgfm" path="res://Textures/Sprites/Character.png" id="1_v0iea"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
@@ -18,6 +19,8 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=1972239113]
+motion_mode = 1
+script = ExtResource("1_cvnsp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=494512027]
 sprite_frames = SubResource("SpriteFrames_6t5aa")
