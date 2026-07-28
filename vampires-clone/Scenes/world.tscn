@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://mmnk0qyj4ali"]
+
+[ext_resource type="Texture2D" uid="uid://fl018gp173cx" path="res://Textures/Tiles/Grass.png" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://d4mksw1nihjx5" path="res://Scenes/player.tscn" id="2_go701"]
+
+[node name="World" type="Node2D" unique_id=26020053]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=167768035]
+texture_filter = 1
+texture_repeat = 2
+texture = ExtResource("1_a02cp")
+region_enabled = true
+region_rect = Rect2(0, 0, 4000, 4000)
+
+[node name="Player" parent="." unique_id=1972239113 instance=ExtResource("2_go701")]

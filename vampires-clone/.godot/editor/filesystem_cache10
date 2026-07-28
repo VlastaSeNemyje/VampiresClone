@@ -1,3 +1,13 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1785246358
+::res://::1785246482
 icon.svg::CompressedTexture2D::6816271246720809138::1785246094::1785246274::1::::<><><>0<>0<>303031f276968bd467eebe20d4760c98<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://Fonts/::1785246482
+::res://Scenes/::1785246386
+::res://Scripts/::1785246381
+::res://Sounds/::1785246420
+::res://Sounds/Music/::1785246420
+::res://Textures/::1785246411
+::res://Textures/Sprites/::1785246727
+Character.png::CompressedTexture2D::5214143614767725118::1785246724::1785246727::1::::<><><>0<>0<>894320d517b2a4011327f7828f2d1d95<>res://.godot/imported/Character.png-7a6f7db8e1d7e9a0021b73e95bf13e63.ctex::
+::res://Textures/Tiles/::1785246953
+Grass.png::CompressedTexture2D::375218472202455883::1785246953::1785246955::1::::<><><>0<>0<>dd20aec1de724bb8ce6978e477d99401<>res://.godot/imported/Grass.png-f8693806bc88da28d10c53a6650d9ce4.ctex::
