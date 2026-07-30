@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://fl018gp173cx" path="res://Textures/Tiles/Grass.png" id="1_a02cp"]
 [ext_resource type="PackedScene" uid="uid://d4mksw1nihjx5" path="res://Scenes/player.tscn" id="2_go701"]
+[ext_resource type="PackedScene" uid="uid://cdtkhmhdppka" path="res://Scenes/enemy.tscn" id="3_5a7ea"]
 
 [node name="World" type="Node2D" unique_id=26020053]
 
@@ -13,3 +14,6 @@ region_enabled = true
 region_rect = Rect2(0, 0, 4000, 4000)
 
 [node name="Player" parent="." unique_id=1972239113 instance=ExtResource("2_go701")]
+
+[node name="Enemy" parent="." unique_id=1581481056 instance=ExtResource("3_5a7ea")]
+position = Vector2(131, 61)
