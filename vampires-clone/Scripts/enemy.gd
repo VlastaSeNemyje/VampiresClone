@@ -16,3 +16,9 @@ func _physics_process(_delta):
 	elif direction.x < -0.1:
 		animated_sprite_2d.flip_h = false
 	
+
+
+func _on_hurt_box_hurt(damage):
+	hp -= damage
+	if hp <= 0:
+		queue_free()

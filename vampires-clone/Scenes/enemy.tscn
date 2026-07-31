@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b1t3flr4tf40w" path="res://Scripts/enemy.gd" id="1_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://ceodc7820ekix" path="res://Textures/Sprites/Enemy.png" id="1_hghv2"]
+[ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_afpow"]
+[ext_resource type="PackedScene" uid="uid://cthuwwjhu3woh" path="res://Utility/hit_box.tscn" id="4_287tu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1f0kj"]
 atlas = ExtResource("1_hghv2")
@@ -22,6 +24,12 @@ animations = [{
 radius = 4.0
 height = 19.642855
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_287tu"]
+size = Vector2(13, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0830c"]
+size = Vector2(12, 19)
+
 [node name="Enemy" type="CharacterBody2D" unique_id=1581481056]
 script = ExtResource("1_1f0kj")
 
@@ -32,3 +40,25 @@ sprite_frames = SubResource("SpriteFrames_afpow")
 position = Vector2(-0.99999994, -3)
 scale = Vector2(1, 1.1200001)
 shape = SubResource("CapsuleShape2D_1f0kj")
+
+[node name="HurtBox" parent="." unique_id=1129910364 instance=ExtResource("3_afpow")]
+visible = false
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="HurtBox" index="0" unique_id=486513834]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_287tu")
+
+[node name="HitBox" parent="." unique_id=1387451001 instance=ExtResource("4_287tu")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0" unique_id=839422151]
+position = Vector2(-1, -0.5)
+shape = SubResource("RectangleShape2D_0830c")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

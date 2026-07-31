@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://cgj1gif3gkgfm" path="res://Textures/Sprites/Character.png" id="1_v0iea"]
+[ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_6t5aa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
 atlas = ExtResource("1_v0iea")
@@ -19,8 +20,11 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvnsp"]
-radius = 4.0
+radius = 3.0
 height = 22.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vgqql"]
+size = Vector2(11, 21)
 
 [node name="Player" type="CharacterBody2D" unique_id=1972239113 groups=["player"]]
 motion_mode = 1
@@ -31,7 +35,20 @@ sprite_frames = SubResource("SpriteFrames_6t5aa")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=635807448]
+visible = false
 position = Vector2(-1, -2)
 shape = SubResource("CapsuleShape2D_cvnsp")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=607192347]
+
+[node name="HurtBox" parent="." unique_id=1129910364 instance=ExtResource("3_6t5aa")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HurtBox" index="0" unique_id=486513834]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_vgqql")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
