@@ -1,16 +1,18 @@
 extends Area2D
 
 @export var damage = 1
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var disable_hit_box_timer: Timer = $DisableHitBoxTimer
+@onready var collision = $CollisionShape2D
+@onready var disableTimer = $DisableHitBoxTimer
 
 func tempdisable():
-	collision_shape_2d.call_deferred("set","disable",true)
-	disable_hit_box_timer.start()
+	collision.call_deferred("set","disabled",true)
+	disableTimer.start()
 
 
 func _on_disable_hit_box_timer_timeout() -> void:
-	collision_shape_2d.call_deferred("set","disable",false)
+	collision.call_deferred("set","disabled",false)
+
+
 
 func _on_area_entered(area):
-	print("entered")
+	print("HitBox hit:", area.name)

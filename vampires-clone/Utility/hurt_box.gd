@@ -8,8 +8,9 @@ extends Area2D
 signal hurt(damage)
 
 
-func _on_area_entered(area: Area2D) -> void:
-	if area.is_in_group("atack"):
+func _on_area_entered(area):
+	if area.is_in_group("attack"):
+		print("HurtBox hit by:", area.name)
 		if not area.get("damage") == null:
 			match HurtBoxType:
 				0: #Cooldown
@@ -26,3 +27,4 @@ func _on_area_entered(area: Area2D) -> void:
 
 func _on_disable_timer_timeout() -> void:
 	collision.call_deferred("set","disable",false)
+	
