@@ -20,6 +20,11 @@ func movement():
 	
 	velocity = mov.normalized()*movement_speed
 	move_and_slide()
+	
+	if movement_speed == 0:
+		animated_sprite_2d.play("idle")
+	else:
+		animated_sprite_2d.play("run")
 
 
 func _on_hurt_box_hurt(damage):

@@ -1,22 +1,62 @@
 [gd_scene format=3 uid="uid://cdtkhmhdppka"]
 
 [ext_resource type="Script" uid="uid://b1t3flr4tf40w" path="res://Scripts/enemy.gd" id="1_1f0kj"]
-[ext_resource type="Texture2D" uid="uid://ceodc7820ekix" path="res://Textures/Sprites/Enemy.png" id="1_hghv2"]
+[ext_resource type="Texture2D" uid="uid://csukh0jlb4ohb" path="res://Textures/Sprites/Soldier_Idle.png" id="2_287tu"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_afpow"]
 [ext_resource type="PackedScene" uid="uid://cthuwwjhu3woh" path="res://Utility/hit_box.tscn" id="4_287tu"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1f0kj"]
-atlas = ExtResource("1_hghv2")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0830c"]
+atlas = ExtResource("2_287tu")
+region = Rect2(26, 36, 48, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghaa6"]
+atlas = ExtResource("2_287tu")
+region = Rect2(126, 36, 48, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dp5w"]
+atlas = ExtResource("2_287tu")
+region = Rect2(226, 36, 48, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auwsv"]
+atlas = ExtResource("2_287tu")
+region = Rect2(326, 36, 48, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uf12"]
+atlas = ExtResource("2_287tu")
+region = Rect2(426, 36, 48, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po0sg"]
+atlas = ExtResource("2_287tu")
+region = Rect2(526, 36, 48, 33)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_afpow"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1f0kj")
+"texture": SubResource("AtlasTexture_0830c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghaa6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dp5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auwsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uf12")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po0sg")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"run",
 "speed": 5.0
 }]
 
@@ -25,7 +65,7 @@ radius = 2.9999998
 height = 40.317513
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_287tu"]
-size = Vector2(13, 27)
+size = Vector2(8.5, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0830c"]
 size = Vector2(5, 18)
@@ -36,23 +76,26 @@ movement_speed = 15
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1289113278]
 sprite_frames = SubResource("SpriteFrames_afpow")
+animation = &"idle"
+autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280193968]
-position = Vector2(-1, -2)
+visible = false
+position = Vector2(0, -4)
 scale = Vector2(0.7948588, -0.34724367)
 shape = SubResource("CapsuleShape2D_1f0kj")
 
 [node name="HurtBox" parent="." unique_id=1129910364 instance=ExtResource("3_afpow")]
-visible = false
 collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="HurtBox" index="0" unique_id=486513834]
-position = Vector2(-0.5, 0.5)
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_287tu")
 
 [node name="HitBox" parent="." unique_id=1387451001 instance=ExtResource("4_287tu")]
-scale = Vector2(1.3200003, 1)
+position = Vector2(0, -2.9999998)
+scale = Vector2(1.3200003, 0.80000037)
 collision_layer = 2
 collision_mask = 2
 
