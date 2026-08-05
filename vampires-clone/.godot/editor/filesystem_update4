@@ -1,6 +1,5 @@
+res://Scenes/player.tscn
 res://Utility/enemy_spawner.tscn
 res://Utility/enemy_spawner.gd
-res://Scenes/world.tscn
-res://Scripts/player.gd
-res://Scenes/player.tscn
-res://Scenes/enemy.tscn
+res://Scenes/Attacks/arrow_attack.tscn
+res://Scenes/Attacks/arrow_attack.gd

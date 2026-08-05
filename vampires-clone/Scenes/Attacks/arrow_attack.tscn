@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://donbyvqoobgj0"]
+
+[ext_resource type="Texture2D" uid="uid://3xtk72gl8dyr" path="res://Textures/Sprites/VFX/Arrow.png" id="1_ehlc7"]
+[ext_resource type="Script" uid="uid://b5tjl2qp00vuj" path="res://Scenes/Attacks/arrow_attack.gd" id="1_ijrjh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehlc7"]
+size = Vector2(3, 20)
+
+[node name="ArrowAttack" type="Area2D" unique_id=1330156193 groups=["attack"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_ijrjh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1019898187]
+texture = ExtResource("1_ehlc7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1856506390]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_ehlc7")
+
+[node name="Timer" type="Timer" parent="." unique_id=1142233917]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2064084221]

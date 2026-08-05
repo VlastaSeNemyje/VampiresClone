@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dva5k5nflhe47"
-path="res://.godot/imported/MiniYoungDryad.png-8875c8701b197ff334e02c18e127bd38.ctex"
+uid="uid://3xtk72gl8dyr"
+path="res://.godot/imported/Arrow.png-85e8d5650af8d51368e2726224fb203a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Miniprotectors/MiniYoungDryad.png"
-dest_files=["res://.godot/imported/MiniYoungDryad.png-8875c8701b197ff334e02c18e127bd38.ctex"]
+source_file="res://Textures/Sprites/VFX/Arrow.png"
+dest_files=["res://.godot/imported/Arrow.png-85e8d5650af8d51368e2726224fb203a.ctex"]
 
 [params]
 
