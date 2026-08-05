@@ -21,7 +21,7 @@ func movement():
 	velocity = mov.normalized()*movement_speed
 	move_and_slide()
 	
-	if movement_speed == 0:
+	if mov == Vector2.ZERO:
 		animated_sprite_2d.play("idle")
 	else:
 		animated_sprite_2d.play("run")

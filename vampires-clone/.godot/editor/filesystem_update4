@@ -1,7 +1,6 @@
-res://Scenes/player.tscn
-res://Scripts/player.gd
-res://Scenes/enemy.tscn
-res://Scripts/enemy.gd
 res://Utility/enemy_spawner.tscn
 res://Utility/enemy_spawner.gd
-res://Utility/spawn_info.gd
+res://Scenes/world.tscn
+res://Scripts/player.gd
+res://Scenes/player.tscn
+res://Scenes/enemy.tscn
