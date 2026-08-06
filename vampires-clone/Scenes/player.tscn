@@ -126,6 +126,18 @@ HurtBoxType = 2
 position = Vector2(0, -3.375164)
 shape = SubResource("RectangleShape2D_vgqql")
 
+[node name="Attack" type="Node2D" parent="." unique_id=1654918872]
+
+[node name="ArrowTimer" type="Timer" parent="Attack" unique_id=1407505424]
+unique_name_in_owner = true
+wait_time = 1.5
+
+[node name="ArrowAttackTimer" type="Timer" parent="Attack/ArrowTimer" unique_id=2000734202]
+unique_name_in_owner = true
+wait_time = 0.075
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="Attack/ArrowTimer" to="." method="_on_arrow_timer_timeout"]
+[connection signal="timeout" from="Attack/ArrowTimer/ArrowAttackTimer" to="." method="_on_arrow_attack_timer_timeout"]
 
 [editable path="HurtBox"]
