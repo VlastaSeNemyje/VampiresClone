@@ -57,8 +57,11 @@ size = Vector2(8.5, 16)
 size = Vector2(5, 18)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1581481056]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_1f0kj")
 movement_speed = 15
+hp = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1289113278]
 sprite_frames = SubResource("SpriteFrames_afpow")

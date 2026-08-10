@@ -66,3 +66,26 @@ func _on_arrow_attack_timer_timeout():
 		var arrow_attack = Arrow.instantiate()
 		arrow_attack.position = position
 		arrow_attack.target = get_random_target()
+		arrow_attack.level = arrow_level
+		add_child(arrow_attack)
+		arrow_ammo -= 1
+		if arrow_ammo > 0:
+			ArrowAttackTimer.start()
+		else:
+			ArrowAttackTimer.stop()
+
+func get_random_target():
+	if enemy_close.size() > 0:
+		return enemy_close.pick_random().global_position
+	else:
+		return Vector2.UP
+
+
+func _on_enemy_detection_area_body_entered(body):
+	if not enemy_close.has(body):
+		enemy_close.append(body)
+
+
+func _on_enemy_detection_area_body_exited(body):
+	if enemy_close.has(body):
+		enemy_close.erase(body)
