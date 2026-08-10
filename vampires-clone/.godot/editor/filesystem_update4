@@ -1,6 +1,4 @@
-res://Scenes/player.tscn
-res://Scripts/player.gd
-res://Scenes/enemy.tscn
 res://Scenes/Attacks/arrow_attack.tscn
-res://Utility/hurt_box.gd
 res://Scenes/Attacks/arrow_attack.gd
+res://Scripts/player.gd
+res://Scenes/player.tscn

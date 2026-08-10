@@ -14,7 +14,7 @@ var Arrow = preload("res://Scenes/Attacks/arrow_attack.tscn")
 
 #Arrow
 var arrow_ammo = 0
-var arrow_baseammo = 1
+var arrow_baseammo = 3
 var arrow_attackspeed = 1.5
 var arrow_level = 1
 

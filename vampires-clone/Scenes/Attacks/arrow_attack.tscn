@@ -8,11 +8,13 @@ size = Vector2(3, 20)
 
 [node name="Arrow" type="Area2D" unique_id=1330156193 groups=["attack"]]
 top_level = true
+scale = Vector2(0.1, 0.1)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_ijrjh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1019898187]
+rotation = -0.6849738
 texture = ExtResource("1_ehlc7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1856506390]
