@@ -98,6 +98,7 @@ size = Vector2(4.677864, 9.750471)
 radius = 283.0159
 
 [node name="Player" type="CharacterBody2D" unique_id=1972239113 groups=["player"]]
+z_index = 1
 motion_mode = 1
 script = ExtResource("1_cvnsp")
 

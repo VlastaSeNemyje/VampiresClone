@@ -62,7 +62,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dexhw")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 10.0
 }]
@@ -70,7 +70,9 @@ animations = [{
 [node name="Death" type="AnimatedSprite2D" unique_id=539514802]
 sprite_frames = SubResource("SpriteFrames_ikot8")
 animation = &"death"
-autoplay = "death"
 script = ExtResource("2_mkry7")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1743582687]
+autoplay = true
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

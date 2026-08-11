@@ -8,3 +8,4 @@ res://Utility/hurt_box.tscn
 res://Scenes/player.tscn
 res://Scenes/Enemy/death.tscn
 res://Scenes/Enemy/death.gd
+res://Scenes/Attacks/arrow_attack.tscn

@@ -8,6 +8,7 @@ size = Vector2(3, 20)
 
 [node name="Arrow" type="Area2D" unique_id=1330156193 groups=["attack"]]
 top_level = true
+z_index = 1
 scale = Vector2(0.1, 0.1)
 collision_layer = 4
 collision_mask = 0
