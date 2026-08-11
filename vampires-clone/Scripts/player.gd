@@ -14,7 +14,7 @@ var Arrow = preload("res://Scenes/Attacks/arrow_attack.tscn")
 
 #Arrow
 var arrow_ammo = 0
-var arrow_baseammo = 3
+var arrow_baseammo = 1
 var arrow_attackspeed = 1.5
 var arrow_level = 1
 
@@ -51,7 +51,7 @@ func attack():
 		if ArrowTimer.is_stopped():
 			ArrowTimer.start()
 
-func _on_hurt_box_hurt(damage):
+func _on_hurt_box_hurt(damage, _angle, _knockback):
 	hp -= damage
 	print(hp)
 

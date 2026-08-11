@@ -1,4 +1,10 @@
-res://Scenes/Attacks/arrow_attack.tscn
-res://Scenes/Attacks/arrow_attack.gd
+res://Scripts/enemy.gd
+res://Scenes/enemy.tscn
+res://Utility/hurt_box.gd
 res://Scripts/player.gd
+res://Scenes/Attacks/arrow_attack.gd
+res://Utility/enemy_spawner.tscn
+res://Utility/hurt_box.tscn
 res://Scenes/player.tscn
+res://Scenes/Enemy/death.tscn
+res://Scenes/Enemy/death.gd

@@ -61,7 +61,6 @@ collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_1f0kj")
 movement_speed = 15
-hp = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1289113278]
 sprite_frames = SubResource("SpriteFrames_afpow")
@@ -78,6 +77,7 @@ shape = SubResource("CapsuleShape2D_1f0kj")
 [node name="HurtBox" parent="." unique_id=1129910364 instance=ExtResource("3_afpow")]
 collision_layer = 4
 collision_mask = 4
+HurtBoxType = 1
 
 [node name="CollisionShape2D" parent="HurtBox" index="0" unique_id=486513834]
 visible = false
@@ -94,6 +94,8 @@ collision_mask = 2
 [node name="CollisionShape2D" parent="HitBox" index="0" unique_id=839422151]
 position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_0830c")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="." unique_id=1017698475]
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 

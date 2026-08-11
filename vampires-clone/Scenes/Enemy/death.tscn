@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://cjp02yiwpu1s5"]
+
+[ext_resource type="Texture2D" uid="uid://cy133liey0vjo" path="res://Textures/Sprites/VFX/MiniFPProjectiles.png" id="1_rytvw"]
+[ext_resource type="Script" uid="uid://ckwbs006geh81" path="res://Scenes/Enemy/death.gd" id="2_mkry7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkry7"]
+atlas = ExtResource("1_rytvw")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ok80"]
+atlas = ExtResource("1_rytvw")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cj3g3"]
+atlas = ExtResource("1_rytvw")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wynqs"]
+atlas = ExtResource("1_rytvw")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okt6x"]
+atlas = ExtResource("1_rytvw")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ggatg"]
+atlas = ExtResource("1_rytvw")
+region = Rect2(160, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0pgf"]
+atlas = ExtResource("1_rytvw")
+region = Rect2(192, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dexhw"]
+atlas = ExtResource("1_rytvw")
+region = Rect2(224, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ikot8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkry7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ok80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cj3g3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wynqs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okt6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ggatg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0pgf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dexhw")
+}],
+"loop": true,
+"name": &"death",
+"speed": 10.0
+}]
+
+[node name="Death" type="AnimatedSprite2D" unique_id=539514802]
+sprite_frames = SubResource("SpriteFrames_ikot8")
+animation = &"death"
+autoplay = "death"
+script = ExtResource("2_mkry7")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1743582687]
