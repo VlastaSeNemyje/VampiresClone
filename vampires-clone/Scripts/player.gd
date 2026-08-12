@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var movement_speed = 40.0
 var hp = 80
+var last_movement = Vector2.UP
 
 #Attacks
 var Arrow = preload("res://Scenes/Attacks/arrow_attack.tscn")
@@ -41,6 +42,7 @@ func movement():
 	move_and_slide()
 	
 	if mov == Vector2.ZERO:
+		last_movement = mov
 		animated_sprite_2d.play("idle")
 	else:
 		animated_sprite_2d.play("run")
