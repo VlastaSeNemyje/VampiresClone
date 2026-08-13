@@ -1,3 +1,6 @@
 res://Scenes/Attacks/whip_attack.tscn
 res://Scenes/Attacks/whip_attack.gd
 res://Scenes/player.tscn
+res://Scenes/Attacks/tornado.tscn
+res://Scenes/Attacks/tornado.gd
+res://Scripts/player.gd

@@ -141,8 +141,18 @@ unique_name_in_owner = true
 wait_time = 0.075
 
 [node name="WhipTimer" type="Timer" parent="Attack" unique_id=92591930]
+unique_name_in_owner = true
 
-[node name="WhipTimerAttack" type="Timer" parent="Attack/WhipTimer" unique_id=1322223988]
+[node name="WhipAttackTimer" type="Timer" parent="Attack/WhipTimer" unique_id=1322223988]
+unique_name_in_owner = true
+
+[node name="TornadoTimer" type="Timer" parent="Attack" unique_id=331399332]
+unique_name_in_owner = true
+wait_time = 3.0
+
+[node name="TornadoAttackTimer" type="Timer" parent="Attack/TornadoTimer" unique_id=90193387]
+unique_name_in_owner = true
+wait_time = 0.2
 
 [node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=307411742]
 collision_layer = 4
@@ -155,6 +165,10 @@ shape = SubResource("CircleShape2D_6t5aa")
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/ArrowTimer" to="." method="_on_arrow_timer_timeout"]
 [connection signal="timeout" from="Attack/ArrowTimer/ArrowAttackTimer" to="." method="_on_arrow_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/WhipTimer" to="." method="_on_whip_timer_timeout"]
+[connection signal="timeout" from="Attack/WhipTimer/WhipAttackTimer" to="." method="_on_whip_attack_timer_timeout"]
+[connection signal="timeout" from="Attack/TornadoTimer" to="." method="_on_tornado_timer_timeout"]
+[connection signal="timeout" from="Attack/TornadoTimer/TornadoAttackTimer" to="." method="_on_tornado_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 
