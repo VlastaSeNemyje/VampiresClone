@@ -140,6 +140,10 @@ wait_time = 1.5
 unique_name_in_owner = true
 wait_time = 0.075
 
+[node name="WhipTimer" type="Timer" parent="Attack" unique_id=92591930]
+
+[node name="WhipTimerAttack" type="Timer" parent="Attack/WhipTimer" unique_id=1322223988]
+
 [node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=307411742]
 collision_layer = 4
 collision_mask = 4
