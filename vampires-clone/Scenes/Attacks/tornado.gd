@@ -28,6 +28,13 @@ func _ready():
 	var tween = create_tween()
 	var swing = deg_to_rad(90) # how wide the half-circle swing is, tweak to taste
 	var dir_sign = 1 if randi_range(0, 1) == 1 else -1
+	
+	var initial_tween = create_tween().set_parallel(true)
+	initial_tween.tween_property(self, "scale", Vector2(1,1)*attack_size,3).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	var final_speed = speed
+	speed = speed/5.0
+	initial_tween.tween_property(self,"speed", final_speed, 6).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	initial_tween.play()
 
 	# Oscillate the angle_offset back and forth -> traces arcs, like a tornado weaving
 	for i in range(3):
