@@ -38,6 +38,8 @@ func _on_hurt_box_hurt(damage, angle, knockback_amount):
 	hp -= damage
 	knockback = angle * knockback_amount
 	if hp <= 0:
+		animated_sprite_2d.play("hit")
 		death()
 	else:
 		snd_hit.play()
+		animated_sprite_2d.play("hit")

@@ -1,6 +1,4 @@
+res://Scenes/enemy.tscn
+res://Scripts/enemy.gd
 res://Scripts/player.gd
 res://Scenes/Attacks/whip_attack.tscn
-res://Scenes/Attacks/whip_attack.gd
-res://Scenes/Attacks/tornado.gd
-res://Scenes/Attacks/tornado.tscn
-res://Scenes/enemy.tscn

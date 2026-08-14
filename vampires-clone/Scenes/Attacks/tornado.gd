@@ -6,9 +6,9 @@ var damage = 5
 var attack_size = 1.0
 var knockback_amount = 100
 var last_movement = Vector2.ZERO
-
 var base_direction = Vector2.ZERO   # the "straight line" direction it curves around
 var angle_offset = 0.0              # this is what we tween, in radians
+var angle = Vector2.ZERO
 
 signal remove_from_array(object)
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -28,7 +28,11 @@ func _ready():
 	var tween = create_tween()
 	var swing = deg_to_rad(90) # how wide the half-circle swing is, tweak to taste
 	var dir_sign = 1 if randi_range(0, 1) == 1 else -1
-	
+	for i in range(3):
+		tween.tween_property(self, "angle_offset", dir_sign * swing, 2)
+		tween.tween_property(self, "angle_offset", -dir_sign * swing, 2)
+	tween.play()
+		
 	var initial_tween = create_tween().set_parallel(true)
 	initial_tween.tween_property(self, "scale", Vector2(1,1)*attack_size,3).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	var final_speed = speed
@@ -50,6 +54,7 @@ func _ready():
 func _physics_process(delta):
 	var current_dir = base_direction.rotated(angle_offset)
 	position += current_dir * speed * delta
+	angle = base_direction.rotated(angle_offset)
 
 func _on_timer_timeout():
 	emit_signal("remove_from_array")
