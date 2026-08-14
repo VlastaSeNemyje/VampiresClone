@@ -22,9 +22,8 @@ func _ready():
 			knockback_amount = 100
 			attack_size = 1.0
 
-	# Base direction is just whatever direction it was already heading
-	base_direction = last_movement if last_movement != Vector2.ZERO else Vector2.RIGHT
-	base_direction = base_direction.normalized()
+	# Direction
+	base_direction = Vector2.RIGHT.rotated(randf_range(0, TAU))
 
 	var tween = create_tween()
 	var swing = deg_to_rad(90) # how wide the half-circle swing is, tweak to taste

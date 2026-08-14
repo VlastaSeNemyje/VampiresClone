@@ -16,6 +16,12 @@ func _ready():
 		facing = -1
 	else:
 		facing = 1
+	var life_timer = Timer.new()
+	life_timer.wait_time = 0.3
+	life_timer.one_shot = true
+	add_child(life_timer)
+	life_timer.timeout.connect(queue_free)
+	life_timer.start()
 
 	angle = Vector2(facing, 0)  # side knockback, matching whichever way player faces
 

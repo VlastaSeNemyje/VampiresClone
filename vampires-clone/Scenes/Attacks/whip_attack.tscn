@@ -39,7 +39,7 @@ scale = Vector2(0.99999934, 0.99999934)
 shape = SubResource("RectangleShape2D_ehlc7")
 
 [node name="Timer" type="Timer" parent="." unique_id=1142233917 groups=["attack"]]
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 autostart = true
 
