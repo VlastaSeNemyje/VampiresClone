@@ -1,4 +1,2 @@
 res://Scenes/enemy.tscn
 res://Scripts/enemy.gd
-res://Scripts/player.gd
-res://Scenes/Attacks/whip_attack.tscn

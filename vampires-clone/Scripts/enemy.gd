@@ -27,11 +27,12 @@ func _physics_process(_delta):
 		animated_sprite_2d.flip_h = true
 
 func death():
+	
 	emit_signal("remove_from_array",self)
-	var enemy_death = death_anim.instantiate()
-	enemy_death.scale = animated_sprite_2d.scale
-	enemy_death.global_position = global_position
-	get_parent().call_deferred("add_child", enemy_death)
+	#var enemy_death = death_anim.instantiate()
+	#enemy_death.scale = animated_sprite_2d.scale
+	#enemy_death.global_position = global_position
+	#get_parent().call_deferred("add_child", enemy_death)
 	queue_free()
 
 func _on_hurt_box_hurt(damage, angle, knockback_amount):
@@ -43,3 +44,4 @@ func _on_hurt_box_hurt(damage, angle, knockback_amount):
 	else:
 		snd_hit.play()
 		animated_sprite_2d.play("hit")
+	
