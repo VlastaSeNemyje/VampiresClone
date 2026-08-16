@@ -20,16 +20,16 @@ var Whip = preload("res://Scenes/Attacks/whip_attack.tscn")
 @onready var whipAttackTimer = get_node("%WhipAttackTimer")
 
 #Arrow
-var arrow_ammo = 1
+var arrow_ammo = 0
 var arrow_baseammo = 1
 var arrow_attackspeed = 1.5
-var arrow_level = 1
+var arrow_level = 0
 
 #Tornado
-var tornado_ammo = 0
+var tornado_ammo = 3
 var tornado_baseammo = 3
 var tornado_attackspeed = 3
-var tornado_level = 0
+var tornado_level = 1
 
 #Whip
 var whip_ammo = 0
