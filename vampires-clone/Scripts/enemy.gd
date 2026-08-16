@@ -9,7 +9,7 @@ var knockback = Vector2.ZERO
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var snd_hit = $snd_hit
 
-var death_anim = preload("res://Scenes/Enemy/death.tscn")
+var is_dead = false
 
 
 signal remove_from_array(object)
@@ -28,11 +28,14 @@ func _physics_process(_delta):
 
 func death():
 	
-	emit_signal("remove_from_array",self)
-	#var enemy_death = death_anim.instantiate()
-	#enemy_death.scale = animated_sprite_2d.scale
-	#enemy_death.global_position = global_position
-	#get_parent().call_deferred("add_child", enemy_death)
+	if is_dead:
+		return
+
+	is_dead = true
+	emit_signal("remove_from_array", self)
+	velocity = Vector2.ZERO
+	animated_sprite_2d.play("hit_dead")
+	await animated_sprite_2d.animation_finished
 	queue_free()
 
 func _on_hurt_box_hurt(damage, angle, knockback_amount):
