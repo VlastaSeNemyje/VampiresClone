@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ba8hbbin7qik3"]
+
+[ext_resource type="AudioStream" uid="uid://k6yeo0j2eera" path="res://Sounds/Music/Chiptune Rock 1.wav" id="1_ag0o3"]
+[ext_resource type="Script" uid="uid://85r7ue2oaem3" path="res://Scripts/musiclevel.gd" id="2_w78yl"]
+
+[node name="MusicLevel" type="AudioStreamPlayer2D" unique_id=1315678360]
+stream = ExtResource("1_ag0o3")
+autoplay = true
+script = ExtResource("2_w78yl")

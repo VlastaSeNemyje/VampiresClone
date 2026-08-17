@@ -1,25 +1,47 @@
-[gd_scene format=3 uid="uid://do51bsbyue13y"]
+[gd_scene format=3 uid="uid://2n8qcp4rkeel"]
 
 [ext_resource type="Script" uid="uid://dkact2a2khtic" path="res://Scenes/Attacks/whip_attack.gd" id="1_vjrup"]
-[ext_resource type="Texture2D" uid="uid://ccgreo03rpgw1" path="res://Textures/Sprites/VFX/Whip.png" id="2_7nbvn"]
+[ext_resource type="Texture2D" uid="uid://beodtmfboviyi" path="res://Textures/Sprites/VFX/Kanec.png" id="2_vjrup"]
+[ext_resource type="AudioStream" uid="uid://7rapib85x3un" path="res://Sounds/VFX/Kanec.wav" id="3_7nbvn"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1jls4"]
-atlas = ExtResource("2_7nbvn")
-region = Rect2(0, 0, 64, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nbvn"]
+atlas = ExtResource("2_vjrup")
+region = Rect2(0, 30, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elnq2"]
+atlas = ExtResource("2_vjrup")
+region = Rect2(30, 30, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xu3n"]
+atlas = ExtResource("2_vjrup")
+region = Rect2(60, 30, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qghlf"]
+atlas = ExtResource("2_vjrup")
+region = Rect2(90, 30, 30, 30)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_40fj3"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1jls4")
+"texture": SubResource("AtlasTexture_7nbvn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elnq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xu3n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qghlf")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehlc7"]
-size = Vector2(60.00004, 20.000008)
+size = Vector2(30.000027, 32.00003)
 
 [node name="Kanec" type="Area2D" unique_id=1330156193 groups=["attack"]]
 top_level = true
@@ -30,13 +52,15 @@ collision_mask = 0
 script = ExtResource("1_vjrup")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=778499729]
-position = Vector2(1.9999981, -14.000001)
-scale = Vector2(0.99999994, 0.99999994)
+scale = Vector2(1.7999893, 1.7999893)
 sprite_frames = SubResource("SpriteFrames_40fj3")
+autoplay = "default"
+frame = 3
+frame_progress = 0.19931011
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1856506390]
-position = Vector2(1.9999981, -14)
-scale = Vector2(0.99999934, 0.99999934)
+position = Vector2(-2.8421701e-14, -14.000001)
+scale = Vector2(0.9999986, 0.9999986)
 shape = SubResource("RectangleShape2D_ehlc7")
 
 [node name="Timer" type="Timer" parent="." unique_id=1142233917 groups=["attack"]]
@@ -45,5 +69,7 @@ one_shot = true
 autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2064084221]
+stream = ExtResource("3_7nbvn")
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

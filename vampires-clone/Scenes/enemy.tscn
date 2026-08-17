@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cy133liey0vjo" path="res://Textures/Sprites/VFX/MiniFPProjectiles.png" id="3_0830c"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_afpow"]
 [ext_resource type="PackedScene" uid="uid://cthuwwjhu3woh" path="res://Utility/hit_box.tscn" id="4_287tu"]
+[ext_resource type="AudioStream" uid="uid://bmhx672y3i5eh" path="res://Sounds/VFX/SFX_WAV_189.wav" id="6_ghaa6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_287tu"]
 atlas = ExtResource("2_287tu")
@@ -200,6 +201,8 @@ position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_0830c")
 
 [node name="snd_hit" type="AudioStreamPlayer2D" parent="." unique_id=1017698475]
+stream = ExtResource("6_ghaa6")
+bus = &"VFX"
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 

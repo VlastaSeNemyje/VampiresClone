@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://n8h0l8ee8uhw" path="res://Textures/Sprites/VFX/Tornado.png" id="1_5t4lv"]
 [ext_resource type="Script" uid="uid://bd2v1nse26fwa" path="res://Scenes/Attacks/tornado.gd" id="1_pgy2e"]
-[ext_resource type="AudioStream" uid="uid://blieesnjkswoy" path="res://Resources/8_Atk_Magic_SFX/22_Water_02.wav" id="3_adlw0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pgy2e"]
 atlas = ExtResource("1_5t4lv")
@@ -42,9 +41,7 @@ wait_time = 10.0
 autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=731117847]
-stream = ExtResource("3_adlw0")
 pitch_scale = 2.5
 autoplay = true
-bus = &"SFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

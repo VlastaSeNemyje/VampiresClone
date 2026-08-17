@@ -1,10 +1,8 @@
-<<<<<<< Updated upstream
-res://Scenes/Attacks/tornado.tscn
-res://default_bus_layout.tres
-res://Scripts/player.gd
-res://Scripts/enemy.gd
 res://Scenes/enemy.tscn
-=======
-res://Scenes/Attacks/whip_attack.tscn
+res://Scenes/Attacks/tornado.tscn
+res://Scripts/enemy.gd
+res://Scripts/player.gd
 res://Scenes/Attacks/kanec.tscn
->>>>>>> Stashed changes
+res://default_bus_layout.tres
+res://Scripts/musiclevel.gd
+res://Scenes/music_level.tscn
