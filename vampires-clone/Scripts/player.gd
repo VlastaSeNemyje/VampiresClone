@@ -4,6 +4,11 @@ var movement_speed = 40.0
 var hp = 80
 var last_movement = Vector2.UP
 
+#Experience
+var experience = 0
+var experience_level = 1
+var collected_experience = 0
+
 #Attacks
 var Arrow = preload("res://Scenes/Attacks/arrow_attack.tscn")
 var Tornado = preload("res://Scenes/Attacks/tornado.tscn")

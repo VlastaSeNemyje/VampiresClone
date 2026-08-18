@@ -1,9 +1,9 @@
 AudioStreamPlayer
+CollisionShape2D
+AnimatedSprite2D
+Area2D
 AudioStreamPlayer2D
 Timer
-AnimatedSprite2D
-CollisionShape2D
-Area2D
 AudioListener2D
 Sprite2D
 Node2D

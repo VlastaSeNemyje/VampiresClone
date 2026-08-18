@@ -1,2 +1,6 @@
 res://default_bus_layout.tres
-res://Scenes/music_level.tscn
+res://Scenes/Attacks/whip_attack.tscn
+res://Scenes/Attacks/whip_attack.gd
+res://Scripts/player.gd
+res://Scenes/exp_gem.tscn
+res://Scripts/exp_gem.gd

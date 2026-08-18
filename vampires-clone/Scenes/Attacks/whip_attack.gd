@@ -17,7 +17,7 @@ func _ready():
 	else:
 		facing = 1
 	var life_timer = Timer.new()
-	life_timer.wait_time = 0.3
+	life_timer.wait_time = 0.1
 	life_timer.one_shot = true
 	add_child(life_timer)
 	life_timer.timeout.connect(queue_free)

@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b4g4ormrns30w"]
+
+[ext_resource type="Texture2D" uid="uid://be8ccxkuggogn" path="res://Textures/Sprites/GemGreen.png" id="1_j05ow"]
+[ext_resource type="Script" uid="uid://d4lght03e0qoi" path="res://Scripts/exp_gem.gd" id="1_xpps1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpps1"]
+atlas = ExtResource("1_j05ow")
+region = Rect2(1, 1, 30, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_meakw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpps1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yuap5"]
+size = Vector2(5, 6)
+
+[node name="ExpGem" type="Area2D" unique_id=221015540 groups=["loot"]]
+script = ExtResource("1_xpps1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=316146659]
+sprite_frames = SubResource("SpriteFrames_meakw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=292709319]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_yuap5")
+
+[node name="Snd_collected" type="AudioStreamPlayer" parent="." unique_id=1477916852]
