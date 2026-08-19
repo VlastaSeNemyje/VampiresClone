@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dva5k5nflhe47" path="res://Textures/Sprites/MiniYoungDryad.png" id="2_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://be0co0l3j62ou" path="res://Textures/Sprites/BarBcg.png" id="4_fkybt"]
+[ext_resource type="Texture2D" uid="uid://4brnwnxt1tqi" path="res://Textures/Sprites/BarProgress.png" id="5_x3wgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("2_6t5aa")
@@ -97,6 +99,11 @@ size = Vector2(4.677864, 9.750471)
 [sub_resource type="CircleShape2D" id="CircleShape2D_6t5aa"]
 radius = 283.0159
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vgqql"]
+radius = 29.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fkybt"]
+
 [node name="Player" type="CharacterBody2D" unique_id=1972239113 groups=["player"]]
 z_index = 1
 motion_mode = 1
@@ -155,12 +162,55 @@ unique_name_in_owner = true
 wait_time = 0.2
 
 [node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=307411742]
+visible = false
 collision_layer = 4
 collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea" unique_id=238774298]
 shape = SubResource("CircleShape2D_6t5aa")
+
+[node name="GrabArea" type="Area2D" parent="." unique_id=2130652941]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea" unique_id=1013245459]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_vgqql")
+
+[node name="CollectArea" type="Area2D" parent="." unique_id=261012492]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea" unique_id=2070721766]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_fkybt")
+
+[node name="GUILayer" type="CanvasLayer" parent="." unique_id=1306127081]
+
+[node name="GUI" type="Control" parent="GUILayer" unique_id=1764110986]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI" unique_id=831773781]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_under = ExtResource("4_fkybt")
+texture_progress = ExtResource("5_x3wgy")
+
+[node name="Lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar" unique_id=259841371]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 540.0
+offset_right = 640.0
+offset_bottom = 23.0
+text = "Level: 1"
+horizontal_alignment = 1
+vertical_alignment = 2
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/ArrowTimer" to="." method="_on_arrow_timer_timeout"]
@@ -171,5 +221,7 @@ shape = SubResource("CircleShape2D_6t5aa")
 [connection signal="timeout" from="Attack/TornadoTimer/TornadoAttackTimer" to="." method="_on_tornado_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
+[connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
+[connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 
 [editable path="HurtBox"]

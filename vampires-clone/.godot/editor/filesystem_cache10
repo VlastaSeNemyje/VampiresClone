@@ -1,9 +1,19 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1787061171
-default_bus_layout.tres::AudioBusLayout::6685835060154629991::1787061171::0::1::::<><><>0<>0<><>::
+::res://::1787158656
+default_bus_layout.tres::AudioBusLayout::6685835060154629991::1787149472::0::1::::<><><>0<>0<><>::
 icon.svg::CompressedTexture2D::6816271246720809138::1785246094::1785246274::1::::<><><>0<>0<>303031f276968bd467eebe20d4760c98<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
 ::res://Fonts/::1785246482
-::res://Resources/::1787061556
+::res://Resources/::1787158556
+::res://Resources/Health Bar Asset Pack 2 by Adwit Rahman/::1787158556
+::res://Resources/Health Bar Asset Pack 2 by Adwit Rahman/Health Bar Asset Pack 2 by Adwit Rahman/::1787158682
+greenbar (1).png::CompressedTexture2D::6619936359978271638::1787158556::1787158682::1::::<><><>0<>0<>639c7cbf9df9fe26668f6a49750cf227<>res://.godot/imported/greenbar (1).png-de2bfc8e59833baafc4ede38f5fb064b.ctex::
+HealthBar DARK.png::CompressedTexture2D::6595679713173491511::1787158556::1787158682::1::::<><><>0<>0<>b32b33b6969bb019b46dfb3d433d0116<>res://.godot/imported/HealthBar DARK.png-e5ea257202e4ec937197951685e10af3.ctex::
+redblue (1).png::CompressedTexture2D::1206583751355097831::1787158556::1787158682::1::::<><><>0<>0<>a4a88baea8ec1b728f79600ecca844f5<>res://.godot/imported/redblue (1).png-bc1d82991c2aff500182d28231388269.ctex::
+redblue (2).png::CompressedTexture2D::7893313471383699855::1787158556::1787158682::1::::<><><>0<>0<>5ac7ab280488c927e62dde6de9044d53<>res://.godot/imported/redblue (2).png-73d830359a6aa24c4906826acb47ea10.ctex::
+redblue (3).png::CompressedTexture2D::4538458150616657999::1787158556::1787158682::1::::<><><>0<>0<>d3ea1eca5049cf3606fa0b5cbfdf24df<>res://.godot/imported/redblue (3).png-9324fc14a31e827f0149f818b9fb3e6b.ctex::
+rpg (1).png::CompressedTexture2D::7662496301570020184::1787158556::1787158682::1::::<><><>0<>0<>bb5cf264771658182891194e719bef79<>res://.godot/imported/rpg (1).png-1198ccc7e3310c3944e459075737d6fa.ctex::
+rpg (2).png::CompressedTexture2D::1471534968477829043::1787158556::1787158682::1::::<><><>0<>0<>03377c92a48e159bdae7716d94f009cb<>res://.godot/imported/rpg (2).png-910e227276e8645d845ec1aec1a61ad7.ctex::
+rpg (3).png::CompressedTexture2D::5056192404595081392::1787158556::1787158682::1::::<><><>0<>0<>75baa629e72b79448c9f86c1823535d3<>res://.godot/imported/rpg (3).png-23fa8db0c600fcddb2ba6c83da1f3bfc.ctex::
 ::res://Resources/Miniprotectors/::1786464184
 Gerald.png::CompressedTexture2D::3946089291369533608::1785853352::1785854029::1::::<><><>0<>0<>7b17a64ca87d02daadaa861914a93a46<>res://.godot/imported/Gerald.png-5666d092115050601d9f188db9709808.ctex::
 MiniDryadDeer.png::CompressedTexture2D::7856777550870009897::1759839645::1785765203::1::::<><><>0<>0<>24c042c51639648cfe4257c14b7a9d2f<>res://.godot/imported/MiniDryadDeer.png-a27831df05d4033e7185d46be0767810.ctex::
@@ -18,12 +28,12 @@ MiniSatyrDruid.png::CompressedTexture2D::4381548578486726282::1759847797::178576
 MiniSatyrWarrior.png::CompressedTexture2D::6567342392285365338::1759848094::1785765203::1::::<><><>0<>0<>6bb852a890237db1b73fa17b465e3e2d<>res://.godot/imported/MiniSatyrWarrior.png-359633d50bacff41d96fa22993232838.ctex::
 MiniTreant.png::CompressedTexture2D::775139624618851333::1759841084::1785765203::1::::<><><>0<>0<>fdaebfd50837d611e85c71106e10a30c<>res://.godot/imported/MiniTreant.png-713c62bf988ea4b2bd6dd885c5e54781.ctex::
 MiniTreantGuard.png::CompressedTexture2D::3369951227493858178::1759841455::1785765203::1::::<><><>0<>0<>0b4f1ddec922753d99dcc9a8522c5df7<>res://.godot/imported/MiniTreantGuard.png-a5fb8261ebe42a0a7b3cd00e9b5e48b3.ctex::
-::res://Scenes/::1787061449
-enemy.tscn::PackedScene::147742687863624088::1786977970::0::1::::<><><>0<>0<><>::uid://b1t3flr4tf40w::::res://Scripts/enemy.gd<>uid://ciig711ipnsnt::::res://Textures/Sprites/Gerald.png<>uid://cy133liey0vjo::::res://Textures/Sprites/VFX/MiniFPProjectiles.png<>uid://cyadi38x6i7cn::::res://Utility/hurt_box.tscn<>uid://cthuwwjhu3woh::::res://Utility/hit_box.tscn<>uid://bmhx672y3i5eh::::res://Sounds/VFX/SFX_WAV_189.wav
+::res://Scenes/::1787159105
+enemy.tscn::PackedScene::147742687863624088::1787158194::0::1::::<><><>0<>0<><>::uid://b1t3flr4tf40w::::res://Scripts/enemy.gd<>uid://ciig711ipnsnt::::res://Textures/Sprites/Gerald.png<>uid://cy133liey0vjo::::res://Textures/Sprites/VFX/MiniFPProjectiles.png<>uid://cyadi38x6i7cn::::res://Utility/hurt_box.tscn<>uid://cthuwwjhu3woh::::res://Utility/hit_box.tscn<>uid://bmhx672y3i5eh::::res://Sounds/VFX/SFX_WAV_189.wav
+exp_gem.tscn::PackedScene::4436070121850415576::1787158088::0::1::::<><><>0<>0<><>::uid://be8ccxkuggogn::::res://Textures/Sprites/GemGreen.png<>uid://d4lght03e0qoi::::res://Scripts/exp_gem.gd<>uid://njfa5i1uhapf::::res://Sounds/VFX/SFX_WAV_280.wav
 music_level.tscn::PackedScene::2454972019836191024::1787037145::0::1::::<><><>0<>0<><>::uid://cgp8qxkss6n26::::res://Sounds/Music/Chiptune Rock 1.mp3
-player.tscn::PackedScene::9220151560129167912::1786632840::0::1::::<><><>0<>0<><>::uid://crask6d84cg4i::::res://Scripts/player.gd<>uid://dva5k5nflhe47::::res://Textures/Sprites/MiniYoungDryad.png<>uid://cyadi38x6i7cn::::res://Utility/hurt_box.tscn
-exp.tscn::PackedScene::4436070121850415576::1787061449::0::1::::<><><>0<>0<><>::
-world.tscn::PackedScene::867847174454360566::1785853120::0::1::::<><><>0<>0<><>::uid://fl018gp173cx::::res://Textures/Tiles/Grass.png<>uid://d4mksw1nihjx5::::res://Scenes/player.tscn<>uid://d1e3hlytsbxte::::res://Utility/enemy_spawner.tscn<>uid://diqfod1cd4yra::::res://Utility/spawn_info.gd<>uid://cdtkhmhdppka::::res://Scenes/enemy.tscn
+player.tscn::PackedScene::9220151560129167912::1787159105::0::1::::<><><>0<>0<><>::uid://crask6d84cg4i::::res://Scripts/player.gd<>uid://dva5k5nflhe47::::res://Textures/Sprites/MiniYoungDryad.png<>uid://cyadi38x6i7cn::::res://Utility/hurt_box.tscn<>uid://be0co0l3j62ou::::res://Textures/Sprites/BarBcg.png<>uid://4brnwnxt1tqi::::res://Textures/Sprites/BarProgress.png
+world.tscn::PackedScene::867847174454360566::1787158108::0::1::::<><><>0<>0<><>::uid://fl018gp173cx::::res://Textures/Tiles/Grass.png<>uid://d4mksw1nihjx5::::res://Scenes/player.tscn<>uid://d1e3hlytsbxte::::res://Utility/enemy_spawner.tscn<>uid://diqfod1cd4yra::::res://Utility/spawn_info.gd<>uid://cdtkhmhdppka::::res://Scenes/enemy.tscn<>uid://b4g4ormrns30w::::res://Scenes/exp_gem.tscn
 ::res://Scenes/Attacks/::1787061325
 arrow_attack.gd::GDScript::4531876710392332221::1786463519::0::1::::<>Area2D<><>0<>0<><>::
 arrow_attack.tscn::PackedScene::8168847477223092491::1786615396::0::1::::<><><>0<>0<><>::uid://3xtk72gl8dyr::::res://Textures/Sprites/VFX/Arrow.png<>uid://b5tjl2qp00vuj::::res://Scenes/Attacks/arrow_attack.gd
@@ -35,9 +45,10 @@ whip_attack.tscn::PackedScene::9053447720099582196::1787061325::0::1::::<><><>0<
 ::res://Scenes/Enemy/::1786465404
 death.gd::GDScript::5520240328759442232::1786465372::0::1::::<>AnimatedSprite2D<><>0<>0<><>::
 death.tscn::PackedScene::5437074041633263930::1786465404::0::1::::<><><>0<>0<><>::uid://cy133liey0vjo::::res://Textures/Sprites/VFX/MiniFPProjectiles.png<>uid://ckwbs006geh81::::res://Scenes/Enemy/death.gd
-::res://Scripts/::1787061325
-enemy.gd::GDScript::4252263405737839508::1786976612::0::1::::<>CharacterBody2D<><>0<>0<><>::
-player.gd::GDScript::5967164107438074938::1787061325::0::1::::<>CharacterBody2D<><>0<>0<><>::
+::res://Scripts/::1787158375
+enemy.gd::GDScript::4252263405737839508::1787158170::0::1::::<>CharacterBody2D<><>0<>0<><>::
+exp_gem.gd::GDScript::9217824512233134828::1787157217::0::1::::<>Area2D<><>0<>0<><>::
+player.gd::GDScript::5967164107438074938::1787158375::0::1::::<>CharacterBody2D<><>0<>0<><>::
 ::res://Sounds/::1786977311
 ::res://Sounds/Music/::1787061171
 Chiptune Rock 1.mp3::AudioStreamMP3::5226973553317288257::1787037145::1787061171::1::::<><><>0<>0<>0bb3b674f8e9a3474c69c0fde68b1ae3<>res://.godot/imported/Chiptune Rock 1.mp3-34308c140f18b04766b3576f34ffa33a.mp3str::
@@ -53,10 +64,14 @@ SFX_WAV_281.wav::AudioStreamWAV::4874349434786236281::1786977410::1786977411::1:
 SFX_WAV_286.wav::AudioStreamWAV::1216874234387579206::1786977433::1786977434::1::::<><><>0<>0<>c12e529f8baccf660cc5fec6d7077e61<>res://.godot/imported/SFX_WAV_286.wav-f44f217a2f91353dc5db1807569c72fc.sample::
 SFX_WAV_289.wav::AudioStreamWAV::4341694250108020409::1786977452::1786977452::1::::<><><>0<>0<>c564471184d8dda633f7b568e781f6e6<>res://.godot/imported/SFX_WAV_289.wav-8c682942b95c563c3d598e63792ef067.sample::
 ::res://Textures/::1785246411
-::res://Textures/Sprites/::1787061599
+::res://Textures/Sprites/::1787159310
+BarBcg.png::CompressedTexture2D::2718933268558997668::1787159310::1787159312::1::::<><><>0<>0<>1f5cf74d53333b3dc490b3917eb8700d<>res://.godot/imported/BarBcg.png-68f0a885ff6b471039c723204fc29954.ctex::
+BarProgress.png::CompressedTexture2D::2038597424122402580::1787159303::1787159312::1::::<><><>0<>0<>0b73f77820e585278f75c1a377661af9<>res://.godot/imported/BarProgress.png-71daf21d37945d004ca7a8e5a430337e.ctex::
 Character.png::CompressedTexture2D::5214143614767725118::1785252398::1785252406::1::::<><><>0<>0<>894320d517b2a4011327f7828f2d1d95<>res://.godot/imported/Character.png-7a6f7db8e1d7e9a0021b73e95bf13e63.ctex::
 Enemy.png::CompressedTexture2D::5082685486047361951::1785418298::1785418302::1::::<><><>0<>0<>56554edcddf04e08cc171d7572fbcb47<>res://.godot/imported/Enemy.png-1dd275d8733ab45634ca4529feb9b33d.ctex::
+GemBlue.png::CompressedTexture2D::8693186639981350869::1787149617::1787149651::1::::<><><>0<>0<>c88e6c98803bd82002c371fe168a6143<>res://.godot/imported/GemBlue.png-463bc1f6b96d2b082dcf7923c6a30e75.ctex::
 GemGreen.png::CompressedTexture2D::2735426754104622113::1787061597::1787061599::1::::<><><>0<>0<>08b194a5f25e62da28efa90ddfc5e3f8<>res://.godot/imported/GemGreen.png-485738ae6981b441a158aa388031725f.ctex::
+GemRed.png::CompressedTexture2D::7016268090420967985::1787149640::1787149651::1::::<><><>0<>0<>70c7ed62bb62d1f362d5e3102e34a165<>res://.godot/imported/GemRed.png-6e7d6bab7132ff776ab157ccd2a633f0.ctex::
 Gerald.png::CompressedTexture2D::5351289992040574061::1786713151::1786717015::1::::<><><>0<>0<>35f0dd87b24223c96427e71f5036cf58<>res://.godot/imported/Gerald.png-9d3801978db72ade242cb50689daafcc.ctex::
 MiniYoungDryad.png::CompressedTexture2D::8635068731225145426::1786976612::1785936627::1::::<><><>0<>0<>3d229a283d1d60090bd8221d78e46eba<>res://.godot/imported/MiniYoungDryad.png-fb0c9e8c422a36e807a4a15fe8c0e007.ctex::
 Soldier_Idle.png::CompressedTexture2D::6078149105926255039::1785765894::1785765894::1::::<><><>0<>0<>b4343e33da180026c96c56f26457030d<>res://.godot/imported/Soldier_Idle.png-22dec1a06f8f30427ba9388c3fd3c0fd.ctex::

@@ -1,6 +1,8 @@
 res://default_bus_layout.tres
-res://Scenes/Attacks/whip_attack.tscn
-res://Scenes/Attacks/whip_attack.gd
-res://Scripts/player.gd
 res://Scenes/exp_gem.tscn
 res://Scripts/exp_gem.gd
+res://Scenes/world.tscn
+res://Scenes/player.tscn
+res://Scripts/player.gd
+res://Scenes/enemy.tscn
+res://Scripts/enemy.gd
