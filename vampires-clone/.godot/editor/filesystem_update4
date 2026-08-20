@@ -1,6 +1,0 @@
-res://default_bus_layout.tres
-res://Scenes/player.tscn
-res://Scripts/player.gd
-res://Scenes/world.tscn
-res://Utility/item_option.tscn
-res://Utility/item_option.gd
