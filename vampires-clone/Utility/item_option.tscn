@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://c7sqo4xpa0vol"]
+
+[ext_resource type="Texture2D" uid="uid://xc1es3bquxmb" path="res://Textures/Sprites/Plantik.png" id="1_8n5gr"]
+[ext_resource type="Script" uid="uid://cjxlpaljdmiu8" path="res://Utility/item_option.gd" id="1_gcekk"]
+
+[node name="ItemOption" type="ColorRect" unique_id=307440007]
+custom_minimum_size = Vector2(180, 50)
+anchors_preset = -1
+anchor_right = 0.28100002
+anchor_bottom = 0.13900001
+offset_right = 0.1599884
+offset_bottom = -0.04000473
+color = Color(0.5718735, 0.34179664, 0.7481997, 1)
+script = ExtResource("1_gcekk")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2133230989]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 26.0
+offset_bottom = 26.0
+color = Color(0, 0, 0, 1)
+
+[node name="ItemIcon" type="TextureRect" parent="ColorRect" unique_id=1656242622]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 28.0
+offset_bottom = 30.0
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("1_8n5gr")
+
+[node name="lbl_name" type="Label" parent="." unique_id=553088678]
+layout_mode = 0
+offset_left = 39.0
+offset_right = 86.0
+offset_bottom = 23.0
+text = "Name"
+horizontal_alignment = 1
+
+[node name="lbl_description" type="Label" parent="." unique_id=1479058481]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 27.0
+offset_right = 165.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 8
+text = "Desription of Item"
+autowrap_mode = 3
+
+[node name="lbl_level" type="Label" parent="." unique_id=1857631893]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 3.0
+offset_right = 171.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 12
+text = "level: 1"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

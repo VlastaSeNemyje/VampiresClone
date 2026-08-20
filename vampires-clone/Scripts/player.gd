@@ -48,6 +48,10 @@ var enemy_close = []
 #GUI
 @onready var expBar = get_node("%ExperienceBar")
 @onready var lblLevel = get_node("%Lbl_level")
+@onready var levelPanel = get_node("%LevelUp")
+@onready var upgradeOptions: Control = $GUILayer/GUI/LevelUp/UppgradeOptions
+@onready var sndLevelUp: AudioStreamPlayer = $GUILayer/GUI/LevelUp/snd_levelup
+@onready var itemOptions = preload("res://Utility/item_option.tscn")
 
 func _ready():
 	attack()
@@ -176,10 +180,9 @@ func calculate_experience(gem_exp):
 	if experience + collected_experience >= exp_required: #level up
 		collected_experience -= exp_required-experience
 		experience_level +=1
-		lblLevel.text = str("Level",experience_level)
 		experience = 0
 		exp_required = calculate_experiencecap()
-		calculate_experience(0)
+		levelup()
 	else:
 		experience += collected_experience
 		collected_experience = 0
@@ -191,7 +194,7 @@ func calculate_experiencecap():
 	if experience_level < 20:
 		exp_cap = experience_level*5
 	elif experience_level < 40:
-		exp_cap + 95 * (experience_level-19)*8
+		exp_cap + 95 + (experience_level-19)*8
 	else:
 		exp_cap = 255 + (experience_level-39)*12
 	return exp_cap
@@ -200,3 +203,26 @@ func set_expbar (set_value = 1, set_max_value = 100):
 	expBar.value = set_value
 	expBar.max_value = set_max_value
 	
+func levelup():
+	sndLevelUp.play()
+	lblLevel.text = str("Level",experience_level)
+	var tween = levelPanel.create_tween()
+	tween.tween_property(levelPanel,"position", Vector2(220,50),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.play()
+	levelPanel.visible = true
+	var options = 0
+	var optionsmax = 3
+	while options < optionsmax:
+		var option_choice = itemOptions.instantiate()
+		upgradeOptions.add_child(option_choice)
+		options += 1
+	get_tree().paused = true
+	
+func upgrade_character(upgrade):
+	var option_children = upgradeOptions.get_children()
+	for i in option_children:
+		i.queue_free()
+	levelPanel.visible = false
+	levelPanel.position = Vector2(800, 50)
+	get_tree().paused = false
+	calculate_experience(0)

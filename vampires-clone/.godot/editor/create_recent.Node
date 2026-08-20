@@ -1,4 +1,9 @@
 Label
+TextureRect
+ColorRect
+AudioStreamPlayer
+VBoxContainer
+Panel
 TextureProgressBar
 Control
 CanvasLayer
@@ -6,10 +11,4 @@ CollisionShape2D
 Area2D
 Node2D
 Sprite2D
-AudioStreamPlayer
 AnimatedSprite2D
-AudioStreamPlayer2D
-Timer
-AudioListener2D
-Camera2D
-CharacterBody2D
