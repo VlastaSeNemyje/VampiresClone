@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cnj0iwo35klfr"]
 
-[ext_resource type="Texture2D" uid="uid://n8h0l8ee8uhw" path="res://Textures/Sprites/VFX/Tornado.png" id="1_5t4lv"]
+[ext_resource type="Texture2D" uid="uid://n8h0l8ee8uhw" path="res://Textures/Sprites/Weapons/Tornado.png" id="1_5t4lv"]
 [ext_resource type="Script" uid="uid://bd2v1nse26fwa" path="res://Scenes/Attacks/tornado.gd" id="1_pgy2e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pgy2e"]

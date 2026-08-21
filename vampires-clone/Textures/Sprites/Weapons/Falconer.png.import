@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n8h0l8ee8uhw"
-path="res://.godot/imported/Tornado.png-7d30a8a9f104113470763fba8f62fec6.ctex"
+uid="uid://l2xh0iyokd5h"
+path="res://.godot/imported/Falconer.png-8e691dddd9b596ab775bbcad87eaae1e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Sprites/VFX/Tornado.png"
-dest_files=["res://.godot/imported/Tornado.png-7d30a8a9f104113470763fba8f62fec6.ctex"]
+source_file="res://Textures/Sprites/Weapons/Falconer.png"
+dest_files=["res://.godot/imported/Falconer.png-8e691dddd9b596ab775bbcad87eaae1e.ctex"]
 
 [params]
 

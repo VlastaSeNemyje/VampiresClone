@@ -26,15 +26,24 @@ var Whip = preload("res://Scenes/Attacks/whip_attack.tscn")
 
 #Arrow
 var arrow_ammo = 0
-var arrow_baseammo = 1
+var arrow_baseammo = 0
 var arrow_attackspeed = 1.5
 var arrow_level = 0
 
+#UPGRADES
+var collected_upgrades = []
+var upgrade_options = []
+var armor = 0
+var speed = 0
+var spell_cooldown = 0
+var spell_size = 0
+var additional_attacks = 0
+
 #Tornado
-var tornado_ammo = 3
-var tornado_baseammo = 3
+var tornado_ammo = 0
+var tornado_baseammo = 0
 var tornado_attackspeed = 3
-var tornado_level = 1
+var tornado_level = 0
 
 #Whip
 var whip_ammo = 0
@@ -214,6 +223,7 @@ func levelup():
 	var optionsmax = 3
 	while options < optionsmax:
 		var option_choice = itemOptions.instantiate()
+		option_choice.item = get_random_item()
 		upgradeOptions.add_child(option_choice)
 		options += 1
 	get_tree().paused = true
@@ -222,7 +232,33 @@ func upgrade_character(upgrade):
 	var option_children = upgradeOptions.get_children()
 	for i in option_children:
 		i.queue_free()
+	upgrade_options.clear()
+	collected_upgrades.append(upgrade)
 	levelPanel.visible = false
 	levelPanel.position = Vector2(800, 50)
 	get_tree().paused = false
 	calculate_experience(0)
+	
+func get_random_item():
+	var dblist = []
+	for i in UpgradeDb.UPGRADES:
+		if i in collected_upgrades: #Find already collected upgrades
+			pass
+		elif i in upgrade_options: #If the upgrade is already an option
+			pass
+		elif UpgradeDb.UPGRADES[i]["type"] == "item": #Dont pick food
+			pass
+		elif UpgradeDb.UPGRADES[i]["prerequisite"].size() > 0: #Check for PreRequsities
+			for n in UpgradeDb.UPGRADES [i]["prerequisite"]:
+				if not n in collected_upgrades:
+					pass
+				else:
+					dblist.append(i)
+		else:
+			dblist.append(i)
+	if dblist.size() > 0:
+		var randomitem = dblist.pick_random()
+		upgrade_options.append(randomitem)
+		return randomitem
+	else:
+		return null

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://donbyvqoobgj0"]
 
-[ext_resource type="Texture2D" uid="uid://3xtk72gl8dyr" path="res://Textures/Sprites/VFX/Arrow.png" id="1_ehlc7"]
+[ext_resource type="Texture2D" uid="uid://3xtk72gl8dyr" path="res://Textures/Sprites/Weapons/Arrow.png" id="1_ehlc7"]
 [ext_resource type="Script" uid="uid://b5tjl2qp00vuj" path="res://Scenes/Attacks/arrow_attack.gd" id="1_ijrjh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehlc7"]

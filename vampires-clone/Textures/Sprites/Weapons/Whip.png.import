@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ccgreo03rpgw1"
-path="res://.godot/imported/Whip.png-b85036542daf036eaa296c69f8e8085d.ctex"
+path="res://.godot/imported/Whip.png-8da607389ab50f9c3e5ea0242a228ab2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Sprites/VFX/Whip.png"
-dest_files=["res://.godot/imported/Whip.png-b85036542daf036eaa296c69f8e8085d.ctex"]
+source_file="res://Textures/Sprites/Weapons/Whip.png"
+dest_files=["res://.godot/imported/Whip.png-8da607389ab50f9c3e5ea0242a228ab2.ctex"]
 
 [params]
 

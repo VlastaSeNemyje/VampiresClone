@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d18s7xf8jgdu7"]
 
 [ext_resource type="Script" uid="uid://dkact2a2khtic" path="res://Scenes/Attacks/whip_attack.gd" id="1_8sbgr"]
-[ext_resource type="Texture2D" uid="uid://ccgreo03rpgw1" path="res://Textures/Sprites/VFX/Whip.png" id="2_8sbgr"]
+[ext_resource type="Texture2D" uid="uid://ccgreo03rpgw1" path="res://Textures/Sprites/Weapons/Whip.png" id="2_8sbgr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1jls4"]
 atlas = ExtResource("2_8sbgr")
