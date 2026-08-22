@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var movement_speed = 40.0
 var hp = 80
+var maxhp = 80
 var last_movement = Vector2.UP
 
 #Experience
@@ -13,6 +14,7 @@ var collected_experience = 0
 var Arrow = preload("res://Scenes/Attacks/arrow_attack.tscn")
 var Tornado = preload("res://Scenes/Attacks/tornado.tscn")
 var Whip = preload("res://Scenes/Attacks/whip_attack.tscn")
+#var Falcon = preload("res://Scenes/Attacks/falcon.tscn")
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -23,6 +25,8 @@ var Whip = preload("res://Scenes/Attacks/whip_attack.tscn")
 @onready var tornadoAttackTimer = get_node("%TornadoAttackTimer")
 @onready var whipTimer = get_node("%WhipTimer")
 @onready var whipAttackTimer = get_node("%WhipAttackTimer")
+#@onready var FalconTimer = get_node("%FalconTimer")
+#@onready var FalconAttackTimer = get_node("%FalconAttackTimer")
 
 #Arrow
 var arrow_ammo = 0
@@ -63,6 +67,7 @@ var enemy_close = []
 @onready var itemOptions = preload("res://Utility/item_option.tscn")
 
 func _ready():
+	upgrade_character("tornado1")
 	attack()
 	set_expbar(experience, calculate_experiencecap())
 
@@ -90,11 +95,11 @@ func movement():
 
 func attack():
 	if arrow_level > 0:
-		ArrowTimer.wait_time = arrow_attackspeed
+		ArrowTimer.wait_time = arrow_attackspeed * (1-spell_cooldown)
 		if ArrowTimer.is_stopped():
 			ArrowTimer.start()
 	if tornado_level > 0:
-		tornadoTimer.wait_time = tornado_attackspeed
+		tornadoTimer.wait_time = tornado_attackspeed * (1-spell_cooldown)
 		if tornadoTimer.is_stopped():
 			tornadoTimer.start()
 	if whip_level > 0:
@@ -103,12 +108,12 @@ func attack():
 			whipTimer.start()
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
-	hp -= damage
+	hp -= clamp(damage-armor, 1.0, 999.0)
 	print(hp)
 
 
 func _on_arrow_timer_timeout():
-	arrow_ammo += arrow_baseammo
+	arrow_ammo += arrow_baseammo + additional_attacks
 	ArrowAttackTimer.start()
 
 #AttackTimers
@@ -127,7 +132,7 @@ func _on_arrow_attack_timer_timeout():
 			ArrowAttackTimer.stop()
 			
 func _on_tornado_timer_timeout():
-	tornado_ammo += tornado_baseammo
+	tornado_ammo += tornado_baseammo + additional_attacks
 	tornadoAttackTimer.start()
 
 func _on_tornado_attack_timer_timeout():
@@ -144,7 +149,7 @@ func _on_tornado_attack_timer_timeout():
 			tornadoAttackTimer.stop()
 
 func _on_whip_timer_timeout():
-	whip_ammo += whip_baseammo
+	whip_ammo += whip_baseammo + additional_attacks
 	whipAttackTimer.start()
 
 
@@ -155,6 +160,20 @@ func _on_whip_attack_timer_timeout() -> void:
 		whip_attack.level = whip_level
 		add_child(whip_attack)
 		whipTimer.start() 
+		
+#func spawn_falcon():
+	#var get_falcon_total = falconBase.get_child_count()
+	#var cals_spawms = (falocon_ammo + additional_attacks) - get_falcon_total
+	#while calc_spawms > 0:
+		#var falcon_spawn = falcon.instatiate()
+		#falcon_spawn.global_position = global_position
+		#falconBase.add_child(falcon_spawn)
+		#calc_spawns -= 1
+		##Upgrade Falcon
+	#var get_falcon = falconBase.get_childer()
+		#for i in get_falcon:
+			#if i.has_method("update_falcon"):
+				#i.update_falcon()
 
 func get_random_target():
 	if enemy_close.size() > 0:
@@ -229,6 +248,65 @@ func levelup():
 	get_tree().paused = true
 	
 func upgrade_character(upgrade):
+	match upgrade:
+		"arrow1":
+			arrow_level = 1
+			arrow_baseammo += 1
+		"arrow2":
+			arrow_level = 2
+			arrow_baseammo += 1
+		"arrow3":
+			arrow_level = 3
+		"arrow4":
+			arrow_level = 4
+			arrow_baseammo += 2
+		"tornado1":
+			tornado_level = 1
+			tornado_baseammo += 1
+		"tornado2":
+			tornado_level = 2
+			tornado_baseammo += 1
+		"tornado3":
+			tornado_level = 3
+			tornado_attackspeed -= 0.5
+		"tornado4":
+			tornado_level = 4
+			tornado_baseammo += 1
+		"whip1":
+			whip_level = 1
+			whip_baseammo += 1
+		"whip2":
+			whip_level = 2
+			whip_baseammo += 1
+		"whip3":
+			whip_level = 3
+		"whip4":
+			whip_level = 4
+			whip_baseammo += 2
+		#"falcon1":
+			#falcon_level = 1
+			#falcon_ammo = 1
+		#"falcon2":
+			#falcon_level = 2
+		#"falcon3":
+			#falcon_level = 3
+		#"falcon4":
+			#falcon_level = 4
+		"armor1","armor2","armor3","armor4":
+			armor += 1
+		"speed1","speed2","speed3","speed4":
+			movement_speed += 20.0
+		"tome1","tome2","tome3","tome4":
+			spell_size += 0.10
+		"scroll1","scroll2","scroll3","scroll4":
+			spell_cooldown += 0.05
+		"ring1","ring2":
+			additional_attacks += 1
+		"food":
+			hp += 20
+			hp = clamp(hp,0,maxhp)
+	
+	attack()
 	var option_children = upgradeOptions.get_children()
 	for i in option_children:
 		i.queue_free()
@@ -249,10 +327,11 @@ func get_random_item():
 		elif UpgradeDb.UPGRADES[i]["type"] == "item": #Dont pick food
 			pass
 		elif UpgradeDb.UPGRADES[i]["prerequisite"].size() > 0: #Check for PreRequsities
+			var to_add = true
 			for n in UpgradeDb.UPGRADES [i]["prerequisite"]:
 				if not n in collected_upgrades:
-					pass
-				else:
+					to_add = false
+				if to_add:
 					dblist.append(i)
 		else:
 			dblist.append(i)

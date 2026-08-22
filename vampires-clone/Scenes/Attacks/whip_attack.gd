@@ -30,7 +30,22 @@ func _ready():
 			hp = 999
 			damage = 5
 			knockback_amount = 100
-			attack_size = 1.0
+			attack_size = 1.0 * ( 1+player.spell_size)
+		2:
+			hp = 999
+			damage = 7.5
+			knockback_amount = 100
+			attack_size = 1.0 * ( 1+player.spell_size)
+		3:
+			hp = 999
+			damage = 9
+			knockback_amount = 100
+			attack_size = 1.0 * ( 1+player.spell_size)
+		4:
+			hp = 999
+			damage = 9
+			knockback_amount = 125
+			attack_size = 1.0 * ( 1+player.spell_size)
 
 	# Whips behavior
 	scale = Vector2(facing, 1) * 0.2

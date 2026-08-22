@@ -20,7 +20,25 @@ func _ready():
 			speed = 100.0
 			damage = 5
 			knockback_amount = 100
-			attack_size = 1.0
+			attack_size = 1.0 * ( 1+player.spell_size)
+		2:
+			hp = 9999
+			speed = 100.0
+			damage = 5
+			knockback_amount = 100
+			attack_size = 1.0 * ( 1+player.spell_size)
+		3:
+			hp = 9999
+			speed = 125.0
+			damage = 5
+			knockback_amount = 100
+			attack_size = 1.0 * ( 1+player.spell_size)
+		4:
+			hp = 9999
+			speed = 125.0
+			damage = 7
+			knockback_amount = 125
+			attack_size = 1.0 * ( 1+player.spell_size)
 
 	# Direction
 	base_direction = Vector2.RIGHT.rotated(randf_range(0, TAU))

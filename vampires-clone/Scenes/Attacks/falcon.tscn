@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cj5b6a12fx70t"]
+
+[ext_resource type="Script" uid="uid://dbmd6ohv7iqt6" path="res://Scenes/Attacks/falcon.gd" id="1_a616w"]
+[ext_resource type="Texture2D" uid="uid://3xtk72gl8dyr" path="res://Textures/Sprites/Weapons/Arrow.png" id="2_d5bdd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehlc7"]
+size = Vector2(3, 20)
+
+[node name="Falcon" type="Area2D" unique_id=1330156193 groups=["attack"]]
+top_level = true
+z_index = 1
+scale = Vector2(0.1, 0.1)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_a616w")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1019898187]
+rotation = -0.6849738
+texture = ExtResource("2_d5bdd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1856506390]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_ehlc7")
+
+[node name="Timer" type="Timer" parent="." unique_id=1142233917]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2064084221]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
