@@ -115,6 +115,7 @@ position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_6t5aa")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.60348916
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=635807448]
 visible = false
@@ -174,7 +175,6 @@ monitorable = false
 shape = SubResource("CircleShape2D_6t5aa")
 
 [node name="GrabArea" type="Area2D" parent="." unique_id=2130652941]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -183,7 +183,6 @@ position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_vgqql")
 
 [node name="CollectArea" type="Area2D" parent="." unique_id=261012492]
-visible = false
 collision_layer = 0
 collision_mask = 8
 

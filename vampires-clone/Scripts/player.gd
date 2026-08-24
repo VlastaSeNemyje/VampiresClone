@@ -14,7 +14,7 @@ var collected_experience = 0
 var Arrow = preload("res://Scenes/Attacks/arrow_attack.tscn")
 var Tornado = preload("res://Scenes/Attacks/tornado.tscn")
 var Whip = preload("res://Scenes/Attacks/whip_attack.tscn")
-#var Falcon = preload("res://Scenes/Attacks/falcon.tscn")
+var Falcon = preload("res://Scenes/Attacks/falcon.tscn")
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -25,8 +25,7 @@ var Whip = preload("res://Scenes/Attacks/whip_attack.tscn")
 @onready var tornadoAttackTimer = get_node("%TornadoAttackTimer")
 @onready var whipTimer = get_node("%WhipTimer")
 @onready var whipAttackTimer = get_node("%WhipAttackTimer")
-#@onready var FalconTimer = get_node("%FalconTimer")
-#@onready var FalconAttackTimer = get_node("%FalconAttackTimer")
+@onready var falconBase = get_node("%FalconBase")
 
 #Arrow
 var arrow_ammo = 0
@@ -55,6 +54,11 @@ var whip_baseammo = 1
 var whip_attackspeed = 3
 var whip_level = 0
 
+#Falcon
+var falcon_ammo = 1
+var falcon_level = 1
+
+
 #Enemy Related
 var enemy_close = []
 
@@ -67,7 +71,7 @@ var enemy_close = []
 @onready var itemOptions = preload("res://Utility/item_option.tscn")
 
 func _ready():
-	upgrade_character("tornado1")
+	#upgrade_character("tornado1")
 	attack()
 	set_expbar(experience, calculate_experiencecap())
 
@@ -106,6 +110,8 @@ func attack():
 		whipTimer.wait_time = whip_attackspeed
 		if whipTimer.is_stopped():
 			whipTimer.start()
+	if falcon_level > 0:
+		spawn_falcon()
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	hp -= clamp(damage-armor, 1.0, 999.0)
@@ -161,15 +167,15 @@ func _on_whip_attack_timer_timeout() -> void:
 		add_child(whip_attack)
 		whipTimer.start() 
 		
-#func spawn_falcon():
-	#var get_falcon_total = falconBase.get_child_count()
-	#var cals_spawms = (falocon_ammo + additional_attacks) - get_falcon_total
-	#while calc_spawms > 0:
-		#var falcon_spawn = falcon.instatiate()
-		#falcon_spawn.global_position = global_position
-		#falconBase.add_child(falcon_spawn)
-		#calc_spawns -= 1
-		##Upgrade Falcon
+func spawn_falcon():
+	var get_falcon_total = falconBase.get_child_count()
+	var calc_spawns = (falcon_ammo + additional_attacks) - get_falcon_total
+	while calc_spawns > 0:
+		var falcon_spawn = Falcon.instantiate()
+		falcon_spawn.global_position = global_position
+		falconBase.add_child(falcon_spawn)
+		calc_spawns -= 1
+		#Upgrade Falcon:
 	#var get_falcon = falconBase.get_childer()
 		#for i in get_falcon:
 			#if i.has_method("update_falcon"):

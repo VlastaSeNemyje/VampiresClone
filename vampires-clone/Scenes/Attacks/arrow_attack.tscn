@@ -15,11 +15,13 @@ collision_mask = 0
 script = ExtResource("1_ijrjh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1019898187]
-rotation = -0.6849738
+rotation = -0.8006555
 texture = ExtResource("1_ehlc7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1856506390]
-position = Vector2(0.5, 0)
+position = Vector2(0.49999997, 0)
+rotation = -0.7853982
+scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_ehlc7")
 
 [node name="Timer" type="Timer" parent="." unique_id=1142233917]

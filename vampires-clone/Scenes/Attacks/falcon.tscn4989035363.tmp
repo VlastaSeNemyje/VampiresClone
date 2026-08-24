@@ -27,20 +27,24 @@ disabled = true
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=1142233917]
 unique_name_in_owner = true
-wait_time = 5.0
+wait_time = 4.0
 one_shot = true
 autostart = true
 
 [node name="ChangeDirection" type="Timer" parent="." unique_id=848043171]
 unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true
+autostart = true
 
 [node name="ResetPosTimer" type="Timer" parent="." unique_id=6874022]
 unique_name_in_owner = true
-wait_time = 3.0
+wait_time = 10.0
+one_shot = true
 autostart = true
 
 [node name="snd_falcon" type="AudioStreamPlayer2D" parent="." unique_id=2064084221]
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="ChangeDirection" to="." method="_on_change_direction_timeout"]
-[connection signal="timeout" from="ResetPosTimer" to="." method="_on_reset_pos_timer_timeout"]
+[connection signal="timeout" from="ResetPosTimer" to="." method="_on_timer_timeout"]
