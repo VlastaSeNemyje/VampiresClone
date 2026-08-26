@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://be0co0l3j62ou" path="res://Textures/Sprites/BarBcg.png" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://4brnwnxt1tqi" path="res://Textures/Sprites/BarProgress.png" id="5_x3wgy"]
 [ext_resource type="AudioStream" uid="uid://boh6gbgbyinnt" path="res://Sounds/VFX/SFX_WAV_277.wav" id="6_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://b7kuxl1bobayo" path="res://Textures/Sprites/BarHealth.png" id="7_3smsa"]
+[ext_resource type="Texture2D" uid="uid://bc4soinvtfwuw" path="res://Textures/Sprites/BarHealthBcg.png" id="7_8erm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("2_6t5aa")
@@ -198,6 +200,18 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
+
+[node name="HealthBar" type="TextureProgressBar" parent="GUILayer/GUI" unique_id=1419325453]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 310.0
+offset_top = 183.0
+offset_right = 342.0
+offset_bottom = 191.0
+scale = Vector2(0.6, 0.6)
+value = 50.0
+texture_under = ExtResource("7_8erm5")
+texture_progress = ExtResource("7_3smsa")
 
 [node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI" unique_id=831773781]
 unique_name_in_owner = true

@@ -55,9 +55,8 @@ var whip_attackspeed = 3
 var whip_level = 0
 
 #Falcon
-var falcon_ammo = 1
-var falcon_level = 1
-
+var falcon_ammo = 0
+var falcon_level = 0
 
 #Enemy Related
 var enemy_close = []
@@ -69,11 +68,13 @@ var enemy_close = []
 @onready var upgradeOptions: Control = $GUILayer/GUI/LevelUp/UppgradeOptions
 @onready var sndLevelUp: AudioStreamPlayer = $GUILayer/GUI/LevelUp/snd_levelup
 @onready var itemOptions = preload("res://Utility/item_option.tscn")
+@onready var healthBar = get_node("%HealthBar")
 
 func _ready():
-	#upgrade_character("tornado1")
+	upgrade_character("tornado1")
 	attack()
 	set_expbar(experience, calculate_experiencecap())
+	_on_hurt_box_hurt(0,0,0)
 
 func _physics_process(delta):
 	movement()
@@ -107,7 +108,7 @@ func attack():
 		if tornadoTimer.is_stopped():
 			tornadoTimer.start()
 	if whip_level > 0:
-		whipTimer.wait_time = whip_attackspeed
+		whipTimer.wait_time = whip_attackspeed * (1-spell_cooldown)
 		if whipTimer.is_stopped():
 			whipTimer.start()
 	if falcon_level > 0:
@@ -116,6 +117,8 @@ func attack():
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	hp -= clamp(damage-armor, 1.0, 999.0)
 	print(hp)
+	healthBar.max_value = maxhp
+	healthBar.value = hp
 
 
 func _on_arrow_timer_timeout():
@@ -175,11 +178,11 @@ func spawn_falcon():
 		falcon_spawn.global_position = global_position
 		falconBase.add_child(falcon_spawn)
 		calc_spawns -= 1
-		#Upgrade Falcon:
-	#var get_falcon = falconBase.get_childer()
-		#for i in get_falcon:
-			#if i.has_method("update_falcon"):
-				#i.update_falcon()
+	#Upgrade Falcon
+	var get_falcon = falconBase.get_children()
+	for i in get_falcon:
+		if i.has_method("update_falcon"):
+			i.update_falcon()
 
 func get_random_target():
 	if enemy_close.size() > 0:
@@ -289,15 +292,15 @@ func upgrade_character(upgrade):
 		"whip4":
 			whip_level = 4
 			whip_baseammo += 2
-		#"falcon1":
-			#falcon_level = 1
-			#falcon_ammo = 1
-		#"falcon2":
-			#falcon_level = 2
-		#"falcon3":
-			#falcon_level = 3
-		#"falcon4":
-			#falcon_level = 4
+		"falcon1":
+			falcon_level = 1
+			falcon_ammo = 1
+		"falcon2":
+			falcon_level = 2
+		"falcon3":
+			falcon_level = 3
+		"falcon4":
+			falcon_level = 4
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":
