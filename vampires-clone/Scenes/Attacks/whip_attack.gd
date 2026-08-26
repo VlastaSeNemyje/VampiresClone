@@ -17,7 +17,7 @@ func _ready():
 	else:
 		facing = 1
 	var life_timer = Timer.new()
-	life_timer.wait_time = 0.1
+	life_timer.wait_time = 0.05
 	life_timer.one_shot = true
 	add_child(life_timer)
 	life_timer.timeout.connect(queue_free)
@@ -40,12 +40,12 @@ func _ready():
 			hp = 999
 			damage = 9
 			knockback_amount = 100
-			attack_size = 1.0 * ( 1+player.spell_size)
+			attack_size = 1.5 * ( 1+player.spell_size)
 		4:
 			hp = 999
 			damage = 9
 			knockback_amount = 125
-			attack_size = 1.0 * ( 1+player.spell_size)
+			attack_size = 2 * ( 1+player.spell_size)
 
 	# Whips behavior
 	scale = Vector2(facing, 1) * 0.2

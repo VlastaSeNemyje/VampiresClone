@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cwt1oog323iwu"]
+
+[ext_resource type="Texture2D" uid="uid://cvwhcb8jkn5ju" path="res://Textures/Sprites/Upgrades/EmptyItem.png" id="1_oakcd"]
+[ext_resource type="Script" uid="uid://epmo0d6sqw41" path="res://Scenes/GUI/item_texture.gd" id="3_vya1j"]
+
+[node name="ItemContainer" type="TextureRect" unique_id=1346390749]
+offset_right = 12.0
+offset_bottom = 12.0
+texture = ExtResource("1_oakcd")
+script = ExtResource("3_vya1j")
+
+[node name="ItemTexture" type="TextureRect" parent="." unique_id=270156239]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(0.35, 0.35)

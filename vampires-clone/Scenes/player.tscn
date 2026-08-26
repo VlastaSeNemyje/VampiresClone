@@ -119,7 +119,6 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=635807448]
-visible = false
 position = Vector2(0, -7)
 scale = Vector2(1, 0.5199999)
 shape = SubResource("CapsuleShape2D_cvnsp")
@@ -260,6 +259,34 @@ offset_bottom = 100.0
 [node name="snd_levelup" type="AudioStreamPlayer" parent="GUILayer/GUI/LevelUp" unique_id=2090545934]
 unique_name_in_owner = true
 stream = ExtResource("6_x3wgy")
+
+[node name="lblTimer" type="Label" parent="GUILayer/GUI" unique_id=1876763833]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 280.0
+offset_right = 360.0
+offset_bottom = 24.0
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollectedWeapons" type="GridContainer" parent="GUILayer/GUI" unique_id=2115723447]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 208.0
+offset_bottom = 40.0
+columns = 10
+
+[node name="CollectedUpgrades" type="GridContainer" parent="GUILayer/GUI" unique_id=1995598392]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 208.0
+offset_bottom = 56.0
+columns = 10
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/ArrowTimer" to="." method="_on_arrow_timer_timeout"]
