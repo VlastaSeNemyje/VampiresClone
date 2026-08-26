@@ -19,24 +19,23 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehlc7"]
-size = Vector2(60.00004, 20.000008)
+size = Vector2(56.00003, 11.000007)
 
 [node name="Whip" type="Area2D" unique_id=1330156193 groups=["attack"]]
 top_level = true
 z_index = 1
-position = Vector2(0, 0.9)
-scale = Vector2(0.1, 0.08)
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_8sbgr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=778499729]
-position = Vector2(1.9999981, -4.000001)
-scale = Vector2(0.99999994, 0.99999994)
+position = Vector2(2, -4.7683716e-07)
+scale = Vector2(1, 0.8)
 sprite_frames = SubResource("SpriteFrames_40fj3")
+speed_scale = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1856506390]
-position = Vector2(1.9999981, -4)
+position = Vector2(-1.0000008, -4.5)
 scale = Vector2(0.99999934, 0.99999934)
 shape = SubResource("RectangleShape2D_ehlc7")
 

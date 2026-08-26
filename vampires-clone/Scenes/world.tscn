@@ -11,7 +11,7 @@
 script = ExtResource("4_fo5ed")
 time_end = 5
 enemy = ExtResource("5_5ukr8")
-enemy_num = 5
+enemy_num = 15
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [node name="World" type="Node2D" unique_id=26020053]

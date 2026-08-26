@@ -32,8 +32,12 @@ func _on_area_entered(area):
 			var damage = area.damage
 			var angle = Vector2.ZERO
 			var knockback = 1
-			if not area.get("angle") == null:
+			
+			if area.has_method("get_knockback_direction"):
+				angle = area.get_knockback_direction(global_position)
+			elif not area.get("angle") == null:
 				angle = area.angle
+				
 			if not area.get("knockback_amount") == null:
 				knockback = area.knockback_amount
 				
