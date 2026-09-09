@@ -75,5 +75,5 @@ func _physics_process(delta):
 	angle = base_direction.rotated(angle_offset)
 
 func _on_timer_timeout():
-	emit_signal("remove_from_array")
+	emit_signal("remove_from_array",self)
 	queue_free()
