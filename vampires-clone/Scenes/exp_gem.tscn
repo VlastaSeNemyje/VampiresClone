@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://be8ccxkuggogn" path="res://Textures/Sprites/GemGreen.png" id="1_j05ow"]
 [ext_resource type="Script" uid="uid://d4lght03e0qoi" path="res://Scripts/exp_gem.gd" id="1_xpps1"]
-[ext_resource type="AudioStream" uid="uid://njfa5i1uhapf" path="res://Sounds/VFX/SFX_WAV_280.wav" id="3_meakw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yuap5"]
 size = Vector2(5, 6)
@@ -18,10 +17,3 @@ texture = ExtResource("1_j05ow")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=292709319]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_yuap5")
-
-[node name="Snd_collected" type="AudioStreamPlayer" parent="." unique_id=1477916852]
-stream = ExtResource("3_meakw")
-volume_db = -10.0
-pitch_scale = 0.9
-
-[connection signal="finished" from="Snd_collected" to="." method="_on_snd_collected_finished"]
