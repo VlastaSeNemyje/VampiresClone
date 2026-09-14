@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://boh6gbgbyinnt" path="res://Sounds/VFX/SFX_WAV_277.wav" id="6_x3wgy"]
 [ext_resource type="Texture2D" uid="uid://b7kuxl1bobayo" path="res://Textures/Sprites/BarHealth.png" id="7_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bc4soinvtfwuw" path="res://Textures/Sprites/BarHealthBcg.png" id="7_8erm5"]
+[ext_resource type="PackedScene" uid="uid://bf71bynv53120" path="res://Utility/basic_button.tscn" id="9_f1ek2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("2_6t5aa")
@@ -233,7 +234,6 @@ vertical_alignment = 2
 [node name="LevelUp" type="Panel" parent="GUILayer/GUI" unique_id=156031489]
 unique_name_in_owner = true
 process_mode = 2
-visible = false
 layout_mode = 0
 offset_left = 800.0
 offset_top = 50.0
@@ -259,6 +259,32 @@ offset_bottom = 100.0
 [node name="snd_levelup" type="AudioStreamPlayer" parent="GUILayer/GUI/LevelUp" unique_id=2090545934]
 unique_name_in_owner = true
 stream = ExtResource("6_x3wgy")
+
+[node name="DeathPanel" type="Panel" parent="GUILayer/GUI" unique_id=1931499826]
+unique_name_in_owner = true
+process_mode = 2
+layout_mode = 0
+offset_left = 225.0
+offset_top = -270.0
+offset_right = 425.0
+offset_bottom = -20.0
+
+[node name="lbl_Result" type="Label" parent="GUILayer/GUI/DeathPanel" unique_id=743600133]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 50.0
+text = "Result"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="snd_victory" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel" unique_id=1877931557]
+stream = ExtResource("6_x3wgy")
+
+[node name="snd_lose" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel" unique_id=1762579757]
+stream = ExtResource("6_x3wgy")
+
+[node name="Button" parent="GUILayer/GUI/DeathPanel" unique_id=1111186126 instance=ExtResource("9_f1ek2")]
+layout_mode = 0
 
 [node name="lblTimer" type="Label" parent="GUILayer/GUI" unique_id=1876763833]
 unique_name_in_owner = true

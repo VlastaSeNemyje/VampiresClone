@@ -169,7 +169,7 @@ motion_mode = 1
 script = ExtResource("1_55h5c")
 movement_speed = 28
 hp = 20
-damage = 2
+enemy_damage = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1289113278]
 scale = Vector2(1.5, 1.5)

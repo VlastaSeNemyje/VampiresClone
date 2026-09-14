@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var hp = 10
 @export var knockback_recovery = 3.5
 @export var experience = 1
-@export var damage = 1
+@export var enemy_damage = 1
 var knockback = Vector2.ZERO
 
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -20,7 +20,7 @@ var exp_gem = preload("res://Scenes/exp_gem.tscn")
 signal remove_from_array(object)
 
 func _ready():
-	hitBox.damage = damage
+	hitBox.damage = enemy_damage
 
 func _physics_process(_delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
