@@ -272,6 +272,7 @@ offset_right = 425.0
 offset_bottom = -20.0
 
 [node name="lbl_Result" type="Label" parent="GUILayer/GUI/DeathPanel" unique_id=743600133]
+unique_name_in_owner = true
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 50.0
@@ -280,13 +281,21 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="snd_victory" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel" unique_id=1877931557]
+unique_name_in_owner = true
 stream = ExtResource("6_x3wgy")
 
 [node name="snd_lose" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel" unique_id=1762579757]
+unique_name_in_owner = true
 stream = ExtResource("6_x3wgy")
 
-[node name="Button" parent="GUILayer/GUI/DeathPanel" unique_id=1111186126 instance=ExtResource("9_f1ek2")]
+[node name="btn_menu" parent="GUILayer/GUI/DeathPanel" unique_id=1111186126 instance=ExtResource("9_f1ek2")]
 layout_mode = 0
+offset_left = 48.0
+offset_top = 200.0
+offset_right = 156.0
+offset_bottom = 231.0
+text = "Menu
+"
 
 [node name="lblTimer" type="Label" parent="GUILayer/GUI" unique_id=1876763833]
 unique_name_in_owner = true

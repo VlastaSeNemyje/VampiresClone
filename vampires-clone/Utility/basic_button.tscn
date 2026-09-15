@@ -1,5 +1,18 @@
 [gd_scene format=3 uid="uid://bf71bynv53120"]
 
+[ext_resource type="Script" uid="uid://bu7anu8xcgm07" path="res://Utility/basic_button.gd" id="1_w5bej"]
+
 [node name="Button" type="Button" unique_id=1111186126]
+custom_minimum_size = Vector2(80, 30)
 offset_right = 8.0
 offset_bottom = 8.0
+text = "Buttony Butt"
+script = ExtResource("1_w5bej")
+
+[node name="snd_hover" type="AudioStreamPlayer2D" parent="." unique_id=868899644]
+
+[node name="snd_click" type="AudioStreamPlayer2D" parent="." unique_id=1729408640]
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="finished" from="snd_click" to="." method="_on_snd_click_finished"]
