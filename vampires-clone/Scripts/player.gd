@@ -81,7 +81,7 @@ func _ready():
 	set_expbar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	movement()
 
 func movement():
@@ -236,7 +236,7 @@ func calculate_experiencecap():
 	if experience_level < 20:
 		exp_cap = experience_level*5
 	elif experience_level < 40:
-		exp_cap + 95 + (experience_level-19)*8
+		exp_cap = 95 + (experience_level-19)*8
 	else:
 		exp_cap = 255 + (experience_level-39)*12
 	return exp_cap
