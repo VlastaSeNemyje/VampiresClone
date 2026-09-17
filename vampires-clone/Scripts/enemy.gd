@@ -54,6 +54,7 @@ func _physics_process(_delta):
 		animated_sprite_2d.flip_h = false
 	elif direction.x < -0.1:
 		animated_sprite_2d.flip_h = true
+		
 
 func flash_white():
 	if flash_material == null:

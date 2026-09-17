@@ -3,7 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://cgp8qxkss6n26" path="res://Sounds/Music/Chiptune Rock 1.mp3" id="1_pu1gl"]
 
 [node name="MusicLevel" type="AudioStreamPlayer" unique_id=228078397]
+process_mode = 3
 stream = ExtResource("1_pu1gl")
 volume_db = -10.0
-autoplay = true
 bus = &"Music"

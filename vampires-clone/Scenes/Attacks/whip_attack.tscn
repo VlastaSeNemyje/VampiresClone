@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dkact2a2khtic" path="res://Scenes/Attacks/whip_attack.gd" id="1_8sbgr"]
 [ext_resource type="Texture2D" uid="uid://ccgreo03rpgw1" path="res://Textures/Sprites/Weapons/Whip.png" id="2_8sbgr"]
+[ext_resource type="AudioStream" uid="uid://bmhx672y3i5eh" path="res://Sounds/VFX/SFX_WAV_189.wav" id="3_1jls4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1jls4"]
 atlas = ExtResource("2_8sbgr")
@@ -45,5 +46,8 @@ one_shot = true
 autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2064084221]
+stream = ExtResource("3_1jls4")
+pitch_scale = 1.2
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

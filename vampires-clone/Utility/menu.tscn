@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://emwelk48grb3"]
+
+[ext_resource type="Script" uid="uid://cjp8ngoipa2c3" path="res://Utility/menu.gd" id="1_3ivhh"]
+[ext_resource type="PackedScene" uid="uid://bf71bynv53120" path="res://Utility/basic_button.tscn" id="2_b2oxh"]
+
+[node name="Menu" type="Control" unique_id=444139732]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3ivhh")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2100059771]
+layout_mode = 0
+offset_right = 682.0
+offset_bottom = 395.0
+color = Color(0.46000254, 0.13635904, 0.7681342, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1535251751]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 100.0
+text = "Myth Survivors"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btn_play" parent="." unique_id=1111186126 instance=ExtResource("2_b2oxh")]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 217.0
+offset_right = 388.0
+offset_bottom = 248.0
+text = "Play
+
+"
+
+[node name="btn_exit" parent="." unique_id=1580338571 instance=ExtResource("2_b2oxh")]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 262.0
+offset_right = 388.0
+offset_bottom = 293.0
+text = "Exit
+"
+
+[connection signal="click_end" from="btn_play" to="." method="_on_btn_play_click_end"]
+[connection signal="click_end" from="btn_exit" to="." method="_on_btn_exit_click_end"]
