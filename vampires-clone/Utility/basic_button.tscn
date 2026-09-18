@@ -8,6 +8,7 @@ custom_minimum_size = Vector2(80, 30)
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Buttony Butt"
+flat = true
 script = ExtResource("1_w5bej")
 
 [node name="snd_hover" type="AudioStreamPlayer2D" parent="." unique_id=868899644]

@@ -39,6 +39,10 @@ player=""
 attack=""
 loot=""
 
+[gui]
+
+theme/custom="uid://0rluig7t2vb5"
+
 [input]
 
 up={

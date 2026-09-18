@@ -20,8 +20,12 @@ color = Color(0.46000254, 0.13635904, 0.7681342, 1)
 
 [node name="Label" type="Label" parent="." unique_id=1535251751]
 layout_mode = 0
-offset_right = 640.0
-offset_bottom = 100.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 660.0
+offset_bottom = 120.0
+theme_override_colors/font_color = Color(0.36846673, 0, 0.065462686, 1)
+theme_override_font_sizes/font_size = 48
 text = "Myth Survivors"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -32,6 +36,11 @@ offset_left = 280.0
 offset_top = 217.0
 offset_right = 388.0
 offset_bottom = 248.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.6666667, 0, 0.15294118, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.20784314, 0.30588236, 1)
+theme_override_colors/font_hover_color = Color(0.6666667, 0, 0.15294118, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.20784314, 0.30588236, 1)
 text = "Play
 
 "
@@ -42,6 +51,11 @@ offset_left = 280.0
 offset_top = 262.0
 offset_right = 388.0
 offset_bottom = 293.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0.6666667, 0, 0.15294118, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.20784314, 0.30588236, 1)
+theme_override_colors/font_hover_color = Color(0.6666667, 0, 0.15294118, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.20784314, 0.30588236, 1)
 text = "Exit
 "
 

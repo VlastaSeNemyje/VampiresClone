@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://0rluig7t2vb5"]
+
+[ext_resource type="FontFile" uid="uid://cdl0gvxcymii0" path="res://Fonts/EXEPixelPerfect.ttf" id="1_jcwc1"]
+
+[resource]
+default_font = ExtResource("1_jcwc1")
+default_font_size = 28
