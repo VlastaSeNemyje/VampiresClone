@@ -16,11 +16,10 @@ var target_array = []
 var angle = Vector2.ZERO
 var reset_pos = Vector2.ZERO
 
-var spr_falcon_reg = preload("res://Textures/Sprites/Weapons/Falconer.png")
-var spr_falcon_atk = preload("res://Textures/Sprites/Weapons/FalconerAttack.png")
+var facing = 1 # 1 = right, -1 = left
 
 @onready var player = get_tree().get_first_node_in_group("player")
-@onready var sprite = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision = $CollisionShape2D
 @onready var AttackTimer = get_node("AttackTimer")
 @onready var ChangeDirection = get_node("%ChangeDirection")
@@ -30,6 +29,8 @@ var spr_falcon_atk = preload("res://Textures/Sprites/Weapons/FalconerAttack.png"
 signal remove_from_array(object)
 
 func _ready():
+	facing = 1 if randi() % 2 == 0 else -1
+	sprite.flip_h = facing == -1
 	update_falcon()
 	_on_reset_pos_timer_timeout()
 
@@ -68,22 +69,21 @@ func update_falcon():
 			paths = 3
 			attack_size = 1.0 * (1 + player.spell_size)
 			attack_speed = 5.0 * (1 - player.spell_cooldown)
-	
-	scale = Vector2( 1.0, 1.0) * attack_size
+
+	scale = Vector2(1.0, 1.0) * attack_size
 	AttackTimer.wait_time = attack_speed
-	
+
 func _physics_process(delta):
 	if target_array.size() > 0:
-		position += angle*speed*delta
+		position += angle * speed * delta
 	else:
 		var player_angle = global_position.direction_to(reset_pos)
 		var distance_dif = global_position - player.global_position
 		var return_speed = 20
-		if abs(distance_dif.x) > 500 or abs (distance_dif.y) > 500:
+		if abs(distance_dif.x) > 500 or abs(distance_dif.y) > 500:
 			return_speed = 100
-		position += player_angle*return_speed*delta
-		rotation = global_position.direction_to(player.global_position).angle() + deg_to_rad(135)
-		
+		position += player_angle * return_speed * delta
+
 func add_paths():
 	snd_falcon.play()
 	emit_signal("remove_from_array", self)
@@ -96,27 +96,38 @@ func add_paths():
 	enable_attack(true)
 	target = target_array[0]
 	process_path()
-	
+
 func process_path():
 	angle = global_position.direction_to(target)
 	ChangeDirection.start()
+	rotate_to_angle(angle)
+
+func rotate_to_angle(dir: Vector2):
+	var target_rotation = dir.angle()
 	var tween = create_tween()
-	var new_rotation_degrees = angle.angle() + deg_to_rad(135)
-	tween.tween_property(self,"rotation",new_rotation_degrees,0.25).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "rotation", target_rotation, 0.2)\
+		.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
-	
+
+func reset_rotation():
+	var tween = create_tween()
+	tween.tween_property(self, "rotation", 0.0, 0.2)\
+		.set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.play()
+
 func enable_attack(atk = true):
 	if atk:
 		collision.call_deferred("set", "disabled", false)
-		sprite.texture = spr_falcon_atk
+		sprite.play("attack")
 	else:
 		collision.call_deferred("set", "disabled", true)
-		sprite.texture = spr_falcon_reg
-
+		sprite.play("idle")
+		reset_rotation()
+		facing = 1 if randi() % 2 == 0 else -1
+		sprite.flip_h = facing == -1
 
 func _on_attack_timer_timeout():
 	add_paths()
-
 
 func _on_change_direction_timeout():
 	if target_array.size() > 0:
@@ -125,7 +136,7 @@ func _on_change_direction_timeout():
 			target = target_array[0]
 			process_path()
 			snd_falcon.play()
-			emit_signal("remove_from_array",self)
+			emit_signal("remove_from_array", self)
 		else:
 			ChangeDirection.stop()
 			AttackTimer.start()
@@ -134,7 +145,6 @@ func _on_change_direction_timeout():
 		ChangeDirection.stop()
 		AttackTimer.start()
 		enable_attack(false)
-
 
 func _on_reset_pos_timer_timeout():
 	var choose_direction = randi() % 4
