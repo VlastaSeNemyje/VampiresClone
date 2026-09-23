@@ -8,14 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://b4g4ormrns30w" path="res://Scenes/exp_gem.tscn" id="6_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://d0qu2pojwvyyh" path="res://Scenes/enemy_basic_0_elite.tscn" id="6_5v1tr"]
 [ext_resource type="PackedScene" uid="uid://cdt0vfoh7p0cp" path="res://Scenes/enemy_gerald_2.tscn" id="7_0fj1v"]
+[ext_resource type="PackedScene" uid="uid://do6hvpnsvqj1y" path="res://Scenes/enemy_gerald_2_elite.tscn" id="8_ikia7"]
 [ext_resource type="AudioStream" uid="uid://k6yeo0j2eera" path="res://Sounds/Music/Chiptune Rock 1.wav" id="11_7yui6"]
 [ext_resource type="Script" uid="uid://dm615omebx2ud" path="res://Scenes/music_level.gd" id="12_c5t2i"]
 
 [sub_resource type="Resource" id="Resource_kn0ld"]
 script = ExtResource("4_fo5ed")
-time_end = 90
+time_end = 120
 enemy = ExtResource("5_0fj1v")
-enemy_num = 2
+enemy_num = 3
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Resource_t2t4p"]
@@ -33,7 +34,16 @@ time_start = 15
 time_end = 120
 enemy = ExtResource("7_0fj1v")
 enemy_num = 3
-enemy_spawn_delay = 30
+enemy_spawn_delay = 25
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Resource_7yui6"]
+script = ExtResource("4_fo5ed")
+time_start = 60
+time_end = 180
+enemy = ExtResource("8_ikia7")
+enemy_num = 1
+enemy_spawn_delay = 45
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [node name="World" type="Node2D" unique_id=26020053]
@@ -48,7 +58,7 @@ region_rect = Rect2(0, 0, 4000, 4000)
 [node name="Player" parent="." unique_id=1972239113 instance=ExtResource("2_go701")]
 
 [node name="EnemySpawner" parent="." unique_id=1013572439 instance=ExtResource("3_5a7ea")]
-spawns = Array[ExtResource("4_fo5ed")]([SubResource("Resource_kn0ld"), SubResource("Resource_t2t4p"), SubResource("Resource_ikia7")])
+spawns = Array[ExtResource("4_fo5ed")]([SubResource("Resource_kn0ld"), SubResource("Resource_t2t4p"), SubResource("Resource_ikia7"), SubResource("Resource_7yui6")])
 
 [node name="Loot" type="Node2D" parent="." unique_id=1105049148 groups=["loot"]]
 

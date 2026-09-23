@@ -1,41 +1,55 @@
 [gd_scene format=3 uid="uid://do6hvpnsvqj1y"]
 
 [ext_resource type="Script" uid="uid://b1t3flr4tf40w" path="res://Scripts/enemy.gd" id="1_ok3uk"]
-[ext_resource type="Texture2D" uid="uid://ciig711ipnsnt" path="res://Textures/Sprites/Gerald.png" id="2_ykon3"]
+[ext_resource type="Texture2D" uid="uid://bmcjvswarlwq" path="res://Textures/Sprites/Gerald2.png" id="2_ok3uk"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_2jlum"]
 [ext_resource type="PackedScene" uid="uid://cthuwwjhu3woh" path="res://Utility/hit_box.tscn" id="4_14i0j"]
 [ext_resource type="AudioStream" uid="uid://bmhx672y3i5eh" path="res://Sounds/VFX/SFX_WAV_189.wav" id="5_3cdtw"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0830c"]
-atlas = ExtResource("2_ykon3")
-region = Rect2(0, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykon3"]
+atlas = ExtResource("2_ok3uk")
+region = Rect2(0, 30, 32, 30)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ghaa6"]
-atlas = ExtResource("2_ykon3")
-region = Rect2(32, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jlum"]
+atlas = ExtResource("2_ok3uk")
+region = Rect2(32, 30, 32, 30)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1dp5w"]
-atlas = ExtResource("2_ykon3")
-region = Rect2(64, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_14i0j"]
+atlas = ExtResource("2_ok3uk")
+region = Rect2(64, 30, 32, 30)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_auwsv"]
-atlas = ExtResource("2_ykon3")
-region = Rect2(96, 32, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cdtw"]
+atlas = ExtResource("2_ok3uk")
+region = Rect2(96, 30, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2brtr"]
+atlas = ExtResource("2_ok3uk")
+region = Rect2(128, 30, 32, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgrxf"]
+atlas = ExtResource("2_ok3uk")
+region = Rect2(160, 30, 32, 30)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_afpow"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0830c")
+"texture": SubResource("AtlasTexture_ykon3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ghaa6")
+"texture": SubResource("AtlasTexture_2jlum")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1dp5w")
+"texture": SubResource("AtlasTexture_14i0j")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_auwsv")
+"texture": SubResource("AtlasTexture_3cdtw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2brtr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgrxf")
 }],
 "loop": true,
 "name": &"idle",
@@ -58,15 +72,19 @@ collision_layer = 5
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_ok3uk")
-movement_speed = 28
-hp = 20
-experience = 5
-enemy_damage = 2
+movement_speed = 33
+hp = 150
+knockback_recovery = 4.5
+experience = 45
+enemy_damage = 5
+death_particle_color = Color(0.38431373, 0.9529412, 1, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1289113278]
 sprite_frames = SubResource("SpriteFrames_afpow")
 animation = &"idle"
 autoplay = "idle"
+frame = 4
+frame_progress = 0.071500435
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280193968]
 visible = false
