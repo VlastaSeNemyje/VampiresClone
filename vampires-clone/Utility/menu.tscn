@@ -62,7 +62,6 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Tab1" parent="CharacterTabs" unique_id=40272832 instance=ExtResource("3_tabs")]
-modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 character_name = "Rusalka"
 portrait_texture = SubResource("AnimatedTexture_aeqf2")

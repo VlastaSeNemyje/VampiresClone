@@ -25,12 +25,16 @@ func refresh() -> void:
 
 	if unlocked:
 		portrait.modulate = Color(1, 1, 1, 1)
+		name_label.modulate = Color(1, 1, 1, 1)
 		lock_label.visible = false
 		name_label.text = character_name
 	else:
 		# Cheap silhouette: multiplying any texture by black keeps its
 		# shape/alpha but flattens all color, no separate art needed.
 		portrait.modulate = Color(0, 0, 0, 1)
+		# Text gets its own, independent tint — dimmed grey rather than
+		# pure black, so "???" stays legible against the dark portrait.
+		name_label.modulate = Color(0.6, 0.6, 0.6, 1)
 		lock_label.visible = true
 		name_label.text = "???"
 
