@@ -1,8 +1,13 @@
 extends CharacterBody2D
 
-var movement_speed = 40.0
-var hp = 80
-var maxhp = 80
+# Exposed so each world's Player instance (player.tscn / player_2.tscn /
+# player_3.tscn) can set its own stats and tell GameProgress which slot
+# it belongs to, straight from the Inspector.
+@export var world_index: int = 0
+@export var movement_speed: float = 40.0
+@export var hp: float = 80
+@export var maxhp: float = 80
+
 var last_movement = Vector2.UP
 var time = 0
 
@@ -394,13 +399,14 @@ func adjust_gui_collection(upgrade):
 			
 func death():
 	deathPanel.visible = true
-	emit_signal("playdeath")
+	emit_signal("playerdeath")
 	get_tree().paused = true
 	var tween = deathPanel.create_tween()
 	tween.tween_property(deathPanel,"position",Vector2(220,50),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	if time >= 300:
 		lblResult.text = "You Win"
 		sndVictory.play()
+		GameProgress.unlock_next(world_index)
 	else:
 		lblResult.text = "You Lose"
 		sndLose.play()

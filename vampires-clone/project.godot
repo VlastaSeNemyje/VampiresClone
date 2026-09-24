@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="VampiresClone"
-run/main_scene="uid://emwelk48grb3"
+run/main_scene="res://Utility/menu.tscn"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
@@ -24,6 +24,7 @@ buses/default_bus_layout="uid://c2iwyx8ngfsup"
 MusicLevel="uid://ba8hbbin7qik3"
 UpgradeDb="*uid://cx2gq62tkpyf2"
 AudioManager="*uid://dy3t2k732oiq2"
+GameProgress="*uid://q3wd78evdt4b"
 
 [display]
 
