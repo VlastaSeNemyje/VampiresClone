@@ -65,3 +65,17 @@ func load_progress() -> void:
 		var loaded = cfg.get_value("progress", "unlocked", unlocked)
 		if loaded is Array and loaded.size() == unlocked.size():
 			unlocked = loaded
+			
+func toggle_lock(index: int) -> void:
+	if index >= 0 and index < unlocked.size():
+		if index == 0:
+			return # starting world stays unlocked always
+		unlocked[index] = not unlocked[index]
+		save_progress()
+		emit_signal("progress_changed")
+
+func reset_progress() -> void:
+	unlocked = [true, false, false]
+	selected_index = 0
+	save_progress()
+	emit_signal("progress_changed")
