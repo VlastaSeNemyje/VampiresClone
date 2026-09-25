@@ -69,6 +69,7 @@ experience = 500
 [node name="snd_Music" type="AudioStreamPlayer" parent="." unique_id=883340347]
 process_mode = 3
 stream = ExtResource("11_7yui6")
+autoplay = true
 script = ExtResource("12_c5t2i")
 
 [connection signal="playerdeath" from="Player" to="snd_Music" method="_on_player_playerdeath"]
