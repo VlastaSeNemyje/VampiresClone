@@ -23,8 +23,8 @@ func _on_tab_selected(index: int) -> void:
 func _build_debug_tools() -> void:
 	var debug_btn := Button.new()
 	debug_btn.text = "🛠"
-	debug_btn.custom_minimum_size = Vector2(28, 28)
-	debug_btn.position = Vector2(644, 4)
+	debug_btn.custom_minimum_size = Vector2(15, 15)
+	debug_btn.position = Vector2(580, 4)
 	add_child(debug_btn)
 
 	var panel := Panel.new()
