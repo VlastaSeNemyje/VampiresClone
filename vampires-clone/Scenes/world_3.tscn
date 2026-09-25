@@ -1,4 +1,4 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://c1rixmjv8cp"]
 
 [ext_resource type="Texture2D" uid="uid://fl018gp173cx" path="res://Textures/Tiles/Grass.png" id="1_a02cp"]
 [ext_resource type="PackedScene" path="res://Scenes/player_3.tscn" id="2_go701"]
@@ -49,9 +49,9 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 [node name="World" type="Node2D" unique_id=26020053]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=167768035]
+modulate = Color(0.72, 0.62, 0.9, 1)
 texture_filter = 1
 texture_repeat = 2
-modulate = Color(0.72, 0.62, 0.9, 1.0)
 texture = ExtResource("1_a02cp")
 region_enabled = true
 region_rect = Rect2(0, 0, 4000, 4000)

@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://doyh14ib7edtd"]
 
-[ext_resource type="Script" path="res://Utility/character_tab.gd" id="1_tab"]
+[ext_resource type="Script" uid="uid://dumoepei1lqag" path="res://Utility/character_tab.gd" id="1_tab"]
 
-[node name="CharacterTab" type="Control"]
+[node name="CharacterTab" type="Control" unique_id=1811973970]
 custom_minimum_size = Vector2(100, 140)
 layout_mode = 3
-mouse_filter = 0
+anchors_preset = 0
 script = ExtResource("1_tab")
 
-[node name="SelectionBorder" type="ColorRect" parent="."]
+[node name="SelectionBorder" type="ColorRect" parent="." unique_id=374569177]
 visible = false
 layout_mode = 0
 offset_right = 100.0
@@ -16,7 +16,7 @@ offset_bottom = 140.0
 mouse_filter = 2
 color = Color(1, 0.85, 0.2, 0.35)
 
-[node name="Portrait" type="TextureRect" parent="."]
+[node name="Portrait" type="TextureRect" parent="." unique_id=530578033]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
@@ -26,24 +26,20 @@ mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="lbl_name" type="Label" parent="."]
+[node name="lbl_name" type="Label" parent="." unique_id=813681593]
 layout_mode = 0
-offset_left = 0.0
 offset_top = 92.0
 offset_right = 100.0
 offset_bottom = 116.0
-mouse_filter = 2
 text = "Name"
 horizontal_alignment = 1
 
-[node name="lbl_locked" type="Label" parent="."]
+[node name="lbl_locked" type="Label" parent="." unique_id=50846457]
 visible = false
 layout_mode = 0
-offset_left = 0.0
 offset_top = 44.0
 offset_right = 100.0
 offset_bottom = 68.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
 text = "LOCKED"
 horizontal_alignment = 1
