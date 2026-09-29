@@ -131,6 +131,38 @@ const UPGRADES = {
 		"prerequisite": ["tornado3"],
 		"type": "weapon"
 	},
+		"leaf1": {
+		"icon": WEAPON_PATH + "Leaf.png",
+		"displayname": "Leaves",
+		"details": "A ring of leaves protects you, damaging weak enemies that get close",
+		"level": "Level: 1",
+		"prerequisite": [],
+		"type": "weapon"
+	},
+	"leaf2": {
+		"icon": WEAPON_PATH + "Leaf.png",
+		"displayname": "Leaves",
+		"details": "The leaves deal 2 more damage per pulse",
+		"level": "Level: 2",
+		"prerequisite": ["leaf1"],
+		"type": "weapon"
+	},
+	"leaf3": {
+		"icon": WEAPON_PATH + "Leaf.png",
+		"displayname": "Leaves",
+		"details": "The leaves pulse 0.3 seconds faster",
+		"level": "Level: 3",
+		"prerequisite": ["leaf2"],
+		"type": "weapon"
+	},
+	"leaf4": {
+		"icon": WEAPON_PATH + "Leaf.png",
+		"displayname": "Leaves",
+		"details": "Bigger area, leaves spin around you, 10% of pulses grow 30% wider",
+		"level": "Level: 4",
+		"prerequisite": ["leaf3"],
+		"type": "weapon"
+	},
 	"armor1": {
 		"icon": ICON_PATH + "armor.png",
 		"displayname": "Armor",

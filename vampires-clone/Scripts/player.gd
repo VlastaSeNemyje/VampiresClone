@@ -21,6 +21,7 @@ var Arrow = preload("res://Scenes/Attacks/arrow_attack.tscn")
 var Tornado = preload("res://Scenes/Attacks/tornado.tscn")
 var Whip = preload("res://Scenes/Attacks/whip_attack.tscn")
 var Falcon = preload("res://Scenes/Attacks/falcon.tscn")
+var LeafProtection = preload("res://Scenes/Attacks/leaf_protection.tscn")
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -64,6 +65,10 @@ var whip_level = 0
 var falcon_ammo = 0
 var falcon_level = 0
 
+#Leaf Protection
+var leaf_level = 0
+var leaf_protection = null
+
 #Enemy Related
 var enemy_close = []
 
@@ -89,7 +94,7 @@ var enemy_close = []
 signal playerdeath
 
 func _ready():
-	upgrade_character("whip1")
+	upgrade_character("leaf1")
 	attack()
 	set_expbar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)
@@ -131,6 +136,8 @@ func attack():
 			whipTimer.start()
 	if falcon_level > 0:
 		spawn_falcon()
+	if leaf_level > 0:
+		spawn_leaf_protection()
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	hp -= clamp(damage-armor, 1.0, 999.0)
@@ -203,6 +210,12 @@ func spawn_falcon():
 	for i in get_falcon:
 		if i.has_method("update_falcon"):
 			i.update_falcon()
+			
+func spawn_leaf_protection():
+	if not is_instance_valid(leaf_protection):
+		leaf_protection = LeafProtection.instantiate()
+		add_child(leaf_protection)
+	leaf_protection.update_leaf_protection()
 
 func get_random_target():
 	if enemy_close.size() > 0:
@@ -321,6 +334,14 @@ func upgrade_character(upgrade):
 			falcon_level = 3
 		"falcon4":
 			falcon_level = 4
+		"leaf1":
+			leaf_level = 1
+		"leaf2":
+			leaf_level = 2
+		"leaf3":
+			leaf_level = 3
+		"leaf4":
+			leaf_level = 4
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":
@@ -379,7 +400,7 @@ func change_time(argtime = 0):
 		get_m = str(0, get_m)
 	if get_s < 10:
 		get_s = str(0, get_s)
-	lblTimer.text = str(get_m,",",get_s)
+	lblTimer.text = str(get_m,".",get_s)
 	
 func adjust_gui_collection(upgrade):
 	var get_upgraded_displayname = UpgradeDb.UPGRADES[upgrade]["displayname"]

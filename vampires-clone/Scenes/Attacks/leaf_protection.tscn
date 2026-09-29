@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bhh6tgjd7murd"]
+
+[ext_resource type="Script" uid="uid://bhcsv7qjxhsf0" path="res://Scenes/Attacks/leaf_protection.gd" id="1_leaf"]
+[ext_resource type="Texture2D" uid="uid://1mqivyq0t0cb" path="res://Textures/Sprites/Weapons/Leaf.png" id="2_m24h6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_leaf"]
+radius = 50.0
+
+[node name="LeafProtection" type="Area2D" unique_id=1722080129]
+show_behind_parent = true
+scale = Vector2(0.6, 0.6)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_leaf")
+leaf_texture = ExtResource("2_m24h6")
+leaf_scale = 0.8
+leaf_ring_ratio = 1.0
+pulse_pop_scale = 0.8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1310352162]
+shape = SubResource("CircleShape2D_leaf")
+
+[node name="Leaves" type="Node2D" parent="." unique_id=1569993299]
+z_index = 1
+
+[node name="TickTimer" type="Timer" parent="." unique_id=82378307]
+
+[node name="snd_pulse" type="AudioStreamPlayer2D" parent="." unique_id=947396750]
+volume_db = -6.0
