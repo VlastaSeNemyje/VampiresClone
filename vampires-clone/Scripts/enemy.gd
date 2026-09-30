@@ -26,6 +26,9 @@ var exp_gem = preload("res://Scenes/exp_gem.tscn")
 var flash_shader = preload("res://Shaders/hit_flash.gdshader")
 var flash_material: ShaderMaterial
 
+var slow_multiplier := 1.0
+var slow_time_left := 0.0
+
 # 4x4 white square used as the death-particle texture, built once and reused
 static var pixel_texture: ImageTexture
 
@@ -43,9 +46,21 @@ func _ready():
 		img.fill(Color(1, 1, 1, 1))
 		pixel_texture = ImageTexture.create_from_image(img)
 
+func apply_slow(multiplier: float, duration: float):
+	slow_multiplier = multiplier if slow_time_left <= 0.0 else minf(slow_multiplier, multiplier)
+	slow_time_left = maxf(slow_time_left, duration)
+	animated_sprite_2d.modulate = Color(0.7, 1.0, 0.7)   # green tint = rooted
+
 func _physics_process(_delta):
+	if slow_time_left > 0.0:
+		slow_time_left -= delta
+		if slow_time_left <= 0.0:
+			slow_multiplier = 1.0
+			animated_sprite_2d.modulate = Color.WHITE
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
 	var direction = global_position.direction_to(player.global_position)
+	velocity = direction * movement_speed * slow_multiplier 
+	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
 	velocity = direction * movement_speed
 	velocity += knockback
 	move_and_slide()
@@ -55,6 +70,8 @@ func _physics_process(_delta):
 	elif direction.x < -0.1:
 		animated_sprite_2d.flip_h = true
 		
+
+
 
 func flash_white():
 	if flash_material == null:

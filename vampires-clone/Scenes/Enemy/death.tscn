@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cjp02yiwpu1s5"]
 
-[ext_resource type="Texture2D" uid="uid://cy133liey0vjo" path="res://Textures/Sprites/VFX/MiniFPProjectiles.png" id="1_rytvw"]
+[ext_resource type="Texture2D" uid="uid://cy133liey0vjo" path="res://Textures/Sprites/Weapons/Roots_icon.png" id="1_rytvw"]
 [ext_resource type="Script" uid="uid://ckwbs006geh81" path="res://Scenes/Enemy/death.gd" id="2_mkry7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mkry7"]

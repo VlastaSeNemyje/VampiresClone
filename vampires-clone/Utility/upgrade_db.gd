@@ -163,6 +163,38 @@ const UPGRADES = {
 		"prerequisite": ["leaf3"],
 		"type": "weapon"
 	},
+	"roots1": {
+		"icon": WEAPON_PATH + "Roots_icon",
+		"displayname": "Roots",
+		"details": "Roots burst from the ground around you, crushing enemies caught in them",
+		"level": "Level: 1",
+		"prerequisite": [],
+		"type": "weapon"
+	},
+	"roots2": {
+		"icon":  WEAPON_PATH + "Roots_icon",
+		"displayname": "Roots",
+		"details": "3 more roots erupt each time",
+		"level": "Level: 2",
+		"prerequisite": ["roots1"],
+		"type": "weapon"
+	},
+	"roots3": {
+		"icon":  WEAPON_PATH + "Roots_icon",
+		"displayname": "Roots",
+		"details": "Roots grow 40% larger",
+		"level": "Level: 3",
+		"prerequisite": ["roots2"],
+		"type": "weapon"
+	},
+	"roots4": {
+		"icon":  WEAPON_PATH + "Roots_icon",
+		"displayname": "Roots",
+		"details": "6 more roots erupt each time",
+		"level": "Level: 4",
+		"prerequisite": ["roots3"],
+		"type": "weapon"
+	},
 	"armor1": {
 		"icon": ICON_PATH + "armor.png",
 		"displayname": "Armor",

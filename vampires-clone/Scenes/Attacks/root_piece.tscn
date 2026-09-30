@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://cx7co5brd1egq"]
+
+[ext_resource type="Script" uid="uid://c2vfgscklsbwy" path="res://Scenes/Attacks/root_piece.gd" id="1_piece"]
+[ext_resource type="Texture2D" uid="uid://cy133liey0vjo" path="res://Textures/Sprites/Weapons/Roots_icon.png" id="2_sheet"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vf0b"]
+atlas = ExtResource("2_sheet")
+region = Rect2(0, 99, 33, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nwhk7"]
+atlas = ExtResource("2_sheet")
+region = Rect2(33, 99, 33, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3p3li"]
+atlas = ExtResource("2_sheet")
+region = Rect2(66, 99, 33, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22uu1"]
+atlas = ExtResource("2_sheet")
+region = Rect2(99, 99, 33, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnum0"]
+atlas = ExtResource("2_sheet")
+region = Rect2(132, 99, 33, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8j4w"]
+atlas = ExtResource("2_sheet")
+region = Rect2(165, 99, 33, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3bar"]
+atlas = ExtResource("2_sheet")
+region = Rect2(198, 99, 33, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjtv4"]
+atlas = ExtResource("2_sheet")
+region = Rect2(231, 99, 33, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lbvgx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vf0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nwhk7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3p3li")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_22uu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnum0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8j4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3bar")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjtv4")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_root"]
+radius = 12.0
+
+[node name="RootPiece" type="Area2D" unique_id=766371167]
+top_level = true
+z_index = -1
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_piece")
+sheet = ExtResource("2_sheet")
+sheet_row = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=250374998]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_lbvgx")
+animation = &"attack"
+autoplay = "attack"
+frame_progress = 0.951232
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1649835185]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_root")
+disabled = true
+
+[node name="snd_erupt" type="AudioStreamPlayer2D" parent="." unique_id=66433031]
+volume_db = -6.0

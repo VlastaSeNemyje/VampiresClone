@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b1t3flr4tf40w" path="res://Scripts/enemy.gd" id="1_8tnnv"]
 [ext_resource type="Texture2D" uid="uid://ciig711ipnsnt" path="res://Textures/Sprites/Gerald.png" id="2_tlr2o"]
-[ext_resource type="Texture2D" uid="uid://cy133liey0vjo" path="res://Textures/Sprites/VFX/MiniFPProjectiles.png" id="3_jrm2m"]
+[ext_resource type="Texture2D" uid="uid://cy133liey0vjo" path="res://Textures/Sprites/Weapons/Roots_icon.png" id="3_jrm2m"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="4_ut41k"]
 [ext_resource type="PackedScene" uid="uid://cthuwwjhu3woh" path="res://Utility/hit_box.tscn" id="5_togjt"]
 [ext_resource type="AudioStream" uid="uid://bmhx672y3i5eh" path="res://Sounds/VFX/SFX_WAV_189.wav" id="6_bbxho"]

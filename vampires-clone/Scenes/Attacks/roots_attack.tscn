@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/Attacks/roots_attack.gd" id="1_roots"]
+[ext_resource type="PackedScene" path="res://Scenes/Attacks/root_piece.tscn" id="2_piece"]
+
+[node name="RootsAttack" type="Node2D"]
+script = ExtResource("1_roots")
+root_scene = ExtResource("2_piece")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
