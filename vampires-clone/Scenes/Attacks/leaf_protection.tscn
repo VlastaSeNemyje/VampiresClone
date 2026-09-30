@@ -21,6 +21,7 @@ aura_color = Color(0.25864887, 0.511751, 0.46720535, 0.3882353)
 edge_color = Color(0.29917666, 0.39942, 0.10595506, 0.4509804)
 pulse_ring_color = Color(0.30882505, 0.41182297, 0.11024811, 0.9019608)
 pulse_pop_scale = 0.9
+damage_per_level = Array[float]([5.0, 5.0, 7.5, 7.5])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1310352162]
 visible = false
