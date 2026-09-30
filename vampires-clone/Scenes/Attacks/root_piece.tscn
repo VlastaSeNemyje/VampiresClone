@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cx7co5brd1egq"]
+[gd_scene format=3 uid="uid://dasp0y8cvdye6"]
 
 [ext_resource type="Script" uid="uid://c2vfgscklsbwy" path="res://Scenes/Attacks/root_piece.gd" id="1_piece"]
 [ext_resource type="Texture2D" uid="uid://cy133liey0vjo" path="res://Textures/Sprites/Weapons/Roots_icon.png" id="2_sheet"]
@@ -85,7 +85,7 @@ position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_lbvgx")
 animation = &"attack"
 autoplay = "attack"
-frame_progress = 0.951232
+frame_progress = 0.097215615
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1649835185]
 position = Vector2(0, -4)

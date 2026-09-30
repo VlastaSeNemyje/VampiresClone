@@ -37,31 +37,31 @@ const UPGRADES = {
 	},
 	"whip1": {
 		"icon": WEAPON_PATH + "whip.png",
-		"displayname": "whip",
-		"details": "A horizontal whip, slashing thrue enemies",
+		"displayname": "Claws",
+		"details": "Claws slash horizontally through enemies",
 		"level": "Level: 1",
 		"prerequisite": [],
 		"type": "weapon"
 	},
 	"whip2": {
 		"icon": WEAPON_PATH + "whip.png",
-		"displayname": "whip",
-		"details": "Whip gets 50% stronger",
+		"displayname": "Claws",
+		"details": "Claws get 50% stronger",
 		"level": "Level: 2",
 		"prerequisite": ["whip1"],
 		"type": "weapon"
 	},
 	"whip3": {
 		"icon": WEAPON_PATH + "whip.png",
-		"displayname": "whip",
-		"details": "Whip gets stronger",
+		"displayname": "Claws",
+		"details": "Claws get stronger",
 		"level": "Level: 3",
 		"prerequisite": ["whip2"],
 		"type": "weapon"
 	},
 	"whip4": {
 		"icon": WEAPON_PATH + "whip.png",
-		"displayname": "whip",
+		"displayname": "Claws",
 		"details": "Knockback is incresed by 25%",
 		"level": "Level: 4",
 		"prerequisite": ["whip3"],
@@ -164,7 +164,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"roots1": {
-		"icon": WEAPON_PATH + "Roots_icon",
+		"icon": WEAPON_PATH + "Roots_icon2.png",
 		"displayname": "Roots",
 		"details": "Roots burst from the ground around you, crushing enemies caught in them",
 		"level": "Level: 1",
@@ -172,7 +172,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"roots2": {
-		"icon":  WEAPON_PATH + "Roots_icon",
+		"icon":  WEAPON_PATH + "Roots_icon2.png",
 		"displayname": "Roots",
 		"details": "3 more roots erupt each time",
 		"level": "Level: 2",
@@ -180,7 +180,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"roots3": {
-		"icon":  WEAPON_PATH + "Roots_icon",
+		"icon":  WEAPON_PATH + "Roots_icon2.png",
 		"displayname": "Roots",
 		"details": "Roots grow 40% larger",
 		"level": "Level: 3",
@@ -188,7 +188,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"roots4": {
-		"icon":  WEAPON_PATH + "Roots_icon",
+		"icon":  WEAPON_PATH + "Roots_icon2.png",
 		"displayname": "Roots",
 		"details": "6 more roots erupt each time",
 		"level": "Level: 4",

@@ -51,7 +51,7 @@ func apply_slow(multiplier: float, duration: float):
 	slow_time_left = maxf(slow_time_left, duration)
 	animated_sprite_2d.modulate = Color(0.7, 1.0, 0.7)   # green tint = rooted
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if slow_time_left > 0.0:
 		slow_time_left -= delta
 		if slow_time_left <= 0.0:
@@ -60,8 +60,6 @@ func _physics_process(_delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction * movement_speed * slow_multiplier 
-	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
-	velocity = direction * movement_speed
 	velocity += knockback
 	move_and_slide()
 

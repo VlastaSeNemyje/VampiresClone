@@ -4,20 +4,18 @@ extends Node2D
 ##
 ## This node lives on the player (like LeafProtection). All the numbers you
 ## want to balance are in the Inspector of Scenes/Attacks/roots_attack.tscn.
-## Look/feel of a single root is in root_piece.tscn.
-
-@export var root_scene: PackedScene
+## Edit RootTemplate in this same scene to customize each root.
 
 # --------------------------------------------------------------- PLACEMENT --
 @export_group("Where roots appear")
 ## Center of the ring, relative to the player's origin (feet).
 @export var center_offset := Vector2(0, -8)
-@export var min_distance := 25.0
-@export var max_distance := 110.0
+@export var min_distance := 12.0
+@export var max_distance := 48.0
 ## Chance that a root erupts under a nearby enemy instead of a random spot.
 @export_range(0.0, 1.0) var enemy_bias := 0.5
 ## Only enemies this close to the player can be targeted.
-@export var enemy_max_distance := 140.0
+@export var enemy_max_distance := 48.0
 ## Random offset around a targeted enemy, so it doesn't look robotic.
 @export var enemy_jitter := 10.0
 ## Roots of the same wave try to stay at least this far apart.
@@ -25,32 +23,28 @@ extends Node2D
 
 # ------------------------------------------------------------------ TIMING --
 @export_group("Timing")
-@export var first_spawn_delay := 0.5
+@export var first_spawn_delay := 5.0
 ## Seconds between each root of a wave (makes the wave ripple out).
 @export var spawn_stagger := 0.04
 ## Ring upgrade ("+1 attack") adds this many roots per wave.
 @export var extra_roots_per_ring := 1
 
 # ------------------------------------------------------------------- STATS --
-# One entry per level. Element 0 = level 1 (roots1) ... element 4 = level 5 (roots5).
+# One entry per level. Element 0 = level 1 (roots1) ... element 3 = level 4 (roots4).
 # Level 1 = start (3 roots)  | level 2 = +3 roots | level 3 = bigger
-# Level 4 = +6 roots         | level 5 = +3 roots and slow
+# Level 4 = +6 roots
 @export_group("Stats per level (element 0 = level 1)")
-@export var root_count_per_level: Array[int] = [3, 6, 6, 12, 15]
+@export var root_count_per_level: Array[int] = [3, 6, 6, 12]
 ## Seconds between waves (Scroll upgrade shortens it).
-@export var cooldown_per_level: Array[float] = [5.0, 5.0, 5.0, 5.0, 5.0]
+@export var cooldown_per_level: Array[float] = [5.0, 5.0, 5.0, 5.0]
 ## Seconds each root stays out.
-@export var lifetime_per_level: Array[float] = [4.0, 4.0, 4.0, 4.0, 4.0]
+@export var lifetime_per_level: Array[float] = [4.0, 4.0, 4.0, 4.0]
 ## Damage per tick, per root.
-@export var damage_per_level: Array[float] = [4.0, 4.0, 4.0, 4.0, 4.0]
+@export var damage_per_level: Array[float] = [4.0, 4.0, 4.0, 4.0]
 ## Seconds between damage ticks.
-@export var tick_interval_per_level: Array[float] = [0.5, 0.5, 0.5, 0.5, 0.5]
+@export var tick_interval_per_level: Array[float] = [0.5, 0.5, 0.5, 0.5]
 ## Size multiplier (Tome upgrade adds on top).
-@export var size_per_level: Array[float] = [1.0, 1.0, 1.4, 1.4, 1.4]
-## Enemy speed multiplier while rooted. 1.0 = no slow, 0.5 = half speed.
-@export var slow_multiplier_per_level: Array[float] = [1.0, 1.0, 1.0, 1.0, 0.5]
-## How long the slow lasts after the last hit.
-@export var slow_duration := 1.0
+@export var size_per_level: Array[float] = [1.0, 1.0, 1.4, 1.4]
 
 # ------------------------------------------------------------ RUNTIME STATE --
 var level := 1
@@ -60,12 +54,12 @@ var lifetime := 4.0
 var damage := 4.0
 var tick_interval := 0.5
 var size := 1.0
-var slow_multiplier := 1.0
 
 var _started := false
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var spawn_timer: Timer = $SpawnTimer
+@onready var root_template = $RootTemplate
 
 
 func _ready() -> void:
@@ -75,6 +69,8 @@ func _ready() -> void:
 
 # Called by the player whenever the level or any player stat changes.
 func update_roots() -> void:
+	if not is_instance_valid(player):
+		return
 	level = clampi(player.roots_level, 1, maxi(root_count_per_level.size(), 1))
 	var i := level - 1
 
@@ -82,7 +78,6 @@ func update_roots() -> void:
 	lifetime = _pick(lifetime_per_level, i, 4.0)
 	damage = _pick(damage_per_level, i, 4.0)
 	tick_interval = maxf(0.1, _pick(tick_interval_per_level, i, 0.5))
-	slow_multiplier = _pick(slow_multiplier_per_level, i, 1.0)
 	# Same conventions as your other weapons: Tome = size, Scroll = cooldown
 	size = _pick(size_per_level, i, 1.0) * (1.0 + player.spell_size)
 	cooldown = maxf(0.3, _pick(cooldown_per_level, i, 5.0) * (1.0 - player.spell_cooldown))
@@ -98,10 +93,9 @@ func _on_spawn_timer_timeout() -> void:
 
 
 func _spawn_wave() -> void:
-	if root_scene == null:
-		push_warning("RootsAttack: no Root Scene assigned.")
+	if not is_instance_valid(player):
 		return
-	var count := root_count + player.additional_attacks * extra_roots_per_ring
+	var count: int = root_count + player.additional_attacks * extra_roots_per_ring
 	var placed: Array[Vector2] = []
 	for n in count:
 		if not is_inside_tree():
@@ -115,13 +109,15 @@ func _spawn_wave() -> void:
 
 
 func _spawn_root(pos: Vector2) -> void:
-	var root = root_scene.instantiate()
+	var root = root_template.duplicate(Node.DUPLICATE_SCRIPTS)
+	root.is_template = false
+	root.visible = true
+	root.process_mode = Node.PROCESS_MODE_INHERIT
+	root.monitoring = true
 	root.damage = damage
 	root.tick_interval = tick_interval
 	root.lifetime = lifetime
 	root.size = size
-	root.slow_multiplier = slow_multiplier
-	root.slow_duration = slow_duration
 	root.position = pos   # RootPiece is top_level, so this is a world position
 	add_child(root)
 
@@ -149,8 +145,9 @@ func _candidate(center: Vector2) -> Vector2:
 				and e.global_position.distance_to(center) <= enemy_max_distance)
 		if targets.size() > 0:
 			var enemy = targets.pick_random()
-			return enemy.global_position \
+			var offset: Vector2 = enemy.global_position - center \
 				+ Vector2.from_angle(randf() * TAU) * randf() * enemy_jitter
+			return center + offset.limit_length(max_distance)
 	return center + Vector2.from_angle(randf() * TAU) * randf_range(min_distance, max_distance)
 
 

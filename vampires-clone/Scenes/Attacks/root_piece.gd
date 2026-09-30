@@ -1,8 +1,9 @@
 extends Area2D
+@export var is_template := false
 ## One root: erupts, lingers, damages enemies standing on it, then retracts.
-## Spawned by roots_attack.gd, which fills in damage / size / lifetime / slow
+## Spawned by roots_attack.gd, which fills in damage / size / lifetime
 ## from its per-level tables. The "Look", "Feel" and "Sound" values below are
-## tweakable in root_piece.tscn (Inspector).
+## tweakable on RootTemplate in roots_attack.tscn (Inspector).
 
 enum State { ERUPT, ACTIVE, RETRACT }
 
@@ -44,8 +45,6 @@ var damage := 4.0
 var tick_interval := 0.5
 var lifetime := 4.0          # seconds the root stays out (after eruption)
 var size := 1.0
-var slow_multiplier := 1.0   # 1.0 = no slow, 0.5 = half speed
-var slow_duration := 1.0
 
 static var _last_sound_msec := 0
 
@@ -60,10 +59,13 @@ var _sprite_base_scale := Vector2.ONE
 
 
 func _ready() -> void:
+	if is_template:
+		return
 	_sprite_base_scale = sprite.scale
 	sprite.sprite_frames = _build_frames()
 	sprite.modulate = tint
 	sprite.flip_h = random_flip and randf() < 0.5
+	collision.shape = collision.shape.duplicate()
 	(collision.shape as CircleShape2D).radius = collision_radius
 	collision.disabled = true
 
@@ -107,8 +109,6 @@ func _tick() -> void:
 		# Same signal HurtBox emits for whip/arrow hits -> enemy.gd handles
 		# damage, hit flash and hit sound. Roots hold enemies: no knockback.
 		area.emit_signal("hurt", damage, Vector2.ZERO, 0.0)
-		if slow_multiplier < 1.0 and enemy.has_method("apply_slow"):
-			enemy.apply_slow(slow_multiplier, slow_duration)
 		hits += 1
 
 	if hits > 0 and hit_punch != 1.0:
@@ -156,6 +156,18 @@ func _build_frames() -> SpriteFrames:
 	frames.add_animation("idle")
 	frames.set_animation_loop("idle", true)
 	frames.set_animation_speed("idle", idle_fps)
+	# Use the frames edited directly on RootTemplate in roots_attack.tscn.
+	var authored := sprite.sprite_frames
+	if authored != null and authored.has_animation("attack"):
+		var count := authored.get_frame_count("attack")
+		var idle_start := maxi(0, count - maxi(loop_frames, 1))
+		for i in count:
+			var texture := authored.get_frame_texture("attack", i)
+			var duration := authored.get_frame_duration("attack", i)
+			frames.add_frame("erupt", texture, duration)
+			if i >= idle_start:
+				frames.add_frame("idle", texture, duration)
+		return frames
 
 	if sheet == null:
 		push_warning("RootPiece: no sheet texture assigned.")
