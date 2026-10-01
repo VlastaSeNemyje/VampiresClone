@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://blrc83jxeub3d"]
 
-[ext_resource type="Script" uid="uid://c1i3lej3tf0gg" path="res://Scripts/player2.gd" id="1_8os5a"]
+[ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scripts/player.gd" id="1_8os5a"]
 [ext_resource type="Texture2D" uid="uid://d0burlhxi4831" path="res://Textures/Sprites/BabaYaga.png" id="2_8os5a"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://be0co0l3j62ou" path="res://Textures/Sprites/BarBcg.png" id="4_fkybt"]
@@ -117,6 +117,7 @@ collision_layer = 2
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_8os5a")
+starting_upgrade = "roots1"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=494512027]
 position = Vector2(0, -15)

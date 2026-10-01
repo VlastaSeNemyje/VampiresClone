@@ -1,12 +1,17 @@
 extends CharacterBody2D
 
-# Exposed so each world's Player instance (player.tscn / player_2.tscn /
-# player_3.tscn) can set its own stats and tell GameProgress which slot
-# it belongs to, straight from the Inspector.
+# One script for every character. Each player scene (player.tscn / player_2.tscn /
+# player_3.tscn) sets its own stats, world slot and starting weapon in the Inspector.
+@export_group("Starting Weapon")
+## The first level of the weapon granted when this player spawns. Choose none for no weapon.
+@export_enum("none", "leaf1", "roots1", "arrow1", "whip1", "tornado1", "falcon1") var starting_upgrade: String = "leaf1"
+
+@export_group("Player Stats")
 @export var world_index: int = 0
 @export var movement_speed: float = 40.0
 @export var hp: float = 80
 @export var maxhp: float = 80
+@export_group("")
 
 var last_movement = Vector2.UP
 var time = 0
@@ -99,7 +104,14 @@ var enemy_close = []
 signal playerdeath
 
 func _ready():
-	upgrade_character("leaf1")
+	if starting_upgrade != "" and UpgradeDb.UPGRADES.has(starting_upgrade):
+		upgrade_character(starting_upgrade)
+	elif starting_upgrade != "" and starting_upgrade != "none":
+		push_warning("Player: unknown starting_upgrade '%s'" % starting_upgrade)
+	# Debug-only weapon menu (never included in exported release builds).
+	# Added after the starting weapon so its level labels are correct.
+	if OS.is_debug_build():
+		add_child(preload("res://Utility/debug_weapon.gd").new())
 	attack()
 	set_expbar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)
@@ -394,11 +406,11 @@ func get_random_item():
 			pass
 		elif UpgradeDb.UPGRADES[i]["prerequisite"].size() > 0: #Check for PreRequsities
 			var to_add = true
-			for n in UpgradeDb.UPGRADES [i]["prerequisite"]:
+			for n in UpgradeDb.UPGRADES[i]["prerequisite"]:
 				if not n in collected_upgrades:
 					to_add = false
-				if to_add:
-					dblist.append(i)
+			if to_add:
+				dblist.append(i)
 		else:
 			dblist.append(i)
 	if dblist.size() > 0:
