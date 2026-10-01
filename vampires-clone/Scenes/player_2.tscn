@@ -113,6 +113,7 @@ radius = 29.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1972239113 groups=["player"]]
 z_index = 1
+position = Vector2(0, 9)
 collision_layer = 2
 collision_mask = 0
 motion_mode = 1
@@ -124,8 +125,7 @@ position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_6t5aa")
 animation = &"run"
 autoplay = "idle"
-frame = 4
-frame_progress = 0.9566931
+frame_progress = 0.2501258
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=635807448]
 visible = false
