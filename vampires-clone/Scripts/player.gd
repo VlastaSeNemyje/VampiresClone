@@ -4,7 +4,7 @@ extends CharacterBody2D
 # player_3.tscn) sets its own stats, world slot and starting weapon in the Inspector.
 @export_group("Starting Weapon")
 ## The first level of the weapon granted when this player spawns. Choose none for no weapon.
-@export_enum("none", "leaf1", "roots1", "arrow1", "whip1", "tornado1", "falcon1") var starting_upgrade: String = "leaf1"
+@export_enum("none", "leaf1", "roots1", "arrow1", "whip1", "tornado1", "falcon1", "kanec1") var starting_upgrade: String = "leaf1"
 
 @export_group("Player Stats")
 @export var world_index: int = 0
@@ -39,6 +39,7 @@ var Roots = preload("res://Scenes/Attacks/roots_attack.tscn")
 @onready var whipTimer = get_node("%WhipTimer")
 @onready var whipAttackTimer = get_node("%WhipAttackTimer")
 @onready var falconBase = get_node("%FalconBase")
+@onready var kanecBase = get_node("%KanecBase")
 
 #Arrow
 var arrow_ammo = 0
@@ -70,6 +71,9 @@ var whip_level = 0
 #Falcon
 var falcon_ammo = 0
 var falcon_level = 0
+
+#Kanec
+var kanec_level = 0
 
 #Leaf Protection
 var leaf_level = 0
@@ -151,6 +155,8 @@ func attack():
 		whipTimer.wait_time = whip_attackspeed * (1-spell_cooldown)
 		if whipTimer.is_stopped():
 			whipTimer.start()
+	if kanec_level > 0:
+		kanecBase.update_kanec(kanec_level)
 	if falcon_level > 0:
 		spawn_falcon()
 	if leaf_level > 0:
@@ -360,6 +366,8 @@ func upgrade_character(upgrade):
 			falcon_level = 3
 		"falcon4":
 			falcon_level = 4
+		"kanec1","kanec2","kanec3","kanec4":
+			kanec_level = int(upgrade.right(1))
 		"leaf1":
 			leaf_level = 1
 		"leaf2":

@@ -99,6 +99,38 @@ const UPGRADES = {
 		"prerequisite": ["falcon3"],
 		"type": "weapon"
 	},
+	"kanec1": {
+		"icon": WEAPON_PATH + "Kanec.png",
+		"displayname": "Forest Spirit",
+		"details": "Forest Spirits run across the screen from left and right, hurting every enemy in their way",
+		"level": "Level: 1",
+		"prerequisite": [],
+		"type": "weapon"
+	},
+	"kanec2": {
+		"icon": WEAPON_PATH + "Kanec.png",
+		"displayname": "Forest Spirit",
+		"details": "Forest Spirits are 50% bigger and two run from each side",
+		"level": "Level: 2",
+		"prerequisite": ["kanec1"],
+		"type": "weapon"
+	},
+	"kanec3": {
+		"icon": WEAPON_PATH + "Kanec.png",
+		"displayname": "Forest Spirit",
+		"details": "Twice as many Forest Spirits run across the screen",
+		"level": "Level: 3",
+		"prerequisite": ["kanec2"],
+		"type": "weapon"
+	},
+	"kanec4": {
+		"icon": WEAPON_PATH + "Kanec.png",
+		"displayname": "Forest Spirit",
+		"details": "A giant Forest Spirit joins in from a random side, dealing double damage",
+		"level": "Level: 4",
+		"prerequisite": ["kanec3"],
+		"type": "weapon"
+	},
 	"tornado1": {
 		"icon": WEAPON_PATH + "tornado.png",
 		"displayname": "Tornado",

@@ -1,5 +1,6 @@
 [gd_scene format=3]
 
+[ext_resource type="Script" path="res://Scenes/Attacks/kanec_base.gd" id="kanec_base"]
 [ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dva5k5nflhe47" path="res://Textures/Sprites/MiniYoungDryad.png" id="2_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_6t5aa"]
@@ -173,6 +174,10 @@ wait_time = 0.2
 
 [node name="FalconBase" type="Node2D" parent="Attack" unique_id=1952933121]
 unique_name_in_owner = true
+
+[node name="KanecBase" type="Node2D" parent="Attack"]
+unique_name_in_owner = true
+script = ExtResource("kanec_base")
 
 [node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=307411742]
 visible = false

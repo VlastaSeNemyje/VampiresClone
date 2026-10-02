@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://2n8qcp4rkeel"]
 
-[ext_resource type="Script" uid="uid://dkact2a2khtic" path="res://Scenes/Attacks/whip_attack.gd" id="1_vjrup"]
+[ext_resource type="Script" uid="uid://1mybx67s2og6" path="res://Scenes/Attacks/kanec_attack.gd" id="1_kanec"]
 [ext_resource type="Texture2D" uid="uid://beodtmfboviyi" path="res://Textures/Sprites/VFX/Kanec.png" id="2_vjrup"]
 [ext_resource type="AudioStream" uid="uid://7rapib85x3un" path="res://Sounds/VFX/Kanec.wav" id="3_7nbvn"]
 
@@ -41,35 +41,23 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehlc7"]
-size = Vector2(30.000027, 32.00003)
+size = Vector2(22, 14)
 
 [node name="Kanec" type="Area2D" unique_id=1330156193 groups=["attack"]]
 top_level = true
 z_index = 1
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.8, 0.8)
 collision_layer = 4
 collision_mask = 0
-script = ExtResource("1_vjrup")
+script = ExtResource("1_kanec")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=778499729]
-scale = Vector2(1.7999893, 1.7999893)
 sprite_frames = SubResource("SpriteFrames_40fj3")
 autoplay = "default"
-frame = 3
-frame_progress = 0.19931011
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1856506390]
-position = Vector2(-2.8421701e-14, -14.000001)
-scale = Vector2(0.9999986, 0.9999986)
 shape = SubResource("RectangleShape2D_ehlc7")
-
-[node name="Timer" type="Timer" parent="." unique_id=1142233917 groups=["attack"]]
-wait_time = 5.0
-one_shot = true
-autostart = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2064084221]
 stream = ExtResource("3_7nbvn")
 autoplay = true
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
