@@ -52,6 +52,7 @@ collision_mask = 0
 script = ExtResource("1_kanec")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=778499729]
+modulate = Color(1, 1, 1, 0.6666667)
 sprite_frames = SubResource("SpriteFrames_40fj3")
 autoplay = "default"
 

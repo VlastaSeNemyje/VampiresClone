@@ -3,11 +3,15 @@
 [ext_resource type="Script" uid="uid://cjp8ngoipa2c3" path="res://Utility/menu.gd" id="1_3ivhh"]
 [ext_resource type="PackedScene" uid="uid://bf71bynv53120" path="res://Utility/basic_button.tscn" id="2_b2oxh"]
 [ext_resource type="Texture2D" uid="uid://crn77avagcwa7" path="res://Textures/Sprites/R1.png" id="3_53h07"]
-[ext_resource type="PackedScene" path="res://Utility/character_tab.tscn" id="3_tabs"]
+[ext_resource type="PackedScene" uid="uid://doyh14ib7edtd" path="res://Utility/character_tab.tscn" id="3_tabs"]
 [ext_resource type="Texture2D" uid="uid://cc6n5cectnvpx" path="res://Textures/Sprites/R2.png" id="4_m0rvo"]
 [ext_resource type="Texture2D" uid="uid://bbxksjoxlmqgp" path="res://Textures/Sprites/R3.png" id="5_fhfum"]
 [ext_resource type="Texture2D" uid="uid://bdtxs6jwcrkma" path="res://Textures/Sprites/R4.png" id="6_ame3m"]
-[ext_resource type="Texture2D" uid="uid://d0burlhxi4831" path="res://Textures/Sprites/BabaYaga.png" id="7_m0rvo"]
+[ext_resource type="Texture2D" uid="uid://dgda0ljeoaboi" path="res://Textures/Sprites/B1.png" id="7_0pn4e"]
+[ext_resource type="Texture2D" uid="uid://ddbf1vtadl2t2" path="res://Textures/Sprites/B2.png" id="8_71tpd"]
+[ext_resource type="Texture2D" uid="uid://c7tsdt0xi2vwy" path="res://Textures/Sprites/Lesly.png" id="8_fhfum"]
+[ext_resource type="Texture2D" uid="uid://7svbbwgcrl4f" path="res://Textures/Sprites/B3.png" id="9_bg5y3"]
+[ext_resource type="Texture2D" uid="uid://cg6cepnb3m2dx" path="res://Textures/Sprites/B4.png" id="10_mqqw7"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_aeqf2"]
 frames = 4
@@ -20,9 +24,16 @@ frame_2/duration = 0.1
 frame_3/texture = ExtResource("6_ame3m")
 frame_3/duration = 0.1
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fhfum"]
-atlas = ExtResource("7_m0rvo")
-region = Rect2(2.153778, 0, 30.032814, 34.096027)
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_58cql"]
+frames = 4
+frame_0/texture = ExtResource("7_0pn4e")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("8_71tpd")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("9_bg5y3")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("10_mqqw7")
+frame_3/duration = 0.1
 
 [node name="Menu" type="Control" unique_id=364621257]
 layout_mode = 3
@@ -70,12 +81,13 @@ portrait_texture = SubResource("AnimatedTexture_aeqf2")
 layout_mode = 2
 index = 1
 character_name = "Baba Yaga"
-portrait_texture = SubResource("AtlasTexture_fhfum")
+portrait_texture = SubResource("AnimatedTexture_58cql")
 
 [node name="Tab3" parent="CharacterTabs" unique_id=443502444 instance=ExtResource("3_tabs")]
 layout_mode = 2
 index = 2
 character_name = "Vila"
+portrait_texture = ExtResource("8_fhfum")
 
 [node name="btn_play" parent="." unique_id=1203686152 instance=ExtResource("2_b2oxh")]
 layout_mode = 0

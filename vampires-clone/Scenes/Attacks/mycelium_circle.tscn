@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://do08jempymomn"]
+
+[ext_resource type="Script" uid="uid://c57nkr5rs244b" path="res://Scenes/Attacks/mycelium_circle.gd" id="1_circle"]
+[ext_resource type="Script" uid="uid://dmtr03aqsvmbh" path="res://Scenes/Attacks/mycelium_mushroom.gd" id="2_mushroom"]
+[ext_resource type="Texture2D" uid="uid://diwg0akedm1s6" path="res://Textures/Sprites/Weapons/Mycelium.png" id="3_tex"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mush"]
+radius = 9.0
+
+[node name="MyceliumCircle" type="Node2D" unique_id=932182596]
+script = ExtResource("1_circle")
+damage_per_level = Array[float]([3.0, 3.0, 5.0, 7.0])
+
+[node name="Pivot" type="Node2D" parent="." unique_id=1190152867]
+z_index = 1
+
+[node name="MushroomTemplate" type="Area2D" parent="." unique_id=324138272]
+process_mode = 4
+visible = false
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+monitorable = false
+script = ExtResource("2_mushroom")
+is_template = true
+
+[node name="Sprite2D" type="Sprite2D" parent="MushroomTemplate" unique_id=1502431719]
+texture = ExtResource("3_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MushroomTemplate" unique_id=2073771430]
+shape = SubResource("CircleShape2D_mush")

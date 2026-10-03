@@ -4,7 +4,7 @@ extends CharacterBody2D
 # player_3.tscn) sets its own stats, world slot and starting weapon in the Inspector.
 @export_group("Starting Weapon")
 ## The first level of the weapon granted when this player spawns. Choose none for no weapon.
-@export_enum("none", "leaf1", "roots1", "arrow1", "whip1", "tornado1", "falcon1", "kanec1") var starting_upgrade: String = "leaf1"
+@export_enum("none", "leaf1", "roots1", "arrow1", "whip1", "tornado1", "falcon1", "kanec1", "mycelium1") var starting_upgrade: String = "leaf1"
 
 @export_group("Player Stats")
 @export var world_index: int = 0
@@ -28,6 +28,7 @@ var Whip = preload("res://Scenes/Attacks/whip_attack.tscn")
 var Falcon = preload("res://Scenes/Attacks/falcon.tscn")
 var LeafProtection = preload("res://Scenes/Attacks/leaf_protection.tscn")
 var Roots = preload("res://Scenes/Attacks/roots_attack.tscn")
+var MyceliumCircle = preload("res://Scenes/Attacks/mycelium_circle.tscn")
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -82,6 +83,10 @@ var leaf_protection = null
 #Roots
 var roots_level = 0
 var roots_attack = null
+
+#Mycelium Circle
+var mycelium_level = 0
+var mycelium_circle = null
 
 #Enemy Related
 var enemy_close = []
@@ -163,6 +168,8 @@ func attack():
 		spawn_leaf_protection()
 	if roots_level > 0:
 		spawn_roots()
+	if mycelium_level > 0:
+		spawn_mycelium_circle()
 
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
@@ -248,6 +255,12 @@ func spawn_roots():
 		roots_attack = Roots.instantiate()
 		add_child(roots_attack)
 	roots_attack.update_roots()
+
+func spawn_mycelium_circle():
+	if not is_instance_valid(mycelium_circle):
+		mycelium_circle = MyceliumCircle.instantiate()
+		add_child(mycelium_circle)
+	mycelium_circle.update_mycelium()
 
 func get_random_target():
 	if enemy_close.size() > 0:
@@ -378,6 +391,8 @@ func upgrade_character(upgrade):
 			leaf_level = 4
 		"roots1","roots2","roots3","roots4":
 			roots_level = int(upgrade.right(1))
+		"mycelium1","mycelium2","mycelium3","mycelium4":
+			mycelium_level = int(upgrade.right(1))
 		"armor1","armor2","armor3","armor4":
 			armor += 1
 		"speed1","speed2","speed3","speed4":

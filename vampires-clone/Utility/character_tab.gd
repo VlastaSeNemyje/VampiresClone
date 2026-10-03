@@ -43,6 +43,18 @@ func refresh() -> void:
 
 func set_selected(is_selected: bool) -> void:
 	selection_border.visible = is_selected and unlocked
+	_set_portrait_animating(is_selected and unlocked)
+
+
+# Animated portraits only play while this tab is the selected one; otherwise
+# they rest on their first frame.
+func _set_portrait_animating(animating: bool) -> void:
+	var anim := portrait_texture as AnimatedTexture
+	if anim == null:
+		return
+	anim.pause = not animating
+	if not animating:
+		anim.current_frame = 0
 
 
 func _gui_input(event: InputEvent) -> void:

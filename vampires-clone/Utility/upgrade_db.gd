@@ -227,6 +227,38 @@ const UPGRADES = {
 		"prerequisite": ["roots3"],
 		"type": "weapon"
 	},
+	"mycelium1": {
+		"icon": WEAPON_PATH + "Mycelium.png",
+		"displayname": "Mycelium Circle",
+		"details": "A mushroom orbits you for 2 seconds every 5 seconds, damaging enemies it touches",
+		"level": "Level: 1",
+		"prerequisite": [],
+		"type": "weapon"
+	},
+	"mycelium2": {
+		"icon": WEAPON_PATH + "Mycelium.png",
+		"displayname": "Mycelium Circle",
+		"details": "A second mushroom joins opposite the first and the circle lasts 3 seconds",
+		"level": "Level: 2",
+		"prerequisite": ["mycelium1"],
+		"type": "weapon"
+	},
+	"mycelium3": {
+		"icon": WEAPON_PATH + "Mycelium.png",
+		"displayname": "Mycelium Circle",
+		"details": "Two more mushrooms join and the circle spins 20% faster",
+		"level": "Level: 3",
+		"prerequisite": ["mycelium2"],
+		"type": "weapon"
+	},
+	"mycelium4": {
+		"icon": WEAPON_PATH + "Mycelium.png",
+		"displayname": "Mycelium Circle",
+		"details": "Four more mushrooms fill the circle, it never stops and spins 10% faster",
+		"level": "Level: 4",
+		"prerequisite": ["mycelium3"],
+		"type": "weapon"
+	},
 	"armor1": {
 		"icon": ICON_PATH + "armor.png",
 		"displayname": "Armor",
