@@ -5,32 +5,32 @@ const WEAPON_PATH = "res://Textures/Sprites/Weapons/"
 const UPGRADES = {
 	"arrow1": {
 		"icon": WEAPON_PATH + "arrow.png",
-		"displayname": "Arrow",
-		"details": "A spear of ice is thrown at a random enemy",
+		"displayname": "Cursed Spit",
+		"details": "Cursed Spit is thrown at a random enemy",
 		"level": "Level: 1",
 		"prerequisite": [],
 		"type": "weapon"
 	},
 	"arrow2": {
 		"icon": WEAPON_PATH + "arrow.png",
-		"displayname": "Arrow",
-		"details": "An addition Arrow is thrown",
+		"displayname": "Cursed Spit",
+		"details": "An additional Cursed Spit is thrown",
 		"level": "Level: 2",
 		"prerequisite": ["arrow1"],
 		"type": "weapon"
 	},
 	"arrow3": {
 		"icon": WEAPON_PATH + "arrow.png",
-		"displayname": "Arrow",
-		"details": "Arrows now pass through another enemy and do + 3 damage",
+		"displayname": "Cursed Spit",
+		"details": "Cursed Spit now passes through another enemy and does +3 damage",
 		"level": "Level: 3",
 		"prerequisite": ["arrow2"],
 		"type": "weapon"
 	},
 	"arrow4": {
 		"icon": WEAPON_PATH + "arrow.png",
-		"displayname": "Arrow",
-		"details": "An additional 2 Arrows are thrown",
+		"displayname": "Cursed Spit",
+		"details": "An additional 2 Cursed Spits are thrown",
 		"level": "Level: 4",
 		"prerequisite": ["arrow3"],
 		"type": "weapon"
@@ -129,6 +129,38 @@ const UPGRADES = {
 		"details": "A giant Forest Spirit joins in from a random side, dealing double damage",
 		"level": "Level: 4",
 		"prerequisite": ["kanec3"],
+		"type": "weapon"
+	},
+	"incense1": {
+		"icon": WEAPON_PATH + "Potion.png",
+		"displayname": "Charming Incense",
+		"details": "Drops an incense bomb near you that explodes after a short delay - lure enemies into the blast",
+		"level": "Level: 1",
+		"prerequisite": [],
+		"type": "weapon"
+	},
+	"incense2": {
+		"icon": WEAPON_PATH + "Potion.png",
+		"displayname": "Charming Incense",
+		"details": "Drops two bombs and the explosion damage is increased by 25%",
+		"level": "Level: 2",
+		"prerequisite": ["incense1"],
+		"type": "weapon"
+	},
+	"incense3": {
+		"icon": WEAPON_PATH + "Potion.png",
+		"displayname": "Charming Incense",
+		"details": "Drops three bombs, the explosion area is 30% bigger and the cooldown is shorter",
+		"level": "Level: 3",
+		"prerequisite": ["incense2"],
+		"type": "weapon"
+	},
+	"incense4": {
+		"icon": WEAPON_PATH + "Potion.png",
+		"displayname": "Charming Incense",
+		"details": "The explosion leaves a lingering cloud that keeps hurting enemies and the cooldown is shorter",
+		"level": "Level: 4",
+		"prerequisite": ["incense3"],
 		"type": "weapon"
 	},
 	"plague1": {

@@ -11,39 +11,143 @@
 [ext_resource type="PackedScene" uid="uid://do6hvpnsvqj1y" path="res://Scenes/enemy_gerald_2_elite.tscn" id="8_ikia7"]
 [ext_resource type="AudioStream" uid="uid://by3vohmuoks5k" path="res://Sounds/Music/The Long Descent.wav" id="10_hpuos"]
 [ext_resource type="Script" uid="uid://dm615omebx2ud" path="res://Scenes/music_level.gd" id="12_c5t2i"]
+[ext_resource type="PackedScene" uid="uid://584qxln27vcy" path="res://Scenes/enemy_nun.tscn" id="9_nun"]
+[ext_resource type="PackedScene" uid="uid://b3sg4blj63666" path="res://Scenes/enemy_lumberjack_strong.tscn" id="9_lumber"]
+[ext_resource type="PackedScene" uid="uid://dtjcqag7tov5s" path="res://Scenes/enemy_nemessis.tscn" id="9_nemesis"]
 
-[sub_resource type="Resource" id="Resource_kn0ld"]
+[sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("4_fo5ed")
-time_end = 120
+time_start = 0
+time_end = 150
 enemy = ExtResource("5_0fj1v")
-enemy_num = 4
+enemy_num = 3
+enemy_spawn_delay = 1
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
-[sub_resource type="Resource" id="Resource_t2t4p"]
+[sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("4_fo5ed")
-time_start = 30
-time_end = 180
+time_start = 150
+time_end = 330
+enemy = ExtResource("5_0fj1v")
+enemy_num = 4
+enemy_spawn_delay = 1
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_3"]
+script = ExtResource("4_fo5ed")
+time_start = 330
+time_end = 540
+enemy = ExtResource("5_0fj1v")
+enemy_num = 6
+enemy_spawn_delay = 1
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_4"]
+script = ExtResource("4_fo5ed")
+time_start = 20
+time_end = 200
+enemy = ExtResource("7_0fj1v")
+enemy_num = 2
+enemy_spawn_delay = 4
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_5"]
+script = ExtResource("4_fo5ed")
+time_start = 200
+time_end = 540
+enemy = ExtResource("7_0fj1v")
+enemy_num = 4
+enemy_spawn_delay = 3
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_6"]
+script = ExtResource("4_fo5ed")
+time_start = 90
+time_end = 540
+enemy = ExtResource("9_nun")
+enemy_num = 2
+enemy_spawn_delay = 8
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_7"]
+script = ExtResource("4_fo5ed")
+time_start = 45
+time_end = 300
 enemy = ExtResource("6_5v1tr")
 enemy_num = 1
+enemy_spawn_delay = 14
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_8"]
+script = ExtResource("4_fo5ed")
+time_start = 300
+time_end = 540
+enemy = ExtResource("6_5v1tr")
+enemy_num = 2
+enemy_spawn_delay = 12
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_9"]
+script = ExtResource("4_fo5ed")
+time_start = 120
+time_end = 540
+enemy = ExtResource("8_ikia7")
+enemy_num = 1
+enemy_spawn_delay = 18
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_10"]
+script = ExtResource("4_fo5ed")
+time_start = 180
+time_end = 420
+enemy = ExtResource("9_lumber")
+enemy_num = 1
+enemy_spawn_delay = 40
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_11"]
+script = ExtResource("4_fo5ed")
+time_start = 420
+time_end = 540
+enemy = ExtResource("9_lumber")
+enemy_num = 2
 enemy_spawn_delay = 25
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
-[sub_resource type="Resource" id="Resource_ikia7"]
+[sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("4_fo5ed")
-time_start = 15
-time_end = 120
-enemy = ExtResource("7_0fj1v")
-enemy_num = 4
-enemy_spawn_delay = 20
+time_start = 450
+time_end = 450
+enemy = ExtResource("9_nemesis")
+enemy_num = 1
+enemy_spawn_delay = 0
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
-[sub_resource type="Resource" id="Resource_7yui6"]
+[sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("4_fo5ed")
-time_start = 60
-time_end = 180
-enemy = ExtResource("8_ikia7")
-enemy_num = 1
-enemy_spawn_delay = 40
+time_start = 135
+time_end = 150
+enemy = ExtResource("5_0fj1v")
+enemy_num = 12
+enemy_spawn_delay = 0
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_14"]
+script = ExtResource("4_fo5ed")
+time_start = 180
+time_end = 540
+enemy = ExtResource("5_0fj1v")
+enemy_num = 3
+enemy_spawn_delay = 1
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_15"]
+script = ExtResource("4_fo5ed")
+time_start = 180
+time_end = 540
+enemy = ExtResource("7_0fj1v")
+enemy_num = 3
+enemy_spawn_delay = 3
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [node name="World" type="Node2D" unique_id=26020053]
@@ -59,7 +163,7 @@ region_rect = Rect2(0, 0, 4000, 4000)
 [node name="Player" parent="." unique_id=1972239113 instance=ExtResource("2_go701")]
 
 [node name="EnemySpawner" parent="." unique_id=1013572439 instance=ExtResource("3_5a7ea")]
-spawns = Array[ExtResource("4_fo5ed")]([SubResource("Resource_kn0ld"), SubResource("Resource_t2t4p"), SubResource("Resource_ikia7"), SubResource("Resource_7yui6")])
+spawns = Array[ExtResource("4_fo5ed")]([SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15")])
 
 [node name="Loot" type="Node2D" parent="." unique_id=1105049148 groups=["loot"]]
 

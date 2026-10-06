@@ -4,13 +4,15 @@ extends CharacterBody2D
 # player_3.tscn) sets its own stats, world slot and starting weapon in the Inspector.
 @export_group("Starting Weapon")
 ## The first level of the weapon granted when this player spawns. Choose none for no weapon.
-@export_enum("none", "leaf1", "roots1", "arrow1", "whip1", "tornado1", "falcon1", "kanec1", "mycelium1", "plague1") var starting_upgrade: String = "leaf1"
+@export_enum("none", "leaf1", "roots1", "arrow1", "whip1", "tornado1", "falcon1", "kanec1", "mycelium1", "plague1", "incense1") var starting_upgrade: String = "leaf1"
 
 @export_group("Player Stats")
 @export var world_index: int = 0
 @export var movement_speed: float = 40.0
 @export var hp: float = 80
 @export var maxhp: float = 80
+## Seconds you must survive before dying counts as a win (the Nemesis arrives at this time).
+@export var win_time: int = 450
 @export_group("")
 
 var last_movement = Vector2.UP
@@ -42,6 +44,7 @@ var MyceliumCircle = preload("res://Scenes/Attacks/mycelium_circle.tscn")
 @onready var falconBase = get_node("%FalconBase")
 @onready var kanecBase = get_node("%KanecBase")
 @onready var plagueBase = get_node("%PlagueBase")
+@onready var incenseBase = get_node("%IncenseBase")
 
 #Arrow
 var arrow_ammo = 0
@@ -79,6 +82,9 @@ var kanec_level = 0
 
 #Plague
 var plague_level = 0
+
+#Charming Incense
+var incense_level = 0
 
 #Leaf Protection
 var leaf_level = 0
@@ -166,6 +172,8 @@ func attack():
 			whipTimer.start()
 	if kanec_level > 0:
 		kanecBase.update_kanec(kanec_level)
+	if incense_level > 0:
+		incenseBase.update_incense(incense_level)
 	if plague_level > 0:
 		plagueBase.update_plague(plague_level)
 	if falcon_level > 0:
@@ -387,6 +395,8 @@ func upgrade_character(upgrade):
 			falcon_level = 4
 		"kanec1","kanec2","kanec3","kanec4":
 			kanec_level = int(upgrade.right(1))
+		"incense1","incense2","incense3","incense4":
+			incense_level = int(upgrade.right(1))
 		"plague1","plague2","plague3","plague4":
 			plague_level = int(upgrade.right(1))
 		"leaf1":
@@ -483,7 +493,7 @@ func death():
 	get_tree().paused = true
 	var tween = deathPanel.create_tween()
 	tween.tween_property(deathPanel,"position",Vector2(220,50),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	if time >= 300:
+	if time >= win_time:
 		lblResult.text = "You Win"
 		sndVictory.play()
 		GameProgress.unlock_next(world_index)

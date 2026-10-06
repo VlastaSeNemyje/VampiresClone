@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://Scenes/Attacks/kanec_base.gd" id="kanec_base"]
 [ext_resource type="Script" path="res://Scenes/Attacks/plague_base.gd" id="plague_base"]
 [ext_resource type="Script" path="res://Scenes/Attacks/plague_level.gd" id="plague_level"]
+[ext_resource type="Script" path="res://Scenes/Attacks/incense_base.gd" id="incense_base"]
+[ext_resource type="Script" path="res://Scenes/Attacks/incense_level.gd" id="incense_level"]
 [ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scripts/player.gd" id="1_8os5a"]
 [ext_resource type="Texture2D" uid="uid://d0burlhxi4831" path="res://Textures/Sprites/BabaYaga.png" id="2_8os5a"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_6t5aa"]
@@ -121,7 +123,7 @@ collision_layer = 2
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_8os5a")
-starting_upgrade = "roots1"
+starting_upgrade = "arrow1"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=494512027]
 position = Vector2(0, -15)
@@ -181,37 +183,70 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 script = ExtResource("kanec_base")
 
-[node name="PlagueBase" type="Node2D" parent="Attack"]
+[node name="PlagueBase" type="Node2D" parent="Attack" unique_id=291970145]
 unique_name_in_owner = true
 script = ExtResource("plague_base")
+damage = 3.5
+size = 0.7
+speed = 90.0
+first_target_range = 200.0
+bounce_range = 200.0
 
-[node name="Level1" type="Node" parent="Attack/PlagueBase"]
+[node name="Level1" type="Node" parent="Attack/PlagueBase" unique_id=1639398247]
 script = ExtResource("plague_level")
-projectiles = 1
-extra_hits = 2
-damage_multiplier = 1.0
-cooldown = 8.0
+cooldown = 5.0
 
-[node name="Level2" type="Node" parent="Attack/PlagueBase"]
+[node name="Level2" type="Node" parent="Attack/PlagueBase" unique_id=1160093044]
 script = ExtResource("plague_level")
 projectiles = 2
-extra_hits = 2
 damage_multiplier = 1.2
-cooldown = 8.0
+cooldown = 5.0
 
-[node name="Level3" type="Node" parent="Attack/PlagueBase"]
+[node name="Level3" type="Node" parent="Attack/PlagueBase" unique_id=1075682058]
 script = ExtResource("plague_level")
 projectiles = 2
 extra_hits = 3
 damage_multiplier = 1.2
-cooldown = 5.0
+cooldown = 3.5
 
-[node name="Level4" type="Node" parent="Attack/PlagueBase"]
+[node name="Level4" type="Node" parent="Attack/PlagueBase" unique_id=1925542646]
 script = ExtResource("plague_level")
 projectiles = 3
 extra_hits = 1
 damage_multiplier = 1.2
+cooldown = 1.8
+
+[node name="IncenseBase" type="Node2D" parent="Attack" unique_id=934267704]
+unique_name_in_owner = true
+script = ExtResource("incense_base")
+bomb_scale = 0.6
+
+[node name="Level1" type="Node" parent="Attack/IncenseBase" unique_id=1557273692]
+script = ExtResource("incense_level")
+cooldown = 5.0
+
+[node name="Level2" type="Node" parent="Attack/IncenseBase" unique_id=1804550754]
+script = ExtResource("incense_level")
+bombs = 2
+damage_multiplier = 1.25
+cooldown = 5.0
+
+[node name="Level3" type="Node" parent="Attack/IncenseBase" unique_id=1792142313]
+script = ExtResource("incense_level")
+bombs = 3
+fuse_time = 3.0
+damage_multiplier = 1.25
+area_multiplier = 1.3
 cooldown = 3.0
+
+[node name="Level4" type="Node" parent="Attack/IncenseBase" unique_id=1405695654]
+script = ExtResource("incense_level")
+bombs = 3
+fuse_time = 2.5
+damage_multiplier = 1.25
+area_multiplier = 1.3
+cooldown = 2.5
+leaves_puddle = true
 
 [node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=307411742]
 visible = false
