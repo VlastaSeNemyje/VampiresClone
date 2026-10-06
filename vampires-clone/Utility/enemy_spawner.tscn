@@ -15,6 +15,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 [node name="EnemySpawner" type="Node2D" unique_id=1013572439]
 script = ExtResource("1_v14hi")
 spawns = Array[ExtResource("2_5yyhq")]([SubResource("Resource_k354k")])
+recycle_distance = 550.0
+forward_spawn_chance = 0.7
 
 [node name="Timer" type="Timer" parent="." unique_id=885861654]
 autostart = true

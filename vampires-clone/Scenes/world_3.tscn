@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://584qxln27vcy" path="res://Scenes/enemy_nun.tscn" id="9_nun"]
 [ext_resource type="PackedScene" uid="uid://b3sg4blj63666" path="res://Scenes/enemy_lumberjack_strong.tscn" id="9_lumber"]
 [ext_resource type="PackedScene" uid="uid://dtjcqag7tov5s" path="res://Scenes/enemy_nemessis.tscn" id="9_nemesis"]
+[ext_resource type="Script" path="res://Utility/pressure_wave.gd" id="10_pw"]
 
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("4_fo5ed")
@@ -150,6 +151,34 @@ enemy_num = 3
 enemy_spawn_delay = 3
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
+[sub_resource type="Resource" id="Wave_1"]
+script = ExtResource("10_pw")
+time_start = 135
+time_end = 150
+crowd_fraction = 0.95
+pulled_per_second = 40
+
+[sub_resource type="Resource" id="Wave_2"]
+script = ExtResource("10_pw")
+time_start = 270
+time_end = 290
+crowd_fraction = 0.95
+pulled_per_second = 40
+
+[sub_resource type="Resource" id="Wave_3"]
+script = ExtResource("10_pw")
+time_start = 390
+time_end = 410
+crowd_fraction = 1.0
+pulled_per_second = 60
+
+[sub_resource type="Resource" id="Wave_4"]
+script = ExtResource("10_pw")
+time_start = 430
+time_end = 450
+crowd_fraction = 1.0
+pulled_per_second = 60
+
 [node name="World" type="Node2D" unique_id=26020053]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=167768035]
@@ -164,6 +193,7 @@ region_rect = Rect2(0, 0, 4000, 4000)
 
 [node name="EnemySpawner" parent="." unique_id=1013572439 instance=ExtResource("3_5a7ea")]
 spawns = Array[ExtResource("4_fo5ed")]([SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15")])
+pressure_waves = Array[ExtResource("10_pw")]([SubResource("Wave_1"), SubResource("Wave_2"), SubResource("Wave_3"), SubResource("Wave_4")])
 
 [node name="Loot" type="Node2D" parent="." unique_id=1105049148 groups=["loot"]]
 
