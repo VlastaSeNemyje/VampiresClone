@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/Attacks/plague_attack.gd" id="1_plague"]
+[ext_resource type="Texture2D" path="res://Textures/Sprites/Weapons/Plague.png" id="2_plague"]
+
+[node name="Plague" type="Node2D"]
+top_level = true
+z_index = 1
+script = ExtResource("1_plague")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_plague")

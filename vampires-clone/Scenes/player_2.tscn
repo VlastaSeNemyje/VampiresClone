@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://blrc83jxeub3d"]
 
 [ext_resource type="Script" path="res://Scenes/Attacks/kanec_base.gd" id="kanec_base"]
+[ext_resource type="Script" path="res://Scenes/Attacks/plague_base.gd" id="plague_base"]
+[ext_resource type="Script" path="res://Scenes/Attacks/plague_level.gd" id="plague_level"]
 [ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scripts/player.gd" id="1_8os5a"]
 [ext_resource type="Texture2D" uid="uid://d0burlhxi4831" path="res://Textures/Sprites/BabaYaga.png" id="2_8os5a"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_6t5aa"]
@@ -178,6 +180,38 @@ unique_name_in_owner = true
 [node name="KanecBase" type="Node2D" parent="Attack"]
 unique_name_in_owner = true
 script = ExtResource("kanec_base")
+
+[node name="PlagueBase" type="Node2D" parent="Attack"]
+unique_name_in_owner = true
+script = ExtResource("plague_base")
+
+[node name="Level1" type="Node" parent="Attack/PlagueBase"]
+script = ExtResource("plague_level")
+projectiles = 1
+extra_hits = 2
+damage_multiplier = 1.0
+cooldown = 8.0
+
+[node name="Level2" type="Node" parent="Attack/PlagueBase"]
+script = ExtResource("plague_level")
+projectiles = 2
+extra_hits = 2
+damage_multiplier = 1.2
+cooldown = 8.0
+
+[node name="Level3" type="Node" parent="Attack/PlagueBase"]
+script = ExtResource("plague_level")
+projectiles = 2
+extra_hits = 3
+damage_multiplier = 1.2
+cooldown = 5.0
+
+[node name="Level4" type="Node" parent="Attack/PlagueBase"]
+script = ExtResource("plague_level")
+projectiles = 3
+extra_hits = 1
+damage_multiplier = 1.2
+cooldown = 3.0
 
 [node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=307411742]
 visible = false

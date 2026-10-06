@@ -131,6 +131,38 @@ const UPGRADES = {
 		"prerequisite": ["kanec3"],
 		"type": "weapon"
 	},
+	"plague1": {
+		"icon": WEAPON_PATH + "Plague.png",
+		"displayname": "Plague",
+		"details": "A plague projectile jumps from enemy to enemy, hurting each one it touches",
+		"level": "Level: 1",
+		"prerequisite": [],
+		"type": "weapon"
+	},
+	"plague2": {
+		"icon": WEAPON_PATH + "Plague.png",
+		"displayname": "Plague",
+		"details": "Two plague projectiles are shot and damage is increased by 20%",
+		"level": "Level: 2",
+		"prerequisite": ["plague1"],
+		"type": "weapon"
+	},
+	"plague3": {
+		"icon": WEAPON_PATH + "Plague.png",
+		"displayname": "Plague",
+		"details": "Plague jumps to more enemies and the cooldown is reduced",
+		"level": "Level: 3",
+		"prerequisite": ["plague2"],
+		"type": "weapon"
+	},
+	"plague4": {
+		"icon": WEAPON_PATH + "Plague.png",
+		"displayname": "Plague",
+		"details": "Three plague projectiles are shot and the cooldown is greatly reduced",
+		"level": "Level: 4",
+		"prerequisite": ["plague3"],
+		"type": "weapon"
+	},
 	"tornado1": {
 		"icon": WEAPON_PATH + "tornado.png",
 		"displayname": "Tornado",

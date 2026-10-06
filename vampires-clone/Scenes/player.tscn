@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://d4mksw1nihjx5"]
 
-[ext_resource type="Script" path="res://Scenes/Attacks/kanec_base.gd" id="kanec_base"]
 [ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dva5k5nflhe47" path="res://Textures/Sprites/MiniYoungDryad.png" id="2_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_6t5aa"]
@@ -10,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://b7kuxl1bobayo" path="res://Textures/Sprites/BarHealth.png" id="7_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bc4soinvtfwuw" path="res://Textures/Sprites/BarHealthBcg.png" id="7_8erm5"]
 [ext_resource type="PackedScene" uid="uid://bf71bynv53120" path="res://Utility/basic_button.tscn" id="9_f1ek2"]
+[ext_resource type="Script" uid="uid://dp8auny0qn4hj" path="res://Scenes/Attacks/kanec_base.gd" id="kanec_base"]
+[ext_resource type="Script" path="res://Scenes/Attacks/plague_base.gd" id="plague_base"]
+[ext_resource type="Script" path="res://Scenes/Attacks/plague_level.gd" id="plague_level"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f1ek2"]
 atlas = ExtResource("2_6t5aa")
@@ -170,9 +172,42 @@ wait_time = 0.2
 [node name="FalconBase" type="Node2D" parent="Attack" unique_id=1952933121]
 unique_name_in_owner = true
 
-[node name="KanecBase" type="Node2D" parent="Attack"]
+[node name="KanecBase" type="Node2D" parent="Attack" unique_id=431870861]
 unique_name_in_owner = true
 script = ExtResource("kanec_base")
+
+[node name="PlagueBase" type="Node2D" parent="Attack" unique_id=291970145]
+unique_name_in_owner = true
+script = ExtResource("plague_base")
+damage = 3.5
+size = 0.7
+speed = 90.0
+first_target_range = 200.0
+bounce_range = 200.0
+
+[node name="Level1" type="Node" parent="Attack/PlagueBase" unique_id=1639398247]
+script = ExtResource("plague_level")
+cooldown = 5.0
+
+[node name="Level2" type="Node" parent="Attack/PlagueBase" unique_id=1160093044]
+script = ExtResource("plague_level")
+projectiles = 2
+damage_multiplier = 1.2
+cooldown = 5.0
+
+[node name="Level3" type="Node" parent="Attack/PlagueBase" unique_id=1075682058]
+script = ExtResource("plague_level")
+projectiles = 2
+extra_hits = 3
+damage_multiplier = 1.2
+cooldown = 3.5
+
+[node name="Level4" type="Node" parent="Attack/PlagueBase" unique_id=1925542646]
+script = ExtResource("plague_level")
+projectiles = 3
+extra_hits = 1
+damage_multiplier = 1.2
+cooldown = 1.8
 
 [node name="EnemyDetectionArea" type="Area2D" parent="." unique_id=307411742]
 visible = false

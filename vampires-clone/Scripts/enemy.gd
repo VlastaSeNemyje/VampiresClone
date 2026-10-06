@@ -35,6 +35,7 @@ static var pixel_texture: ImageTexture
 signal remove_from_array(object)
 
 func _ready():
+	add_to_group("enemy")
 	hitBox.damage = enemy_damage
 
 	flash_material = ShaderMaterial.new()

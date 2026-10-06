@@ -4,7 +4,7 @@ extends CharacterBody2D
 # player_3.tscn) sets its own stats, world slot and starting weapon in the Inspector.
 @export_group("Starting Weapon")
 ## The first level of the weapon granted when this player spawns. Choose none for no weapon.
-@export_enum("none", "leaf1", "roots1", "arrow1", "whip1", "tornado1", "falcon1", "kanec1", "mycelium1") var starting_upgrade: String = "leaf1"
+@export_enum("none", "leaf1", "roots1", "arrow1", "whip1", "tornado1", "falcon1", "kanec1", "mycelium1", "plague1") var starting_upgrade: String = "leaf1"
 
 @export_group("Player Stats")
 @export var world_index: int = 0
@@ -41,6 +41,7 @@ var MyceliumCircle = preload("res://Scenes/Attacks/mycelium_circle.tscn")
 @onready var whipAttackTimer = get_node("%WhipAttackTimer")
 @onready var falconBase = get_node("%FalconBase")
 @onready var kanecBase = get_node("%KanecBase")
+@onready var plagueBase = get_node("%PlagueBase")
 
 #Arrow
 var arrow_ammo = 0
@@ -75,6 +76,9 @@ var falcon_level = 0
 
 #Kanec
 var kanec_level = 0
+
+#Plague
+var plague_level = 0
 
 #Leaf Protection
 var leaf_level = 0
@@ -162,6 +166,8 @@ func attack():
 			whipTimer.start()
 	if kanec_level > 0:
 		kanecBase.update_kanec(kanec_level)
+	if plague_level > 0:
+		plagueBase.update_plague(plague_level)
 	if falcon_level > 0:
 		spawn_falcon()
 	if leaf_level > 0:
@@ -381,6 +387,8 @@ func upgrade_character(upgrade):
 			falcon_level = 4
 		"kanec1","kanec2","kanec3","kanec4":
 			kanec_level = int(upgrade.right(1))
+		"plague1","plague2","plague3","plague4":
+			plague_level = int(upgrade.right(1))
 		"leaf1":
 			leaf_level = 1
 		"leaf2":
