@@ -6,6 +6,8 @@ extends Node2D
 ## Level 4: one extra big, hard-hitting projectile from a random side.
 
 var Kanec = preload("res://Scenes/Attacks/kanec.tscn")
+## Mega Beast evolution (Forest Spirit + Ring). All its numbers live on the MegaBeast scene.
+var MegaBeast = preload("res://Scenes/Attacks/mega_beast.tscn")
 
 @export_group("Base Stats")
 @export var damage: float = 6.0
@@ -45,6 +47,7 @@ var Kanec = preload("res://Scenes/Attacks/kanec.tscn")
 
 var level = 0
 var timer: Timer
+var mega_timer: Timer
 
 @onready var player = get_tree().get_first_node_in_group("player")
 
@@ -53,6 +56,11 @@ func _ready():
 	timer.one_shot = false
 	timer.timeout.connect(_on_timer_timeout)
 	add_child(timer)
+
+	mega_timer = Timer.new()
+	mega_timer.one_shot = true
+	mega_timer.timeout.connect(_on_mega_timer_timeout)
+	add_child(mega_timer)
 
 # Called by player.gd whenever the weapon is (up)graded.
 func update_kanec(new_level: int):
@@ -63,6 +71,10 @@ func update_kanec(new_level: int):
 		timer.start()
 	if first_time:
 		_on_timer_timeout()
+	if player.evolved.get("kanec", false) and mega_timer.is_stopped():
+		var settings = MegaBeast.instantiate()   # only read, never added to the scene
+		mega_timer.start(settings.first_spawn_delay)
+		settings.free()
 
 func _per_side() -> int:
 	match level:
@@ -104,3 +116,12 @@ func _spawn(from_left: bool, proj_size: float, damage_mult: float, knockback_mul
 	projectile.travel_distance = rect.size.x + screen_margin * 2.0
 	projectile.global_position = Vector2(rect.position.x - screen_margin if from_left else rect.end.x + screen_margin, y)
 	add_child(projectile)
+
+# Mega Beast: one huge expanding beast every spawn_interval seconds (see mega_beast.gd)
+func _on_mega_timer_timeout():
+	var beast = MegaBeast.instantiate()
+	var interval = beast.spawn_interval
+	if beast.affected_by_scroll:
+		interval *= 1 - player.spell_cooldown
+	add_child(beast)
+	mega_timer.start(max(0.5, interval))

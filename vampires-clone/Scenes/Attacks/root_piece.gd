@@ -35,6 +35,15 @@ enum State { ERUPT, ACTIVE, RETRACT }
 @export var fade_out_time := 0.4
 @export var collision_radius := 12.0
 
+@export_group("Explosion (Shatter evolution)")
+## Leave empty to use the Charming Incense explosion (Textures/Sprites/Weapons/Explosion.png).
+@export var explosion_texture: Texture2D
+@export var explosion_tint := Color(0.6, 1.0, 0.4, 0.9)
+## The flash starts at this fraction of its final size and grows.
+@export var explosion_start_scale := 0.3
+@export var explosion_visual_time := 0.35
+@export var explosion_z_index := 2
+
 @export_group("Sound")
 ## Stops 15 roots from playing 15 sounds on the same frame.
 @export var min_seconds_between_sounds := 0.06
@@ -45,12 +54,22 @@ var damage := 4.0
 var tick_interval := 0.5
 var lifetime := 4.0          # seconds the root stays out (after eruption)
 var size := 1.0
+# Shatter evolution (set by roots_attack.gd; the radius is multiplied by the root size here)
+var explodes := false
+var explosion_delay := 1.5
+var explosion_radius := 30.0
+var explosion_damage := 15.0
+var explosion_knockback := 60.0
+var retract_after_explosion := true
+
+const DEFAULT_EXPLOSION_PATH := "res://Textures/Sprites/Weapons/Explosion.png"
 
 static var _last_sound_msec := 0
 
 var _state := State.ERUPT
 var _age := 0.0
 var _tick_left := 0.0
+var _exploded := false
 var _sprite_base_scale := Vector2.ONE
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -93,6 +112,11 @@ func _process(delta: float) -> void:
 			if _tick_left <= 0.0:
 				_tick()
 				_tick_left = tick_interval
+			if explodes and not _exploded and _age >= activate_delay + explosion_delay:
+				_explode()
+				if retract_after_explosion:
+					_retract()
+					return
 			if _age >= activate_delay + lifetime:
 				_retract()
 
@@ -115,6 +139,43 @@ func _tick() -> void:
 		sprite.scale = _sprite_base_scale * hit_punch
 		create_tween().tween_property(sprite, "scale", _sprite_base_scale, 0.12)\
 			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+
+## Shatter: the root bursts, hurting every enemy in a much wider area than the root itself.
+func _explode() -> void:
+	_exploded = true
+	var radius := explosion_radius * size
+	var center := global_position + collision.position * size
+	for e in get_tree().get_nodes_in_group("enemy"):
+		if e.get("is_dead") == true or center.distance_to(e.global_position) > radius:
+			continue
+		e.get_node("HurtBox").hurt.emit(explosion_damage, center.direction_to(e.global_position), explosion_knockback)
+	_play_explosion_visual(center, radius)
+
+
+func _play_explosion_visual(center: Vector2, radius: float) -> void:
+	var tex := explosion_texture
+	if tex == null and ResourceLoader.exists(DEFAULT_EXPLOSION_PATH):
+		tex = load(DEFAULT_EXPLOSION_PATH)
+	if tex == null:
+		return
+	# Same trick as the Incense bomb: scale so the visible part is exactly 2 x radius wide
+	var used := tex.get_image().get_used_rect().size.x
+	var full := radius * 2.0 / maxf(1.0, float(used))
+	var flash := Sprite2D.new()
+	flash.texture = tex
+	flash.top_level = true
+	flash.global_position = center
+	flash.z_index = explosion_z_index
+	flash.modulate = explosion_tint
+	flash.scale = Vector2.ONE * full * explosion_start_scale
+	# Added to our parent so the flash outlives the root that spawned it
+	get_parent().add_child(flash)
+	var tween := flash.create_tween().set_parallel(true)
+	tween.tween_property(flash, "scale", Vector2.ONE * full, explosion_visual_time)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(flash, "modulate:a", 0.0, explosion_visual_time)
+	tween.chain().tween_callback(flash.queue_free)
 
 
 func _retract() -> void:

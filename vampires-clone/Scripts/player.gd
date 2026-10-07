@@ -54,6 +54,8 @@ var arrow_level = 0
 
 #UPGRADES
 var collected_upgrades = []
+## Weapons that have evolved, e.g. {"roots": true}. Filled from UpgradeDb entries with an "evolves" key.
+var evolved = {}
 var upgrade_options = []
 var armor = 0
 var speed = 0
@@ -356,6 +358,9 @@ func levelup():
 	get_tree().paused = true
 	
 func upgrade_character(upgrade):
+	var evolves_weapon = UpgradeDb.UPGRADES[upgrade].get("evolves", "")
+	if evolves_weapon != "":
+		evolved[evolves_weapon] = true
 	match upgrade:
 		"arrow1":
 			arrow_level = 1
@@ -461,6 +466,10 @@ func get_random_item():
 				dblist.append(i)
 		else:
 			dblist.append(i)
+	# An evolution that is ready (both prerequisites maxed) is always offered first
+	var evolutions = dblist.filter(func(i): return UpgradeDb.UPGRADES[i].has("evolves"))
+	if evolutions.size() > 0:
+		dblist = evolutions
 	if dblist.size() > 0:
 		var randomitem = dblist.pick_random()
 		upgrade_options.append(randomitem)
@@ -486,6 +495,12 @@ func adjust_gui_collection(upgrade):
 		for i in collected_upgrades:
 			get_collected_displayname.append(UpgradeDb.UPGRADES[i]["displayname"])
 		if not get_upgraded_displayname in get_collected_displayname:
+			# An evolution takes the place of the weapon it evolves
+			var evolves_weapon = UpgradeDb.UPGRADES[upgrade].get("evolves", "")
+			if evolves_weapon != "":
+				for c in collectedWeapons.get_children():
+					if c.upgrade != null and UpgradeDb.UPGRADES[c.upgrade]["displayname"] == UpgradeDb.UPGRADES[evolves_weapon + "1"]["displayname"]:
+						c.queue_free()
 			var new_item = itemContainer.instantiate()
 			new_item.upgrade = upgrade
 			match get_type:

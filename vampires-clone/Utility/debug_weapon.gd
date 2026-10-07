@@ -28,7 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _build_groups() -> void:
 	for key in UpgradeDb.UPGRADES:
 		var data = UpgradeDb.UPGRADES[key]
-		if data["type"] == "item":
+		if data["type"] == "item" or data.has("evolves"):
 			continue
 		var base: String = key.rstrip("0123456789")
 		var lvl := int(key.substr(base.length()))
@@ -77,6 +77,17 @@ func _build_ui() -> void:
 		for base in groups:
 			if groups[base]["type"] == type:
 				_add_row(base)
+
+	# evolutions: only work once both prerequisites are maxed (same rule as the level-up screen)
+	var evo_header := Label.new()
+	evo_header.text = "-- EVOLUTIONS --"
+	evo_header.add_theme_font_size_override("font_size", FONT_SIZE)
+	list.add_child(evo_header)
+	for key in UpgradeDb.UPGRADES:
+		if UpgradeDb.UPGRADES[key].has("evolves"):
+			var evo_btn := _make_button("EVOLVE " + UpgradeDb.UPGRADES[key]["displayname"])
+			evo_btn.pressed.connect(func(): _evolve(key))
+			list.add_child(evo_btn)
 
 
 func _add_row(base: String) -> void:
@@ -138,3 +149,12 @@ func _refresh() -> void:
 			if (base + str(lvl)) in player.collected_upgrades:
 				current = lvl
 		level_labels[base].text = "%d/%d" % [current, groups[base]["max"]]
+
+
+func _evolve(key: String) -> void:
+	if get_tree().paused or key in player.collected_upgrades:
+		return
+	for pre in UpgradeDb.UPGRADES[key]["prerequisite"]:
+		if not pre in player.collected_upgrades:
+			return
+	player.upgrade_character(key)

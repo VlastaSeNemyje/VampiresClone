@@ -323,6 +323,26 @@ const UPGRADES = {
 		"prerequisite": ["mycelium3"],
 		"type": "weapon"
 	},
+	# ---- Evolutions: offered automatically once every prerequisite is collected (weapon + passive maxed).
+	# "evolves" = base weapon id (e.g. "roots" for roots1..roots4). The weapon script checks player.evolved[<id>].
+	"roots_evo": {
+		"icon": WEAPON_PATH + "Evo_roots.png",
+		"displayname": "Shatter",
+		"details": "EVOLUTION: 50% more roots erupt, then explode in a much wider area",
+		"level": "Evolution",
+		"prerequisite": ["roots4", "tome4"],
+		"type": "weapon",
+		"evolves": "roots"
+	},
+	"kanec_evo": {
+		"icon": WEAPON_PATH + "Evo_kanec.png",
+		"displayname": "Mega Beast",
+		"details": "EVOLUTION: every 15 seconds a giant beast charges at you and crushes everything weak on the screen",
+		"level": "Evolution",
+		"prerequisite": ["kanec4", "ring2"],
+		"type": "weapon",
+		"evolves": "kanec"
+	},
 	"armor1": {
 		"icon": ICON_PATH + "armor.png",
 		"displayname": "Armor",

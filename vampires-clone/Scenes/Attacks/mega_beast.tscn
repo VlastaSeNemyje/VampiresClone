@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/Attacks/mega_beast.gd" id="1_beast"]
+[ext_resource type="Texture2D" path="res://Textures/Sprites/Weapons/Evo_kanec.png" id="2_tex"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_beast"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tex")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="MegaBeast" type="Node2D"]
+top_level = true
+script = ExtResource("1_beast")
+
+[node name="BeastSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_beast")
+autoplay = "default"
+
+[node name="snd_impact" type="AudioStreamPlayer2D" parent="."]

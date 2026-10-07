@@ -46,6 +46,25 @@ extends Node2D
 ## Size multiplier (Tome upgrade adds on top).
 @export var size_per_level: Array[float] = [1.0, 1.0, 1.4, 1.4]
 
+
+# --------------------------------------------------------- EVOLUTION: SHATTER --
+# Unlocked by evolving Roots (Roots level 4 + Tome level 4, see UpgradeDb "roots_evo").
+@export_group("Evolution - Shatter")
+## Evolved waves have this many times more roots (1.5 = +50%, rounded up).
+@export var evolved_root_multiplier := 1.5
+## Extra multipliers applied on top of the normal level stats while evolved.
+@export var evolved_damage_multiplier := 1.0
+@export var evolved_size_multiplier := 1.0
+@export var evolved_cooldown_multiplier := 1.0
+## Seconds after a root becomes active until it explodes.
+@export var explosion_delay := 1.5
+## Explosion radius in pixels at size 1.0 (it grows with root size, so Tome helps).
+@export var explosion_radius := 30.0
+@export var explosion_damage := 15.0
+@export var explosion_knockback := 60.0
+## The root disappears right after exploding (false = keeps hurting until its lifetime ends).
+@export var retract_after_explosion := true
+
 # ------------------------------------------------------------ RUNTIME STATE --
 var level := 1
 var root_count := 3
@@ -55,6 +74,7 @@ var damage := 4.0
 var tick_interval := 0.5
 var size := 1.0
 
+var evolved := false
 var _started := false
 
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -82,6 +102,12 @@ func update_roots() -> void:
 	size = _pick(size_per_level, i, 1.0) * (1.0 + player.spell_size)
 	cooldown = maxf(0.3, _pick(cooldown_per_level, i, 5.0) * (1.0 - player.spell_cooldown))
 
+	evolved = bool(player.evolved.get("roots", false))
+	if evolved:
+		damage *= evolved_damage_multiplier
+		size *= evolved_size_multiplier
+		cooldown = maxf(0.3, cooldown * evolved_cooldown_multiplier)
+
 	if not _started:
 		_started = true
 		spawn_timer.start(maxf(first_spawn_delay, 0.05))
@@ -96,6 +122,8 @@ func _spawn_wave() -> void:
 	if not is_instance_valid(player):
 		return
 	var count: int = root_count + player.additional_attacks * extra_roots_per_ring
+	if evolved:
+		count = ceili(count * evolved_root_multiplier)
 	var placed: Array[Vector2] = []
 	for n in count:
 		if not is_inside_tree():
@@ -118,6 +146,12 @@ func _spawn_root(pos: Vector2) -> void:
 	root.tick_interval = tick_interval
 	root.lifetime = lifetime
 	root.size = size
+	root.explodes = evolved
+	root.explosion_delay = explosion_delay
+	root.explosion_radius = explosion_radius
+	root.explosion_damage = explosion_damage
+	root.explosion_knockback = explosion_knockback
+	root.retract_after_explosion = retract_after_explosion
 	root.position = pos   # RootPiece is top_level, so this is a world position
 	add_child(root)
 
