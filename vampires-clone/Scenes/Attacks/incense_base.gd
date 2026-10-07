@@ -31,11 +31,11 @@ var Bomb = preload("res://Scenes/Attacks/incense_bomb.tscn")
 
 @export_group("Puddle")
 ## How long the area stays after the explosion (last level).
-@export var puddle_duration: float = 3.0
+@export var puddle_duration: float = 2.0
 ## Seconds between puddle damage ticks.
 @export var puddle_tick_interval: float = 0.5
 ## Damage of one puddle tick as a fraction of the explosion damage.
-@export var puddle_damage_multiplier: float = 0.3
+@export var puddle_damage_multiplier: float = 0.2
 ## Puddle knockback as a fraction of the explosion knockback.
 @export var puddle_knockback_multiplier: float = 0.0
 @export_range(0.0, 1.0) var puddle_alpha: float = 0.7

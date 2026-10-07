@@ -2,7 +2,7 @@ extends Node2D
 ## Kanec weapon controller. Lives at Player/Attack/KanecBase - tweak everything in the Inspector.
 ## Level 1: 1 from the left + 1 from the right.
 ## Level 2: +50% size, 2 per side.
-## Level 3: double the projectiles (4 per side).
+## Level 3: 3 per side.
 ## Level 4: one extra big, hard-hitting projectile from a random side.
 
 var Kanec = preload("res://Scenes/Attacks/kanec.tscn")
@@ -30,8 +30,8 @@ var Kanec = preload("res://Scenes/Attacks/kanec.tscn")
 @export_group("Projectiles Per Side")
 @export var per_side_level_1: int = 1
 @export var per_side_level_2: int = 2
-@export var per_side_level_3: int = 4
-@export var per_side_level_4: int = 4
+@export var per_side_level_3: int = 3
+@export var per_side_level_4: int = 3
 
 @export_group("Upgrades")
 ## Level 2 and up: size increase (0.5 = +50%).
@@ -39,7 +39,7 @@ var Kanec = preload("res://Scenes/Attacks/kanec.tscn")
 ## Level 4: extra projectile from a random side.
 @export var big_projectile_enabled_level: int = 4
 ## Size of the big one relative to a normal one (3.0 = 200% bigger).
-@export var big_size_multiplier: float = 3.0
+@export var big_size_multiplier: float = 2.5
 @export var big_damage_multiplier: float = 2.0
 @export var big_knockback_multiplier: float = 1.0
 

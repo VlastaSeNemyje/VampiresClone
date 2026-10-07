@@ -27,14 +27,14 @@ extends Node2D
 ## Seconds between each root of a wave (makes the wave ripple out).
 @export var spawn_stagger := 0.04
 ## Ring upgrade ("+1 attack") adds this many roots per wave.
-@export var extra_roots_per_ring := 1
+@export var extra_roots_per_ring := 2
 
 # ------------------------------------------------------------------- STATS --
 # One entry per level. Element 0 = level 1 (roots1) ... element 3 = level 4 (roots4).
 # Level 1 = start (3 roots)  | level 2 = +3 roots | level 3 = bigger
 # Level 4 = +6 roots
 @export_group("Stats per level (element 0 = level 1)")
-@export var root_count_per_level: Array[int] = [3, 6, 6, 12]
+@export var root_count_per_level: Array[int] = [3, 5, 5, 8]
 ## Seconds between waves (Scroll upgrade shortens it).
 @export var cooldown_per_level: Array[float] = [5.0, 5.0, 5.0, 5.0]
 ## Seconds each root stays out.

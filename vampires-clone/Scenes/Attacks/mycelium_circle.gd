@@ -22,9 +22,9 @@ extends Node2D
 # L1: 1 mushroom, 2 s every 5 s     | L2: +1 opposite mushroom, 3 s
 # L3: +2 mushrooms, spins 20% faster | L4: +4 mushrooms, always on, +10% faster
 @export_group("Stats per level (element 0 = level 1)")
-@export var mushroom_count_per_level: Array[int] = [1, 2, 4, 8]
+@export var mushroom_count_per_level: Array[int] = [1, 2, 3, 6]
 ## How long the mushrooms stay out each cycle (ignored when Always On).
-@export var active_duration_per_level: Array[float] = [2.0, 3.0, 3.0, 3.0]
+@export var active_duration_per_level: Array[float] = [2.5, 3.0, 3.0, 3.0]
 ## Seconds from the START of one appearance to the START of the next
 ## (Scroll upgrade shortens it). Ignored when Always On.
 @export var cooldown_per_level: Array[float] = [5.0, 5.0, 5.0, 5.0]

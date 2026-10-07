@@ -69,8 +69,8 @@ var tornado_level = 0
 
 #Whip
 var whip_ammo = 0
-var whip_baseammo = 1
-var whip_attackspeed = 3
+var whip_baseammo = 0
+var whip_attackspeed = 1.5
 var whip_level = 0
 
 #Falcon
@@ -123,6 +123,9 @@ var enemy_close = []
 signal playerdeath
 
 func _ready():
+	# Whip swings come in bursts: one-shot, short gap between swings of the same burst
+	whipAttackTimer.one_shot = true
+	whipAttackTimer.wait_time = 0.25
 	if starting_upgrade != "" and UpgradeDb.UPGRADES.has(starting_upgrade):
 		upgrade_character(starting_upgrade)
 	elif starting_upgrade != "" and starting_upgrade != "none":
@@ -242,7 +245,11 @@ func _on_whip_attack_timer_timeout() -> void:
 		whip_attack.position = position
 		whip_attack.level = whip_level
 		add_child(whip_attack)
-		whipTimer.start() 
+		whip_ammo -= 1
+		if whip_ammo > 0:
+			whipAttackTimer.start()
+		else:
+			whipAttackTimer.stop()
 		
 func spawn_falcon():
 	var get_falcon_total = falconBase.get_child_count()

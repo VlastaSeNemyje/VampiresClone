@@ -56,7 +56,7 @@ const DEFAULT_LEAF_PATH := "res://Textures/Sprites/Weapons/Leaf.png"
 ## Seconds between pulses (lower = faster). Level 3 = "shorter cooldown".
 @export var tick_interval_per_level: Array[float] = [1.0, 1.0, 0.7, 0.7]
 ## Aura radius in pixels (this is the attack size). Level 4 = "bigger area".
-@export var radius_per_level: Array[float] = [50.0, 50.0, 50.0, 65.0]
+@export var radius_per_level: Array[float] = [55.0, 55.0, 55.0, 65.0]
 @export var knockback_per_level: Array[float] = [40.0, 40.0, 40.0, 60.0]
 ## Number of MAIN leaves (fillers are added on top of this).
 @export var leaf_count_per_level: Array[int] = [8, 8, 8, 10]
@@ -136,7 +136,8 @@ func _process(delta: float) -> void:
 
 # Called by the player whenever the level or any player stat changes.
 func update_leaf_protection() -> void:
-	_apply_stats(player.leaf_level, player.spell_size, player.spell_cooldown)
+	# Ring ("+1 attack") makes the aura 20% wider per level
+	_apply_stats(player.leaf_level, player.spell_size + 0.2 * player.additional_attacks, player.spell_cooldown)
 
 
 func _apply_stats(lvl: int, size_bonus: float, cooldown_bonus: float) -> void:

@@ -9,7 +9,7 @@ radius = 9.0
 
 [node name="MyceliumCircle" type="Node2D" unique_id=932182596]
 script = ExtResource("1_circle")
-damage_per_level = Array[float]([3.0, 3.0, 5.0, 7.0])
+damage_per_level = Array[float]([3.0, 3.0, 5.0, 6.0])
 
 [node name="Pivot" type="Node2D" parent="." unique_id=1190152867]
 z_index = 1

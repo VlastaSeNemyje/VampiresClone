@@ -118,7 +118,7 @@ const UPGRADES = {
 	"kanec3": {
 		"icon": WEAPON_PATH + "Kanec.png",
 		"displayname": "Forest Spirit",
-		"details": "Twice as many Forest Spirits run across the screen",
+		"details": "Three Forest Spirits run from each side",
 		"level": "Level: 3",
 		"prerequisite": ["kanec2"],
 		"type": "weapon"
@@ -150,7 +150,7 @@ const UPGRADES = {
 	"incense3": {
 		"icon": WEAPON_PATH + "Potion.png",
 		"displayname": "Charming Incense",
-		"details": "Drops three bombs, the explosion area is 30% bigger and the cooldown is shorter",
+		"details": "Drops three bombs, the explosion area is 15% bigger and the cooldown is shorter",
 		"level": "Level: 3",
 		"prerequisite": ["incense2"],
 		"type": "weapon"
@@ -270,7 +270,7 @@ const UPGRADES = {
 	"roots2": {
 		"icon":  WEAPON_PATH + "Roots_icon2.png",
 		"displayname": "Roots",
-		"details": "3 more roots erupt each time",
+		"details": "2 more roots erupt each time",
 		"level": "Level: 2",
 		"prerequisite": ["roots1"],
 		"type": "weapon"
@@ -286,7 +286,7 @@ const UPGRADES = {
 	"roots4": {
 		"icon":  WEAPON_PATH + "Roots_icon2.png",
 		"displayname": "Roots",
-		"details": "6 more roots erupt each time",
+		"details": "3 more roots erupt each time",
 		"level": "Level: 4",
 		"prerequisite": ["roots3"],
 		"type": "weapon"
@@ -310,7 +310,7 @@ const UPGRADES = {
 	"mycelium3": {
 		"icon": WEAPON_PATH + "Mycelium.png",
 		"displayname": "Mycelium Circle",
-		"details": "Two more mushrooms join and the circle spins 20% faster",
+		"details": "One more mushroom joins and the circle spins 20% faster",
 		"level": "Level: 3",
 		"prerequisite": ["mycelium2"],
 		"type": "weapon"
@@ -318,7 +318,7 @@ const UPGRADES = {
 	"mycelium4": {
 		"icon": WEAPON_PATH + "Mycelium.png",
 		"displayname": "Mycelium Circle",
-		"details": "Four more mushrooms fill the circle, it never stops and spins 10% faster",
+		"details": "Three more mushrooms fill the circle, it never stops and spins 10% faster",
 		"level": "Level: 4",
 		"prerequisite": ["mycelium3"],
 		"type": "weapon"
@@ -454,7 +454,7 @@ const UPGRADES = {
 	"ring1": {
 		"icon": ICON_PATH + "Ring.png",
 		"displayname": "Ring",
-		"details": "Your spells now spawn 1 more additional attack",
+		"details": "Your spells spawn 1 more attack (Claws swing again, Leaves grow 20% wider)",
 		"level": "Level: 1",
 		"prerequisite": [],
 		"type": "upgrade"
