@@ -1,7 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b622b3inivdys"]
 
-[ext_resource type="Script" path="res://Scenes/Attacks/mega_beast.gd" id="1_beast"]
-[ext_resource type="Texture2D" path="res://Textures/Sprites/Weapons/Evo_kanec.png" id="2_tex"]
+[ext_resource type="Script" uid="uid://dcm5feh68j734" path="res://Scenes/Attacks/mega_beast.gd" id="1_beast"]
+[ext_resource type="Texture2D" uid="uid://341fglwowhb7" path="res://Textures/Sprites/Weapons/Evo_kanec.png" id="2_tex"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_beast"]
 animations = [{
@@ -14,12 +14,13 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="MegaBeast" type="Node2D"]
+[node name="MegaBeast" type="Node2D" unique_id=1798871468]
 top_level = true
 script = ExtResource("1_beast")
 
-[node name="BeastSprite" type="AnimatedSprite2D" parent="."]
+[node name="BeastSprite" type="AnimatedSprite2D" parent="." unique_id=361255060]
+modulate = Color(1, 1, 1, 0.60784316)
 sprite_frames = SubResource("SpriteFrames_beast")
 autoplay = "default"
 
-[node name="snd_impact" type="AudioStreamPlayer2D" parent="."]
+[node name="snd_impact" type="AudioStreamPlayer2D" parent="." unique_id=1573749502]
