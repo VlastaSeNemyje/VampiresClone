@@ -328,8 +328,8 @@ const UPGRADES = {
 	"roots_evo": {
 		"icon": WEAPON_PATH + "Evo_roots.png",
 		"displayname": "Shatter",
-		"details": "EVOLUTION: 50% more roots erupt, then explode in a much wider area",
-		"level": "Evolution",
+		"details": "ASCEND: 50% more roots erupt, then explode in a much wider area",
+		"level": "Ascend",
 		"prerequisite": ["roots4", "tome4"],
 		"type": "weapon",
 		"evolves": "roots"
@@ -337,11 +337,20 @@ const UPGRADES = {
 	"kanec_evo": {
 		"icon": WEAPON_PATH + "Evo_kanec.png",
 		"displayname": "Mega Beast",
-		"details": "EVOLUTION: every 15 seconds a giant beast charges at you and crushes everything weak on the screen",
-		"level": "Evolution",
+		"details": "ASCEND: every 15 seconds a giant beast charges at you and crushes everything weak on the screen",
+		"level": "Ascend",
 		"prerequisite": ["kanec4", "ring2"],
 		"type": "weapon",
 		"evolves": "kanec"
+	},
+	"leaf_evo": {
+		"icon": WEAPON_PATH + "Evo_leaf.png",
+		"displayname": "Ultra Green",
+		"details": "ASCEND: every 10 seconds the leaves grow 100% and push every enemy away, stunning them for 2 seconds",
+		"level": "Ascend",
+		"prerequisite": ["leaf4", "armor4"],
+		"type": "weapon",
+		"evolves": "leaf"
 	},
 	"armor1": {
 		"icon": ICON_PATH + "armor.png",

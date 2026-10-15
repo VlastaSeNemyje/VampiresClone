@@ -29,6 +29,12 @@ var flash_material: ShaderMaterial
 var slow_multiplier := 1.0
 var slow_time_left := 0.0
 
+## Set to false to make this enemy immune to stun (e.g. a boss).
+@export var can_be_stunned := true
+@export var stun_tint := Color(1.0, 1.0, 0.55)
+var stun_time_left := 0.0
+var _mask_before_stun := 0
+
 # 4x4 white square used as the death-particle texture, built once and reused
 static var pixel_texture: ImageTexture
 
@@ -52,7 +58,32 @@ func apply_slow(multiplier: float, duration: float):
 	slow_time_left = maxf(slow_time_left, duration)
 	animated_sprite_2d.modulate = Color(0.7, 1.0, 0.7)   # green tint = rooted
 
+# A stunned enemy cannot move or deal contact damage and slides through other enemies,
+# so a push is never blocked by the crowd.
+func apply_stun(duration: float):
+	if not can_be_stunned or is_dead:
+		return
+	if stun_time_left <= 0.0:
+		_mask_before_stun = collision_mask
+		collision_mask = 0
+		hitBox.damage = 0
+	stun_time_left = maxf(stun_time_left, duration)
+	animated_sprite_2d.modulate = stun_tint
+
+func _end_stun():
+	collision_mask = _mask_before_stun
+	hitBox.damage = enemy_damage
+	animated_sprite_2d.modulate = Color(0.7, 1.0, 0.7) if slow_time_left > 0.0 else Color.WHITE
+
+# Launches the enemy so it slides roughly `distance` pixels along `direction`.
+func apply_push(direction: Vector2, distance: float):
+	knockback = direction * sqrt(2.0 * knockback_recovery * Engine.physics_ticks_per_second * maxf(distance, 0.0))
+
 func _physics_process(delta):
+	if stun_time_left > 0.0:
+		stun_time_left -= delta
+		if stun_time_left <= 0.0:
+			_end_stun()
 	if slow_time_left > 0.0:
 		slow_time_left -= delta
 		if slow_time_left <= 0.0:
@@ -60,7 +91,9 @@ func _physics_process(delta):
 			animated_sprite_2d.modulate = Color.WHITE
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
 	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * movement_speed * slow_multiplier 
+	velocity = direction * movement_speed * slow_multiplier
+	if stun_time_left > 0.0:
+		velocity = Vector2.ZERO
 	velocity += knockback
 	move_and_slide()
 
@@ -169,7 +202,10 @@ func death():
 
 func _on_hurt_box_hurt(damage, angle, knockback_amount):
 	hp -= damage
-	knockback = angle * knockback_amount
+	var new_knockback = angle * knockback_amount
+	# a stunned enemy that is being pushed keeps the stronger push
+	if stun_time_left <= 0.0 or new_knockback.length() > knockback.length():
+		knockback = new_knockback
 	snd_hit.play()
 	flash_white()
 

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bhcsv7qjxhsf0" path="res://Scenes/Attacks/leaf_protection.gd" id="1_leaf"]
 [ext_resource type="Texture2D" uid="uid://1mqivyq0t0cb" path="res://Textures/Sprites/Weapons/Leaf.png" id="2_m24h6"]
+[ext_resource type="Texture2D" uid="uid://dduqxgkvbnmmg" path="res://Textures/Sprites/Weapons/Evo_leaf.png" id="3_evo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_leaf"]
 radius = 56.0
@@ -14,6 +15,7 @@ collision_mask = 4
 monitorable = false
 script = ExtResource("1_leaf")
 leaf_texture = ExtResource("2_m24h6")
+evolved_leaf_texture = ExtResource("3_evo")
 leaf_scale = 0.5
 leaf_tint = Color(0.65882355, 0.65882355, 0.65882355, 0.79607844)
 leaf_ring_ratio = 0.885

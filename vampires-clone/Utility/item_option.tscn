@@ -3,6 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://xc1es3bquxmb" path="res://Textures/Sprites/Plantik.png" id="1_8n5gr"]
 [ext_resource type="Script" uid="uid://cjxlpaljdmiu8" path="res://Utility/item_option.gd" id="1_gcekk"]
 
+[sub_resource type="Gradient" id="Gradient_ascend"]
+colors = PackedColorArray(1, 0.78, 0, 1, 1, 0.55, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ascend"]
+gradient = SubResource("Gradient_ascend")
+fill_to = Vector2(0, 1)
+
 [node name="ItemOption" type="ColorRect" unique_id=307440007]
 custom_minimum_size = Vector2(180, 50)
 anchors_preset = -1
@@ -14,25 +21,25 @@ color = Color(0.5718735, 0.34179664, 0.7481997, 1)
 script = ExtResource("1_gcekk")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2133230989]
-mouse_filter = 2
 layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
 offset_right = 26.0
 offset_bottom = 26.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="ItemIcon" type="TextureRect" parent="ColorRect" unique_id=1656242622]
-mouse_filter = 2
-expand_mode = 1
-stretch_mode = 5
 layout_mode = 0
 offset_left = -4.0
 offset_top = -2.0
 offset_right = 28.0
 offset_bottom = 30.0
 scale = Vector2(0.9, 0.9)
+mouse_filter = 2
 texture = ExtResource("1_8n5gr")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="lbl_name" type="Label" parent="." unique_id=553088678]
 layout_mode = 0
@@ -60,3 +67,41 @@ offset_right = 171.0
 offset_bottom = 26.0
 theme_override_font_sizes/font_size = 12
 text = "level: 1"
+
+[node name="AscendBadge" type="Control" parent="." unique_id=1100106325]
+visible = false
+anchors_preset = 0
+offset_left = 116.0
+offset_top = 28.0
+offset_right = 178.0
+offset_bottom = 48.0
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="AscendBadge" unique_id=541484121]
+layout_mode = 0
+offset_right = 62.0
+offset_bottom = 20.0
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_ascend")
+expand_mode = 1
+
+[node name="lbl_ascend" type="Label" parent="AscendBadge" unique_id=1269534655]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 44.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 8
+text = "Ascend with"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="AscendIcon" type="TextureRect" parent="AscendBadge" unique_id=450129375]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 2.0
+offset_right = 60.0
+offset_bottom = 18.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5

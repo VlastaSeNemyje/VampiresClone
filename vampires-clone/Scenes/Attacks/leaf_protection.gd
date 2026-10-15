@@ -79,6 +79,29 @@ const DEFAULT_LEAF_PATH := "res://Textures/Sprites/Weapons/Leaf.png"
 ## 0.30 = a big pulse is 30% wider than the normal aura.
 @export var big_pulse_bonus: float = 0.30
 
+# ------------------------------------------------- EVOLUTION: ULTRA GREEN ----
+# Unlocked by evolving Leaves (Leaves level 4 + Armor level 4, see UpgradeDb "leaf_evo").
+# The leaves keep their level 4 stats and get a periodic "surge".
+@export_group("Evolution - Ultra Green")
+## Sprite used for the leaves once evolved.
+@export var evolved_leaf_texture: Texture2D
+@export var evolved_leaf_tint: Color = Color.WHITE
+## Seconds between surges (also the wait before the first one).
+@export var surge_interval: float = 10.0
+## How much bigger the aura gets during a surge (1.0 = +100%).
+@export var surge_size_bonus: float = 1.0
+## Seconds the aura takes to grow, stay big, and shrink back.
+@export var surge_grow_time: float = 0.3
+@export var surge_hold_time: float = 0.8
+@export var surge_shrink_time: float = 0.5
+## Enemies end up this many pixels outside the grown aura after being pushed.
+@export var surge_push_margin: float = 25.0
+## Seconds every pushed enemy is stunned.
+@export var surge_stun_duration: float = 2.0
+## Extra damage dealt to every pushed enemy (0 = none).
+@export var surge_damage: float = 0.0
+@export var surge_ring_color: Color = Color(0.5, 1.0, 0.4, 0.9)
+
 # ------------------------------------------------------- RUNTIME STATE ----
 var level := 1
 var damage := 3.0
@@ -108,6 +131,13 @@ var _warned_no_texture := false
 var _fallback_texture: Texture2D
 var _last_signature: Array = []
 
+var evolved := false
+# 1.0 normally, (1 + surge_size_bonus) while the aura is fully grown
+var surge_mult := 1.0
+var _surge_running := false
+var _surge_timer: Timer
+var _built_texture: Texture2D
+
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var leaves: Node2D = $Leaves
 @onready var collision: CollisionShape2D = $CollisionShape2D
@@ -121,6 +151,9 @@ func _ready() -> void:
 		return
 	position = center_offset
 	tick_timer.timeout.connect(_on_tick_timer_timeout)
+	_surge_timer = Timer.new()
+	_surge_timer.timeout.connect(_on_surge_timer_timeout)
+	add_child(_surge_timer)
 	update_leaf_protection()
 
 
@@ -153,10 +186,8 @@ func _apply_stats(lvl: int, size_bonus: float, cooldown_bonus: float) -> void:
 
 	# Collision circle always covers the biggest possible pulse; the exact
 	# radius of each pulse is checked by distance in _on_tick_timer_timeout.
-	var max_radius := base_radius
-	if level >= big_pulse_from_level:
-		max_radius *= 1.0 + big_pulse_bonus
-	(collision.shape as CircleShape2D).radius = max_radius + hit_padding
+	evolved = not Engine.is_editor_hint() and bool(player.evolved.get("leaf", false))
+	_update_collision_radius()
 
 	if Engine.is_editor_hint():
 		# Editor: no timer, no tweens - just show the final look instantly
@@ -170,13 +201,26 @@ func _apply_stats(lvl: int, size_bonus: float, cooldown_bonus: float) -> void:
 	if tick_timer.is_stopped():
 		tick_timer.start()
 
+	if evolved and _surge_timer.is_stopped():
+		_surge_timer.start(maxf(surge_interval, 0.5))
+
 	_rebuild_leaves()
-	_tween_radius_to(base_radius, grow_time)
+	if not _surge_running:
+		_tween_radius_to(base_radius, grow_time)
+
+
+# Collision circle always covers the biggest possible pulse; the exact
+# radius of each pulse is checked by distance in _on_tick_timer_timeout.
+func _update_collision_radius() -> void:
+	var max_radius := base_radius * surge_mult
+	if level >= big_pulse_from_level:
+		max_radius *= 1.0 + big_pulse_bonus
+	(collision.shape as CircleShape2D).radius = max_radius + hit_padding
 
 
 func _on_tick_timer_timeout() -> void:
 	var big := level >= big_pulse_from_level and randf() < big_pulse_chance
-	var radius := base_radius * (1.0 + (big_pulse_bonus if big else 0.0))
+	var radius := base_radius * surge_mult * (1.0 + (big_pulse_bonus if big else 0.0))
 	var hits := 0
 
 	for area in get_overlapping_areas():
@@ -194,6 +238,64 @@ func _on_tick_timer_timeout() -> void:
 		hits += 1
 
 	_play_pulse(big, hits, radius)
+
+
+# ---------------------------------------------------------------- SURGE ---
+func _on_surge_timer_timeout() -> void:
+	_surge_timer.start(maxf(surge_interval, 0.5))
+	if evolved and not _surge_running:
+		_run_surge()
+
+
+# Grow -> push + stun everything inside -> hold -> shrink back.
+func _run_surge() -> void:
+	_surge_running = true
+	var big_radius := base_radius * (1.0 + surge_size_bonus)
+	surge_mult = 1.0 + surge_size_bonus
+	_update_collision_radius()
+	_tween_radius_to(big_radius, surge_grow_time)
+	await get_tree().create_timer(surge_grow_time).timeout
+	if not is_inside_tree():
+		return
+	_push_and_stun(big_radius)
+	pulse_strength = 1.0
+	pulse_progress = 0.0
+	if _pulse_tween:
+		_pulse_tween.kill()
+	_pulse_tween = create_tween()
+	_pulse_tween.tween_property(self, "pulse_progress", 1.0, 0.5)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	await get_tree().create_timer(surge_hold_time).timeout
+	if not is_inside_tree():
+		return
+	surge_mult = 1.0
+	_update_collision_radius()
+	if _radius_tween:
+		_radius_tween.kill()
+	_radius_tween = create_tween()
+	_radius_tween.tween_property(self, "visual_radius", base_radius, surge_shrink_time)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	_surge_running = false
+
+
+func _push_and_stun(big_radius: float) -> void:
+	# The aura node is scaled, so the aura's real size on screen is radius * global scale
+	var world_radius := big_radius * global_scale.x
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if enemy.get("is_dead") == true:
+			continue
+		var distance: float = global_position.distance_to(enemy.global_position)
+		if distance > world_radius:
+			continue
+		var direction := global_position.direction_to(enemy.global_position)
+		if direction == Vector2.ZERO:
+			direction = Vector2.RIGHT.rotated(randf() * TAU)
+		if surge_damage > 0.0:
+			enemy.get_node("HurtBox").emit_signal("hurt", surge_damage, direction, 0.0)
+		if enemy.has_method("apply_stun"):
+			enemy.apply_stun(surge_stun_duration)
+		if enemy.has_method("apply_push"):
+			enemy.apply_push(direction, world_radius + surge_push_margin - distance)
 
 
 # ------------------------------------------------------------- FEEDBACK ---
@@ -218,7 +320,7 @@ func _play_pulse(big: bool, hits: int, radius: float) -> void:
 		_radius_tween = create_tween()
 		_radius_tween.tween_property(self, "visual_radius", radius, 0.12)\
 			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		_radius_tween.tween_property(self, "visual_radius", base_radius, 0.3)\
+		_radius_tween.tween_property(self, "visual_radius", base_radius * surge_mult, 0.3)\
 			.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 	if hits > 0 and snd_pulse.stream != null:
@@ -300,6 +402,8 @@ func _preview_signature() -> Array:
 # Children 0 .. leaf_count-1 are the main leaves (they define the ring).
 # Children after that are filler leaves, placed in the gaps between them.
 func _get_leaf_texture() -> Texture2D:
+	if evolved and evolved_leaf_texture != null:
+		return evolved_leaf_texture
 	if leaf_texture != null:
 		return leaf_texture
 	if _fallback_texture == null and ResourceLoader.exists(DEFAULT_LEAF_PATH):
@@ -310,9 +414,10 @@ func _get_leaf_texture() -> Texture2D:
 func _rebuild_leaves(force := false) -> void:
 	var fillers := maxi(filler_per_gap, 0)
 	var total := leaf_count + leaf_count * fillers
-	if not force and leaves.get_child_count() == total:
-		return
 	var tex := _get_leaf_texture()
+	if not force and leaves.get_child_count() == total and tex == _built_texture:
+		return
+	_built_texture = tex
 	if tex == null and not _warned_no_texture:
 		_warned_no_texture = true
 		push_warning("LeafProtection: no Leaf Texture set. Assign one in the Inspector.")
@@ -328,7 +433,7 @@ func _rebuild_leaves(force := false) -> void:
 			leaf.scale = Vector2.ONE * leaf_scale
 		else:
 			leaf.scale = Vector2.ONE * leaf_scale * filler_scale
-		leaf.modulate = leaf_tint
+		leaf.modulate = evolved_leaf_tint if evolved else leaf_tint
 		leaves.add_child(leaf)
 	_layout_leaves()
 

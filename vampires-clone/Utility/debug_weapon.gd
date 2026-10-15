@@ -80,12 +80,12 @@ func _build_ui() -> void:
 
 	# evolutions: only work once both prerequisites are maxed (same rule as the level-up screen)
 	var evo_header := Label.new()
-	evo_header.text = "-- EVOLUTIONS --"
+	evo_header.text = "-- ASCENDS --"
 	evo_header.add_theme_font_size_override("font_size", FONT_SIZE)
 	list.add_child(evo_header)
 	for key in UpgradeDb.UPGRADES:
 		if UpgradeDb.UPGRADES[key].has("evolves"):
-			var evo_btn := _make_button("EVOLVE " + UpgradeDb.UPGRADES[key]["displayname"])
+			var evo_btn := _make_button("ASCEND " + UpgradeDb.UPGRADES[key]["displayname"])
 			evo_btn.pressed.connect(func(): _evolve(key))
 			list.add_child(evo_btn)
 
