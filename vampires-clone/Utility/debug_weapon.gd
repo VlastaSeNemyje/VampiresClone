@@ -10,6 +10,19 @@ var level_labels := {}    # base_id -> Label
 
 const FONT_SIZE := 10
 
+## Enemies available in the spawn list: [button label, scene].
+const ENEMIES := [
+	["Basic", preload("res://Scenes/enemy_basic_0.tscn")],
+	["Basic Elite", preload("res://Scenes/enemy_basic_0_elite.tscn")],
+	["Gerald", preload("res://Scenes/enemy_gerald_2.tscn")],
+	["Gerald Elite", preload("res://Scenes/enemy_gerald_2_elite.tscn")],
+	["Lumberjack Strong", preload("res://Scenes/enemy_lumberjack_strong.tscn")],
+	["Nemesis", preload("res://Scenes/enemy_nemessis.tscn")],
+	["Nun", preload("res://Scenes/enemy_nun.tscn")],
+	["Builder", preload("res://Scenes/enemy_builder.tscn")],
+]
+const SPAWN_DISTANCE := 100.0
+
 
 func _ready() -> void:
 	layer = 100
@@ -77,6 +90,24 @@ func _build_ui() -> void:
 		for base in groups:
 			if groups[base]["type"] == type:
 				_add_row(base)
+
+	# enemies: spawn 1 or 10 around the player
+	var enemy_header := Label.new()
+	enemy_header.text = "-- SPAWN ENEMY --"
+	enemy_header.add_theme_font_size_override("font_size", FONT_SIZE)
+	list.add_child(enemy_header)
+	for entry in ENEMIES:
+		var row := HBoxContainer.new()
+		list.add_child(row)
+		var lbl := Label.new()
+		lbl.text = entry[0]
+		lbl.custom_minimum_size = Vector2(80, 0)
+		lbl.add_theme_font_size_override("font_size", FONT_SIZE)
+		row.add_child(lbl)
+		for n in [1, 10]:
+			var b := _make_button("x%d" % n)
+			b.pressed.connect(func(): _spawn_enemy(entry[1], n))
+			row.add_child(b)
 
 	# evolutions: only work once both prerequisites are maxed (same rule as the level-up screen)
 	var evo_header := Label.new()
@@ -150,6 +181,12 @@ func _refresh() -> void:
 				current = lvl
 		level_labels[base].text = "%d/%d" % [current, groups[base]["max"]]
 
+
+func _spawn_enemy(scene: PackedScene, count: int) -> void:
+	for i in count:
+		var enemy = scene.instantiate()
+		enemy.global_position = player.global_position + Vector2.RIGHT.rotated(randf() * TAU) * SPAWN_DISTANCE
+		get_tree().current_scene.add_child(enemy)
 
 func _evolve(key: String) -> void:
 	if get_tree().paused or key in player.collected_upgrades:

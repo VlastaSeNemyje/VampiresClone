@@ -1,0 +1,40 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/wall.gd" id="1_wall"]
+[ext_resource type="Texture2D" path="res://Textures/Sprites/Wall.png" id="2_wall"]
+[ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_hurt"]
+[ext_resource type="AudioStream" uid="uid://bmhx672y3i5eh" path="res://Sounds/VFX/SFX_WAV_189.wav" id="4_snd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(32, 32)
+
+[node name="Wall" type="StaticBody2D"]
+z_index = 1
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_wall")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_wall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HurtBox" parent="." instance=ExtResource("3_hurt")]
+visible = false
+position = Vector2(0, 0)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_snd")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]

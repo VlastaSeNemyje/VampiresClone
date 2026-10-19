@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://cleusbgv2ih52"]
+
+[ext_resource type="Script" uid="uid://h0gox26ebyra" path="res://Scripts/builder.gd" id="1_b"]
+[ext_resource type="Texture2D" uid="uid://o42451ik7s12" path="res://Resources/MinifolksVillagers/Without Outline/MiniNobleMan.png" id="2_b"]
+[ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_b"]
+[ext_resource type="PackedScene" uid="uid://cthuwwjhu3woh" path="res://Utility/hit_box.tscn" id="4_b"]
+[ext_resource type="AudioStream" uid="uid://bmhx672y3i5eh" path="res://Sounds/VFX/SFX_WAV_189.wav" id="5_b"]
+[ext_resource type="PackedScene" path="res://Scenes/wall.tscn" id="6_b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0"]
+atlas = ExtResource("2_b")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1"]
+atlas = ExtResource("2_b")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2"]
+atlas = ExtResource("2_b")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3"]
+atlas = ExtResource("2_b")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4"]
+atlas = ExtResource("2_b")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5"]
+atlas = ExtResource("2_b")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b"]
+radius = 2.9999998
+height = 34.557865
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h"]
+size = Vector2(8.5, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x"]
+size = Vector2(5, 18)
+
+[node name="Enemy_builder" type="CharacterBody2D" unique_id=1729332304]
+z_index = 1
+scale = Vector2(0.7, 0.7)
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_b")
+wall_scene = ExtResource("6_b")
+hp = 40
+experience = 30
+enemy_damage = 5
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=303303999]
+position = Vector2(-1, -12)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_b")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=478156325]
+visible = false
+position = Vector2(0, 2)
+scale = Vector2(0.7948588, -0.34724367)
+shape = SubResource("CapsuleShape2D_b")
+
+[node name="HurtBox" parent="." unique_id=154999246 instance=ExtResource("3_b")]
+visible = false
+position = Vector2(-1, 5.0000005)
+scale = Vector2(1.2, 0.84)
+collision_layer = 4
+collision_mask = 4
+HurtBoxType = 1
+
+[node name="CollisionShape2D" parent="HurtBox" index="0" unique_id=486513834]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_h")
+
+[node name="HitBox" parent="." unique_id=2045777139 instance=ExtResource("4_b")]
+position = Vector2(0, 3.0000002)
+scale = Vector2(0.8963902, 0.59324384)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0" unique_id=839422151]
+position = Vector2(-0.5, -1)
+shape = SubResource("RectangleShape2D_x")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="." unique_id=2136886107]
+stream = ExtResource("5_b")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

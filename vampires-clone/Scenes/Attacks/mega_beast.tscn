@@ -1,13 +1,45 @@
 [gd_scene format=3 uid="uid://b622b3inivdys"]
 
 [ext_resource type="Script" uid="uid://dcm5feh68j734" path="res://Scenes/Attacks/mega_beast.gd" id="1_beast"]
-[ext_resource type="Texture2D" uid="uid://341fglwowhb7" path="res://Textures/Sprites/Weapons/Evo_kanec.png" id="2_tex"]
+[ext_resource type="Texture2D" uid="uid://dyeo7d47l4jf1" path="res://Textures/Sprites/Megakanec.png" id="2_vlaee"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1ib4"]
+atlas = ExtResource("2_vlaee")
+region = Rect2(0, 0, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otehv"]
+atlas = ExtResource("2_vlaee")
+region = Rect2(32, 0, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3iy1"]
+atlas = ExtResource("2_vlaee")
+region = Rect2(64, 0, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvrj3"]
+atlas = ExtResource("2_vlaee")
+region = Rect2(96, 0, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uw8hb"]
+atlas = ExtResource("2_vlaee")
+region = Rect2(128, 0, 32, 33)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_beast"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_tex")
+"texture": SubResource("AtlasTexture_u1ib4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otehv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3iy1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvrj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uw8hb")
 }],
 "loop": true,
 "name": &"default",
@@ -22,5 +54,7 @@ script = ExtResource("1_beast")
 modulate = Color(1, 1, 1, 0.60784316)
 sprite_frames = SubResource("SpriteFrames_beast")
 autoplay = "default"
+frame = 3
+frame_progress = 0.51591027
 
 [node name="snd_impact" type="AudioStreamPlayer2D" parent="." unique_id=1573749502]
