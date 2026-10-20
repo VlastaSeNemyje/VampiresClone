@@ -21,6 +21,7 @@ const ENEMIES := [
 	["Nun", preload("res://Scenes/enemy_nun.tscn")],
 	["Builder", preload("res://Scenes/enemy_builder.tscn")],
 	["Decker", preload("res://Scenes/enemy_decker.tscn")],
+	["Hunter", preload("res://Scenes/enemy_hunter.tscn")],
 ]
 const SPAWN_DISTANCE := 100.0
 

@@ -1,12 +1,7 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://c7lw3r24jtsuu"]
 
-[ext_resource type="Script" path="res://Scenes/Attacks/kanec_base.gd" id="kanec_base"]
-[ext_resource type="Script" path="res://Scenes/Attacks/plague_base.gd" id="plague_base"]
-[ext_resource type="Script" path="res://Scenes/Attacks/plague_level.gd" id="plague_level"]
-[ext_resource type="Script" path="res://Scenes/Attacks/incense_base.gd" id="incense_base"]
-[ext_resource type="Script" path="res://Scenes/Attacks/incense_level.gd" id="incense_level"]
 [ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scripts/player.gd" id="1_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://dva5k5nflhe47" path="res://Textures/Sprites/MiniYoungDryad.png" id="2_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://c7tsdt0xi2vwy" path="res://Textures/Sprites/Lesly.png" id="2_htltj"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://be0co0l3j62ou" path="res://Textures/Sprites/BarBcg.png" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://4brnwnxt1tqi" path="res://Textures/Sprites/BarProgress.png" id="5_x3wgy"]
@@ -14,61 +9,25 @@
 [ext_resource type="Texture2D" uid="uid://b7kuxl1bobayo" path="res://Textures/Sprites/BarHealth.png" id="7_3smsa"]
 [ext_resource type="Texture2D" uid="uid://bc4soinvtfwuw" path="res://Textures/Sprites/BarHealthBcg.png" id="7_8erm5"]
 [ext_resource type="PackedScene" uid="uid://bf71bynv53120" path="res://Utility/basic_button.tscn" id="9_f1ek2"]
+[ext_resource type="Script" uid="uid://dni2eo6i3088s" path="res://Scenes/Attacks/incense_base.gd" id="incense_base"]
+[ext_resource type="Script" path="res://Scenes/Attacks/incense_level.gd" id="incense_level"]
+[ext_resource type="Script" uid="uid://dp8auny0qn4hj" path="res://Scenes/Attacks/kanec_base.gd" id="kanec_base"]
+[ext_resource type="Script" path="res://Scenes/Attacks/plague_base.gd" id="plague_base"]
+[ext_resource type="Script" path="res://Scenes/Attacks/plague_level.gd" id="plague_level"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f1ek2"]
-atlas = ExtResource("2_6t5aa")
-region = Rect2(0, 0, 32, 33)
+[sub_resource type="AtlasTexture" id="AtlasTexture_efv3f"]
+atlas = ExtResource("2_htltj")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tx1dd"]
-atlas = ExtResource("2_6t5aa")
-region = Rect2(32, 0, 32, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gymyn"]
-atlas = ExtResource("2_6t5aa")
-region = Rect2(64, 0, 32, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pu2lt"]
-atlas = ExtResource("2_6t5aa")
-region = Rect2(96, 0, 32, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ukyrk"]
-atlas = ExtResource("2_6t5aa")
-region = Rect2(0, 33, 32, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7dp3o"]
-atlas = ExtResource("2_6t5aa")
-region = Rect2(32, 33, 32, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h4iuc"]
-atlas = ExtResource("2_6t5aa")
-region = Rect2(64, 33, 32, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fd4e3"]
-atlas = ExtResource("2_6t5aa")
-region = Rect2(96, 33, 32, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qqcod"]
-atlas = ExtResource("2_6t5aa")
-region = Rect2(128, 33, 32, 33)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_igrcy"]
-atlas = ExtResource("2_6t5aa")
-region = Rect2(160, 33, 32, 33)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jb5ob"]
+atlas = ExtResource("2_htltj")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6t5aa"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f1ek2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tx1dd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gymyn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pu2lt")
+"texture": SubResource("AtlasTexture_efv3f")
 }],
 "loop": true,
 "name": &"idle",
@@ -76,22 +35,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ukyrk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7dp3o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h4iuc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fd4e3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qqcod")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_igrcy")
+"texture": SubResource("AtlasTexture_jb5ob")
 }],
 "loop": true,
 "name": &"run",
@@ -119,6 +63,7 @@ collision_layer = 2
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("1_cvnsp")
+starting_upgrade = "roots1"
 world_index = 2
 movement_speed = 34.0
 hp = 100
@@ -126,9 +71,8 @@ maxhp = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=494512027]
 position = Vector2(0, -15)
-modulate = Color(0.8, 0.65, 0.95, 1.0)
 sprite_frames = SubResource("SpriteFrames_6t5aa")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=635807448]
@@ -179,7 +123,7 @@ wait_time = 0.2
 [node name="FalconBase" type="Node2D" parent="Attack" unique_id=1952933121]
 unique_name_in_owner = true
 
-[node name="KanecBase" type="Node2D" parent="Attack"]
+[node name="KanecBase" type="Node2D" parent="Attack" unique_id=709700638]
 unique_name_in_owner = true
 script = ExtResource("kanec_base")
 
@@ -212,7 +156,6 @@ cooldown = 3.5
 [node name="Level4" type="Node" parent="Attack/PlagueBase" unique_id=1925542646]
 script = ExtResource("plague_level")
 projectiles = 3
-extra_hits = 2
 damage_multiplier = 1.2
 cooldown = 1.8
 
@@ -239,7 +182,6 @@ bombs = 3
 fuse_time = 3.0
 damage_multiplier = 1.25
 area_multiplier = 1.15
-cooldown = 4.0
 
 [node name="Level4" type="Node" parent="Attack/IncenseBase" unique_id=1405695654]
 script = ExtResource("incense_level")

@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/hunter_net.gd" id="1_n"]
+[ext_resource type="Texture2D" uid="uid://br7oxb6l2cxbg" path="res://Textures/Sprites/HunterNet.png" id="2_n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n"]
+size = Vector2(10, 6)
+
+[node name="HunterNet" type="StaticBody2D"]
+z_index = 1
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_n")
