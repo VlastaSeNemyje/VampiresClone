@@ -79,6 +79,10 @@ func _end_stun():
 func apply_push(direction: Vector2, distance: float):
 	knockback = direction * sqrt(2.0 * knockback_recovery * Engine.physics_ticks_per_second * maxf(distance, 0.0))
 
+## Direction this enemy wants to walk in. Override for enemies that do not simply chase the player.
+func _get_move_direction() -> Vector2:
+	return global_position.direction_to(player.global_position)
+
 func _physics_process(delta):
 	if stun_time_left > 0.0:
 		stun_time_left -= delta
@@ -91,7 +95,7 @@ func _physics_process(delta):
 			animated_sprite_2d.modulate = Color.WHITE
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)
 	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * movement_speed * slow_multiplier
+	velocity = _get_move_direction() * movement_speed * slow_multiplier
 	if stun_time_left > 0.0:
 		velocity = Vector2.ZERO
 	velocity += knockback
