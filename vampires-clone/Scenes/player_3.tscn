@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c7lw3r24jtsuu"]
 
+[ext_resource type="Script" path="res://Scripts/exp_bar_flash.gd" id="expflash"]
 [ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://c7tsdt0xi2vwy" path="res://Textures/Sprites/Lesly.png" id="2_htltj"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_6t5aa"]
@@ -241,11 +242,13 @@ texture_progress = ExtResource("7_3smsa")
 
 [node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI" unique_id=831773781]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_under = ExtResource("4_fkybt")
 texture_progress = ExtResource("5_x3wgy")
+script = ExtResource("expflash")
 
 [node name="Lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar" unique_id=259841371]
 unique_name_in_owner = true

@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://blrc83jxeub3d"]
 
+[ext_resource type="Script" path="res://Scripts/exp_bar_flash.gd" id="expflash"]
 [ext_resource type="Script" path="res://Scenes/Attacks/kanec_base.gd" id="kanec_base"]
 [ext_resource type="Script" path="res://Scenes/Attacks/plague_base.gd" id="plague_base"]
 [ext_resource type="Script" path="res://Scenes/Attacks/plague_level.gd" id="plague_level"]
@@ -299,11 +300,13 @@ texture_progress = ExtResource("7_3smsa")
 
 [node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI" unique_id=831773781]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_under = ExtResource("4_fkybt")
 texture_progress = ExtResource("5_x3wgy")
+script = ExtResource("expflash")
 
 [node name="Lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar" unique_id=259841371]
 unique_name_in_owner = true

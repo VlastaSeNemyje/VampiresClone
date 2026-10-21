@@ -338,8 +338,9 @@ func calculate_experiencecap():
 	return exp_cap
 	
 func set_expbar (set_value = 1, set_max_value = 100):
-	expBar.value = set_value
 	expBar.max_value = set_max_value
+	# Keep the bar full while the upgrade screen is open
+	expBar.value = set_max_value if expBar.flashing else set_value
 	
 func levelup():
 	sndLevelUp.play()
@@ -355,6 +356,7 @@ func levelup():
 		option_choice.item = get_random_item()
 		upgradeOptions.add_child(option_choice)
 		options += 1
+	expBar.start_flash()
 	get_tree().paused = true
 	
 func upgrade_character(upgrade):
@@ -445,6 +447,7 @@ func upgrade_character(upgrade):
 	collected_upgrades.append(upgrade)
 	levelPanel.visible = false
 	levelPanel.position = Vector2(800, 50)
+	expBar.stop_flash()
 	get_tree().paused = false
 	calculate_experience(0)
 	

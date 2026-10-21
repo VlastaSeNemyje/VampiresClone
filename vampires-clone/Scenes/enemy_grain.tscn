@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://din6gagt37tmk"]
+
+[ext_resource type="Script" uid="uid://ciw33s7l5lfbk" path="res://Scripts/grain.gd" id="1_g"]
+[ext_resource type="Texture2D" uid="uid://bdy86q0irosxp" path="res://Textures/Sprites/Grain.png" id="2_g"]
+[ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_g"]
+[ext_resource type="PackedScene" uid="uid://cthuwwjhu3woh" path="res://Utility/hit_box.tscn" id="4_g"]
+[ext_resource type="AudioStream" uid="uid://bmhx672y3i5eh" path="res://Sounds/VFX/SFX_WAV_189.wav" id="5_g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0"]
+atlas = ExtResource("2_g")
+region = Rect2(0, 0, 33, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1"]
+atlas = ExtResource("2_g")
+region = Rect2(33, 0, 33, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2"]
+atlas = ExtResource("2_g")
+region = Rect2(66, 0, 33, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g"]
+radius = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h"]
+size = Vector2(6, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x"]
+size = Vector2(5, 7)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_push"]
+radius = 6.0
+
+[node name="Enemy_grain" type="CharacterBody2D" unique_id=526136641]
+z_index = 1
+motion_mode = 1
+script = ExtResource("1_g")
+movement_speed = 70
+hp = 3
+experience = 1.5
+ignore_recycle = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=76677163]
+position = Vector2(0, -6)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_g")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2008384337]
+visible = false
+shape = SubResource("CircleShape2D_g")
+
+[node name="HurtBox" parent="." unique_id=480203246 instance=ExtResource("3_g")]
+visible = false
+collision_layer = 4
+collision_mask = 4
+HurtBoxType = 1
+
+[node name="CollisionShape2D" parent="HurtBox" index="0" unique_id=486513834]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_h")
+
+[node name="HitBox" parent="." unique_id=1508532108 instance=ExtResource("4_g")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0" unique_id=839422151]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_x")
+
+[node name="PushArea" type="Area2D" parent="." unique_id=842217157]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea" unique_id=867403205]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_push")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="." unique_id=1245162456]
+stream = ExtResource("5_g")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

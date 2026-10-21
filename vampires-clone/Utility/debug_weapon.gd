@@ -22,6 +22,7 @@ const ENEMIES := [
 	["Builder", preload("res://Scenes/enemy_builder.tscn")],
 	["Decker", preload("res://Scenes/enemy_decker.tscn")],
 	["Hunter", preload("res://Scenes/enemy_hunter.tscn")],
+	["Viscous Grain", preload("res://Scenes/enemy_grain_swarm.tscn")],
 ]
 const SPAWN_DISTANCE := 100.0
 

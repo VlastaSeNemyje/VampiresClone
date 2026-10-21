@@ -3,8 +3,10 @@ extends CharacterBody2D
 @export var movement_speed = 20
 @export var hp = 10
 @export var knockback_recovery = 3.5
-@export var experience = 1
+@export var experience: float = 1.0
 @export var enemy_damage = 1
+## Enemies with this on are never moved back to the screen edge or pulled to the player by the spawner.
+@export var ignore_recycle := false
 var knockback = Vector2.ZERO
 
 @export var flash_duration: float = 0.3

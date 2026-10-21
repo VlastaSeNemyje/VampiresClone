@@ -13,7 +13,11 @@ extends ColorRect
 @onready var ascendIcon = $AscendBadge/AscendIcon
 @onready var lblAscend = $AscendBadge/lbl_ascend
 
+@export var highlight_color := Color(1, 1, 1, 1)
+
 var selected = false
+var cursor = 0 # only used by the first option
+var highlight: ReferenceRect
 var item = null
 @onready var player = get_tree().get_first_node_in_group("player")
 
@@ -31,12 +35,55 @@ func _ready():
 		_style_as_evolution()
 	else:
 		_setup_ascend_badge()
+	highlight = ReferenceRect.new()
+	highlight.editor_only = false
+	highlight.border_color = highlight_color
+	highlight.border_width = 3.0
+	highlight.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	highlight.set_anchors_preset(Control.PRESET_FULL_RECT)
+	highlight.visible = get_index() == 0 # selection always starts at the top
+	add_child(highlight)
 
 func _gui_input(event):
 	if event.is_action_pressed("click") and not selected:
-		selected = true
+		_confirm()
 		accept_event()
-		emit_signal("selected_upgrade", item)
+
+
+func _confirm() -> void:
+	if selected:
+		return
+	selected = true
+	emit_signal("selected_upgrade", item)
+
+
+# Keyboard navigation: only the first option listens, and moves the cursor across its siblings.
+func _input(event: InputEvent) -> void:
+	if not is_visible_in_tree() or get_index() != 0 or selected:
+		return
+	if not (event is InputEventKey and event.pressed and not event.echo):
+		return
+	var options := get_parent().get_children()
+	match event.keycode:
+		KEY_UP, KEY_W:
+			_move_cursor(options, -1)
+		KEY_DOWN, KEY_S:
+			_move_cursor(options, 1)
+		KEY_SPACE, KEY_ENTER, KEY_KP_ENTER:
+			options[cursor]._confirm()
+		_:
+			return
+	get_viewport().set_input_as_handled()
+
+
+func _move_cursor(options: Array, step: int) -> void:
+	cursor = wrap(cursor + step, 0, options.size())
+	for i in options.size():
+		options[i].set_highlight(i == cursor)
+
+
+func set_highlight(on: bool) -> void:
+	highlight.visible = on
 
 
 # Ascensions (evolutions) get a red card with a yellow frame so they stand out from normal upgrades

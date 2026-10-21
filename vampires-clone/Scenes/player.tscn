@@ -3,13 +3,14 @@
 [ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dva5k5nflhe47" path="res://Textures/Sprites/MiniYoungDryad.png" id="2_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_6t5aa"]
-[ext_resource type="Texture2D" uid="uid://be0co0l3j62ou" path="res://Textures/Sprites/BarBcg.png" id="4_fkybt"]
+[ext_resource type="Texture2D" uid="uid://cinmsuxk78hoe" path="res://Textures/Sprites/BarBcg.png" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://4brnwnxt1tqi" path="res://Textures/Sprites/BarProgress.png" id="5_x3wgy"]
 [ext_resource type="AudioStream" uid="uid://boh6gbgbyinnt" path="res://Sounds/VFX/SFX_WAV_277.wav" id="6_x3wgy"]
-[ext_resource type="Texture2D" uid="uid://b7kuxl1bobayo" path="res://Textures/Sprites/BarHealth.png" id="7_3smsa"]
-[ext_resource type="Texture2D" uid="uid://bc4soinvtfwuw" path="res://Textures/Sprites/BarHealthBcg.png" id="7_8erm5"]
+[ext_resource type="Texture2D" uid="uid://dknonegagoxct" path="res://Textures/Sprites/BarHealth.png" id="7_3smsa"]
+[ext_resource type="Texture2D" uid="uid://ceqkjud1vms3l" path="res://Textures/Sprites/BarHealthBcg.png" id="7_8erm5"]
 [ext_resource type="PackedScene" uid="uid://bf71bynv53120" path="res://Utility/basic_button.tscn" id="9_f1ek2"]
-[ext_resource type="Script" path="res://Scenes/Attacks/incense_base.gd" id="incense_base"]
+[ext_resource type="Script" uid="uid://dfdf3i2qwjluh" path="res://Scripts/exp_bar_flash.gd" id="expflash"]
+[ext_resource type="Script" uid="uid://dni2eo6i3088s" path="res://Scenes/Attacks/incense_base.gd" id="incense_base"]
 [ext_resource type="Script" path="res://Scenes/Attacks/incense_level.gd" id="incense_level"]
 [ext_resource type="Script" uid="uid://dp8auny0qn4hj" path="res://Scenes/Attacks/kanec_base.gd" id="kanec_base"]
 [ext_resource type="Script" path="res://Scenes/Attacks/plague_base.gd" id="plague_base"]
@@ -207,7 +208,6 @@ cooldown = 3.5
 [node name="Level4" type="Node" parent="Attack/PlagueBase" unique_id=1925542646]
 script = ExtResource("plague_level")
 projectiles = 3
-extra_hits = 2
 damage_multiplier = 1.2
 cooldown = 1.8
 
@@ -234,7 +234,6 @@ bombs = 3
 fuse_time = 3.0
 damage_multiplier = 1.25
 area_multiplier = 1.15
-cooldown = 4.0
 
 [node name="Level4" type="Node" parent="Attack/IncenseBase" unique_id=1405695654]
 script = ExtResource("incense_level")
@@ -294,11 +293,13 @@ texture_progress = ExtResource("7_3smsa")
 
 [node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI" unique_id=831773781]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_under = ExtResource("4_fkybt")
 texture_progress = ExtResource("5_x3wgy")
+script = ExtResource("expflash")
 
 [node name="Lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar" unique_id=259841371]
 unique_name_in_owner = true

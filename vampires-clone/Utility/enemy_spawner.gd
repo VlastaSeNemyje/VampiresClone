@@ -51,7 +51,7 @@ func _on_timer_timeout() -> void:
 
 func _recycle_far_enemies():
 	for e in get_tree().get_nodes_in_group("enemy"):
-		if e.get("is_dead") or e.movement_speed >= recycle_max_enemy_speed:
+		if e.get("is_dead") or e.get("ignore_recycle") or e.movement_speed >= recycle_max_enemy_speed:
 			continue
 		if e.global_position.distance_to(player.global_position) > recycle_distance:
 			e.global_position = get_random_position(maxf(forward_spawn_chance, 0.8))
@@ -67,7 +67,7 @@ func _maintain_crowd():
 	var near = 0
 	var far = []
 	for e in get_tree().get_nodes_in_group("enemy"):
-		if e.get("is_dead") or e.movement_speed >= recycle_max_enemy_speed:
+		if e.get("is_dead") or e.get("ignore_recycle") or e.movement_speed >= recycle_max_enemy_speed:
 			continue
 		total += 1
 		if e.global_position.distance_to(player.global_position) <= crowd_radius:
