@@ -7,11 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://cc6n5cectnvpx" path="res://Textures/Sprites/R2.png" id="4_m0rvo"]
 [ext_resource type="Texture2D" uid="uid://bbxksjoxlmqgp" path="res://Textures/Sprites/R3.png" id="5_fhfum"]
 [ext_resource type="Texture2D" uid="uid://bdtxs6jwcrkma" path="res://Textures/Sprites/R4.png" id="6_ame3m"]
-[ext_resource type="Texture2D" uid="uid://dgda0ljeoaboi" path="res://Textures/Sprites/B1.png" id="7_0pn4e"]
-[ext_resource type="Texture2D" uid="uid://ddbf1vtadl2t2" path="res://Textures/Sprites/B2.png" id="8_71tpd"]
+[ext_resource type="Texture2D" uid="uid://beln20okq0mcx" path="res://Textures/Sprites/B1.png" id="7_0pn4e"]
+[ext_resource type="Texture2D" uid="uid://co2njcoggvth4" path="res://Textures/Sprites/B2.png" id="8_71tpd"]
 [ext_resource type="Texture2D" uid="uid://c7tsdt0xi2vwy" path="res://Textures/Sprites/Lesly.png" id="8_fhfum"]
-[ext_resource type="Texture2D" uid="uid://7svbbwgcrl4f" path="res://Textures/Sprites/B3.png" id="9_bg5y3"]
-[ext_resource type="Texture2D" uid="uid://cg6cepnb3m2dx" path="res://Textures/Sprites/B4.png" id="10_mqqw7"]
+[ext_resource type="Texture2D" uid="uid://vrj6asra48qi" path="res://Textures/Sprites/B3.png" id="9_bg5y3"]
+[ext_resource type="Texture2D" uid="uid://yy0y20vvjvft" path="res://Textures/Sprites/B4.png" id="10_mqqw7"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_aeqf2"]
 frames = 4
@@ -58,7 +58,7 @@ offset_right = 660.0
 offset_bottom = 78.0
 theme_override_colors/font_color = Color(0.36846673, 0, 0.065462686, 1)
 theme_override_font_sizes/font_size = 40
-text = "Myth Survivors"
+text = "Folk Survivors"
 horizontal_alignment = 1
 vertical_alignment = 1
 

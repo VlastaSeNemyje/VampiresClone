@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://pjqoy6r1a87x"]
+
+[ext_resource type="Texture2D" uid="uid://dyov61exhygqv" path="res://Textures/Sprites/SwampBog.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c3p8hy1l5k3rv" path="res://Textures/Sprites/SwampTree2.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://ccgdyc7oumigi" path="res://Textures/Sprites/SwampTree1.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://ba3sy8ujduehr" path="res://Textures/Sprites/SwampTree.png" id="4"]
+
+[sub_resource type="RectangleShape2D" id="shape_bog"]
+size = Vector2(33.653843, 16.46341)
+
+[node name="ObstacleGroup2" type="Node2D" unique_id=221279666]
+z_index = 1
+y_sort_enabled = true
+
+[node name="SwampBog_1" type="StaticBody2D" parent="." unique_id=1655270025]
+position = Vector2(2, 10.999998)
+scale = Vector2(2.0800002, 1.6400008)
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SwampBog_1" unique_id=302005620]
+texture = ExtResource("1")
+offset = Vector2(0, -8.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwampBog_1" unique_id=76104834]
+position = Vector2(0.9615384, -6.0975566)
+scale = Vector2(1, 0.9999998)
+shape = SubResource("shape_bog")
+
+[node name="SwampTree2_2" type="StaticBody2D" parent="." unique_id=451498642]
+position = Vector2(22, -1)
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SwampTree2_2" unique_id=291705534]
+texture = ExtResource("2")
+offset = Vector2(0, -12.5)
+
+[node name="SwampTree1_3" type="StaticBody2D" parent="." unique_id=1268927741]
+position = Vector2(6, 16)
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SwampTree1_3" unique_id=2124544445]
+texture = ExtResource("3")
+offset = Vector2(0, -5.5)
+
+[node name="SwampBog_4" type="StaticBody2D" parent="." unique_id=1035186419]
+position = Vector2(31, 14)
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SwampBog_4" unique_id=1978488683]
+texture = ExtResource("1")
+offset = Vector2(0, -8.5)
+
+[node name="SwampTree2_5" type="StaticBody2D" parent="." unique_id=1122469228]
+position = Vector2(-32, 15)
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SwampTree2_5" unique_id=498164703]
+texture = ExtResource("2")
+offset = Vector2(0, -12.5)
+
+[node name="SwampTree_6" type="StaticBody2D" parent="." unique_id=1815610346]
+position = Vector2(-6, 18)
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SwampTree_6" unique_id=390065939]
+texture = ExtResource("4")
+offset = Vector2(0, -12.5)

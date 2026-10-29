@@ -44,6 +44,7 @@ signal remove_from_array(object)
 
 func _ready():
 	add_to_group("enemy")
+	collision_mask |= 32   # the Obstacle layer (trees and bogs)
 	hitBox.damage = enemy_damage
 
 	flash_material = ShaderMaterial.new()
@@ -67,7 +68,7 @@ func apply_stun(duration: float):
 		return
 	if stun_time_left <= 0.0:
 		_mask_before_stun = collision_mask
-		collision_mask = 0
+		collision_mask = 32   # obstacles still block a stunned enemy
 		hitBox.damage = 0
 	stun_time_left = maxf(stun_time_left, duration)
 	animated_sprite_2d.modulate = stun_tint

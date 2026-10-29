@@ -12,7 +12,7 @@ extends CharacterBody2D
 @export var hp: float = 80
 @export var maxhp: float = 80
 ## Seconds you must survive before dying counts as a win (the Nemesis arrives at this time).
-@export var win_time: int = 450
+@export var win_time: int = 360
 @export_group("")
 
 var last_movement = Vector2.UP
@@ -125,6 +125,7 @@ var enemy_close = []
 signal playerdeath
 
 func _ready():
+	collision_mask |= 32   # the Obstacle layer (trees and bogs)
 	# Whip swings come in bursts: one-shot, short gap between swings of the same burst
 	whipAttackTimer.one_shot = true
 	whipAttackTimer.wait_time = 0.25

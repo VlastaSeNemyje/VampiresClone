@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/local_idiot_swarm.gd" id="1_s"]
+[ext_resource type="PackedScene" path="res://Scenes/enemy_local_idiot.tscn" id="2_s"]
+
+[node name="LocalIdiotSwarm" type="Node2D"]
+script = ExtResource("1_s")
+idiot_scene = ExtResource("2_s")

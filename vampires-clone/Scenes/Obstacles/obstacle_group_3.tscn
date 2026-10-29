@@ -1,0 +1,96 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://Textures/Sprites/SwampTree1.png" id="1"]
+[ext_resource type="Texture2D" path="res://Textures/Sprites/SwampTree3.png" id="2"]
+[ext_resource type="Texture2D" path="res://Textures/Sprites/SwampTree2.png" id="3"]
+
+[sub_resource type="RectangleShape2D" id="shape_t1"]
+size = Vector2(7, 4)
+
+[sub_resource type="RectangleShape2D" id="shape_t3"]
+size = Vector2(12, 6)
+
+[sub_resource type="RectangleShape2D" id="shape_t2"]
+size = Vector2(12, 6)
+
+[node name="ObstacleGroup3" type="Node2D"]
+y_sort_enabled = true
+z_index = 1
+
+[node name="SwampTree1_1" type="StaticBody2D" parent="."]
+position = Vector2(-18, -22)
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SwampTree1_1"]
+texture = ExtResource("1")
+offset = Vector2(0, -5.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwampTree1_1"]
+position = Vector2(0, -2)
+shape = SubResource("shape_t1")
+
+[node name="SwampTree3_2" type="StaticBody2D" parent="."]
+position = Vector2(-39, -13)
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SwampTree3_2"]
+texture = ExtResource("2")
+offset = Vector2(0, -19.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwampTree3_2"]
+position = Vector2(0, -3)
+shape = SubResource("shape_t3")
+
+[node name="SwampTree1_3" type="StaticBody2D" parent="."]
+position = Vector2(-13, -9)
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SwampTree1_3"]
+texture = ExtResource("1")
+offset = Vector2(0, -5.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwampTree1_3"]
+position = Vector2(0, -2)
+shape = SubResource("shape_t1")
+
+[node name="SwampTree2_4" type="StaticBody2D" parent="."]
+position = Vector2(39, 3)
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SwampTree2_4"]
+texture = ExtResource("3")
+offset = Vector2(0, -12.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwampTree2_4"]
+position = Vector2(0, -3)
+shape = SubResource("shape_t2")
+
+[node name="SwampTree3_5" type="StaticBody2D" parent="."]
+position = Vector2(-23, 4)
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SwampTree3_5"]
+texture = ExtResource("2")
+offset = Vector2(0, -19.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwampTree3_5"]
+position = Vector2(0, -3)
+shape = SubResource("shape_t3")
+
+[node name="SwampTree1_6" type="StaticBody2D" parent="."]
+position = Vector2(-8, 17)
+collision_layer = 32
+collision_mask = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SwampTree1_6"]
+texture = ExtResource("1")
+offset = Vector2(0, -5.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwampTree1_6"]
+position = Vector2(0, -2)
+shape = SubResource("shape_t1")

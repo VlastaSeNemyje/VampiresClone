@@ -1,0 +1,122 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/grain.gd" id="1_1f0kj"]
+[ext_resource type="Texture2D" uid="uid://qqp8rxdag8ku" path="res://Textures/Sprites/MiniPeasant.png" id="2_5phjl"]
+[ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_afpow"]
+[ext_resource type="PackedScene" uid="uid://cthuwwjhu3woh" path="res://Utility/hit_box.tscn" id="4_287tu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5phjl"]
+atlas = ExtResource("2_5phjl")
+region = Rect2(0, 33, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cj28r"]
+atlas = ExtResource("2_5phjl")
+region = Rect2(32, 33, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65uil"]
+atlas = ExtResource("2_5phjl")
+region = Rect2(64, 33, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dtji"]
+atlas = ExtResource("2_5phjl")
+region = Rect2(96, 33, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gqce"]
+atlas = ExtResource("2_5phjl")
+region = Rect2(128, 33, 32, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mrun"]
+atlas = ExtResource("2_5phjl")
+region = Rect2(160, 33, 32, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_afpow"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5phjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cj28r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65uil")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dtji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gqce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mrun")
+}],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1f0kj"]
+radius = 2.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_287tu"]
+size = Vector2(8.5, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0830c"]
+size = Vector2(5, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_push"]
+radius = 8.0
+
+[node name="Enemy_local_idiot" type="CharacterBody2D"]
+z_index = 1
+motion_mode = 1
+script = ExtResource("1_1f0kj")
+movement_speed = 50
+hp = 3
+experience = 1.5
+ignore_recycle = true
+use_sprite_color_for_particles = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -7)
+sprite_frames = SubResource("SpriteFrames_afpow")
+animation = &"run"
+autoplay = "run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_1f0kj")
+
+[node name="HurtBox" parent="." instance=ExtResource("3_afpow")]
+visible = false
+collision_layer = 4
+collision_mask = 4
+HurtBoxType = 1
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_287tu")
+
+[node name="HitBox" parent="." instance=ExtResource("4_287tu")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_0830c")
+
+[node name="PushArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea"]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_push")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]
