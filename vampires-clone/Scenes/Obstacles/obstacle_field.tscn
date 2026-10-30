@@ -1,16 +1,18 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://s5lxkhvy84xa"]
 
-[ext_resource type="Script" path="res://Scenes/Obstacles/obstacle_field.gd" id="1_f"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/obstacle_group_1.tscn" id="2_1"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/obstacle_group_2.tscn" id="2_2"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/obstacle_group_3.tscn" id="2_3"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/obstacle_group_4.tscn" id="2_4"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/obstacle_group_5.tscn" id="2_5"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/obstacle_group_6.tscn" id="2_6"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/obstacle_group_7.tscn" id="2_7"]
-[ext_resource type="PackedScene" path="res://Scenes/Obstacles/obstacle_group_8.tscn" id="2_8"]
+[ext_resource type="Script" uid="uid://cnvmhrtj5fq8e" path="res://Scenes/Obstacles/obstacle_field.gd" id="1_f"]
+[ext_resource type="PackedScene" uid="uid://bkjeu27s42dok" path="res://Scenes/Obstacles/obstacle_group_1.tscn" id="2_1"]
+[ext_resource type="PackedScene" uid="uid://pjqoy6r1a87x" path="res://Scenes/Obstacles/obstacle_group_2.tscn" id="2_2"]
+[ext_resource type="PackedScene" uid="uid://d0wo8ne8bw3uf" path="res://Scenes/Obstacles/obstacle_group_3.tscn" id="2_3"]
+[ext_resource type="PackedScene" uid="uid://dalt4wtmx6mv6" path="res://Scenes/Obstacles/obstacle_group_4.tscn" id="2_4"]
+[ext_resource type="PackedScene" uid="uid://7vi752kmq07y" path="res://Scenes/Obstacles/obstacle_group_5.tscn" id="2_5"]
+[ext_resource type="PackedScene" uid="uid://cjha3lpdvm55e" path="res://Scenes/Obstacles/obstacle_group_6.tscn" id="2_6"]
+[ext_resource type="PackedScene" uid="uid://b4lmknni3eiuj" path="res://Scenes/Obstacles/obstacle_group_7.tscn" id="2_7"]
+[ext_resource type="PackedScene" uid="uid://cg4ktchkk16a8" path="res://Scenes/Obstacles/obstacle_group_8.tscn" id="2_8"]
 
-[node name="ObstacleField" type="Node2D"]
+[node name="ObstacleField" type="Node2D" unique_id=1330715363]
 y_sort_enabled = true
 script = ExtResource("1_f")
 group_scenes = Array[PackedScene]([ExtResource("2_1"), ExtResource("2_2"), ExtResource("2_3"), ExtResource("2_4"), ExtResource("2_5"), ExtResource("2_6"), ExtResource("2_7"), ExtResource("2_8")])
+clear_radius = 190.0
+min_group_distance = 90.0
