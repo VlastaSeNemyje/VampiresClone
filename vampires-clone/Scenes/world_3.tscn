@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c1rixmjv8cp"]
 
 [ext_resource type="Texture2D" uid="uid://fl018gp173cx" path="res://Textures/Tiles/Grass.png" id="1_a02cp"]
-[ext_resource type="PackedScene" path="res://Scenes/player_3.tscn" id="2_go701"]
+[ext_resource type="PackedScene" uid="uid://c7lw3r24jtsuu" path="res://Scenes/player_3.tscn" id="2_go701"]
 [ext_resource type="PackedScene" uid="uid://d1e3hlytsbxte" path="res://Utility/enemy_spawner.tscn" id="3_5a7ea"]
 [ext_resource type="Script" uid="uid://diqfod1cd4yra" path="res://Utility/spawn_info.gd" id="4_fo5ed"]
 [ext_resource type="PackedScene" uid="uid://cdtkhmhdppka" path="res://Scenes/enemy_basic_0.tscn" id="5_0fj1v"]
@@ -9,16 +9,19 @@
 [ext_resource type="PackedScene" uid="uid://d0qu2pojwvyyh" path="res://Scenes/enemy_basic_0_elite.tscn" id="6_5v1tr"]
 [ext_resource type="PackedScene" uid="uid://cdt0vfoh7p0cp" path="res://Scenes/enemy_gerald_2.tscn" id="7_0fj1v"]
 [ext_resource type="PackedScene" uid="uid://do6hvpnsvqj1y" path="res://Scenes/enemy_gerald_2_elite.tscn" id="8_ikia7"]
-[ext_resource type="AudioStream" uid="uid://bjiavm3gdgpxg" path="res://Sounds/Music/01. Slay The Evil.wav" id="10_kyxo2"]
-[ext_resource type="Script" uid="uid://dm615omebx2ud" path="res://Scenes/music_level.gd" id="12_c5t2i"]
-[ext_resource type="PackedScene" uid="uid://584qxln27vcy" path="res://Scenes/enemy_nun.tscn" id="9_nun"]
 [ext_resource type="PackedScene" uid="uid://b3sg4blj63666" path="res://Scenes/enemy_lumberjack_strong.tscn" id="9_lumber"]
 [ext_resource type="PackedScene" uid="uid://dtjcqag7tov5s" path="res://Scenes/enemy_nemessis.tscn" id="9_nemesis"]
-[ext_resource type="Script" path="res://Utility/pressure_wave.gd" id="10_pw"]
+[ext_resource type="PackedScene" uid="uid://584qxln27vcy" path="res://Scenes/enemy_nun.tscn" id="9_nun"]
+[ext_resource type="AudioStream" uid="uid://bjiavm3gdgpxg" path="res://Sounds/Music/01. Slay The Evil.wav" id="10_kyxo2"]
+[ext_resource type="Script" uid="uid://djm8y6nl5j05a" path="res://Utility/pressure_wave.gd" id="10_pw"]
+[ext_resource type="Texture2D" uid="uid://cofvdmjhmxq2s" path="res://Textures/Sprites/Forest Side.png" id="11_fs"]
+[ext_resource type="Script" uid="uid://dm615omebx2ud" path="res://Scenes/music_level.gd" id="12_c5t2i"]
+
+[sub_resource type="RectangleShape2D" id="Bound_shape"]
+size = Vector2(4000, 872)
 
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("4_fo5ed")
-time_start = 0
 time_end = 150
 enemy = ExtResource("5_0fj1v")
 enemy_num = 3
@@ -121,7 +124,6 @@ time_start = 450
 time_end = 450
 enemy = ExtResource("9_nemesis")
 enemy_num = 1
-enemy_spawn_delay = 0
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_13"]
@@ -130,7 +132,6 @@ time_start = 135
 time_end = 150
 enemy = ExtResource("5_0fj1v")
 enemy_num = 12
-enemy_spawn_delay = 0
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_14"]
@@ -155,15 +156,11 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 script = ExtResource("10_pw")
 time_start = 135
 time_end = 150
-crowd_fraction = 0.95
-pulled_per_second = 40
 
 [sub_resource type="Resource" id="Wave_2"]
 script = ExtResource("10_pw")
 time_start = 270
 time_end = 290
-crowd_fraction = 0.95
-pulled_per_second = 40
 
 [sub_resource type="Resource" id="Wave_3"]
 script = ExtResource("10_pw")
@@ -188,6 +185,60 @@ texture_repeat = 2
 texture = ExtResource("1_a02cp")
 region_enabled = true
 region_rect = Rect2(0, 0, 4000, 4000)
+
+[node name="ForestTop" type="Sprite2D" parent="." unique_id=1799423001]
+z_index = 2
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(0, -1)
+texture = ExtResource("11_fs")
+region_enabled = true
+region_rect = Rect2(0, 0, 4000, 360)
+
+[node name="ForestBottom" type="Sprite2D" parent="." unique_id=1888934484]
+z_index = 2
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(0, -7)
+texture = ExtResource("11_fs")
+flip_v = true
+region_enabled = true
+region_rect = Rect2(0, 0, 4000, 360)
+
+[node name="ForestFillTop" type="ColorRect" parent="."]
+z_index = 2
+offset_left = -2000.0
+offset_top = -1181.0
+offset_right = 2000.0
+offset_bottom = -180.0
+mouse_filter = 2
+color = Color(0.0666667, 0.164706, 0, 1)
+
+[node name="ForestFillBottom" type="ColorRect" parent="."]
+z_index = 2
+offset_left = -2000.0
+offset_top = 172.0
+offset_right = 2000.0
+offset_bottom = 1173.0
+mouse_filter = 2
+color = Color(0.0666667, 0.164706, 0, 1)
+
+[node name="BoundTop" type="StaticBody2D" parent="." unique_id=1292532605]
+position = Vector2(3, -570)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoundTop" unique_id=1573129740]
+shape = SubResource("Bound_shape")
+
+[node name="BoundBottom" type="StaticBody2D" parent="." unique_id=1269483162]
+position = Vector2(10, 597)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoundBottom" unique_id=1900096279]
+position = Vector2(0, -35)
+shape = SubResource("Bound_shape")
 
 [node name="Player" parent="." unique_id=1972239113 instance=ExtResource("2_go701")]
 
