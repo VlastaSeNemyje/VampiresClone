@@ -9,13 +9,55 @@ signal tab_selected(index)
 @onready var portrait: TextureRect = $Portrait
 @onready var name_label: Label = $lbl_name
 @onready var lock_label: Label = $lbl_locked
-@onready var selection_border: ColorRect = $SelectionBorder
+@onready var selection_border: Panel = $SelectionBorder
 
 var unlocked := false
+var selected := false
+var hovered := false
+
+const TEX_FRAME := preload("res://Textures/Sprites/Menu/Frame.png")
+const TEX_FRAME_SELECTED := preload("res://Textures/Sprites/Menu/Frame selected.png")
+
+const TINT_BASE := Color(0.5, 0.1, 0.12, 1)
+const TINT_HOVER := Color(1, 0.3, 0.3, 1)
+const TINT_SELECTED := Color(1, 0.3, 0.3, 1)
+
+@onready var frame_art: TextureRect = $FrameArt
+
+var _style_base := _make_style(Color(0.04, 0.02, 0.02, 1), 0)
+var _style_hover := _make_style(Color(0.04, 0.02, 0.02, 1), 8)
+var _style_selected := _make_style(Color(0.33, 0.03, 0.05, 1), 10)
+
+
+func _make_style(bg: Color, glow: int) -> StyleBoxFlat:
+	var s := StyleBoxFlat.new()
+	s.bg_color = bg
+	if glow > 0:
+		s.shadow_color = Color(1, 0.1, 0.1, 0.4)
+		s.shadow_size = glow
+	return s
+
+
+func _update_frame() -> void:
+	if selected:
+		selection_border.add_theme_stylebox_override("panel", _style_selected)
+		frame_art.texture = TEX_FRAME_SELECTED
+		frame_art.modulate = TINT_SELECTED
+	elif hovered and unlocked:
+		selection_border.add_theme_stylebox_override("panel", _style_hover)
+		frame_art.texture = TEX_FRAME
+		frame_art.modulate = TINT_HOVER
+	else:
+		selection_border.add_theme_stylebox_override("panel", _style_base)
+		frame_art.texture = TEX_FRAME
+		frame_art.modulate = TINT_BASE
+
 
 
 func _ready() -> void:
 	GameProgress.connect("progress_changed", Callable(self, "refresh"))
+	mouse_entered.connect(func(): hovered = true; _update_frame())
+	mouse_exited.connect(func(): hovered = false; _update_frame())
 	portrait.texture = portrait_texture
 	refresh()
 
@@ -42,8 +84,9 @@ func refresh() -> void:
 
 
 func set_selected(is_selected: bool) -> void:
-	selection_border.visible = is_selected and unlocked
-	_set_portrait_animating(is_selected and unlocked)
+	selected = is_selected and unlocked
+	_update_frame()
+	_set_portrait_animating(selected)
 
 
 # Animated portraits only play while this tab is the selected one; otherwise

@@ -12,6 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://c7tsdt0xi2vwy" path="res://Textures/Sprites/Lesly.png" id="8_fhfum"]
 [ext_resource type="Texture2D" uid="uid://vrj6asra48qi" path="res://Textures/Sprites/B3.png" id="9_bg5y3"]
 [ext_resource type="Texture2D" uid="uid://yy0y20vvjvft" path="res://Textures/Sprites/B4.png" id="10_mqqw7"]
+[ext_resource type="Texture2D" uid="uid://clc85crh3hksu" path="res://Textures/Sprites/Menu/Tree left.png" id="11_treel"]
+[ext_resource type="Texture2D" uid="uid://dfvtwdxph5pm" path="res://Textures/Sprites/Menu/Tree right.png" id="12_treer"]
+[ext_resource type="Texture2D" uid="uid://bxce2fd1ath8q" path="res://Textures/Sprites/Menu/Down left.png" id="13_downl"]
+[ext_resource type="Texture2D" uid="uid://csnea0gtdlt2g" path="res://Textures/Sprites/Menu/Down right.png" id="14_downr"]
+[ext_resource type="Texture2D" uid="uid://cyj6568vc4ja4" path="res://Textures/Sprites/Menu/Bottom.png" id="15_bottom"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_aeqf2"]
 frames = 4
@@ -35,6 +40,22 @@ frame_2/duration = 0.1
 frame_3/texture = ExtResource("10_mqqw7")
 frame_3/duration = 0.1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.35, 0.03, 0.05, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.75, 0.1, 0.12, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
+bg_color = Color(0.55, 0.05, 0.08, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.36, 0.1, 1)
+
 [node name="Menu" type="Control" unique_id=364621257]
 layout_mode = 3
 anchors_preset = 15
@@ -48,15 +69,69 @@ script = ExtResource("1_3ivhh")
 layout_mode = 0
 offset_right = 682.0
 offset_bottom = 395.0
-color = Color(0.46000254, 0.13635904, 0.7681342, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="TreeLeft" type="TextureRect" parent="." unique_id=18035597]
+modulate = Color(0.39308554, 0.3930855, 0.39308548, 1)
+texture_filter = 1
+layout_mode = 0
+offset_right = 501.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("11_treel")
+expand_mode = 1
+
+[node name="TreeRight" type="TextureRect" parent="." unique_id=478084420]
+modulate = Color(0.39308554, 0.3930855, 0.39308548, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 139.0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("12_treer")
+expand_mode = 1
+
+[node name="DownLeft" type="TextureRect" parent="." unique_id=1116789449]
+modulate = Color(0.67481464, 0.67481464, 0.6748146, 1)
+texture_filter = 1
+layout_mode = 0
+offset_top = 16.0
+offset_right = 501.0
+offset_bottom = 376.0
+mouse_filter = 2
+texture = ExtResource("13_downl")
+expand_mode = 1
+
+[node name="DownRight" type="TextureRect" parent="." unique_id=1085161996]
+modulate = Color(0.67481464, 0.67481464, 0.6748146, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 139.0
+offset_top = 16.0
+offset_right = 640.0
+offset_bottom = 376.0
+mouse_filter = 2
+texture = ExtResource("14_downr")
+expand_mode = 1
+
+[node name="Bottom" type="TextureRect" parent="." unique_id=2101846687]
+texture_filter = 1
+layout_mode = 0
+offset_top = 312.0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("15_bottom")
+stretch_mode = 1
 
 [node name="Label" type="Label" parent="." unique_id=2102448114]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 8.0
 offset_right = 660.0
-offset_bottom = 78.0
-theme_override_colors/font_color = Color(0.36846673, 0, 0.065462686, 1)
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(1, 0.36, 0.1, 1)
 theme_override_font_sizes/font_size = 40
 text = "Folk Survivors"
 horizontal_alignment = 1
@@ -65,10 +140,11 @@ vertical_alignment = 1
 [node name="CharacterTabs" type="HBoxContainer" parent="." unique_id=1396596262]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 140.0
-offset_top = 90.0
-offset_right = 540.0
-offset_bottom = 230.0
+offset_left = 118.00001
+offset_top = 80.0
+offset_right = 518.0
+offset_bottom = 220.0
+scale = Vector2(1.0199988, 1.0199988)
 theme_override_constants/separation = 20
 alignment = 1
 
@@ -91,29 +167,39 @@ portrait_texture = ExtResource("8_fhfum")
 
 [node name="btn_play" parent="." unique_id=1203686152 instance=ExtResource("2_b2oxh")]
 layout_mode = 0
-offset_left = 280.0
-offset_top = 260.0
-offset_right = 388.0
-offset_bottom = 291.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0.6666667, 0, 0.15294118, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.20784314, 0.30588236, 1)
-theme_override_colors/font_hover_color = Color(0.6666667, 0, 0.15294118, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 0.20784314, 0.30588236, 1)
+offset_left = 260.0
+offset_top = 233.0
+offset_right = 380.0
+offset_bottom = 263.0
+theme_override_colors/font_color = Color(0.96, 0.9, 0.75, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.36, 0.1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.36, 0.1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_hover")
 text = "Play"
+flat = false
 
 [node name="btn_exit" parent="." unique_id=1893024946 instance=ExtResource("2_b2oxh")]
 layout_mode = 0
-offset_left = 280.0
-offset_top = 305.0
-offset_right = 388.0
-offset_bottom = 336.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0.6666667, 0, 0.15294118, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.20784314, 0.30588236, 1)
-theme_override_colors/font_hover_color = Color(0.6666667, 0, 0.15294118, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 0.20784314, 0.30588236, 1)
+offset_left = 260.0
+offset_top = 267.0
+offset_right = 380.0
+offset_bottom = 297.0
+theme_override_colors/font_color = Color(0.96, 0.9, 0.75, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.36, 0.1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.36, 0.1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_btn_hover")
 text = "Exit"
+flat = false
 
 [connection signal="click_end" from="btn_play" to="." method="_on_btn_play_click_end"]
 [connection signal="click_end" from="btn_exit" to="." method="_on_btn_exit_click_end"]
