@@ -18,6 +18,10 @@ var hovered := false
 const TEX_FRAME := preload("res://Textures/Sprites/Menu/Frame.png")
 const TEX_FRAME_SELECTED := preload("res://Textures/Sprites/Menu/Frame selected.png")
 
+# Art rects placed so each sprite's border line lands exactly on the 100x140 card.
+const RECT_FRAME := Rect2(-7.4, -12.2, 115.8, 167.4)
+const RECT_SELECTED := Rect2(-6.4, -12.9, 112.4, 162.8)
+
 const TINT_BASE := Color(0.5, 0.1, 0.12, 1)
 const TINT_HOVER := Color(1, 0.3, 0.3, 1)
 const TINT_SELECTED := Color(1, 0.3, 0.3, 1)
@@ -42,14 +46,17 @@ func _update_frame() -> void:
 	if selected:
 		selection_border.add_theme_stylebox_override("panel", _style_selected)
 		frame_art.texture = TEX_FRAME_SELECTED
+		_place_art(RECT_SELECTED)
 		frame_art.modulate = TINT_SELECTED
 	elif hovered and unlocked:
 		selection_border.add_theme_stylebox_override("panel", _style_hover)
 		frame_art.texture = TEX_FRAME
+		_place_art(RECT_FRAME)
 		frame_art.modulate = TINT_HOVER
 	else:
 		selection_border.add_theme_stylebox_override("panel", _style_base)
 		frame_art.texture = TEX_FRAME
+		_place_art(RECT_FRAME)
 		frame_art.modulate = TINT_BASE
 
 
@@ -104,3 +111,8 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if unlocked:
 			emit_signal("tab_selected", index)
+
+
+func _place_art(rect: Rect2) -> void:
+	frame_art.position = rect.position
+	frame_art.size = rect.size

@@ -17,6 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://bxce2fd1ath8q" path="res://Textures/Sprites/Menu/Down left.png" id="13_downl"]
 [ext_resource type="Texture2D" uid="uid://csnea0gtdlt2g" path="res://Textures/Sprites/Menu/Down right.png" id="14_downr"]
 [ext_resource type="Texture2D" uid="uid://cyj6568vc4ja4" path="res://Textures/Sprites/Menu/Bottom.png" id="15_bottom"]
+[ext_resource type="Texture2D" uid="uid://b6w5qx7870qha" path="res://Textures/Sprites/Menu/Button.png" id="16_btn"]
+[ext_resource type="Texture2D" uid="uid://jjq30gwjely0" path="res://Textures/Sprites/Menu/Button Selection.png" id="17_btnsel"]
+[ext_resource type="Texture2D" uid="uid://cuwukvuxvj4au" path="res://Textures/Sprites/Menu/Button Side.png" id="18_side"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_aeqf2"]
 frames = 4
@@ -40,21 +43,15 @@ frame_2/duration = 0.1
 frame_3/texture = ExtResource("10_mqqw7")
 frame_3/duration = 0.1
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
-bg_color = Color(0.35, 0.03, 0.05, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.75, 0.1, 0.12, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_btn"]
+texture = ExtResource("16_btn")
+modulate_color = Color(0.8, 0.2, 0.2, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_hover"]
-bg_color = Color(0.55, 0.05, 0.08, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 0.36, 0.1, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_btn_sel"]
+texture = ExtResource("17_btnsel")
+modulate_color = Color(0.6, 0.2, 0.25, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btn"]
 
 [node name="Menu" type="Control" unique_id=364621257]
 layout_mode = 3
@@ -72,7 +69,8 @@ offset_bottom = 395.0
 color = Color(0, 0, 0, 1)
 
 [node name="TreeLeft" type="TextureRect" parent="." unique_id=18035597]
-modulate = Color(0.39308554, 0.3930855, 0.39308548, 1)
+modulate = Color(0.5019608, 0.101960786, 0.12156863, 1)
+self_modulate = Color(1, 1, 1, 0.39215687)
 texture_filter = 1
 layout_mode = 0
 offset_right = 501.0
@@ -82,7 +80,7 @@ texture = ExtResource("11_treel")
 expand_mode = 1
 
 [node name="TreeRight" type="TextureRect" parent="." unique_id=478084420]
-modulate = Color(0.39308554, 0.3930855, 0.39308548, 1)
+modulate = Color(0.5019608, 0.101960786, 0.12156863, 0.39215687)
 texture_filter = 1
 layout_mode = 0
 offset_left = 139.0
@@ -93,7 +91,7 @@ texture = ExtResource("12_treer")
 expand_mode = 1
 
 [node name="DownLeft" type="TextureRect" parent="." unique_id=1116789449]
-modulate = Color(0.67481464, 0.67481464, 0.6748146, 1)
+modulate = Color(0.5019608, 0.101960786, 0.12156863, 0.7058824)
 texture_filter = 1
 layout_mode = 0
 offset_top = 16.0
@@ -104,7 +102,7 @@ texture = ExtResource("13_downl")
 expand_mode = 1
 
 [node name="DownRight" type="TextureRect" parent="." unique_id=1085161996]
-modulate = Color(0.67481464, 0.67481464, 0.6748146, 1)
+modulate = Color(0.5019608, 0.101960786, 0.12156863, 0.7058824)
 texture_filter = 1
 layout_mode = 0
 offset_left = 139.0
@@ -116,6 +114,7 @@ texture = ExtResource("14_downr")
 expand_mode = 1
 
 [node name="Bottom" type="TextureRect" parent="." unique_id=2101846687]
+modulate = Color(0.5359303, 0.11179704, 0.13249472, 1)
 texture_filter = 1
 layout_mode = 0
 offset_top = 312.0
@@ -140,10 +139,10 @@ vertical_alignment = 1
 [node name="CharacterTabs" type="HBoxContainer" parent="." unique_id=1396596262]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 118.00001
-offset_top = 80.0
-offset_right = 518.0
-offset_bottom = 220.0
+offset_left = 116.00001
+offset_top = 70.00001
+offset_right = 516.0
+offset_bottom = 210.0
 scale = Vector2(1.0199988, 1.0199988)
 theme_override_constants/separation = 20
 alignment = 1
@@ -166,40 +165,92 @@ character_name = "Leshy"
 portrait_texture = ExtResource("8_fhfum")
 
 [node name="btn_play" parent="." unique_id=1203686152 instance=ExtResource("2_b2oxh")]
+texture_filter = 1
 layout_mode = 0
-offset_left = 260.0
+offset_left = 256.0
 offset_top = 233.0
-offset_right = 380.0
-offset_bottom = 263.0
+offset_right = 384.0
+offset_bottom = 261.0
 theme_override_colors/font_color = Color(0.96, 0.9, 0.75, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.36, 0.1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 0.36, 0.1, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_hover")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
-theme_override_styles/focus = SubResource("StyleBoxFlat_btn_hover")
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_btn_sel")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btn_sel")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
 text = "Play"
 flat = false
 
-[node name="btn_exit" parent="." unique_id=1893024946 instance=ExtResource("2_b2oxh")]
+[node name="SideL" type="TextureRect" parent="btn_play" unique_id=1203686201]
+modulate = Color(0.5019608, 0.101960786, 0.12156863, 1)
+texture_filter = 1
 layout_mode = 0
-offset_left = 260.0
+offset_left = -26.0
+offset_top = 3.0
+offset_right = -4.0
+offset_bottom = 25.0
+mouse_filter = 2
+texture = ExtResource("18_side")
+expand_mode = 1
+
+[node name="SideR" type="TextureRect" parent="btn_play" unique_id=1203686202]
+modulate = Color(0.5, 0.1, 0.12, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 132.0
+offset_top = 3.0
+offset_right = 154.0
+offset_bottom = 25.0
+mouse_filter = 2
+texture = ExtResource("18_side")
+expand_mode = 1
+
+[node name="btn_exit" parent="." unique_id=1893024946 instance=ExtResource("2_b2oxh")]
+texture_filter = 1
+layout_mode = 0
+offset_left = 256.0
 offset_top = 267.0
-offset_right = 380.0
-offset_bottom = 297.0
+offset_right = 384.0
+offset_bottom = 295.0
 theme_override_colors/font_color = Color(0.96, 0.9, 0.75, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.36, 0.1, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 0.36, 0.1, 1)
-theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_hover")
-theme_override_styles/hover = SubResource("StyleBoxFlat_btn_hover")
-theme_override_styles/focus = SubResource("StyleBoxFlat_btn_hover")
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_btn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_btn_sel")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btn_sel")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
 text = "Exit"
 flat = false
+
+[node name="SideL" type="TextureRect" parent="btn_exit" unique_id=1893024951]
+modulate = Color(0.5, 0.1, 0.12, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = -26.0
+offset_top = 3.0
+offset_right = -4.0
+offset_bottom = 25.0
+mouse_filter = 2
+texture = ExtResource("18_side")
+expand_mode = 1
+
+[node name="SideR" type="TextureRect" parent="btn_exit" unique_id=1893024952]
+modulate = Color(0.5, 0.1, 0.12, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 132.0
+offset_top = 3.0
+offset_right = 154.0
+offset_bottom = 25.0
+mouse_filter = 2
+texture = ExtResource("18_side")
+expand_mode = 1
 
 [connection signal="click_end" from="btn_play" to="." method="_on_btn_play_click_end"]
 [connection signal="click_end" from="btn_exit" to="." method="_on_btn_exit_click_end"]
