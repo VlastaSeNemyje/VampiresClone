@@ -13,11 +13,26 @@ extends ColorRect
 @onready var ascendIcon = $AscendBadge/AscendIcon
 @onready var lblAscend = $AscendBadge/lbl_ascend
 
-@export var highlight_color := Color(1, 1, 1, 1)
+@export_group("Menu style")
+@export var bg_base := Color(0.04, 0.02, 0.02, 1)
+@export var bg_highlight := Color(0.33, 0.03, 0.05, 1)
+@export var tint_base := Color(0.5, 0.1, 0.12, 1)
+@export var tint_hover := Color(1, 0.3, 0.3, 1)
+@export var tint_highlight := Color(1, 0.3, 0.3, 1)
+## The frame art is drawn at this scale (smaller = thinner frame).
+@export var frame_scale := 0.5
+
+const TEX_FRAME := preload("res://Textures/Sprites/Menu/Frame wide.png")
+const TEX_FRAME_SELECTED := preload("res://Textures/Sprites/Menu/Frame selected wide.png")
+const PATCH_FRAME := 14
+const PATCH_FRAME_SELECTED := 30
 
 var selected = false
 var cursor = 0 # only used by the first option
-var highlight: ReferenceRect
+var highlighted := false
+var hovered := false
+var is_evolution := false
+var frame: NinePatchRect
 var item = null
 @onready var player = get_tree().get_first_node_in_group("player")
 
@@ -35,14 +50,16 @@ func _ready():
 		_style_as_evolution()
 	else:
 		_setup_ascend_badge()
-	highlight = ReferenceRect.new()
-	highlight.editor_only = false
-	highlight.border_color = highlight_color
-	highlight.border_width = 3.0
-	highlight.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	highlight.set_anchors_preset(Control.PRESET_FULL_RECT)
-	highlight.visible = get_index() == 0 # selection always starts at the top
-	add_child(highlight)
+	frame = NinePatchRect.new()
+	frame.draw_center = false
+	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(frame) # last child, so it draws over the card content
+	resized.connect(_layout_frame)
+	mouse_entered.connect(func(): hovered = true; _update_look())
+	mouse_exited.connect(func(): hovered = false; _update_look())
+	highlighted = get_index() == 0 # selection always starts at the top
+	_layout_frame()
+	_update_look()
 
 func _gui_input(event):
 	if event.is_action_pressed("click") and not selected:
@@ -83,19 +100,43 @@ func _move_cursor(options: Array, step: int) -> void:
 
 
 func set_highlight(on: bool) -> void:
-	highlight.visible = on
+	highlighted = on
+	_update_look()
 
 
-# Ascensions (evolutions) get a red card with a yellow frame so they stand out from normal upgrades
+# Frame art is scaled down so a 190px-wide source border fits the small card.
+func _layout_frame() -> void:
+	frame.scale = Vector2.ONE * frame_scale
+	frame.position = Vector2.ZERO
+	frame.size = size / frame_scale
+
+
+# Same look as the menu character tabs: dark card + red frame, brighter frame when selected.
+func _update_look() -> void:
+	if highlighted:
+		frame.texture = TEX_FRAME_SELECTED
+		_set_patch(PATCH_FRAME_SELECTED)
+	else:
+		frame.texture = TEX_FRAME
+		_set_patch(PATCH_FRAME)
+	if is_evolution:
+		color = evolution_color
+		frame.modulate = evolution_frame_color
+		return
+	color = bg_highlight if highlighted else bg_base
+	frame.modulate = tint_highlight if highlighted else (tint_hover if hovered else tint_base)
+
+
+func _set_patch(m: int) -> void:
+	frame.patch_margin_left = m
+	frame.patch_margin_right = m
+	frame.patch_margin_top = m
+	frame.patch_margin_bottom = m
+
+
+# Ascensions (evolutions) keep a red card with a yellow frame so they stand out from normal upgrades
 func _style_as_evolution() -> void:
-	color = evolution_color
-	var frame := ReferenceRect.new()
-	frame.editor_only = false
-	frame.border_color = evolution_frame_color
-	frame.border_width = evolution_frame_width
-	frame.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	frame.set_anchors_preset(Control.PRESET_FULL_RECT)
-	add_child(frame)
+	is_evolution = true
 
 
 # If this option is one half of an Ascend and the player already owns the other half,

@@ -85,7 +85,7 @@ func _start_ambience() -> void:
 	ambience.volume_db = 6
 	ambience.bus = &"Music" if AudioServer.get_bus_index(&"Music") != -1 else &"Master"
 	ambience.finished.connect(ambience.play) # fallback loop if import loop is off
-	add_child(ambience)
+	add_child(ambience) 
 	ambience.play()
 
 

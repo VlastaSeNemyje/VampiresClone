@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://b5tupvx3wxuwm"]
+
+[ext_resource type="Script" uid="uid://daylnxooufe14" path="res://Utility/mist.gd" id="1_mist"]
+[ext_resource type="Script" uid="uid://6iqlvdm1hgkv" path="res://Utility/mist_variant.gd" id="2_variant"]
+
+[sub_resource type="Resource" id="Variant_long"]
+script = ExtResource("2_variant")
+stretch = Vector2(10, 2)
+tint = Color(1, 1, 1, 0.3)
+tilt_degrees = 2.0
+
+[sub_resource type="Resource" id="Variant_puffy"]
+script = ExtResource("2_variant")
+stretch = Vector2(6, 3.5)
+tint = Color(0.92, 0.97, 1, 0.22)
+tilt_degrees = 6.0
+
+[sub_resource type="Resource" id="Variant_thin"]
+script = ExtResource("2_variant")
+stretch = Vector2(13, 1.2)
+tint = Color(1, 1, 0.95, 0.4)
+tilt_degrees = 1.0
+weight = 0.7
+
+[node name="Mist" type="Node2D" unique_id=1424011676]
+modulate = Color(0.72464263, 0.7246426, 0.7246426, 1)
+z_index = 10
+script = ExtResource("1_mist")
+density = 18
+speed = 50.0
+variants = Array[ExtResource("2_variant")]([SubResource("Variant_long"), SubResource("Variant_puffy"), SubResource("Variant_thin")])
