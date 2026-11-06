@@ -7,7 +7,16 @@ extends Control
 ]
 
 
+const FOREST_AMBIENCE := preload("res://Sounds/Music/Forest_Ambience.wav")
+const AMBIENCE_HOLD_TIME := 6.0   # seconds ambience keeps playing after Play
+const AMBIENCE_FADE_TIME := 3.0   # seconds to fade the ambience out
+const LEVEL_MUSIC_FADE_IN := 3.0  # seconds for level music to reach full volume
+
+var ambience: AudioStreamPlayer
+
+
 func _ready() -> void:
+	_start_ambience()
 	for tab in tabs:
 		tab.connect("tab_selected", Callable(self, "_on_tab_selected"))
 		tab.refresh()
@@ -70,7 +79,27 @@ func _build_debug_tools() -> void:
 	debug_btn.pressed.connect(func(): panel.visible = not panel.visible)
 
 
+func _start_ambience() -> void:
+	ambience = AudioStreamPlayer.new()
+	ambience.stream = FOREST_AMBIENCE
+	ambience.bus = &"Music" if AudioServer.get_bus_index(&"Music") != -1 else &"Master"
+	ambience.finished.connect(ambience.play) # fallback loop if import loop is off
+	add_child(ambience)
+	ambience.play()
+
+
 func _on_btn_play_click_end() -> void:
+	# Hand the ambience over to the scene tree root so it survives the scene change,
+	# keep it playing for a while, then fade it out.
+	if is_instance_valid(ambience):
+		ambience.reparent(get_tree().root)
+		var tw := ambience.create_tween()
+		tw.tween_interval(AMBIENCE_HOLD_TIME)
+		tw.tween_property(ambience, "volume_db", -80.0, AMBIENCE_FADE_TIME)
+		tw.tween_callback(ambience.queue_free)
+	# Tell the level music to wait the same hold time, then fade in.
+	Engine.set_meta("level_music_delay", AMBIENCE_HOLD_TIME)
+	Engine.set_meta("level_music_fade_in", LEVEL_MUSIC_FADE_IN)
 	get_tree().change_scene_to_file(GameProgress.get_selected_world_scene())
 
 
