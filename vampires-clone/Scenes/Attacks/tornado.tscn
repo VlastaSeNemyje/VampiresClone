@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://cnj0iwo35klfr"]
 
-[ext_resource type="Texture2D" uid="uid://n8h0l8ee8uhw" path="res://Textures/Sprites/Weapons/Tornado.png" id="1_5t4lv"]
 [ext_resource type="Script" uid="uid://bd2v1nse26fwa" path="res://Scenes/Attacks/tornado.gd" id="1_pgy2e"]
+[ext_resource type="Texture2D" uid="uid://dd33t31e2fslu" path="res://Textures/Sprites/1791015627985.png" id="2_pgy2e"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pgy2e"]
-atlas = ExtResource("1_5t4lv")
+[sub_resource type="AtlasTexture" id="AtlasTexture_adlw0"]
+atlas = ExtResource("2_pgy2e")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_adlw0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pgy2e")
+"texture": SubResource("AtlasTexture_adlw0")
 }],
 "loop": true,
 "name": &"default",
@@ -30,6 +30,7 @@ collision_mask = 0
 script = ExtResource("1_pgy2e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=246312358]
+self_modulate = Color(1, 1, 1, 0.8156863)
 sprite_frames = SubResource("SpriteFrames_adlw0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1058248506]
