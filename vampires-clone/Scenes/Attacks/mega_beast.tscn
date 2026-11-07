@@ -58,3 +58,4 @@ frame = 3
 frame_progress = 0.51591027
 
 [node name="snd_impact" type="AudioStreamPlayer2D" parent="." unique_id=1573749502]
+bus = &"AttackVFX"

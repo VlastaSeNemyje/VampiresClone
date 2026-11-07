@@ -22,10 +22,13 @@ extends ColorRect
 ## The frame art is drawn at this scale (smaller = thinner frame).
 @export var frame_scale := 0.5
 
-const TEX_FRAME := preload("res://Textures/Sprites/Menu/Frame wide.png")
-const TEX_FRAME_SELECTED := preload("res://Textures/Sprites/Menu/Frame selected wide.png")
-const PATCH_FRAME := 14
-const PATCH_FRAME_SELECTED := 30
+const TEX_FRAME := preload("res://Textures/Sprites/Menu/Item option.png")
+const TEX_FRAME_SELECTED := preload("res://Textures/Sprites/Menu/Item select.png")
+const PATCH_FRAME := 6
+const PATCH_FRAME_SELECTED := 10
+# Transparent gap (texture px) between the texture edge and the border lines
+const INSET_FRAME := 0.0
+const INSET_FRAME_SELECTED := 0.0
 
 var selected = false
 var cursor = 0 # only used by the first option
@@ -106,9 +109,14 @@ func set_highlight(on: bool) -> void:
 
 # Frame art is scaled down so a 190px-wide source border fits the small card.
 func _layout_frame() -> void:
-	frame.scale = Vector2.ONE * frame_scale
-	frame.position = Vector2.ZERO
-	frame.size = size / frame_scale
+	# Item select.png is 180x50 (same as the card) so it is drawn 1:1; the plain
+	# frame art is scaled down by frame_scale. The inset grows the frame outward if
+	# the art has a transparent gap before its border lines.
+	var s := 1.0 # both frame images are 180x50, drawn 1:1
+	var inset := (INSET_FRAME_SELECTED if highlighted else INSET_FRAME) * s
+	frame.scale = Vector2.ONE * s
+	frame.position = Vector2(-inset, -inset)
+	frame.size = (size + Vector2(inset, inset) * 2.0) / s
 
 
 # Same look as the menu character tabs: dark card + red frame, brighter frame when selected.
@@ -119,12 +127,13 @@ func _update_look() -> void:
 	else:
 		frame.texture = TEX_FRAME
 		_set_patch(PATCH_FRAME)
+	_layout_frame()
 	if is_evolution:
 		color = evolution_color
 		frame.modulate = evolution_frame_color
 		return
-	color = bg_highlight if highlighted else bg_base
-	frame.modulate = tint_highlight if highlighted else (tint_hover if hovered else tint_base)
+	color = bg_base # no red tint behind the card when selected
+	frame.modulate = Color.WHITE # keep the orange art as drawn
 
 
 func _set_patch(m: int) -> void:
@@ -161,8 +170,6 @@ func _setup_ascend_badge() -> void:
 				if _base_id(owned) == _base_id(partner):
 					ascendIcon.texture = load(UpgradeDb.UPGRADES[partner]["icon"])
 					ascendBadge.visible = true
-					# keep the description clear of the badge
-					lblDescription.size.x = ascendBadge.position.x - lblDescription.position.x - 2.0
 					return
 
 

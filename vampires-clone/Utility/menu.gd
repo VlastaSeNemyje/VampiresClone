@@ -82,8 +82,8 @@ func _build_debug_tools() -> void:
 func _start_ambience() -> void:
 	ambience = AudioStreamPlayer.new()
 	ambience.stream = FOREST_AMBIENCE
-	ambience.volume_db = 6
-	ambience.bus = &"Music" if AudioServer.get_bus_index(&"Music") != -1 else &"Master"
+	ambience.volume_db = 20
+	ambience.bus = &"MenuMusic"
 	ambience.finished.connect(ambience.play) # fallback loop if import loop is off
 	add_child(ambience) 
 	ambience.play()

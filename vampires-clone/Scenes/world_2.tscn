@@ -210,5 +210,6 @@ process_mode = 3
 stream = ExtResource("10_hpuos")
 autoplay = true
 script = ExtResource("12_c5t2i")
+bus = &"WorldMusic"
 
 [connection signal="playerdeath" from="Player" to="snd_Music" method="_on_player_playerdeath"]

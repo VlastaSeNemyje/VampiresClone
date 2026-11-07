@@ -12,9 +12,11 @@ flat = true
 script = ExtResource("1_w5bej")
 
 [node name="snd_hover" type="AudioStreamPlayer2D" parent="." unique_id=868899644]
+bus = &"UI"
 
 [node name="snd_click" type="AudioStreamPlayer2D" parent="." unique_id=1729408640]
 stream = ExtResource("2_3mu3o")
+bus = &"UI"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="pressed" from="." to="." method="_on_pressed"]

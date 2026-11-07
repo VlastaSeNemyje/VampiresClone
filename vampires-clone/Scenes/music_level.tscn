@@ -5,5 +5,4 @@
 [node name="MusicLevel" type="AudioStreamPlayer" unique_id=228078397]
 process_mode = 3
 stream = ExtResource("1_pu1gl")
-volume_db = -10.0
-bus = &"Music"
+bus = &"WorldMusic"

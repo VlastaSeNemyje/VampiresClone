@@ -38,3 +38,4 @@ position = Vector2(0, -4.7683716e-07)
 
 [node name="snd_pulse" type="AudioStreamPlayer2D" parent="." unique_id=947396750]
 volume_db = -6.0
+bus = &"AttackVFX"

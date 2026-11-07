@@ -62,3 +62,4 @@ shape = SubResource("RectangleShape2D_ehlc7")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2064084221]
 stream = ExtResource("3_7nbvn")
 autoplay = true
+bus = &"AttackVFX"

@@ -1,7 +1,7 @@
 extends Node
 
 # Main "full" pickup sound — plays for a single, non-rapid pickup
-var xp_sound: AudioStreamPlayer
+@onready var xp_sound: AudioStreamPlayer = $XpSound
 
 # Small pool of players for rapid/stacked pickups, so quick successive
 # ticks can overlap slightly without cutting each other off
@@ -25,17 +25,13 @@ const TICK_LENGTH := 0.07
 
 
 func _ready():
-	xp_sound = AudioStreamPlayer.new()
-	add_child(xp_sound)
-	xp_sound.stream = preload("res://Sounds/VFX/SFX_XP_VampireSurvivors_processed.wav")
-	xp_sound.volume_db = -1
-	xp_sound.bus = "Master"
-
+	# xp_sound (stream, volume, bus) is configured on the XpSound node in
+	# Scenes/audio_manager.tscn
 	for i in TICK_POOL_SIZE:
 		var p = AudioStreamPlayer.new()
 		p.stream = xp_sound.stream   # reuse the same clip, just truncated
 		p.volume_db = -6             # quieter, so it reads as a "tick" not a duplicate hit
-		p.bus = "Master"
+		p.bus = xp_sound.bus
 		add_child(p)
 		tick_pool.append(p)
 

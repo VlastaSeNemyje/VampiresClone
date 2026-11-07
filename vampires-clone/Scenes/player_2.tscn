@@ -347,6 +347,7 @@ offset_bottom = 100.0
 [node name="snd_levelup" type="AudioStreamPlayer" parent="GUILayer/GUI/LevelUp" unique_id=2090545934]
 unique_name_in_owner = true
 stream = ExtResource("6_x3wgy")
+bus = &"UI"
 
 [node name="DeathPanel" type="Panel" parent="GUILayer/GUI" unique_id=1931499826]
 unique_name_in_owner = true
@@ -370,10 +371,12 @@ vertical_alignment = 1
 [node name="snd_victory" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel" unique_id=1877931557]
 unique_name_in_owner = true
 stream = ExtResource("6_x3wgy")
+bus = &"UI"
 
 [node name="snd_lose" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel" unique_id=1762579757]
 unique_name_in_owner = true
 stream = ExtResource("6_x3wgy")
+bus = &"UI"
 
 [node name="btn_menu" parent="GUILayer/GUI/DeathPanel" unique_id=1111186126 instance=ExtResource("9_f1ek2")]
 layout_mode = 0

@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://c7lw3r24jtsuu"]
 
-[ext_resource type="Script" path="res://Scripts/exp_bar_flash.gd" id="expflash"]
 [ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://c7tsdt0xi2vwy" path="res://Textures/Sprites/Lesly.png" id="2_htltj"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_6t5aa"]
-[ext_resource type="Texture2D" uid="uid://be0co0l3j62ou" path="res://Textures/Sprites/BarBcg.png" id="4_fkybt"]
+[ext_resource type="Texture2D" uid="uid://cinmsuxk78hoe" path="res://Textures/Sprites/BarBcg.png" id="4_fkybt"]
 [ext_resource type="Texture2D" uid="uid://4brnwnxt1tqi" path="res://Textures/Sprites/BarProgress.png" id="5_x3wgy"]
 [ext_resource type="AudioStream" uid="uid://boh6gbgbyinnt" path="res://Sounds/VFX/SFX_WAV_277.wav" id="6_x3wgy"]
-[ext_resource type="Texture2D" uid="uid://b7kuxl1bobayo" path="res://Textures/Sprites/BarHealth.png" id="7_3smsa"]
-[ext_resource type="Texture2D" uid="uid://bc4soinvtfwuw" path="res://Textures/Sprites/BarHealthBcg.png" id="7_8erm5"]
+[ext_resource type="Texture2D" uid="uid://dknonegagoxct" path="res://Textures/Sprites/BarHealth.png" id="7_3smsa"]
+[ext_resource type="Texture2D" uid="uid://ceqkjud1vms3l" path="res://Textures/Sprites/BarHealthBcg.png" id="7_8erm5"]
 [ext_resource type="PackedScene" uid="uid://bf71bynv53120" path="res://Utility/basic_button.tscn" id="9_f1ek2"]
+[ext_resource type="Script" uid="uid://dfdf3i2qwjluh" path="res://Scripts/exp_bar_flash.gd" id="expflash"]
 [ext_resource type="Script" uid="uid://dni2eo6i3088s" path="res://Scenes/Attacks/incense_base.gd" id="incense_base"]
 [ext_resource type="Script" path="res://Scenes/Attacks/incense_level.gd" id="incense_level"]
 [ext_resource type="Script" uid="uid://dp8auny0qn4hj" path="res://Scenes/Attacks/kanec_base.gd" id="kanec_base"]
@@ -58,7 +58,7 @@ radius = 29.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fkybt"]
 
-[node name="Player" type="CharacterBody2D" unique_id=1972239113 groups=["player"]]
+[node name="Player2" type="CharacterBody2D" unique_id=1972239113 groups=["player"]]
 z_index = 1
 collision_layer = 2
 collision_mask = 16
@@ -72,6 +72,7 @@ maxhp = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=494512027]
 position = Vector2(0, -15)
+scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_6t5aa")
 animation = &"run"
 autoplay = "idle"
@@ -228,18 +229,6 @@ anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 360.0
 
-[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1419325453]
-z_index = 10
-unique_name_in_owner = true
-offset_left = -7.7
-offset_top = 2.3
-offset_right = 24.3
-offset_bottom = 10.3
-scale = Vector2(0.4615, 0.4615)
-value = 50.0
-texture_under = ExtResource("7_8erm5")
-texture_progress = ExtResource("7_3smsa")
-
 [node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI" unique_id=831773781]
 unique_name_in_owner = true
 process_mode = 3
@@ -289,6 +278,7 @@ offset_bottom = 100.0
 [node name="snd_levelup" type="AudioStreamPlayer" parent="GUILayer/GUI/LevelUp" unique_id=2090545934]
 unique_name_in_owner = true
 stream = ExtResource("6_x3wgy")
+bus = &"UI"
 
 [node name="DeathPanel" type="Panel" parent="GUILayer/GUI" unique_id=1931499826]
 unique_name_in_owner = true
@@ -312,10 +302,12 @@ vertical_alignment = 1
 [node name="snd_victory" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel" unique_id=1877931557]
 unique_name_in_owner = true
 stream = ExtResource("6_x3wgy")
+bus = &"UI"
 
 [node name="snd_lose" type="AudioStreamPlayer" parent="GUILayer/GUI/DeathPanel" unique_id=1762579757]
 unique_name_in_owner = true
 stream = ExtResource("6_x3wgy")
+bus = &"UI"
 
 [node name="btn_menu" parent="GUILayer/GUI/DeathPanel" unique_id=1111186126 instance=ExtResource("9_f1ek2")]
 layout_mode = 0
@@ -353,6 +345,18 @@ offset_top = 40.0
 offset_right = 208.0
 offset_bottom = 56.0
 columns = 10
+
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1419325453]
+unique_name_in_owner = true
+z_index = 10
+offset_left = -7.7
+offset_top = 2.3
+offset_right = 24.3
+offset_bottom = 10.3
+scale = Vector2(0.4615, 0.4615)
+value = 50.0
+texture_under = ExtResource("7_8erm5")
+texture_progress = ExtResource("7_3smsa")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/ArrowTimer" to="." method="_on_arrow_timer_timeout"]

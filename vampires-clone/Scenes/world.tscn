@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/enemy_local_idiot_swarm.tscn" id="16_idiot"]
 [ext_resource type="Script" uid="uid://cs38s4swnkfpi" path="res://Utility/story_text.gd" id="17_story"]
 [ext_resource type="Script" uid="uid://fml5lvkoohrr" path="res://Utility/story_line.gd" id="18_storyline"]
-[ext_resource type="PackedScene" path="res://Scenes/mist.tscn" id="19_mist"]
+[ext_resource type="PackedScene" uid="uid://b5tupvx3wxuwm" path="res://Scenes/mist.tscn" id="19_mist"]
 
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("4_fo5ed")
@@ -252,14 +252,15 @@ visible = false
 position = Vector2(106, -89)
 experience = 0
 
-[node name="Mist" parent="." instance=ExtResource("19_mist")]
+[node name="Mist" parent="." unique_id=821978904 instance=ExtResource("19_mist")]
 
 [node name="snd_Music" type="AudioStreamPlayer" parent="." unique_id=883340347]
 process_mode = 3
 stream = ExtResource("11_7yui6")
-volume_db = -15.0
+volume_db = 5.0
 autoplay = true
 script = ExtResource("12_c5t2i")
+bus = &"WorldMusic"
 
 [node name="StoryText" type="CanvasLayer" parent="." unique_id=1831414024]
 script = ExtResource("17_story")

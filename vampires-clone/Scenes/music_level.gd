@@ -11,7 +11,7 @@ func _ready() -> void:
 		Engine.remove_meta("level_music_delay")
 		Engine.remove_meta("level_music_fade_in")
 		var target_db := volume_db
-		volume_db = -80.0
+		volume_db = -50.0
 		stop() # cancel autoplay (may have already started)
 		await get_tree().process_frame
 		stop()

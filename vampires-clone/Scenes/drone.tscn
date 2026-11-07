@@ -48,6 +48,7 @@ shape = SubResource("CircleShape2D_hit")
 
 [node name="snd_hit" type="AudioStreamPlayer2D" parent="." unique_id=1643949835]
 stream = ExtResource("6_d")
+bus = &"AttackVFX"
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 

@@ -91,6 +91,7 @@ wait_time = 3.0
 autostart = true
 
 [node name="snd_falcon" type="AudioStreamPlayer2D" parent="." unique_id=2064084221]
+bus = &"AttackVFX"
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="ChangeDirection" to="." method="_on_change_direction_timeout"]

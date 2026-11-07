@@ -107,3 +107,4 @@ disabled = true
 
 [node name="snd_erupt" type="AudioStreamPlayer2D" parent="RootTemplate" unique_id=66433031]
 volume_db = -6.0
+bus = &"AttackVFX"

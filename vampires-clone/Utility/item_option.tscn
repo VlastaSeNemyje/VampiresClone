@@ -44,65 +44,68 @@ stretch_mode = 5
 
 [node name="lbl_name" type="Label" parent="." unique_id=553088678]
 layout_mode = 0
-offset_left = 54.0
-offset_right = 101.0
-offset_bottom = 23.0
+offset_left = 51.0
+offset_top = 1.0
+offset_right = 125.0
+offset_bottom = 13.0
+theme_override_font_sizes/font_size = 12
 text = "Name"
-horizontal_alignment = 1
+clip_text = true
 
 [node name="lbl_description" type="Label" parent="." unique_id=1479058481]
 layout_mode = 0
 offset_left = 51.0
-offset_top = 27.0
-offset_right = 212.0
-offset_bottom = 48.0
+offset_top = 21.0
+offset_right = 178.0
+offset_bottom = 45.0
+theme_override_constants/line_spacing = 1
 theme_override_font_sizes/font_size = 8
 text = "Desription of Item"
 autowrap_mode = 3
 
 [node name="lbl_level" type="Label" parent="." unique_id=1857631893]
 layout_mode = 0
-offset_left = 130.0
-offset_top = 3.0
-offset_right = 171.0
-offset_bottom = 26.0
+offset_left = 126.0
+offset_top = 1.0
+offset_right = 178.0
+offset_bottom = 13.0
 theme_override_font_sizes/font_size = 12
 text = "level: 1"
+horizontal_alignment = 2
 
 [node name="AscendBadge" type="Control" parent="." unique_id=1100106325]
 visible = false
 anchors_preset = 0
-offset_left = 116.0
-offset_top = 28.0
-offset_right = 178.0
-offset_bottom = 48.0
+offset_left = 51.0
+offset_top = 38.0
+offset_right = 151.0
+offset_bottom = 49.0
 mouse_filter = 2
 
 [node name="Background" type="TextureRect" parent="AscendBadge" unique_id=541484121]
 layout_mode = 0
-offset_right = 62.0
-offset_bottom = 20.0
+offset_right = 100.0
+offset_bottom = 11.0
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_ascend")
 expand_mode = 1
 
 [node name="lbl_ascend" type="Label" parent="AscendBadge" unique_id=1269534655]
 layout_mode = 0
-offset_left = 2.0
-offset_right = 44.0
-offset_bottom = 20.0
+offset_left = 3.0
+offset_right = 83.0
+offset_bottom = 11.0
 theme_override_font_sizes/font_size = 8
 text = "Ascend with"
-horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 3
+clip_text = true
 
 [node name="AscendIcon" type="TextureRect" parent="AscendBadge" unique_id=450129375]
 layout_mode = 0
-offset_left = 44.0
-offset_top = 2.0
-offset_right = 60.0
-offset_bottom = 18.0
+offset_left = 86.0
+offset_top = 0.5
+offset_right = 96.0
+offset_bottom = 10.5
 mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5

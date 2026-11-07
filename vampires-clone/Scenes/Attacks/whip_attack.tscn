@@ -49,5 +49,6 @@ autostart = true
 stream = ExtResource("3_1jls4")
 pitch_scale = 1.2
 autoplay = true
+bus = &"AttackVFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

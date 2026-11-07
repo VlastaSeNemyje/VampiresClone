@@ -190,7 +190,7 @@ region_rect = Rect2(0, 0, 4000, 4000)
 z_index = 2
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(0, -1)
+position = Vector2(0, 32)
 texture = ExtResource("11_fs")
 region_enabled = true
 region_rect = Rect2(0, 0, 4000, 360)
@@ -199,32 +199,32 @@ region_rect = Rect2(0, 0, 4000, 360)
 z_index = 2
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(0, -7)
+position = Vector2(0, -8)
 texture = ExtResource("11_fs")
 flip_v = true
 region_enabled = true
 region_rect = Rect2(0, 0, 4000, 360)
 
-[node name="ForestFillTop" type="ColorRect" parent="."]
+[node name="ForestFillTop" type="ColorRect" parent="." unique_id=985897618]
 z_index = 2
 offset_left = -2000.0
-offset_top = -1181.0
+offset_top = -1148.0
 offset_right = 2000.0
-offset_bottom = -180.0
+offset_bottom = -147.0
 mouse_filter = 2
 color = Color(0.0666667, 0.164706, 0, 1)
 
-[node name="ForestFillBottom" type="ColorRect" parent="."]
+[node name="ForestFillBottom" type="ColorRect" parent="." unique_id=825356943]
 z_index = 2
 offset_left = -2000.0
-offset_top = 172.0
+offset_top = 171.0
 offset_right = 2000.0
-offset_bottom = 1173.0
+offset_bottom = 1172.0
 mouse_filter = 2
 color = Color(0.0666667, 0.164706, 0, 1)
 
 [node name="BoundTop" type="StaticBody2D" parent="." unique_id=1292532605]
-position = Vector2(3, -570)
+position = Vector2(-4, -522)
 collision_layer = 16
 collision_mask = 0
 
@@ -232,7 +232,7 @@ collision_mask = 0
 shape = SubResource("Bound_shape")
 
 [node name="BoundBottom" type="StaticBody2D" parent="." unique_id=1269483162]
-position = Vector2(10, 597)
+position = Vector2(10, 600)
 collision_layer = 16
 collision_mask = 0
 
@@ -256,6 +256,7 @@ experience = 500
 process_mode = 3
 stream = ExtResource("10_kyxo2")
 autoplay = true
+bus = &"WorldMusic"
 script = ExtResource("12_c5t2i")
 
 [connection signal="playerdeath" from="Player" to="snd_Music" method="_on_player_playerdeath"]

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c5hrfi1rw1lt4"]
+
+[ext_resource type="Script" uid="uid://dy3t2k732oiq2" path="res://Scripts/audio_manager.gd" id="1_mgr"]
+[ext_resource type="AudioStream" uid="uid://bumawn78io68q" path="res://Sounds/VFX/SFX_XP_VampireSurvivors_processed.wav" id="2_xp"]
+
+[node name="AudioManager" type="Node" unique_id=767527358]
+process_mode = 3
+script = ExtResource("1_mgr")
+
+[node name="XpSound" type="AudioStreamPlayer" parent="." unique_id=1317682256]
+stream = ExtResource("2_xp")
+bus = &"AttackVFX"

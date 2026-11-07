@@ -115,6 +115,7 @@ position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_push")
 
 [node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
+bus = &"AttackVFX"
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 
