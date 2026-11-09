@@ -14,14 +14,41 @@ const LEVEL_MUSIC_FADE_IN := 3.0  # seconds for level music to reach full volume
 
 var ambience: AudioStreamPlayer
 
+@export_group("Flicker")
+## Peak darkness of a flicker (0 = none, 1 = black). Keep low for subtle.
+@export_range(0.0, 1.0, 0.005) var flicker_strength: float = 0.14
+## Shortest / longest pause between flickers, in seconds.
+@export var flicker_interval_min: float = 6.0
+@export var flicker_interval_max: float = 10.0
+## Duration of one dip (seconds).
+@export_range(0.02, 1.0, 0.01) var flicker_duration: float = 0.18
+## Chance that a flicker is a quick double-blink.
+@export_range(0.0, 1.0, 0.05) var flicker_double_chance: float = 0.4
+
+@onready var flicker_rect: ColorRect = $Flicker
+
 
 func _ready() -> void:
 	_start_ambience()
+	_flicker_loop()
 	for tab in tabs:
 		tab.connect("tab_selected", Callable(self, "_on_tab_selected"))
 		tab.refresh()
 	if OS.is_debug_build():
 		_build_debug_tools()
+
+
+func _flicker_loop() -> void:
+	while is_inside_tree():
+		await get_tree().create_timer(randf_range(flicker_interval_min, flicker_interval_max)).timeout
+		if not is_inside_tree():
+			return
+		var blinks := 2 if randf() < flicker_double_chance else 1
+		for i in blinks:
+			var tw := create_tween()
+			tw.tween_property(flicker_rect, "modulate:a", flicker_strength, flicker_duration * 0.3)
+			tw.tween_property(flicker_rect, "modulate:a", 0.0, flicker_duration * 0.7)
+			await tw.finished
 
 
 func _on_tab_selected(index: int) -> void:

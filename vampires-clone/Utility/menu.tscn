@@ -2,24 +2,64 @@
 
 [ext_resource type="Script" uid="uid://cjp8ngoipa2c3" path="res://Utility/menu.gd" id="1_3ivhh"]
 [ext_resource type="PackedScene" uid="uid://bf71bynv53120" path="res://Utility/basic_button.tscn" id="2_b2oxh"]
-[ext_resource type="Texture2D" uid="uid://crn77avagcwa7" path="res://Textures/Sprites/R1.png" id="3_53h07"]
+[ext_resource type="Texture2D" uid="uid://b32fjbk4rmbl3" path="res://Textures/Sprites/R1.png" id="3_53h07"]
 [ext_resource type="PackedScene" uid="uid://doyh14ib7edtd" path="res://Utility/character_tab.tscn" id="3_tabs"]
-[ext_resource type="Texture2D" uid="uid://cc6n5cectnvpx" path="res://Textures/Sprites/R2.png" id="4_m0rvo"]
-[ext_resource type="Texture2D" uid="uid://bbxksjoxlmqgp" path="res://Textures/Sprites/R3.png" id="5_fhfum"]
-[ext_resource type="Texture2D" uid="uid://bdtxs6jwcrkma" path="res://Textures/Sprites/R4.png" id="6_ame3m"]
-[ext_resource type="Texture2D" uid="uid://beln20okq0mcx" path="res://Textures/Sprites/B1.png" id="7_0pn4e"]
-[ext_resource type="Texture2D" uid="uid://co2njcoggvth4" path="res://Textures/Sprites/B2.png" id="8_71tpd"]
-[ext_resource type="Texture2D" uid="uid://c7tsdt0xi2vwy" path="res://Textures/Sprites/Lesly.png" id="8_fhfum"]
-[ext_resource type="Texture2D" uid="uid://vrj6asra48qi" path="res://Textures/Sprites/B3.png" id="9_bg5y3"]
-[ext_resource type="Texture2D" uid="uid://yy0y20vvjvft" path="res://Textures/Sprites/B4.png" id="10_mqqw7"]
-[ext_resource type="Texture2D" uid="uid://clc85crh3hksu" path="res://Textures/Sprites/Menu/Tree left.png" id="11_treel"]
-[ext_resource type="Texture2D" uid="uid://dfvtwdxph5pm" path="res://Textures/Sprites/Menu/Tree right.png" id="12_treer"]
-[ext_resource type="Texture2D" uid="uid://bxce2fd1ath8q" path="res://Textures/Sprites/Menu/Down left.png" id="13_downl"]
-[ext_resource type="Texture2D" uid="uid://csnea0gtdlt2g" path="res://Textures/Sprites/Menu/Down right.png" id="14_downr"]
-[ext_resource type="Texture2D" uid="uid://cyj6568vc4ja4" path="res://Textures/Sprites/Menu/Bottom.png" id="15_bottom"]
-[ext_resource type="Texture2D" uid="uid://b6w5qx7870qha" path="res://Textures/Sprites/Menu/Button.png" id="16_btn"]
-[ext_resource type="Texture2D" uid="uid://jjq30gwjely0" path="res://Textures/Sprites/Menu/Button Selection.png" id="17_btnsel"]
-[ext_resource type="Texture2D" uid="uid://cuwukvuxvj4au" path="res://Textures/Sprites/Menu/Button Side.png" id="18_side"]
+[ext_resource type="Texture2D" uid="uid://bb0f435y2rtg5" path="res://Textures/Sprites/R2.png" id="4_m0rvo"]
+[ext_resource type="Texture2D" uid="uid://cytdx4neenm3r" path="res://Textures/Sprites/R3.png" id="5_fhfum"]
+[ext_resource type="Texture2D" uid="uid://76piuqkbgufw" path="res://Textures/Sprites/R4.png" id="6_ame3m"]
+[ext_resource type="Texture2D" uid="uid://cf8sdc6efk7ds" path="res://Textures/Sprites/B1.png" id="7_0pn4e"]
+[ext_resource type="Texture2D" uid="uid://bvdq552sviv4p" path="res://Textures/Sprites/B2.png" id="8_71tpd"]
+[ext_resource type="Texture2D" uid="uid://t424ifs4i8ys" path="res://Textures/Sprites/Lesly.png" id="8_fhfum"]
+[ext_resource type="Texture2D" uid="uid://cfi8h1k60sr2" path="res://Textures/Sprites/B3.png" id="9_bg5y3"]
+[ext_resource type="Texture2D" uid="uid://h1lxth0lkjn6" path="res://Textures/Sprites/B4.png" id="10_mqqw7"]
+[ext_resource type="Texture2D" uid="uid://dmb1idwq1hxm7" path="res://Textures/Sprites/Menu/Tree left.png" id="11_treel"]
+[ext_resource type="Texture2D" uid="uid://fcny7prm7shf" path="res://Textures/Sprites/Menu/Tree right.png" id="12_treer"]
+[ext_resource type="Texture2D" uid="uid://267qoesfon3s" path="res://Textures/Sprites/Menu/Down left.png" id="13_downl"]
+[ext_resource type="Texture2D" uid="uid://bs1vaj6gnttaq" path="res://Textures/Sprites/Menu/Down right.png" id="14_downr"]
+[ext_resource type="Texture2D" uid="uid://dom3btgv11lx" path="res://Textures/Sprites/Menu/Bottom.png" id="15_bottom"]
+[ext_resource type="Texture2D" uid="uid://cw4huvqmdye7i" path="res://Textures/Sprites/Menu/Button.png" id="16_btn"]
+[ext_resource type="Texture2D" uid="uid://d1g852qul8mk4" path="res://Textures/Sprites/Menu/Button Selection.png" id="17_btnsel"]
+[ext_resource type="Texture2D" uid="uid://hhl1ugnut6hj" path="res://Textures/Sprites/Menu/Button Side.png" id="18_side"]
+[ext_resource type="Shader" uid="uid://cmg0ws2wtqnqx" path="res://Shaders/pixel_distortion.gdshader" id="19_pdshader"]
+[ext_resource type="Texture2D" uid="uid://uxrfcv2h3i4x" path="res://Textures/Sprites/Pixel distortion.png" id="20_pdtex"]
+[ext_resource type="Texture2D" uid="uid://c2gb0c05d1mnq" path="res://Textures/Sprites/Floating pixel.png" id="21_fp0"]
+[ext_resource type="Texture2D" uid="uid://b2fiyh4vywf02" path="res://Textures/Sprites/Floating pixel1.png" id="22_fp1"]
+[ext_resource type="Texture2D" uid="uid://bbvvt503m8tq" path="res://Textures/Sprites/Floating pixel2.png" id="23_fp2"]
+[ext_resource type="Texture2D" uid="uid://ds43pn6dvo2sx" path="res://Textures/Sprites/Floating pixel big.png" id="24_fp3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pd"]
+shader = ExtResource("19_pdshader")
+shader_parameter/updates_per_second = 7.000000285
+shader_parameter/burst_chance = 0.25
+shader_parameter/grid_resolution = Vector2(640, 360)
+shader_parameter/block_size = Vector2(16, 4)
+shader_parameter/block_chance = 0.08
+shader_parameter/max_shift = 12.0
+shader_parameter/width_variation = 0.6
+shader_parameter/effect_strength = 1.0
+shader_parameter/overlay_strength = 0.250000011875
+shader_parameter/overlay_only_in_glitch = false
+shader_parameter/chroma_split = 1.0000000475
+
+[sub_resource type="Gradient" id="Gradient_fp"]
+offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.5, 1, 1, 1, 0.5, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fp"]
+gradient = SubResource("Gradient_fp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fp"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(330, 190, 1)
+direction = Vector3(0.3, -1, 0)
+spread = 25.0
+initial_velocity_min = 4.0
+initial_velocity_max = 12.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+color = Color(0.9, 0.25, 0.25, 1)
+color_ramp = SubResource("GradientTexture1D_fp")
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_aeqf2"]
 frames = 4
@@ -123,6 +163,64 @@ offset_bottom = 360.0
 mouse_filter = 2
 texture = ExtResource("15_bottom")
 stretch_mode = 1
+
+[node name="PixelDistortion" type="TextureRect" parent="." unique_id=792370422]
+texture_filter = 1
+material = SubResource("ShaderMaterial_pd")
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+texture = ExtResource("20_pdtex")
+expand_mode = 1
+
+[node name="FloatingPixels" type="Node2D" parent="." unique_id=2119389721]
+modulate = Color(1, 1, 1, 0.6)
+position = Vector2(320, 180)
+
+[node name="Small" type="GPUParticles2D" parent="FloatingPixels" unique_id=2135828689]
+texture_filter = 1
+amount = 16
+texture = ExtResource("21_fp0")
+lifetime = 10.0
+preprocess = 10.0
+visibility_rect = Rect2(-340, -200, 680, 400)
+process_material = SubResource("ParticleProcessMaterial_fp")
+
+[node name="Small2" type="GPUParticles2D" parent="FloatingPixels" unique_id=128155509]
+texture_filter = 1
+amount = 12
+texture = ExtResource("22_fp1")
+lifetime = 10.0
+preprocess = 10.0
+visibility_rect = Rect2(-340, -200, 680, 400)
+process_material = SubResource("ParticleProcessMaterial_fp")
+
+[node name="Medium" type="GPUParticles2D" parent="FloatingPixels" unique_id=354637996]
+texture_filter = 1
+amount = 10
+texture = ExtResource("23_fp2")
+lifetime = 10.0
+preprocess = 10.0
+visibility_rect = Rect2(-340, -200, 680, 400)
+process_material = SubResource("ParticleProcessMaterial_fp")
+
+[node name="Big" type="GPUParticles2D" parent="FloatingPixels" unique_id=1176006317]
+texture_filter = 1
+amount = 4
+texture = ExtResource("24_fp3")
+lifetime = 10.0
+preprocess = 10.0
+visibility_rect = Rect2(-340, -200, 680, 400)
+process_material = SubResource("ParticleProcessMaterial_fp")
+
+[node name="Flicker" type="ColorRect" parent="." unique_id=1703590231]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="." unique_id=2102448114]
 layout_mode = 0
