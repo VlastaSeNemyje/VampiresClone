@@ -11,7 +11,8 @@ extends CharacterBody2D
 @export var movement_speed: float = 40.0
 @export var hp: float = 80
 @export var maxhp: float = 80
-## Seconds you must survive before dying counts as a win (the Nemesis arrives at this time).
+## Seconds you must survive in this player's world. Reaching this time ends the run as a win; dying earlier is a loss.
+## Set per world in each player scene (player.tscn = world 1, player_2.tscn = world 2, player_3.tscn = world 3).
 @export var win_time: int = 360
 @export_group("")
 
@@ -490,7 +491,10 @@ func change_time(argtime = 0):
 	if get_s < 10:
 		get_s = str(0, get_s)
 	lblTimer.text = str(get_m,".",get_s)
-	
+	# Surviving until win_time ends the run as a win
+	if time >= win_time and not deathPanel.visible:
+		death()
+
 func adjust_gui_collection(upgrade):
 	var get_upgraded_displayname = UpgradeDb.UPGRADES[upgrade]["displayname"]
 	var get_type = UpgradeDb.UPGRADES[upgrade]["type"]
@@ -531,3 +535,9 @@ func death():
 func _on_btn_menu_click_end():
 	get_tree().paused = false
 	var _level = get_tree().change_scene_to_file("res://Utility/menu.tscn")
+
+
+# Retry: start the current world's run again from the beginning
+func _on_btn_retry_click_end():
+	get_tree().paused = false
+	get_tree().reload_current_scene()
