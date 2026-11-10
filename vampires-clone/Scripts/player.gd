@@ -14,6 +14,14 @@ extends CharacterBody2D
 ## Seconds you must survive in this player's world. Reaching this time ends the run as a win; dying earlier is a loss.
 ## Set per world in each player scene (player.tscn = world 1, player_2.tscn = world 2, player_3.tscn = world 3).
 @export var win_time: int = 360
+## Multiplier on all experience picked up from gems (1.0 = full value, 0.75 = 25% less).
+@export_range(0.0, 3.0, 0.05) var experience_gain: float = 0.75
+
+@export_group("Level-Up Draft")
+## Most different attacks the player can hold (the starting attack counts). New attacks stop being offered at this number.
+@export var max_attacks: int = 3
+## Chance (0-1) that the second card offers the upgrade needed to Ascend an attack the player owns.
+@export_range(0.0, 1.0, 0.05) var ascend_path_chance: float = 0.65
 @export_group("")
 
 var last_movement = Vector2.UP
@@ -126,6 +134,7 @@ var enemy_close = []
 signal playerdeath
 
 func _ready():
+	change_time(0)   # show the full countdown before the first second ticks
 	collision_mask |= 32   # the Obstacle layer (trees and bogs)
 	# Whip swings come in bursts: one-shot, short gap between swings of the same burst
 	whipAttackTimer.one_shot = true
@@ -312,7 +321,7 @@ func _on_grab_area_area_entered(area):
 func _on_collect_area_area_entered(area):
 	if area.is_in_group("loot"):
 		var gem_exp = area.collect()
-		calculate_experience(gem_exp)
+		calculate_experience(gem_exp * experience_gain)
 
 func calculate_experience(gem_exp):
 	var exp_required = calculate_experiencecap()
@@ -351,13 +360,10 @@ func levelup():
 	tween.tween_property(levelPanel,"position", Vector2(220,50),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	levelPanel.visible = true
-	var options = 0
-	var optionsmax = 3
-	while options < optionsmax:
+	for item in get_level_up_options(3):
 		var option_choice = itemOptions.instantiate()
-		option_choice.item = get_random_item()
+		option_choice.item = item
 		upgradeOptions.add_child(option_choice)
-		options += 1
 	expBar.start_flash()
 	get_tree().paused = true
 	
@@ -453,39 +459,138 @@ func upgrade_character(upgrade):
 	get_tree().paused = false
 	calculate_experience(0)
 	
-func get_random_item():
-	var dblist = []
-	for i in UpgradeDb.UPGRADES:
-		if i in collected_upgrades: #Find already collected upgrades
-			pass
-		elif i in upgrade_options: #If the upgrade is already an option
-			pass
-		elif UpgradeDb.UPGRADES[i]["type"] == "item": #Dont pick food
-			pass
-		elif UpgradeDb.UPGRADES[i]["prerequisite"].size() > 0: #Check for PreRequsities
-			var to_add = true
-			for n in UpgradeDb.UPGRADES[i]["prerequisite"]:
-				if not n in collected_upgrades:
-					to_add = false
-			if to_add:
-				dblist.append(i)
+# Builds the level-up cards together so each one has a job and they never repeat:
+#   1. Attack      - the next rank of an attack the player already owns (higher ranks are favoured)
+#   2. Ascend path - the upgrade an owned attack needs for its Ascend (ascend_path_chance),
+#                    otherwise another owned rank-up or any passive upgrade
+#   3. Wildcard    - anything, and the only card that can offer a new attack (until max_attacks)
+# An Ascend that is ready always takes the first card. A null entry is shown as Food.
+func get_level_up_options(count: int = 3) -> Array:
+	var eligible = []
+	for id in UpgradeDb.UPGRADES:
+		var data = UpgradeDb.UPGRADES[id]
+		if id in collected_upgrades or data["type"] == "item":
+			continue
+		if data["prerequisite"].all(func(pre): return pre in collected_upgrades):
+			eligible.append(id)
+
+	var owned_attacks = _owned_attack_bases()
+	var can_add_attack = owned_attacks.size() < max_attacks
+	# attack -> the passive its Ascend needs, for every Ascend not taken yet
+	var ascend_passive = {}
+	for id in UpgradeDb.UPGRADES:
+		var data = UpgradeDb.UPGRADES[id]
+		if data.has("evolves") and not id in collected_upgrades:
+			for pre in data["prerequisite"]:
+				if _base_id(pre) != data["evolves"]:
+					ascend_passive[data["evolves"]] = _base_id(pre)
+	var path_passives = []
+	for attack in owned_attacks:
+		if ascend_passive.has(attack):
+			path_passives.append(ascend_passive[attack])
+	var owns_ascendable = path_passives.size() > 0
+
+	var ready_ascends = []   # Ascends with both halves maxed
+	var attack_ranks = []    # next rank of an owned attack
+	var path = []            # next rank of a passive an owned attack needs to Ascend
+	var steady = []          # owned rank-ups and every passive (never a new attack)
+	var wild = []            # steady + new attacks while under the cap
+	var attack_weights = {}
+	var wild_weights = {}
+	for id in eligible:
+		var data = UpgradeDb.UPGRADES[id]
+		if data.has("evolves"):
+			ready_ascends.append(id)
+		elif _is_new_attack(id):
+			if can_add_attack:
+				wild.append(id)
+				# no Ascend possible yet: steer the player towards an attack that has one
+				if not owns_ascendable and ascend_passive.has(_base_id(id)):
+					wild_weights[id] = 3.0
 		else:
-			dblist.append(i)
-	# An evolution that is ready (both prerequisites maxed) is always offered first
-	var evolutions = dblist.filter(func(i): return UpgradeDb.UPGRADES[i].has("evolves"))
-	if evolutions.size() > 0:
-		dblist = evolutions
-	if dblist.size() > 0:
-		var randomitem = dblist.pick_random()
-		upgrade_options.append(randomitem)
-		return randomitem
-	else:
+			steady.append(id)
+			wild.append(id)
+			if data["type"] == "weapon":
+				attack_ranks.append(id)
+				attack_weights[id] = float(int(id.right(1)))
+			elif _base_id(id) in path_passives:
+				path.append(id)
+
+	var chosen = []
+	ready_ascends.shuffle()
+	for id in ready_ascends:
+		if chosen.size() < count:
+			chosen.append(id)
+
+	var jobs = [
+		[attack_ranks, attack_weights],
+		[path if randf() < ascend_path_chance else steady, {}],
+		[wild, wild_weights],
+	]
+	var new_attack_offered = false
+	for job in jobs.slice(chosen.size()):
+		if chosen.size() >= count:
+			break
+		var pick = null
+		# fall back to wider pools when the card's own pool is empty
+		for pool in [job[0], steady, wild]:
+			var source = pool
+			if new_attack_offered: # never more than one new attack per screen
+				source = pool.filter(func(id): return not _is_new_attack(id))
+			pick = _pick_weighted(source, chosen, job[1])
+			if pick != null:
+				break
+		if pick != null and _is_new_attack(pick):
+			new_attack_offered = true
+		chosen.append(pick)
+
+	upgrade_options = chosen.filter(func(id): return id != null)
+	return chosen
+
+
+# "armor3" -> "armor"
+func _base_id(id: String) -> String:
+	return id.rstrip("0123456789")
+
+
+# Rank 1 of an attack, i.e. an attack the player does not have yet
+func _is_new_attack(id: String) -> bool:
+	var data = UpgradeDb.UPGRADES[id]
+	return data["type"] == "weapon" and not data.has("evolves") and data["prerequisite"].is_empty()
+
+
+# Every attack the player holds, e.g. ["leaf", "kanec"]
+func _owned_attack_bases() -> Array:
+	var bases = []
+	for id in collected_upgrades:
+		var data = UpgradeDb.UPGRADES[id]
+		if data["type"] == "weapon" and not data.has("evolves") and not _base_id(id) in bases:
+			bases.append(_base_id(id))
+	return bases
+
+
+# Random entry of pool that is not already on a card. weights: id -> weight (default 1).
+func _pick_weighted(pool: Array, taken: Array, weights: Dictionary):
+	var candidates = pool.filter(func(id): return not id in taken)
+	if candidates.is_empty():
 		return null
-		
+	var total = 0.0
+	for id in candidates:
+		total += weights.get(id, 1.0)
+	var roll = randf() * total
+	for id in candidates:
+		roll -= weights.get(id, 1.0)
+		if roll <= 0.0:
+			return id
+	return candidates.back()
+
+
 func change_time(argtime = 0):
 	time = argtime
-	var get_m = int(time/60.0)
-	var get_s = time % 60
+	# The timer counts down from win_time to zero
+	var time_left = maxi(win_time - time, 0)
+	var get_m = int(time_left/60.0)
+	var get_s = time_left % 60
 	if get_m < 10:
 		get_m = str(0, get_m)
 	if get_s < 10:

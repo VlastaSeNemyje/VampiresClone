@@ -148,29 +148,36 @@ func _style_as_evolution() -> void:
 	is_evolution = true
 
 
-# If this option is one half of an Ascend and the player already owns the other half,
-# show an "Ascend with <icon of the other half>" badge.
+# If this option is one half of an Ascend the player has started (owns at least one rank of
+# either half), show an "Ascend 3/8 with <icon of the other half>" badge.
+# 3/8 = ranks already collected out of all the ranks the Ascend needs.
 func _setup_ascend_badge() -> void:
 	var base := _base_id(item)
 	for evo in UpgradeDb.UPGRADES:
 		var data = UpgradeDb.UPGRADES[evo]
 		if not data.has("evolves") or evo in player.collected_upgrades:
 			continue
-		var partners := []
 		var is_part := false
+		var partner = null
+		var have := 0
+		var need := 0
 		for pre in data["prerequisite"]:
-			if _base_id(pre) == base:
+			var pre_base := _base_id(pre)
+			if pre_base == base:
 				is_part = true
 			else:
-				partners.append(pre)
-		if not is_part:
+				partner = pre
+			var ranks_needed := int(pre.right(1)) # "tome4" -> 4
+			need += ranks_needed
+			for rank in range(1, ranks_needed + 1):
+				if (pre_base + str(rank)) in player.collected_upgrades:
+					have += 1
+		if not is_part or partner == null or have == 0:
 			continue
-		for partner in partners:
-			for owned in player.collected_upgrades:
-				if _base_id(owned) == _base_id(partner):
-					ascendIcon.texture = load(UpgradeDb.UPGRADES[partner]["icon"])
-					ascendBadge.visible = true
-					return
+		lblAscend.text = "Ascend %d/%d with" % [have, need]
+		ascendIcon.texture = load(UpgradeDb.UPGRADES[partner]["icon"])
+		ascendBadge.visible = true
+		return
 
 
 # "armor3" -> "armor"
