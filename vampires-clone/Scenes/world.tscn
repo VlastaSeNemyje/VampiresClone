@@ -75,7 +75,7 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("4_fo5ed")
-time_start = 110
+time_start = 106
 time_end = 330
 enemy = ExtResource("5_hgpy0")
 enemy_num = 2
@@ -84,16 +84,17 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("4_fo5ed")
-time_start = 85
-time_end = 330
+time_start = 70
+time_end = 200
 enemy = ExtResource("13_hunter")
-enemy_num = 1
-enemy_spawn_delay = 10
+enemy_num = 3
+enemy_spawn_delay = 15
+grouped = true
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("4_fo5ed")
-time_start = 100
+time_start = 153
 time_end = 330
 enemy = ExtResource("14_decker")
 enemy_num = 1
@@ -120,7 +121,7 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("4_fo5ed")
-time_start = 110
+time_start = 130
 time_end = 305
 enemy = ExtResource("15_grain")
 enemy_num = 1
@@ -129,7 +130,7 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("4_fo5ed")
-time_start = 55
+time_start = 70
 time_end = 135
 enemy = ExtResource("16_idiot")
 enemy_num = 1
@@ -165,18 +166,22 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_17"]
 script = ExtResource("4_fo5ed")
-time_start = 200
-time_end = 200
+time_start = 111
+time_end = 290
 enemy = ExtResource("16_idiot")
 enemy_num = 3
+enemy_spawn_delay = 29
+surround = true
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_18"]
 script = ExtResource("4_fo5ed")
-time_start = 245
-time_end = 245
-enemy = ExtResource("16_idiot")
-enemy_num = 3
+time_start = 200
+time_end = 330
+enemy = ExtResource("13_hunter")
+enemy_num = 4
+enemy_spawn_delay = 15
+grouped = true
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_19"]
@@ -185,6 +190,27 @@ time_start = 305
 time_end = 305
 enemy = ExtResource("16_idiot")
 enemy_num = 4
+surround = true
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_20"]
+script = ExtResource("4_fo5ed")
+time_start = 60
+time_end = 90
+enemy = ExtResource("5_0fj1v")
+enemy_num = 4
+enemy_spawn_delay = 1
+surround = true
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
+[sub_resource type="Resource" id="Spawn_21"]
+script = ExtResource("4_fo5ed")
+time_start = 60
+time_end = 90
+enemy = ExtResource("7_0fj1v")
+enemy_num = 3
+enemy_spawn_delay = 2
+surround = true
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Wave_1"]
@@ -228,7 +254,7 @@ region_rect = Rect2(0, 0, 4000, 4000)
 [node name="Player" parent="." unique_id=1972239113 instance=ExtResource("2_go701")]
 
 [node name="EnemySpawner" parent="." unique_id=1013572439 instance=ExtResource("3_5a7ea")]
-spawns = Array[ExtResource("4_fo5ed")]([SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19")])
+spawns = Array[ExtResource("4_fo5ed")]([SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19"), SubResource("Spawn_20"), SubResource("Spawn_21")])
 pressure_waves = Array[ExtResource("10_pw")]([SubResource("Wave_1"), SubResource("Wave_2"), SubResource("Wave_3"), SubResource("Wave_4")])
 
 [node name="FoodStumpField" type="Node2D" parent="." unique_id=431043961]

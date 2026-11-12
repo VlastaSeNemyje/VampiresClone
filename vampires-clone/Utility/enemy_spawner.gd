@@ -24,6 +24,8 @@ extends Node2D
 
 var time = 0
 
+const SIDES = ["up", "down", "right", "left"]
+
 signal changetime(time)
 
 func _ready():
@@ -42,9 +44,17 @@ func _on_timer_timeout() -> void:
 				i.spawn_delay_counter = 0
 				var new_enemy = i.enemy
 				var counter = 0
+				var group_center = get_random_position()
+				var sides = SIDES.duplicate()
+				sides.shuffle()
 				while counter < i.enemy_num:
 					var enemy_spawn = new_enemy.instantiate()
-					enemy_spawn.global_position = get_random_position()
+					if i.grouped:
+						enemy_spawn.global_position = group_center + Vector2.from_angle(randf() * TAU) * randf_range(0.0, i.group_spread)
+					elif i.surround:
+						enemy_spawn.global_position = get_random_position(0.0, sides[counter % sides.size()])
+					else:
+						enemy_spawn.global_position = get_random_position()
 					add_child(enemy_spawn)
 					counter += 1
 	emit_signal("changetime", time)
@@ -81,7 +91,7 @@ func _maintain_crowd():
 	for i in needed:
 		far[i].global_position = get_random_position(maxf(forward_spawn_chance, 0.8))
 
-func get_random_position(forward_chance = -1.0):
+func get_random_position(forward_chance = -1.0, forced_side = ""):
 	if forward_chance < 0.0:
 		forward_chance = forward_spawn_chance
 	var vpr = get_viewport_rect().size * randf_range (1.1, 1.4)
@@ -89,9 +99,11 @@ func get_random_position(forward_chance = -1.0):
 	var top_right = Vector2 (player.global_position.x + vpr.x/2, player.global_position.y - vpr.y/2)
 	var bottom_left = Vector2 (player.global_position.x - vpr.x/2, player.global_position.y + vpr.y/2)
 	var bottom_right = Vector2 (player.global_position.x + vpr.x/2, player.global_position.y + vpr.y/2)
-	var pos_side = ["up", "down", "right", "left"].pick_random()
+	var pos_side = SIDES.pick_random()
 	var move_dir = player.velocity
-	if move_dir.length() > 1.0 and randf() < forward_chance:
+	if forced_side != "":
+		pos_side = forced_side
+	elif move_dir.length() > 1.0 and randf() < forward_chance:
 		if absf(move_dir.x) > absf(move_dir.y):
 			pos_side = "right" if move_dir.x > 0 else "left"
 		else:
