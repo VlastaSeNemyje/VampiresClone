@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cbctpa7bp0168"]
+
+[ext_resource type="Script" uid="uid://bjaebl841ensi" path="res://Scenes/Objects/food_stump.gd" id="1_stump"]
+[ext_resource type="Texture2D" uid="uid://dni7gbi2bwmak" path="res://Textures/Sprites/Candle.png" id="2_candle"]
+[ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_hurt"]
+[ext_resource type="AudioStream" uid="uid://bmhx672y3i5eh" path="res://Sounds/VFX/SFX_WAV_189.wav" id="4_snd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(14, 20)
+
+[node name="FoodStump" type="Node2D" unique_id=80554273]
+z_index = 1
+script = ExtResource("1_stump")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=156962516]
+texture_filter = 1
+position = Vector2(-5.9604645e-08, 5.9604645e-08)
+scale = Vector2(0.5083333, 0.5083333)
+texture = ExtResource("2_candle")
+hframes = 4
+
+[node name="HurtBox" parent="." unique_id=1342252357 instance=ExtResource("3_hurt")]
+visible = false
+position = Vector2(0, 0)
+collision_layer = 4
+collision_mask = 4
+HurtBoxType = 1
+
+[node name="CollisionShape2D" parent="HurtBox" index="0" unique_id=486513834]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="." unique_id=1807584500]
+stream = ExtResource("4_snd")
+bus = &"AttackVFX"
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]

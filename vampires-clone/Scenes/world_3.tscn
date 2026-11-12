@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c1rixmjv8cp"]
 
 [ext_resource type="Texture2D" uid="uid://fl018gp173cx" path="res://Textures/Tiles/Grass.png" id="1_a02cp"]
+[ext_resource type="Script" path="res://Scenes/Objects/food_stump_field.gd" id="30_stumps"]
 [ext_resource type="PackedScene" uid="uid://c7lw3r24jtsuu" path="res://Scenes/player_3.tscn" id="2_go701"]
 [ext_resource type="PackedScene" uid="uid://d1e3hlytsbxte" path="res://Utility/enemy_spawner.tscn" id="3_5a7ea"]
 [ext_resource type="Script" uid="uid://diqfod1cd4yra" path="res://Utility/spawn_info.gd" id="4_fo5ed"]
@@ -236,6 +237,12 @@ shape = SubResource("Bound_shape")
 [node name="EnemySpawner" parent="." unique_id=1013572439 instance=ExtResource("3_5a7ea")]
 spawns = Array[ExtResource("4_fo5ed")]([SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15")])
 pressure_waves = Array[ExtResource("10_pw")]([SubResource("Wave_1"), SubResource("Wave_2"), SubResource("Wave_3"), SubResource("Wave_4")])
+
+[node name="FoodStumpField" type="Node2D" parent="."]
+script = ExtResource("30_stumps")
+density = 2.5
+area_size = Vector2(3600, 240)
+clear_radius = 120.0
 
 [node name="Loot" type="Node2D" parent="." unique_id=1105049148 groups=["loot"]]
 

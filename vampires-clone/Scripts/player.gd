@@ -21,7 +21,7 @@ extends CharacterBody2D
 ## Most different attacks the player can hold (the starting attack counts). New attacks stop being offered at this number.
 @export var max_attacks: int = 3
 ## Chance (0-1) that the second card offers the upgrade needed to Ascend an attack the player owns.
-@export_range(0.0, 1.0, 0.05) var ascend_path_chance: float = 0.65
+@export_range(0.0, 1.0, 0.05) var ascend_path_chance: float = 0.4
 @export_group("")
 
 var last_movement = Vector2.UP
@@ -336,6 +336,12 @@ func _on_grab_area_area_entered(area):
 	if area.is_in_group("loot"):
 		area.target = self
 
+# Restores health (Food card, food dropped by Food Stumps) and refreshes the health bar.
+func heal(amount: float):
+	hp = clamp(hp + amount, 0, maxhp)
+	healthBar.max_value = maxhp
+	healthBar.value = hp
+
 func _on_collect_area_area_entered(area):
 	if area.is_in_group("loot"):
 		var gem_exp = area.collect()
@@ -462,8 +468,7 @@ func upgrade_character(upgrade):
 		"ring1","ring2":
 			additional_attacks += 1
 		"food":
-			hp += 20
-			hp = clamp(hp,0,maxhp)
+			heal(20)
 	adjust_gui_collection(upgrade)
 	attack()
 	var option_children = upgradeOptions.get_children()

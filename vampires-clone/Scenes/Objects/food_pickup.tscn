@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scenes/Objects/food_pickup.gd" id="1_food"]
+[ext_resource type="Texture2D" uid="uid://50s0wy6jpjke" path="res://Textures/Sprites/Upgrades/Food.png" id="2_food"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_food"]
+size = Vector2(10, 8)
+
+[node name="FoodPickup" type="Area2D" groups=["loot"]]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_food")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_food")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_food")

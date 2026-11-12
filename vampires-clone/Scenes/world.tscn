@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://cs38s4swnkfpi" path="res://Utility/story_text.gd" id="17_story"]
 [ext_resource type="Script" uid="uid://fml5lvkoohrr" path="res://Utility/story_line.gd" id="18_storyline"]
 [ext_resource type="PackedScene" uid="uid://b5tupvx3wxuwm" path="res://Scenes/mist.tscn" id="19_mist"]
+[ext_resource type="Script" uid="uid://c3s7dhh8tr5fe" path="res://Scenes/Objects/food_stump_field.gd" id="30_stumps"]
 
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("4_fo5ed")
@@ -230,6 +231,10 @@ region_rect = Rect2(0, 0, 4000, 4000)
 spawns = Array[ExtResource("4_fo5ed")]([SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19")])
 pressure_waves = Array[ExtResource("10_pw")]([SubResource("Wave_1"), SubResource("Wave_2"), SubResource("Wave_3"), SubResource("Wave_4")])
 
+[node name="FoodStumpField" type="Node2D" parent="." unique_id=431043961]
+script = ExtResource("30_stumps")
+density = 1.2
+
 [node name="Loot" type="Node2D" parent="." unique_id=1105049148 groups=["loot"]]
 
 [node name="ExpGem" parent="." unique_id=221015540 instance=ExtResource("6_5ukr8")]
@@ -244,8 +249,8 @@ process_mode = 3
 stream = ExtResource("11_7yui6")
 volume_db = 5.0
 autoplay = true
-script = ExtResource("12_c5t2i")
 bus = &"WorldMusic"
+script = ExtResource("12_c5t2i")
 
 [node name="StoryText" type="CanvasLayer" parent="." unique_id=1831414024]
 script = ExtResource("17_story")
