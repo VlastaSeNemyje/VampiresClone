@@ -36,6 +36,27 @@ func _ready() -> void:
 		tab.refresh()
 	if OS.is_debug_build():
 		_build_debug_tools()
+	# Keyboard cursor: character row -> Play -> Exit (wrapping). Up / down (W / S) move between them,
+	# left / right (A / D) browse the characters, Enter / Space confirm the character or press the button.
+	$btn_play.link_focus([$btn_play, $btn_exit])
+	for tab in tabs:
+		tab.focus_neighbor_bottom = tab.get_path_to($btn_play)
+		tab.focus_neighbor_top = tab.get_path_to($btn_exit)
+		tab.focus_entered.connect(_enter_row_at.bind(tab))
+	_enter_row_at(tabs[clampi(GameProgress.selected_index, 0, tabs.size() - 1)])
+	# Nothing confirmed yet: the cursor starts on the first character (browse look), and Play
+	# starts the first character (GameProgress falls back to it).
+	# Coming back with a character already confirmed, the cursor starts on Play.
+	if GameProgress.selected_index < 0:
+		tabs[0].grab_focus()
+	else:
+		$btn_play.grab_focus()
+
+
+# Coming back to the character row from Play / Exit lands on the tab the cursor was on last.
+func _enter_row_at(tab: Control) -> void:
+	$btn_play.focus_neighbor_top = $btn_play.get_path_to(tab)
+	$btn_exit.focus_neighbor_bottom = $btn_exit.get_path_to(tab)
 
 
 func _flicker_loop() -> void:

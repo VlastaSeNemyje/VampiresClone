@@ -48,7 +48,7 @@ func _update_frame() -> void:
 		frame_art.texture = TEX_FRAME_SELECTED
 		_place_art(RECT_SELECTED)
 		frame_art.modulate = TINT_SELECTED
-	elif hovered and unlocked:
+	elif (hovered or has_focus()) and unlocked:   # browsed, not confirmed yet
 		selection_border.add_theme_stylebox_override("panel", _style_hover)
 		frame_art.texture = TEX_FRAME
 		_place_art(RECT_FRAME)
@@ -65,12 +65,17 @@ func _ready() -> void:
 	GameProgress.connect("progress_changed", Callable(self, "refresh"))
 	mouse_entered.connect(func(): hovered = true; _update_frame())
 	mouse_exited.connect(func(): hovered = false; _update_frame())
+	# Keyboard cursor = focus. Mouse and keyboard share it: hovering a tab also moves the cursor there.
+	focus_entered.connect(_update_frame)
+	focus_exited.connect(_update_frame)
+	mouse_entered.connect(func(): if unlocked: grab_focus())
 	portrait.texture = portrait_texture
 	refresh()
 
 
 func refresh() -> void:
 	unlocked = GameProgress.is_unlocked(index)
+	focus_mode = Control.FOCUS_ALL if unlocked else Control.FOCUS_NONE   # the cursor skips locked characters
 
 	if unlocked:
 		portrait.modulate = Color(1, 1, 1, 1)
@@ -111,6 +116,42 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if unlocked:
 			emit_signal("tab_selected", index)
+		return
+	# Keyboard: left / right (A / D) browse the characters, Enter / Space confirm the browsed one,
+	# W / S leave the row (the arrow keys do that through the focus neighbours set by the menu).
+	if not (event is InputEventKey and event.pressed and not event.echo):
+		return
+	match event.keycode:
+		KEY_LEFT, KEY_A:
+			_browse(-1)
+		KEY_RIGHT, KEY_D:
+			_browse(1)
+		KEY_ENTER, KEY_KP_ENTER, KEY_SPACE:
+			if unlocked:
+				emit_signal("tab_selected", index)
+		KEY_W:
+			_focus_neighbor(SIDE_TOP)
+		KEY_S:
+			_focus_neighbor(SIDE_BOTTOM)
+		_:
+			return
+	accept_event()
+
+
+# Moves the cursor to the next unlocked character in the given direction, wrapping around.
+func _browse(step: int) -> void:
+	var siblings := get_parent().get_children()
+	for i in range(1, siblings.size()):
+		var tab = siblings[wrapi(get_index() + step * i, 0, siblings.size())]
+		if tab.get("unlocked"):
+			tab.grab_focus()
+			return
+
+
+func _focus_neighbor(side: Side) -> void:
+	var target := find_valid_focus_neighbor(side)
+	if target != null:
+		target.grab_focus()
 
 
 func _place_art(rect: Rect2) -> void:

@@ -3,7 +3,8 @@ extends Node
 # --- Slot 0 = starting Dryad/forest world, always unlocked ---
 # --- Slot 1 & 2 = unlocked by finishing the previous world     ---
 var unlocked: Array[bool] = [true, false, false]
-var selected_index: int = 0
+## -1 = no character confirmed yet (the menu starts like that)
+var selected_index: int = -1
 
 # Fill in the real paths once you've duplicated world.tscn for the
 # two new worlds (see INTEGRATION_NOTES.md).
@@ -76,6 +77,6 @@ func toggle_lock(index: int) -> void:
 
 func reset_progress() -> void:
 	unlocked = [true, false, false]
-	selected_index = 0
+	selected_index = -1
 	save_progress()
 	emit_signal("progress_changed")

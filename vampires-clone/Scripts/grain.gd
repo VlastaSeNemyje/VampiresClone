@@ -17,6 +17,11 @@ var charge_direction := Vector2.ZERO
 func _ready():
 	super()
 	add_to_group("grain")
+	# Chargers never steer, so they must not be solid: a charger blocked by an enemy stays there
+	# forever and keeps shoving it into the crowd behind, which freezes the whole group.
+	# They fly through everything instead; the PushArea still shoves the enemies they pass.
+	collision_layer = 0
+	collision_mask = 0
 
 func _get_move_direction() -> Vector2:
 	return charge_direction

@@ -84,10 +84,14 @@ frame_3/texture = ExtResource("10_mqqw7")
 frame_3/duration = 0.1
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_btn"]
+content_margin_top = 0.0
+content_margin_bottom = 4.0
 texture = ExtResource("16_btn")
 modulate_color = Color(0.8, 0.2, 0.2, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_btn_sel"]
+content_margin_top = 0.0
+content_margin_bottom = 4.0
 texture = ExtResource("17_btnsel")
 modulate_color = Color(0.6, 0.2, 0.25, 1)
 
@@ -278,7 +282,7 @@ theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxTexture_btn")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_btn_sel")
 theme_override_styles/hover = SubResource("StyleBoxTexture_btn_sel")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
+theme_override_styles/focus = SubResource("StyleBoxTexture_btn_sel")
 text = "Play"
 flat = false
 
@@ -322,7 +326,7 @@ theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_styles/normal = SubResource("StyleBoxTexture_btn")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_btn_sel")
 theme_override_styles/hover = SubResource("StyleBoxTexture_btn_sel")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_btn")
+theme_override_styles/focus = SubResource("StyleBoxTexture_btn_sel")
 text = "Exit"
 flat = false
 

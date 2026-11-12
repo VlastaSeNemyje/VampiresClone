@@ -22,7 +22,7 @@
 
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("4_fo5ed")
-time_end = 70
+time_end = 85
 enemy = ExtResource("5_0fj1v")
 enemy_num = 3
 enemy_spawn_delay = 1
@@ -30,8 +30,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("4_fo5ed")
-time_start = 70
-time_end = 150
+time_start = 85
+time_end = 185
 enemy = ExtResource("5_0fj1v")
 enemy_num = 4
 enemy_spawn_delay = 1
@@ -39,8 +39,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("4_fo5ed")
-time_start = 150
-time_end = 270
+time_start = 185
+time_end = 330
 enemy = ExtResource("5_0fj1v")
 enemy_num = 5
 enemy_spawn_delay = 1
@@ -48,16 +48,16 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("4_fo5ed")
-time_start = 70
-time_end = 77
+time_start = 85
+time_end = 92
 enemy = ExtResource("5_0fj1v")
 enemy_num = 12
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("4_fo5ed")
-time_start = 15
-time_end = 90
+time_start = 20
+time_end = 110
 enemy = ExtResource("7_0fj1v")
 enemy_num = 2
 enemy_spawn_delay = 4
@@ -65,8 +65,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("4_fo5ed")
-time_start = 90
-time_end = 270
+time_start = 110
+time_end = 330
 enemy = ExtResource("7_0fj1v")
 enemy_num = 3
 enemy_spawn_delay = 3
@@ -74,8 +74,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("4_fo5ed")
-time_start = 90
-time_end = 270
+time_start = 110
+time_end = 330
 enemy = ExtResource("5_hgpy0")
 enemy_num = 2
 enemy_spawn_delay = 4
@@ -83,8 +83,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("4_fo5ed")
-time_start = 70
-time_end = 270
+time_start = 85
+time_end = 330
 enemy = ExtResource("13_hunter")
 enemy_num = 1
 enemy_spawn_delay = 10
@@ -92,8 +92,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("4_fo5ed")
-time_start = 80
-time_end = 270
+time_start = 100
+time_end = 330
 enemy = ExtResource("14_decker")
 enemy_num = 1
 enemy_spawn_delay = 12
@@ -101,8 +101,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("4_fo5ed")
-time_start = 25
-time_end = 135
+time_start = 30
+time_end = 165
 enemy = ExtResource("6_5v1tr")
 enemy_num = 1
 enemy_spawn_delay = 14
@@ -110,8 +110,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("4_fo5ed")
-time_start = 135
-time_end = 270
+time_start = 165
+time_end = 330
 enemy = ExtResource("6_5v1tr")
 enemy_num = 2
 enemy_spawn_delay = 12
@@ -119,8 +119,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("4_fo5ed")
-time_start = 90
-time_end = 250
+time_start = 110
+time_end = 305
 enemy = ExtResource("15_grain")
 enemy_num = 1
 enemy_spawn_delay = 20
@@ -128,8 +128,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("4_fo5ed")
-time_start = 45
-time_end = 110
+time_start = 55
+time_end = 135
 enemy = ExtResource("16_idiot")
 enemy_num = 1
 enemy_spawn_delay = 20
@@ -137,8 +137,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_14"]
 script = ExtResource("4_fo5ed")
-time_start = 110
-time_end = 150
+time_start = 135
+time_end = 185
 enemy = ExtResource("16_idiot")
 enemy_num = 1
 enemy_spawn_delay = 10
@@ -146,8 +146,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_15"]
 script = ExtResource("4_fo5ed")
-time_start = 150
-time_end = 215
+time_start = 185
+time_end = 265
 enemy = ExtResource("16_idiot")
 enemy_num = 1
 enemy_spawn_delay = 5
@@ -155,8 +155,8 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_16"]
 script = ExtResource("4_fo5ed")
-time_start = 215
-time_end = 270
+time_start = 265
+time_end = 330
 enemy = ExtResource("16_idiot")
 enemy_num = 1
 enemy_spawn_delay = 8
@@ -164,49 +164,49 @@ metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Spawn_17"]
 script = ExtResource("4_fo5ed")
-time_start = 165
-time_end = 165
-enemy = ExtResource("16_idiot")
-enemy_num = 3
-metadata/_custom_type_script = "uid://diqfod1cd4yra"
-
-[sub_resource type="Resource" id="Spawn_18"]
-script = ExtResource("4_fo5ed")
 time_start = 200
 time_end = 200
 enemy = ExtResource("16_idiot")
 enemy_num = 3
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
+[sub_resource type="Resource" id="Spawn_18"]
+script = ExtResource("4_fo5ed")
+time_start = 245
+time_end = 245
+enemy = ExtResource("16_idiot")
+enemy_num = 3
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
 [sub_resource type="Resource" id="Spawn_19"]
 script = ExtResource("4_fo5ed")
-time_start = 250
-time_end = 250
+time_start = 305
+time_end = 305
 enemy = ExtResource("16_idiot")
 enemy_num = 4
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
 [sub_resource type="Resource" id="Wave_1"]
 script = ExtResource("10_pw")
-time_start = 70
-time_end = 82
+time_start = 85
+time_end = 97
 
 [sub_resource type="Resource" id="Wave_2"]
 script = ExtResource("10_pw")
-time_start = 135
-time_end = 148
+time_start = 165
+time_end = 178
 
 [sub_resource type="Resource" id="Wave_3"]
 script = ExtResource("10_pw")
-time_start = 195
-time_end = 210
+time_start = 240
+time_end = 255
 crowd_fraction = 1.0
 pulled_per_second = 60
 
 [sub_resource type="Resource" id="Wave_4"]
 script = ExtResource("10_pw")
-time_start = 245
-time_end = 265
+time_start = 300
+time_end = 320
 crowd_fraction = 1.0
 pulled_per_second = 60
 

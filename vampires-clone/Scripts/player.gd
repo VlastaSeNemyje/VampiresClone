@@ -130,11 +130,29 @@ var enemy_close = []
 @onready var sndVictory = get_node("%snd_victory")
 @onready var sndLose = get_node("%snd_lose")
 
+#Pause (button and panel are built in _build_pause_gui, so every player scene gets them)
+const PAUSE_ICON = preload("res://Textures/Sprites/Menu/Pause.png")
+const BASIC_BUTTON = preload("res://Utility/basic_button.tscn")
+# Panel buttons use the main menu look: outline normally, filled on hover and while clicked
+const BUTTON_TEXTURE = preload("res://Textures/Sprites/Menu/Button.png")
+const BUTTON_FILLED_TEXTURE = preload("res://Textures/Sprites/Menu/Button Selection.png")
+const BUTTON_SIDE_TEXTURE = preload("res://Textures/Sprites/Menu/Button Side.png")
+const BUTTON_SIDE_TINT := Color(0.5, 0.1, 0.12, 1)   # same as SIDE_DIM in basic_button.gd
+const BUTTON_NORMAL_TINT := Color(0.8, 0.2, 0.2, 1)
+const BUTTON_HOVER_TINT := Color(0.6, 0.2, 0.25, 1)
+const PANEL_BUTTON_SIZE := Vector2(128, 28)
+## Top-left corner of the pause button on the 640x360 screen (top right, under the Level label).
+@export var pause_button_position := Vector2(604, 26)
+@export_range(0.0, 1.0) var pause_button_opacity: float = 0.5
+var btnPause: TextureButton
+var pausePanel: Panel
+
 #Signal
 signal playerdeath
 
 func _ready():
 	change_time(0)   # show the full countdown before the first second ticks
+	_build_pause_gui()
 	collision_mask |= 32   # the Obstacle layer (trees and bogs)
 	# Whip swings come in bursts: one-shot, short gap between swings of the same burst
 	whipAttackTimer.one_shot = true
@@ -622,8 +640,107 @@ func adjust_gui_collection(upgrade):
 				"upgrade":
 					collectedUpgrades.add_child(new_item)
 			
+func _build_pause_gui():
+	var gui = deathPanel.get_parent()
+
+	# The button is paused together with the game, so it cannot be clicked
+	# while the level-up, end-game or pause panel is open.
+	btnPause = TextureButton.new()
+	btnPause.name = "btn_pause"
+	btnPause.texture_normal = PAUSE_ICON
+	btnPause.position = pause_button_position
+	btnPause.modulate.a = pause_button_opacity
+	btnPause.focus_mode = Control.FOCUS_NONE
+	btnPause.pressed.connect(_on_btn_pause_pressed)
+	gui.add_child(btnPause)
+
+	# Same Panel, size and place as the end-game panel
+	pausePanel = Panel.new()
+	pausePanel.name = "PausePanel"
+	pausePanel.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	pausePanel.visible = false
+	pausePanel.position = Vector2(220, 50)
+	pausePanel.size = deathPanel.size
+	gui.add_child(pausePanel)
+
+	var lbl = Label.new()
+	lbl.text = "Pause"
+	lbl.size = Vector2(pausePanel.size.x, 50)
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	pausePanel.add_child(lbl)
+
+	var btn_continue = BASIC_BUTTON.instantiate()
+	btn_continue.name = "btn_continue"
+	btn_continue.text = "Continue"
+	btn_continue.position = Vector2(48, 160)
+	btn_continue.click_end.connect(_on_btn_continue_click_end)
+	pausePanel.add_child(btn_continue)
+
+	for btn in [btn_continue, deathPanel.get_node("btn_retry"), deathPanel.get_node("btn_menu")]:
+		_style_panel_button(btn)
+	# Keyboard: arrows / W S move between the buttons of a panel, Enter / Space confirm
+	btn_continue.link_focus([btn_continue])
+	btn_continue.link_focus([deathPanel.get_node("btn_retry"), deathPanel.get_node("btn_menu")])
+
+func _button_style(texture: Texture2D, tint: Color) -> StyleBoxTexture:
+	var style := StyleBoxTexture.new()
+	style.texture = texture
+	style.modulate_color = tint
+	# The button art sits in the upper part of its texture, so lift the text 2 px to centre it
+	style.content_margin_top = 0.0
+	style.content_margin_bottom = 4.0
+	return style
+
+# Gives a panel button its normal / hover / click look and centres it in its panel.
+func _style_panel_button(btn: Button):
+	btn.flat = false
+	btn.text = btn.text.strip_edges()   # "Menu" has a stray line break in the scenes
+	btn.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	btn.add_theme_stylebox_override("normal", _button_style(BUTTON_TEXTURE, BUTTON_NORMAL_TINT))
+	btn.add_theme_stylebox_override("hover", _button_style(BUTTON_FILLED_TEXTURE, BUTTON_HOVER_TINT))
+	btn.add_theme_stylebox_override("pressed", _button_style(BUTTON_FILLED_TEXTURE, BUTTON_HOVER_TINT))
+	# the keyboard cursor looks the same as mouse hover
+	btn.add_theme_stylebox_override("focus", _button_style(BUTTON_FILLED_TEXTURE, BUTTON_HOVER_TINT))
+	btn.add_theme_color_override("font_color", Color(0.96, 0.9, 0.75, 1))
+	for color_name in ["font_hover_color", "font_pressed_color", "font_hover_pressed_color", "font_focus_color"]:
+		btn.add_theme_color_override(color_name, Color.WHITE)
+	btn.size = PANEL_BUTTON_SIZE
+	btn.position.x = (btn.get_parent().size.x - PANEL_BUTTON_SIZE.x) * 0.5
+	# Side ornaments, placed as in the main menu; basic_button.gd brightens them on hover
+	for side in [["SideL", -26.0], ["SideR", PANEL_BUTTON_SIZE.x + 4.0]]:
+		var ornament := TextureRect.new()
+		ornament.name = side[0]
+		ornament.texture = BUTTON_SIDE_TEXTURE
+		ornament.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		ornament.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		ornament.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		ornament.modulate = BUTTON_SIDE_TINT
+		ornament.position = Vector2(side[1], 3)
+		ornament.size = Vector2(22, 22)
+		btn.add_child(ornament)
+
+func _on_btn_pause_pressed():
+	if get_tree().paused:
+		return
+	pausePanel.visible = true
+	get_tree().paused = true
+	pausePanel.get_node("btn_continue").grab_focus()
+
+# Esc pauses the game (the player is paused with the game, so this never runs while a panel is open)
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_cancel"):
+		_on_btn_pause_pressed()
+		get_viewport().set_input_as_handled()
+
+func _on_btn_continue_click_end():
+	pausePanel.visible = false
+	get_tree().paused = false
+
 func death():
+	btnPause.visible = false
 	deathPanel.visible = true
+	deathPanel.get_node("btn_retry").grab_focus()
 	emit_signal("playerdeath")
 	get_tree().paused = true
 	var tween = deathPanel.create_tween()
