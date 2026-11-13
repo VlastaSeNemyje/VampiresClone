@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b4g4ormrns30w" path="res://Scenes/exp_gem.tscn" id="6_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://d0qu2pojwvyyh" path="res://Scenes/enemy_basic_0_elite.tscn" id="6_5v1tr"]
 [ext_resource type="PackedScene" uid="uid://cdt0vfoh7p0cp" path="res://Scenes/enemy_gerald_2.tscn" id="7_0fj1v"]
+[ext_resource type="PackedScene" uid="uid://do6hvpnsvqj1y" path="res://Scenes/enemy_gerald_2_elite.tscn" id="8_geraldelite"]
 [ext_resource type="Script" uid="uid://djm8y6nl5j05a" path="res://Utility/pressure_wave.gd" id="10_pw"]
 [ext_resource type="AudioStream" uid="uid://k6yeo0j2eera" path="res://Sounds/Music/Chiptune Rock 1.wav" id="11_7yui6"]
 [ext_resource type="Script" uid="uid://dm615omebx2ud" path="res://Scenes/music_level.gd" id="12_c5t2i"]
@@ -213,6 +214,15 @@ enemy_spawn_delay = 2
 surround = true
 metadata/_custom_type_script = "uid://diqfod1cd4yra"
 
+[sub_resource type="Resource" id="Spawn_22"]
+script = ExtResource("4_fo5ed")
+time_start = 51
+time_end = 100
+enemy = ExtResource("8_geraldelite")
+enemy_num = 1
+enemy_spawn_delay = 19
+metadata/_custom_type_script = "uid://diqfod1cd4yra"
+
 [sub_resource type="Resource" id="Wave_1"]
 script = ExtResource("10_pw")
 time_start = 85
@@ -254,12 +264,11 @@ region_rect = Rect2(0, 0, 4000, 4000)
 [node name="Player" parent="." unique_id=1972239113 instance=ExtResource("2_go701")]
 
 [node name="EnemySpawner" parent="." unique_id=1013572439 instance=ExtResource("3_5a7ea")]
-spawns = Array[ExtResource("4_fo5ed")]([SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19"), SubResource("Spawn_20"), SubResource("Spawn_21")])
+spawns = Array[ExtResource("4_fo5ed")]([SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19"), SubResource("Spawn_20"), SubResource("Spawn_21"), SubResource("Spawn_22")])
 pressure_waves = Array[ExtResource("10_pw")]([SubResource("Wave_1"), SubResource("Wave_2"), SubResource("Wave_3"), SubResource("Wave_4")])
 
 [node name="FoodStumpField" type="Node2D" parent="." unique_id=431043961]
 script = ExtResource("30_stumps")
-density = 1.2
 
 [node name="Loot" type="Node2D" parent="." unique_id=1105049148 groups=["loot"]]
 

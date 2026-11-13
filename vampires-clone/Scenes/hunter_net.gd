@@ -8,8 +8,15 @@ extends StaticBody2D
 ## Tint and opacity of the net sprite.
 @export var net_color: Color = Color(1, 1, 1, 1)
 
+## Damage the player takes on touching the net (repeats on the player's hurt cooldown while they keep touching).
+@export var damage: int = 3
+## How far the damaging zone reaches past the solid net on each side, so the player's hurt box can touch it.
+@export var damage_margin: float = 6.0
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var shape: CollisionShape2D = $CollisionShape2D
+@onready var hit_box: Area2D = $HitBox
+@onready var hit_shape: CollisionShape2D = $HitBox/CollisionShape2D
 
 var hunter_a: Node2D   # set by Hunter before add_child
 var hunter_b: Node2D
@@ -19,6 +26,8 @@ func _ready():
 	_texture_width = sprite.texture.get_width()
 	sprite.modulate = net_color
 	shape.shape = shape.shape.duplicate()   # own copy, resized every frame
+	hit_box.damage = damage
+	hit_shape.shape = RectangleShape2D.new()
 	_update()
 
 func other_end(hunter: Node2D) -> Node2D:
@@ -49,7 +58,9 @@ func _update():
 	var seg = maxf(a.distance_to(b), 1.0)
 	sprite.scale = Vector2(seg / _texture_width, 1.0)
 	(shape.shape as RectangleShape2D).size = Vector2(seg, thickness)
+	(hit_shape.shape as RectangleShape2D).size = Vector2(seg, thickness + damage_margin * 2.0)
 
 func _remove():
 	shape.set_deferred("disabled", true)
+	hit_shape.set_deferred("disabled", true)
 	queue_free()

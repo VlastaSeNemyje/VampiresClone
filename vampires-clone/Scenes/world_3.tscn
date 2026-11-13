@@ -240,9 +240,7 @@ pressure_waves = Array[ExtResource("10_pw")]([SubResource("Wave_1"), SubResource
 
 [node name="FoodStumpField" type="Node2D" parent="."]
 script = ExtResource("30_stumps")
-density = 2.5
 area_size = Vector2(3600, 240)
-clear_radius = 120.0
 
 [node name="Loot" type="Node2D" parent="." unique_id=1105049148 groups=["loot"]]
 

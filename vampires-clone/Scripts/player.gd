@@ -21,7 +21,7 @@ extends CharacterBody2D
 ## Most different attacks the player can hold (the starting attack counts). New attacks stop being offered at this number.
 @export var max_attacks: int = 3
 ## Chance (0-1) that the second card offers the upgrade needed to Ascend an attack the player owns.
-@export_range(0.0, 1.0, 0.05) var ascend_path_chance: float = 0.4
+@export_range(0.0, 1.0, 0.05) var ascend_path_chance: float = 0.35
 @export_group("")
 
 var last_movement = Vector2.UP
@@ -364,12 +364,17 @@ func calculate_experience(gem_exp):
 
 func calculate_experiencecap():
 	var exp_cap = experience_level
-	if experience_level < 20:
+	# Early levels stay cheap; from level 8 the cost climbs faster to slow the mid game.
+	if experience_level < 8:
 		exp_cap = experience_level*5
+	elif experience_level < 20:
+		exp_cap = 35 + (experience_level-7)*12
 	elif experience_level < 40:
-		exp_cap = 95 + (experience_level-19)*8
+		exp_cap = 179 + (experience_level-19)*14
+	elif experience_level < 50:
+		exp_cap = 459 + (experience_level-39)*18
 	else:
-		exp_cap = 255 + (experience_level-39)*12
+		exp_cap = 639 + (experience_level-49)*22
 	return exp_cap
 	
 func set_expbar (set_value = 1, set_max_value = 100):
@@ -644,7 +649,12 @@ func adjust_gui_collection(upgrade):
 					collectedWeapons.add_child(new_item)
 				"upgrade":
 					collectedUpgrades.add_child(new_item)
-			
+		else:
+			# Already shown: move its slot to the new rank so it gains a level square
+			for c in collectedWeapons.get_children() + collectedUpgrades.get_children():
+				if c.upgrade != null and UpgradeDb.UPGRADES[c.upgrade]["displayname"] == get_upgraded_displayname:
+					c.set_upgrade(upgrade)
+
 func _build_pause_gui():
 	var gui = deathPanel.get_parent()
 

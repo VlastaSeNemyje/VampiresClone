@@ -1,75 +1,77 @@
 extends Node
 
-# Main "full" pickup sound — plays for a single, non-rapid pickup
+# Template player — stream, volume and bus are configured on the XpSound node
+# in Scenes/audio_manager.tscn. The voices below copy its settings.
 @onready var xp_sound: AudioStreamPlayer = $XpSound
 
-# Small pool of players for rapid/stacked pickups, so quick successive
-# ticks can overlap slightly without cutting each other off
-var tick_pool: Array[AudioStreamPlayer] = []
-const TICK_POOL_SIZE := 4
-var tick_index := 0
+# ---- Tuning ----------------------------------------------------------------
+# Pickups are queued and played at a steady rate, so a vacuumed pile of gems
+# becomes an even rising run of notes instead of a same-frame burst.
+const XP_INTERVAL := 0.08       # seconds between notes while a queue drains
+const XP_MAX_QUEUE := 6         # extra pickups beyond this are merged (no long tail)
+const XP_RESET_TIME := 0.4      # silence after which the run starts from the bottom again
 
-var xp_cooldown := 0.0
-var time_since_xp := 999.0
-var xp_pitch := 1.0
+const XP_BASE_PITCH := 0.7      # pitch of the first note in a run
+const XP_SCALE: Array[int] = [0, 2, 4, 7, 9]  # major pentatonic, in semitones
+const XP_MAX_STEP := 4          # highest note of the run (4 = 9 semitones up, ~1.18 pitch)
 
-const XP_SOUND_DELAY := 0.055
-const XP_RESET_TIME := 0.20
+const XP_VOLUME_STEP_DB := 0.8  # each step up the run gets this much quieter...
+const XP_VOLUME_FLOOR_DB := 6.0 # ...down to at most this far below the base volume
 
-const XP_START_PITCH := 0.95
-const XP_PITCH_STEP := 0.005
-const XP_MAX_PITCH := 1.15
+const VOICE_COUNT := 8          # overlapping voices, so notes ring out instead of being cut
+# -----------------------------------------------------------------------------
 
-# How much of the sound a "stacked" tick is allowed to play before being cut
-const TICK_LENGTH := 0.07
+var voices: Array[AudioStreamPlayer] = []
+var voice_index := 0
+
+var pending := 0          # queued pickups waiting to be played
+var note_timer := 0.0     # time until the next queued note may play
+var time_since_note := 999.0
+var step := 0             # position in the rising run
 
 
 func _ready():
-	# xp_sound (stream, volume, bus) is configured on the XpSound node in
-	# Scenes/audio_manager.tscn
-	for i in TICK_POOL_SIZE:
-		var p = AudioStreamPlayer.new()
-		p.stream = xp_sound.stream   # reuse the same clip, just truncated
-		p.volume_db = -6             # quieter, so it reads as a "tick" not a duplicate hit
+	for i in VOICE_COUNT:
+		var p := AudioStreamPlayer.new()
+		p.stream = xp_sound.stream
 		p.bus = xp_sound.bus
 		add_child(p)
-		tick_pool.append(p)
+		voices.append(p)
 
 
 func _process(delta):
-	if xp_cooldown > 0.0:
-		xp_cooldown -= delta
+	note_timer -= delta
+	time_since_note += delta
 
-	time_since_xp += delta
-	if time_since_xp >= XP_RESET_TIME:
-		xp_pitch = XP_START_PITCH
+	if pending > 0 and note_timer <= 0.0:
+		pending -= 1
+		note_timer = XP_INTERVAL
+		_play_note()
 
 
 func play_xp():
-	var is_rapid = xp_cooldown > 0.0
-	time_since_xp = 0.0
-
-	if is_rapid:
-		_play_tick()
-		return
-
-	xp_cooldown = XP_SOUND_DELAY
-	xp_sound.pitch_scale = xp_pitch
-	xp_sound.play()
-
-	xp_pitch = min(xp_pitch + XP_PITCH_STEP, XP_MAX_PITCH)
+	pending = mini(pending + 1, XP_MAX_QUEUE)
 
 
-func _play_tick():
-	var p = tick_pool[tick_index]
-	tick_index = (tick_index + 1) % TICK_POOL_SIZE
+func _play_note():
+	if time_since_note >= XP_RESET_TIME:
+		step = 0
+	time_since_note = 0.0
 
-	p.pitch_scale = xp_pitch
+	var p := voices[voice_index]
+	voice_index = (voice_index + 1) % VOICE_COUNT
+
+	p.pitch_scale = XP_BASE_PITCH * pow(2.0, _semitones(step) / 12.0)
+	p.volume_db = xp_sound.volume_db - minf(step * XP_VOLUME_STEP_DB, XP_VOLUME_FLOOR_DB)
 	p.play()
 
-	# cut it short so it reads as a quick "tick" instead of a full pickup sound
-	await get_tree().create_timer(TICK_LENGTH).timeout
-	if p.playing:
-		p.stop()
+	step = mini(step + 1, XP_MAX_STEP)
 
-	xp_pitch = min(xp_pitch + XP_PITCH_STEP, XP_MAX_PITCH)
+
+# Semitone offset of the given step: walks up the scale, wrapping into the
+# next octave when it runs past the end.
+func _semitones(s: int) -> float:
+	var size := XP_SCALE.size()
+	@warning_ignore("integer_division")
+	var octave := s / size
+	return 12.0 * octave + XP_SCALE[s % size]

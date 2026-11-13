@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://do6hvpnsvqj1y"]
 
 [ext_resource type="Script" uid="uid://b1t3flr4tf40w" path="res://Scripts/enemy.gd" id="1_ok3uk"]
-[ext_resource type="Texture2D" uid="uid://bmcjvswarlwq" path="res://Textures/Sprites/Gerald2.png" id="2_ok3uk"]
+[ext_resource type="Texture2D" uid="uid://dhfpayflu8y2u" path="res://Textures/Sprites/Gerald2.png" id="2_ok3uk"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_2jlum"]
 [ext_resource type="PackedScene" uid="uid://cthuwwjhu3woh" path="res://Utility/hit_box.tscn" id="4_14i0j"]
 [ext_resource type="AudioStream" uid="uid://bmhx672y3i5eh" path="res://Sounds/VFX/SFX_WAV_189.wav" id="5_3cdtw"]
@@ -84,7 +84,7 @@ sprite_frames = SubResource("SpriteFrames_afpow")
 animation = &"idle"
 autoplay = "idle"
 frame = 4
-frame_progress = 0.071500435
+frame_progress = 0.3461277
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280193968]
 visible = false
@@ -103,6 +103,7 @@ position = Vector2(-2, 1)
 shape = SubResource("RectangleShape2D_287tu")
 
 [node name="HitBox" parent="." unique_id=1387451001 instance=ExtResource("4_14i0j")]
+visible = false
 position = Vector2(-1, 1)
 scale = Vector2(0.9999991, 0.63999975)
 collision_layer = 2

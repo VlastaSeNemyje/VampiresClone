@@ -21,8 +21,11 @@ extends "res://Scripts/enemy.gd"
 @export var net_player_distance: float = 75.0
 ## A Hunter can hold this many nets (2 lets them form a chain around the player).
 @export var max_nets_per_hunter: int = 2
-## Hunters holding a net walk apart along the circle until the net is this long, then stand still.
-@export var net_max_length: float = 25.0
+## Hunters holding a net walk apart along the circle until the net is this long, then hold position.
+## With orbit_radius 60, about 7 Hunters at this length close a full ring around the player.
+@export var net_max_length: float = 55.0
+## How gently a Hunter eases off as its net approaches net_max_length (bigger = softer stop, less jitter).
+@export var net_spread_smoothing: float = 8.0
 ## The net tears when its Hunters get further apart than this (e.g. one was moved away).
 @export var net_break_distance: float = 160.0
 
@@ -48,16 +51,20 @@ func _get_move_direction() -> Vector2:
 
 # A Hunter with a net spreads away from its partners along the circle, stretching the net.
 func _holding_net_direction(radial: Vector2, tangent: Vector2) -> Vector2:
-	var center = Vector2.ZERO
+	# Every net pushes its Hunter away from the partner until the net is fully stretched
+	# (and pulls it back if overstretched). A Hunter in the middle of a chain balances
+	# between its two partners, so the whole chain keeps opening instead of freezing
+	# as soon as one net is long enough.
+	var spread_amount = 0.0
 	for net in nets:
-		if net.length() >= net_max_length:
-			return Vector2.ZERO
-		center += net.other_end(self).global_position
-	center /= nets.size()
-	var spread = tangent * signf(tangent.dot(global_position - center))
-	if spread == Vector2.ZERO:
-		return radial
-	return (radial + spread).normalized()
+		var away = global_position - net.other_end(self).global_position
+		var side = signf(tangent.dot(away))
+		if side == 0.0:
+			side = 1.0 if get_instance_id() > net.other_end(self).get_instance_id() else -1.0
+		var slack = (net_max_length - net.length()) / maxf(net_spread_smoothing, 0.01)
+		spread_amount += side * clampf(slack, -1.0, 1.0)
+	var dir = radial + tangent * clampf(spread_amount, -1.0, 1.0)
+	return dir.limit_length(1.0)
 
 func _gather_direction() -> Vector2:
 	var closest: Node2D = null
