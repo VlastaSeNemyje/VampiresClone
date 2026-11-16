@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://d4mksw1nihjx5"]
 
+[ext_resource type="PackedScene" path="res://Scenes/light_pool.tscn" id="99_lightpool"]
 [ext_resource type="Script" uid="uid://crask6d84cg4i" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dva5k5nflhe47" path="res://Textures/Sprites/MiniYoungDryad.png" id="2_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_6t5aa"]
@@ -136,6 +137,8 @@ shape = SubResource("CapsuleShape2D_cvnsp")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=607192347]
 zoom = Vector2(1.3, 1.3)
+
+[node name="LightPool" parent="." instance=ExtResource("99_lightpool")]
 
 [node name="HurtBox" parent="." unique_id=1129910364 instance=ExtResource("3_6t5aa")]
 visible = false

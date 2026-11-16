@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://blrc83jxeub3d"]
 
+[ext_resource type="PackedScene" path="res://Scenes/light_pool.tscn" id="99_lightpool"]
 [ext_resource type="Script" path="res://Scripts/exp_bar_flash.gd" id="expflash"]
 [ext_resource type="Script" path="res://Scenes/Attacks/kanec_base.gd" id="kanec_base"]
 [ext_resource type="Script" path="res://Scenes/Attacks/plague_base.gd" id="plague_base"]
@@ -142,6 +143,8 @@ shape = SubResource("CapsuleShape2D_cvnsp")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=607192347]
 zoom = Vector2(1.3, 1.3)
+
+[node name="LightPool" parent="." instance=ExtResource("99_lightpool")]
 
 [node name="HurtBox" parent="." unique_id=1129910364 instance=ExtResource("3_6t5aa")]
 position = Vector2(2, -13)
