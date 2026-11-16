@@ -12,11 +12,18 @@ const XP_MAX_QUEUE := 6         # extra pickups beyond this are merged (no long 
 const XP_RESET_TIME := 0.4      # silence after which the run starts from the bottom again
 
 const XP_BASE_PITCH := 0.7      # pitch of the first note in a run
-const XP_SCALE: Array[int] = [0, 2, 4, 7, 9]  # major pentatonic, in semitones
-const XP_MAX_STEP := 4          # highest note of the run (4 = 9 semitones up, ~1.18 pitch)
+const XP_SCALE: Array[int] = [0, 2, 4, 5, 7]  # first five notes of a major scale, in semitones
+const XP_MAX_STEP := 4          # highest note of the run (4 = 7 semitones up, ~1.05 pitch)
 
-const XP_VOLUME_STEP_DB := 0.8  # each step up the run gets this much quieter...
+const XP_VOLUME_STEP_DB := 1.5  # each step up the run gets this much quieter...
 const XP_VOLUME_FLOOR_DB := 6.0 # ...down to at most this far below the base volume
+
+# Once the run is holding on its top note, repeats come slower and keep
+# getting quieter, so a long stack settles into a soft pulse instead of a
+# loud wall of the same high note layered on itself.
+const XP_HOLD_INTERVAL := 0.13      # seconds between repeated top notes
+const XP_HOLD_VOLUME_STEP_DB := 2.0 # each repeat of the top note gets this much quieter...
+const XP_HOLD_VOLUME_FLOOR_DB := 8.0 # ...down to at most this much extra
 
 const VOICE_COUNT := 8          # overlapping voices, so notes ring out instead of being cut
 # -----------------------------------------------------------------------------
@@ -28,6 +35,7 @@ var pending := 0          # queued pickups waiting to be played
 var note_timer := 0.0     # time until the next queued note may play
 var time_since_note := 999.0
 var step := 0             # position in the rising run
+var hold_count := 0       # how many times the top note has repeated in this run
 
 
 func _ready():
@@ -45,8 +53,8 @@ func _process(delta):
 
 	if pending > 0 and note_timer <= 0.0:
 		pending -= 1
-		note_timer = XP_INTERVAL
 		_play_note()
+		note_timer = XP_HOLD_INTERVAL if hold_count > 0 else XP_INTERVAL
 
 
 func play_xp():
@@ -56,16 +64,22 @@ func play_xp():
 func _play_note():
 	if time_since_note >= XP_RESET_TIME:
 		step = 0
+		hold_count = 0
 	time_since_note = 0.0
 
 	var p := voices[voice_index]
 	voice_index = (voice_index + 1) % VOICE_COUNT
 
 	p.pitch_scale = XP_BASE_PITCH * pow(2.0, _semitones(step) / 12.0)
-	p.volume_db = xp_sound.volume_db - minf(step * XP_VOLUME_STEP_DB, XP_VOLUME_FLOOR_DB)
+	p.volume_db = xp_sound.volume_db \
+			- minf(step * XP_VOLUME_STEP_DB, XP_VOLUME_FLOOR_DB) \
+			- minf(hold_count * XP_HOLD_VOLUME_STEP_DB, XP_HOLD_VOLUME_FLOOR_DB)
 	p.play()
 
-	step = mini(step + 1, XP_MAX_STEP)
+	if step >= XP_MAX_STEP:
+		hold_count += 1
+	else:
+		step += 1
 
 
 # Semitone offset of the given step: walks up the scale, wrapping into the
