@@ -1,54 +1,54 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b4sbgkrc1h8j0"]
 
-[ext_resource type="Script" path="res://Scripts/grain.gd" id="1_1f0kj"]
-[ext_resource type="Texture2D" uid="uid://qqp8rxdag8ku" path="res://Textures/Sprites/MiniPeasant.png" id="2_5phjl"]
+[ext_resource type="Script" uid="uid://ciw33s7l5lfbk" path="res://Scripts/grain.gd" id="1_1f0kj"]
+[ext_resource type="Texture2D" uid="uid://jh82lqy53qmj" path="res://Textures/Sprites/MiniPeasant.png" id="2_5phjl"]
 [ext_resource type="PackedScene" uid="uid://cyadi38x6i7cn" path="res://Utility/hurt_box.tscn" id="3_afpow"]
 [ext_resource type="PackedScene" uid="uid://cthuwwjhu3woh" path="res://Utility/hit_box.tscn" id="4_287tu"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5phjl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymu5l"]
 atlas = ExtResource("2_5phjl")
-region = Rect2(0, 33, 32, 33)
+region = Rect2(0, 68, 32, 31)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cj28r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3meg"]
 atlas = ExtResource("2_5phjl")
-region = Rect2(32, 33, 32, 33)
+region = Rect2(32, 68, 32, 31)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_65uil"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_11175"]
 atlas = ExtResource("2_5phjl")
-region = Rect2(64, 33, 32, 33)
+region = Rect2(64, 68, 32, 31)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1dtji"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwg01"]
 atlas = ExtResource("2_5phjl")
-region = Rect2(96, 33, 32, 33)
+region = Rect2(96, 68, 32, 31)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0gqce"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_48enw"]
 atlas = ExtResource("2_5phjl")
-region = Rect2(128, 33, 32, 33)
+region = Rect2(128, 68, 32, 31)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8mrun"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_02lns"]
 atlas = ExtResource("2_5phjl")
-region = Rect2(160, 33, 32, 33)
+region = Rect2(160, 68, 32, 31)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_afpow"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5phjl")
+"texture": SubResource("AtlasTexture_ymu5l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cj28r")
+"texture": SubResource("AtlasTexture_o3meg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_65uil")
+"texture": SubResource("AtlasTexture_11175")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1dtji")
+"texture": SubResource("AtlasTexture_wwg01")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0gqce")
+"texture": SubResource("AtlasTexture_48enw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8mrun")
+"texture": SubResource("AtlasTexture_02lns")
 }],
 "loop": true,
 "name": &"run",
@@ -67,7 +67,7 @@ size = Vector2(5, 10)
 [sub_resource type="CircleShape2D" id="CircleShape2D_push"]
 radius = 8.0
 
-[node name="Enemy_local_idiot" type="CharacterBody2D"]
+[node name="Enemy_local_idiot" type="CharacterBody2D" unique_id=1405610998]
 z_index = 1
 motion_mode = 1
 script = ExtResource("1_1f0kj")
@@ -77,44 +77,45 @@ experience = 1.5
 ignore_recycle = true
 use_sprite_color_for_particles = false
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -7)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=725710213]
+position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_afpow")
 animation = &"run"
 autoplay = "run"
+frame_progress = 0.43889007
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=834853485]
 visible = false
 shape = SubResource("CircleShape2D_1f0kj")
 
-[node name="HurtBox" parent="." instance=ExtResource("3_afpow")]
+[node name="HurtBox" parent="." unique_id=1967320092 instance=ExtResource("3_afpow")]
 visible = false
 collision_layer = 4
 collision_mask = 4
 HurtBoxType = 1
 
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
+[node name="CollisionShape2D" parent="HurtBox" index="0" unique_id=486513834]
 position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_287tu")
 
-[node name="HitBox" parent="." instance=ExtResource("4_287tu")]
+[node name="HitBox" parent="." unique_id=2062394661 instance=ExtResource("4_287tu")]
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" parent="HitBox" index="0"]
+[node name="CollisionShape2D" parent="HitBox" index="0" unique_id=839422151]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_0830c")
 
-[node name="PushArea" type="Area2D" parent="."]
+[node name="PushArea" type="Area2D" parent="." unique_id=454706401]
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PushArea" unique_id=127895743]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_push")
 
-[node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="." unique_id=1729497593]
 bus = &"AttackVFX"
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
