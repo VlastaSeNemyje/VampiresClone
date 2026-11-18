@@ -68,7 +68,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"falcon1": {
-		"icon": WEAPON_PATH + "falcon_3_new_attack.png",
+		"icon": WEAPON_PATH + "Falconer.png",
 		"displayname": "falcon",
 		"details": "A magical falcon will follow you attacking enemies in a straight line",
 		"level": "Level: 1",
@@ -76,7 +76,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"falcon2": {
-		"icon": WEAPON_PATH + "falcon_3_new_attack.png",
+		"icon": WEAPON_PATH + "Falconer.png",
 		"displayname": "falcon",
 		"details": "The falcon will now attack an additional enemy per attack",
 		"level": "Level: 2",
@@ -84,7 +84,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"falcon3": {
-		"icon": WEAPON_PATH + "falcon_3_new_attack.png",
+		"icon": WEAPON_PATH + "Falconer.png",
 		"displayname": "falcon",
 		"details": "The falcon will attack another additional enemy per attack",
 		"level": "Level: 3",
@@ -92,7 +92,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"falcon4": {
-		"icon": WEAPON_PATH + "falcon_3_new_attack.png",
+		"icon": WEAPON_PATH + "Falconer.png",
 		"displayname": "falcon",
 		"details": "The falcon now does + 5 damage per attack and causes 20% additional knockback",
 		"level": "Level: 4",
