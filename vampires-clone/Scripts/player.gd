@@ -140,6 +140,7 @@ const BUTTON_SIDE_TEXTURE = preload("res://Textures/Sprites/Menu/Button Side.png
 const BUTTON_SIDE_TINT := Color(0.5, 0.1, 0.12, 1)   # same as SIDE_DIM in basic_button.gd
 const BUTTON_NORMAL_TINT := Color(0.8, 0.2, 0.2, 1)
 const BUTTON_HOVER_TINT := Color(0.6, 0.2, 0.25, 1)
+const HUD_RED := Color(1, 0.3, 0.3, 1)   # the bright red of the menu buttons
 const PANEL_BUTTON_SIZE := Vector2(128, 28)
 ## Top-left corner of the pause button on the 640x360 screen (top right, under the Level label).
 @export var pause_button_position := Vector2(604, 26)
@@ -150,7 +151,25 @@ var pausePanel: Panel
 #Signal
 signal playerdeath
 
+# Timer and level in the menu red, with the button side ornaments on both sides of the timer.
+func _style_hud_red() -> void:
+	lblTimer.add_theme_color_override("font_color", HUD_RED)
+	lblLevel.add_theme_color_override("font_color", HUD_RED)
+	for i in 2:
+		var side := TextureRect.new()
+		side.texture = BUTTON_SIDE_TEXTURE
+		side.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		side.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		side.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		side.modulate = BUTTON_SIDE_TINT
+		side.size = Vector2(22, 22)
+		var x: float = lblTimer.position.x - 26.0 if i == 0 else lblTimer.position.x + lblTimer.size.x + 4.0
+		side.position = Vector2(x, lblTimer.position.y + (lblTimer.size.y - 22.0) * 0.5)
+		lblTimer.get_parent().add_child(side)
+
+
 func _ready():
+	_style_hud_red()
 	change_time(0)   # show the full countdown before the first second ticks
 	_build_pause_gui()
 	collision_mask |= 32   # the Obstacle layer (trees and bogs)

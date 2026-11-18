@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cthuwwjhu3woh" path="res://Utility/hit_box.tscn" id="4_b"]
 [ext_resource type="AudioStream" uid="uid://bmhx672y3i5eh" path="res://Sounds/VFX/SFX_WAV_189.wav" id="5_b"]
 [ext_resource type="PackedScene" path="res://Scenes/drone.tscn" id="6_b"]
+[ext_resource type="Texture2D" uid="uid://bko7wbcgafca4" path="res://Textures/Sprites/Dron_light.png" id="7_light"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0"]
 atlas = ExtResource("2_b")
@@ -57,6 +58,9 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_light"]
+blend_mode = 1
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b"]
 radius = 2.9999998
 height = 34.557865
@@ -86,6 +90,11 @@ scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_b")
 animation = &"idle"
 autoplay = "idle"
+
+[node name="HandLight" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_light")
+position = Vector2(6, 6)
+texture = ExtResource("7_light")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

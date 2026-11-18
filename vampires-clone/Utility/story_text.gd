@@ -24,7 +24,7 @@ func _ready() -> void:
 	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_label.add_theme_font_size_override("font_size", font_size)
-	_label.add_theme_color_override("font_color", Color.WHITE)
+	_label.add_theme_color_override("font_color", Color(1, 0.3, 0.3, 1))   # menu red
 	_label.modulate.a = 0.0
 	add_child(_label)
 	# Show lines in time order regardless of how they were entered.
