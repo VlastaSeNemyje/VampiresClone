@@ -271,6 +271,7 @@ pressure_waves = Array[ExtResource("10_pw")]([SubResource("Wave_1"), SubResource
 
 [node name="FoodStumpField" type="Node2D" parent="." unique_id=431043961]
 script = ExtResource("30_stumps")
+food_drop_chance = 0.6
 
 [node name="Loot" type="Node2D" parent="." unique_id=1105049148 groups=["loot"]]
 

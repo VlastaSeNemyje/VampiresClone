@@ -7,10 +7,10 @@
 shader = ExtResource("1_shader")
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 shader_parameter/max_darkness = 1.0
-shader_parameter/pool_radius = 1.475
+shader_parameter/pool_radius = 1.26
 shader_parameter/pool_softness = 0.6
-shader_parameter/lead = 0.2
-shader_parameter/bands = 6
+shader_parameter/lead = 0.1
+shader_parameter/bands = 3
 shader_parameter/dither_width = 0.6
 shader_parameter/flicker_amount = 0.0
 shader_parameter/flicker_speed = 6.0
