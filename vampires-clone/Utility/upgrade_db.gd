@@ -4,7 +4,7 @@ const ICON_PATH = "res://Textures/Sprites/Upgrades/"
 const WEAPON_PATH = "res://Textures/Sprites/Weapons/"
 const UPGRADES = {
 	"arrow1": {
-		"icon": WEAPON_PATH + "arrow.png",
+		"icon": WEAPON_PATH + "Arrow.png",
 		"displayname": "Cursed Spit",
 		"details": "Cursed Spit is thrown at a random enemy",
 		"level": "Level: 1",
@@ -12,7 +12,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"arrow2": {
-		"icon": WEAPON_PATH + "arrow.png",
+		"icon": WEAPON_PATH + "Arrow.png",
 		"displayname": "Cursed Spit",
 		"details": "An additional Cursed Spit is thrown",
 		"level": "Level: 2",
@@ -20,7 +20,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"arrow3": {
-		"icon": WEAPON_PATH + "arrow.png",
+		"icon": WEAPON_PATH + "Arrow.png",
 		"displayname": "Cursed Spit",
 		"details": "Cursed Spit now passes through another enemy and does +3 damage",
 		"level": "Level: 3",
@@ -28,7 +28,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"arrow4": {
-		"icon": WEAPON_PATH + "arrow.png",
+		"icon": WEAPON_PATH + "Arrow.png",
 		"displayname": "Cursed Spit",
 		"details": "An additional 2 Cursed Spits are thrown",
 		"level": "Level: 4",
@@ -36,7 +36,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"whip1": {
-		"icon": WEAPON_PATH + "whip.png",
+		"icon": WEAPON_PATH + "Whip.png",
 		"displayname": "Claws",
 		"details": "Claws slash horizontally through enemies",
 		"level": "Level: 1",
@@ -44,7 +44,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"whip2": {
-		"icon": WEAPON_PATH + "whip.png",
+		"icon": WEAPON_PATH + "Whip.png",
 		"displayname": "Claws",
 		"details": "Claws get 50% stronger",
 		"level": "Level: 2",
@@ -52,7 +52,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"whip3": {
-		"icon": WEAPON_PATH + "whip.png",
+		"icon": WEAPON_PATH + "Whip.png",
 		"displayname": "Claws",
 		"details": "Claws get stronger",
 		"level": "Level: 3",
@@ -60,7 +60,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"whip4": {
-		"icon": WEAPON_PATH + "whip.png",
+		"icon": WEAPON_PATH + "Whip.png",
 		"displayname": "Claws",
 		"details": "Knockback is incresed by 25%",
 		"level": "Level: 4",
@@ -196,7 +196,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"tornado1": {
-		"icon": WEAPON_PATH + "tornado.png",
+		"icon": WEAPON_PATH + "Tornado.png",
 		"displayname": "Weird Noise",
 		"details": "A Weird Noise is created and random heads somewhere in the players direction",
 		"level": "Level: 1",
@@ -204,7 +204,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"tornado2": {
-		"icon": WEAPON_PATH + "tornado.png",
+		"icon": WEAPON_PATH + "Tornado.png",
 		"displayname": "Weird Noise",
 		"details": "An additional Weird Noise is created",
 		"level": "Level: 2",
@@ -212,7 +212,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"tornado3": {
-		"icon": WEAPON_PATH + "tornado.png",
+		"icon": WEAPON_PATH + "Tornado.png",
 		"displayname": "Weird Noise",
 		"details": "The Weird Noise cooldown is reduced by 0.5 seconds",
 		"level": "Level: 3",
@@ -220,7 +220,7 @@ const UPGRADES = {
 		"type": "weapon"
 	},
 	"tornado4": {
-		"icon": WEAPON_PATH + "tornado.png",
+		"icon": WEAPON_PATH + "Tornado.png",
 		"displayname": "Weird Noise",
 		"details": "An additional Weird Noise is created and the knockback is increased by 25%",
 		"level": "Level: 4",
@@ -353,7 +353,7 @@ const UPGRADES = {
 		"evolves": "leaf"
 	},
 	"armor1": {
-		"icon": ICON_PATH + "armor.png",
+		"icon": ICON_PATH + "Armor.png",
 		"displayname": "Armor",
 		"details": "Reduces Damage By 1 point",
 		"level": "Level: 1",
@@ -361,7 +361,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"armor2": {
-		"icon": ICON_PATH + "armor.png",
+		"icon": ICON_PATH + "Armor.png",
 		"displayname": "Armor",
 		"details": "Reduces Damage By an additional 1 point",
 		"level": "Level: 2",
@@ -369,7 +369,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"armor3": {
-		"icon": ICON_PATH + "armor.png",
+		"icon": ICON_PATH + "Armor.png",
 		"displayname": "Armor",
 		"details": "Reduces Damage By an additional 1 point",
 		"level": "Level: 3",
@@ -377,7 +377,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"armor4": {
-		"icon": ICON_PATH + "armor.png",
+		"icon": ICON_PATH + "Armor.png",
 		"displayname": "Armor",
 		"details": "Reduces Damage By an additional 1 point",
 		"level": "Level: 4",
@@ -449,7 +449,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"scroll1": {
-		"icon": ICON_PATH + "scroll_old.png",
+		"icon": ICON_PATH + "Scroll_old.png",
 		"displayname": "Scroll",
 		"details": "Decreases of the cooldown of spells by an additional 5% of their base time",
 		"level": "Level: 1",
@@ -457,7 +457,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"scroll2": {
-		"icon": ICON_PATH + "scroll_old.png",
+		"icon": ICON_PATH + "Scroll_old.png",
 		"displayname": "Scroll",
 		"details": "Decreases of the cooldown of spells by an additional 5% of their base time",
 		"level": "Level: 2",
@@ -465,7 +465,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"scroll3": {
-		"icon": ICON_PATH + "scroll_old.png",
+		"icon": ICON_PATH + "Scroll_old.png",
 		"displayname": "Scroll",
 		"details": "Decreases of the cooldown of spells by an additional 5% of their base time",
 		"level": "Level: 3",
@@ -473,7 +473,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"scroll4": {
-		"icon": ICON_PATH + "scroll_old.png",
+		"icon": ICON_PATH + "Scroll_old.png",
 		"displayname": "Scroll",
 		"details": "Decreases of the cooldown of spells by an additional 5% of their base time",
 		"level": "Level: 4",
