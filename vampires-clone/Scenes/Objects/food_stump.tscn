@@ -10,7 +10,9 @@ size = Vector2(14, 20)
 
 [node name="FoodStump" type="Node2D" unique_id=80554273]
 z_index = 1
+scale = Vector2(1.9199998, 1.9199998)
 script = ExtResource("1_stump")
+food_drop_chance = 0.6
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=156962516]
 texture_filter = 1

@@ -64,8 +64,12 @@ func load_progress() -> void:
 	var err = cfg.load(SAVE_PATH)
 	if err == OK:
 		var loaded = cfg.get_value("progress", "unlocked", unlocked)
+		# Saved array comes back untyped; copy element by element
+		# (direct assignment to Array[bool] fails at runtime in Godot 4).
 		if loaded is Array and loaded.size() == unlocked.size():
-			unlocked = loaded
+			for i in range(unlocked.size()):
+				unlocked[i] = bool(loaded[i])
+		unlocked[0] = true
 			
 func toggle_lock(index: int) -> void:
 	if index >= 0 and index < unlocked.size():

@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" uid="uid://cjp8ngoipa2c3" path="res://Utility/menu.gd" id="1_3ivhh"]
 [ext_resource type="PackedScene" uid="uid://bf71bynv53120" path="res://Utility/basic_button.tscn" id="2_b2oxh"]
-[ext_resource type="Texture2D" uid="uid://b32fjbk4rmbl3" path="res://Textures/Sprites/R1.png" id="3_53h07"]
+[ext_resource type="Texture2D" uid="uid://crn77avagcwa7" path="res://Textures/Sprites/R1.png" id="3_53h07"]
 [ext_resource type="PackedScene" uid="uid://doyh14ib7edtd" path="res://Utility/character_tab.tscn" id="3_tabs"]
-[ext_resource type="Texture2D" uid="uid://bb0f435y2rtg5" path="res://Textures/Sprites/R2.png" id="4_m0rvo"]
-[ext_resource type="Texture2D" uid="uid://cytdx4neenm3r" path="res://Textures/Sprites/R3.png" id="5_fhfum"]
-[ext_resource type="Texture2D" uid="uid://76piuqkbgufw" path="res://Textures/Sprites/R4.png" id="6_ame3m"]
-[ext_resource type="Texture2D" uid="uid://cf8sdc6efk7ds" path="res://Textures/Sprites/B1.png" id="7_0pn4e"]
-[ext_resource type="Texture2D" uid="uid://bvdq552sviv4p" path="res://Textures/Sprites/B2.png" id="8_71tpd"]
-[ext_resource type="Texture2D" uid="uid://t424ifs4i8ys" path="res://Textures/Sprites/Lesly.png" id="8_fhfum"]
-[ext_resource type="Texture2D" uid="uid://cfi8h1k60sr2" path="res://Textures/Sprites/B3.png" id="9_bg5y3"]
-[ext_resource type="Texture2D" uid="uid://h1lxth0lkjn6" path="res://Textures/Sprites/B4.png" id="10_mqqw7"]
+[ext_resource type="Texture2D" uid="uid://cc6n5cectnvpx" path="res://Textures/Sprites/R2.png" id="4_m0rvo"]
+[ext_resource type="Texture2D" uid="uid://bbxksjoxlmqgp" path="res://Textures/Sprites/R3.png" id="5_fhfum"]
+[ext_resource type="Texture2D" uid="uid://bdtxs6jwcrkma" path="res://Textures/Sprites/R4.png" id="6_ame3m"]
+[ext_resource type="Texture2D" uid="uid://beln20okq0mcx" path="res://Textures/Sprites/B1.png" id="7_0pn4e"]
+[ext_resource type="Texture2D" uid="uid://b4vp2mi5gmod5" path="res://Textures/Sprites/B2.png" id="8_71tpd"]
+[ext_resource type="Texture2D" uid="uid://8i8ax5u6pass" path="res://Textures/Sprites/Lesly.png" id="8_fhfum"]
+[ext_resource type="Texture2D" uid="uid://vrj6asra48qi" path="res://Textures/Sprites/B3.png" id="9_bg5y3"]
+[ext_resource type="Texture2D" uid="uid://yy0y20vvjvft" path="res://Textures/Sprites/B4.png" id="10_mqqw7"]
 [ext_resource type="Texture2D" uid="uid://dmb1idwq1hxm7" path="res://Textures/Sprites/Menu/Tree left.png" id="11_treel"]
 [ext_resource type="Texture2D" uid="uid://fcny7prm7shf" path="res://Textures/Sprites/Menu/Tree right.png" id="12_treer"]
 [ext_resource type="Texture2D" uid="uid://267qoesfon3s" path="res://Textures/Sprites/Menu/Down left.png" id="13_downl"]
@@ -21,11 +21,13 @@
 [ext_resource type="Texture2D" uid="uid://d1g852qul8mk4" path="res://Textures/Sprites/Menu/Button Selection.png" id="17_btnsel"]
 [ext_resource type="Texture2D" uid="uid://hhl1ugnut6hj" path="res://Textures/Sprites/Menu/Button Side.png" id="18_side"]
 [ext_resource type="Shader" uid="uid://cmg0ws2wtqnqx" path="res://Shaders/pixel_distortion.gdshader" id="19_pdshader"]
-[ext_resource type="Texture2D" uid="uid://uxrfcv2h3i4x" path="res://Textures/Sprites/Pixel distortion.png" id="20_pdtex"]
-[ext_resource type="Texture2D" uid="uid://c2gb0c05d1mnq" path="res://Textures/Sprites/Floating pixel.png" id="21_fp0"]
-[ext_resource type="Texture2D" uid="uid://b2fiyh4vywf02" path="res://Textures/Sprites/Floating pixel1.png" id="22_fp1"]
-[ext_resource type="Texture2D" uid="uid://bbvvt503m8tq" path="res://Textures/Sprites/Floating pixel2.png" id="23_fp2"]
-[ext_resource type="Texture2D" uid="uid://ds43pn6dvo2sx" path="res://Textures/Sprites/Floating pixel big.png" id="24_fp3"]
+[ext_resource type="Texture2D" uid="uid://dfd3vrb768di" path="res://Textures/Sprites/Pixel distortion.png" id="20_pdtex"]
+[ext_resource type="Texture2D" uid="uid://dlmtf4u4e015d" path="res://Textures/Sprites/Floating pixel.png" id="21_fp0"]
+[ext_resource type="Texture2D" uid="uid://ux2j2pdqwib6" path="res://Textures/Sprites/Floating pixel1.png" id="22_fp1"]
+[ext_resource type="Texture2D" uid="uid://c8ubnvxh70o4q" path="res://Textures/Sprites/Floating pixel2.png" id="23_fp2"]
+[ext_resource type="Texture2D" uid="uid://dtpu6pc6sixqk" path="res://Textures/Sprites/Floating pixel big.png" id="24_fp3"]
+[ext_resource type="Texture2D" uid="uid://b8vrqrac1yoyc" path="res://Textures/Sprites/BabaLocked.png" id="25_babalocked"]
+[ext_resource type="Texture2D" uid="uid://is6voieiprq6" path="res://Textures/Sprites/LeshyLocked.png" id="26_leshylocked"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pd"]
 shader = ExtResource("19_pdshader")
@@ -94,8 +96,6 @@ content_margin_top = 0.0
 content_margin_bottom = 4.0
 texture = ExtResource("17_btnsel")
 modulate_color = Color(0.6, 0.2, 0.25, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_btn"]
 
 [node name="Menu" type="Control" unique_id=364621257]
 layout_mode = 3
@@ -259,12 +259,14 @@ layout_mode = 2
 index = 1
 character_name = "Baba Yaga"
 portrait_texture = SubResource("AnimatedTexture_58cql")
+locked_texture = ExtResource("25_babalocked")
 
 [node name="Tab3" parent="CharacterTabs" unique_id=443502444 instance=ExtResource("3_tabs")]
 layout_mode = 2
 index = 2
 character_name = "Leshy"
 portrait_texture = ExtResource("8_fhfum")
+locked_texture = ExtResource("26_leshylocked")
 
 [node name="btn_play" parent="." unique_id=1203686152 instance=ExtResource("2_b2oxh")]
 texture_filter = 1

@@ -133,7 +133,7 @@ const UPGRADES = {
 	},
 	"incense1": {
 		"icon": WEAPON_PATH + "Potion.png",
-		"displayname": "Charming Incense",
+		"displayname": "Charming Incest",
 		"details": "Drops an incense bomb near you that explodes after a short delay - lure enemies into the blast",
 		"level": "Level: 1",
 		"prerequisite": [],
@@ -141,7 +141,7 @@ const UPGRADES = {
 	},
 	"incense2": {
 		"icon": WEAPON_PATH + "Potion.png",
-		"displayname": "Charming Incense",
+		"displayname": "Charming Incest",
 		"details": "Drops two bombs and the explosion damage is increased by 25%",
 		"level": "Level: 2",
 		"prerequisite": ["incense1"],
@@ -149,7 +149,7 @@ const UPGRADES = {
 	},
 	"incense3": {
 		"icon": WEAPON_PATH + "Potion.png",
-		"displayname": "Charming Incense",
+		"displayname": "Charming Incest",
 		"details": "Drops three bombs, the explosion area is 15% bigger and the cooldown is shorter",
 		"level": "Level: 3",
 		"prerequisite": ["incense2"],
@@ -157,7 +157,7 @@ const UPGRADES = {
 	},
 	"incense4": {
 		"icon": WEAPON_PATH + "Potion.png",
-		"displayname": "Charming Incense",
+		"displayname": "Charming Incest",
 		"details": "The explosion leaves a lingering cloud that keeps hurting enemies and the cooldown is shorter",
 		"level": "Level: 4",
 		"prerequisite": ["incense3"],

@@ -780,7 +780,7 @@ func death():
 	var tween = deathPanel.create_tween()
 	tween.tween_property(deathPanel,"position",Vector2(220,50),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	if time >= win_time:
-		lblResult.text = "You Win"
+		lblResult.text = "Your home is safe"
 		sndVictory.play()
 		GameProgress.unlock_next(world_index)
 	else:

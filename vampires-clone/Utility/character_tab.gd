@@ -5,6 +5,8 @@ signal tab_selected(index)
 @export var index: int = 0
 @export var character_name: String = "???"
 @export var portrait_texture: Texture2D
+## Silhouette shown while this character is locked (drawn behind the LOCKED text).
+@export var locked_texture: Texture2D
 
 @onready var portrait: TextureRect = $Portrait
 @onready var name_label: Label = $lbl_name
@@ -78,14 +80,20 @@ func refresh() -> void:
 	focus_mode = Control.FOCUS_ALL if unlocked else Control.FOCUS_NONE   # the cursor skips locked characters
 
 	if unlocked:
+		portrait.texture = portrait_texture
 		portrait.modulate = Color(1, 1, 1, 1)
 		name_label.modulate = Color(1, 1, 1, 1)
 		lock_label.visible = false
 		name_label.text = character_name
 	else:
-		# Cheap silhouette: multiplying any texture by black keeps its
-		# shape/alpha but flattens all color, no separate art needed.
-		portrait.modulate = Color(0, 0, 0, 1)
+		# Use the dedicated silhouette art if set; otherwise fall back to
+		# multiplying the portrait by black (keeps shape/alpha, flattens color).
+		if locked_texture != null:
+			portrait.texture = locked_texture
+			portrait.modulate = Color(1, 1, 1, 1)
+		else:
+			portrait.texture = portrait_texture
+			portrait.modulate = Color(0, 0, 0, 1)
 		# Text gets its own, independent tint — dimmed grey rather than
 		# pure black, so "???" stays legible against the dark portrait.
 		name_label.modulate = Color(0.6, 0.6, 0.6, 1)
