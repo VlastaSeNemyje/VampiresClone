@@ -29,7 +29,13 @@ func is_unlocked(index: int) -> bool:
 	return unlocked[index]
 
 
+# Progression is closed: only the first world/character is playable, winning does not unlock more.
+const PROGRESSION_CLOSED := true
+
+
 func unlock(index: int) -> void:
+	if PROGRESSION_CLOSED:
+		return
 	if index >= 0 and index < unlocked.size() and not unlocked[index]:
 		unlocked[index] = true
 		save_progress()
@@ -62,7 +68,7 @@ func save_progress() -> void:
 func load_progress() -> void:
 	var cfg = ConfigFile.new()
 	var err = cfg.load(SAVE_PATH)
-	if err == OK:
+	if err == OK and not PROGRESSION_CLOSED:
 		var loaded = cfg.get_value("progress", "unlocked", unlocked)
 		# Saved array comes back untyped; copy element by element
 		# (direct assignment to Array[bool] fails at runtime in Godot 4).
