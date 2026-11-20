@@ -188,6 +188,35 @@ func _ready():
 	set_expbar(experience, calculate_experiencecap())
 	_on_hurt_box_hurt(0,0,0)
 
+# --- Touch controls: touch and drag anywhere = virtual joystick (mobile web) ---
+const TOUCH_DEADZONE := 8.0     # pixels before the drag counts as movement
+const TOUCH_MAX_DIST := 40.0    # pixels of drag for full strength
+var touch_index := -1
+var touch_origin := Vector2.ZERO
+var touch_vec := Vector2.ZERO
+
+func _input(event):
+	if event is InputEventScreenTouch:
+		if event.pressed and touch_index == -1:
+			touch_index = event.index
+			touch_origin = event.position
+			touch_vec = Vector2.ZERO
+		elif not event.pressed and event.index == touch_index:
+			touch_index = -1
+			touch_vec = Vector2.ZERO
+	elif event is InputEventScreenDrag and event.index == touch_index:
+		var d: Vector2 = event.position - touch_origin
+		if d.length() < TOUCH_DEADZONE:
+			touch_vec = Vector2.ZERO
+		else:
+			touch_vec = d.limit_length(TOUCH_MAX_DIST) / TOUCH_MAX_DIST
+
+func _notification(what):
+	# Releases held touch when the game pauses (level-up, pause menu), so no stuck movement
+	if what == NOTIFICATION_PAUSED:
+		touch_index = -1
+		touch_vec = Vector2.ZERO
+
 func _physics_process(_delta):
 	movement()
 
@@ -195,6 +224,9 @@ func movement():
 	var x_mov = Input.get_action_strength("right") - Input.get_action_strength("left")
 	var y_mov = Input.get_action_strength("down") - Input.get_action_strength("up")
 	var mov = Vector2(x_mov,y_mov)
+	if mov == Vector2.ZERO and touch_vec != Vector2.ZERO:
+		mov = touch_vec
+		x_mov = mov.x
 	
 	if x_mov > 0:
 		animated_sprite_2d.flip_h = false
