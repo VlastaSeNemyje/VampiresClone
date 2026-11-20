@@ -497,7 +497,7 @@ const UPGRADES = {
 		"type": "upgrade"
 	},
 	"food": {
-		"icon": ICON_PATH + "food.png",
+		"icon": ICON_PATH + "Food.png",
 		"displayname": "Food",
 		"details": "Heals you for 20 health",
 		"level": "N/A",
