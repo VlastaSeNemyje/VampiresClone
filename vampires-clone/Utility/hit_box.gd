@@ -15,4 +15,4 @@ func _on_disable_hit_box_timer_timeout() -> void:
 
 
 func _on_area_entered(area):
-	print("HitBox hit:", area.name)
+	pass

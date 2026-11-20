@@ -25,7 +25,7 @@ var knockback = Vector2.ZERO
 
 var is_dead = false
 var exp_gem = preload("res://Scenes/exp_gem.tscn")
-var flash_shader = preload("res://Shaders/hit_flash.gdshader")
+var flash_shader = preload("res://Shaders/hit_flash_instance.gdshader")
 var flash_material: ShaderMaterial
 
 var slow_multiplier := 1.0
@@ -39,6 +39,15 @@ var _mask_before_stun := 0
 
 # 4x4 white square used as the death-particle texture, built once and reused
 static var pixel_texture: ImageTexture
+# One material shared by every enemy (the flash amount is a per-instance shader parameter)
+static var shared_flash_material: ShaderMaterial
+# Average sprite colour per texture, so the image is read back only once per sprite
+static var _color_cache: Dictionary = {}
+# Death particle systems alive right now; new ones are skipped past the cap
+static var active_death_particles := 0
+const MAX_DEATH_PARTICLES := 24
+
+var _flash_tween: Tween
 
 signal remove_from_array(object)
 
@@ -46,8 +55,10 @@ func _ready():
 	add_to_group("enemy")
 	hitBox.damage = enemy_damage
 
-	flash_material = ShaderMaterial.new()
-	flash_material.shader = flash_shader
+	if shared_flash_material == null:
+		shared_flash_material = ShaderMaterial.new()
+		shared_flash_material.shader = flash_shader
+	flash_material = shared_flash_material
 	animated_sprite_2d.material = flash_material
 
 	if pixel_texture == null:
@@ -114,10 +125,12 @@ func _physics_process(delta):
 func flash_white():
 	if flash_material == null:
 		return
-	flash_material.set_shader_parameter("flash_amount", 1.0)
-	var tween = create_tween()
-	tween.tween_method(
-		func(v): flash_material.set_shader_parameter("flash_amount", v),
+	animated_sprite_2d.set_instance_shader_parameter("flash_amount", 1.0)
+	if _flash_tween != null and _flash_tween.is_valid():
+		_flash_tween.kill()
+	_flash_tween = create_tween()
+	_flash_tween.tween_method(
+		func(v): animated_sprite_2d.set_instance_shader_parameter("flash_amount", v),
 		1.0, 0.0, flash_duration
 	)
 
@@ -126,6 +139,8 @@ func _get_average_sprite_color() -> Color:
 	var anim = animated_sprite_2d.animation
 	var frame = animated_sprite_2d.frame
 	var texture = frames.get_frame_texture(anim, frame)
+	if _color_cache.has(texture):
+		return _color_cache[texture]
 
 	var img = texture.get_image()
 	if img == null:
@@ -134,9 +149,13 @@ func _get_average_sprite_color() -> Color:
 	img.resize(1, 1, Image.INTERPOLATE_BILINEAR)
 	var avg = img.get_pixel(0, 0)
 	avg.a = 1.0
+	_color_cache[texture] = avg
 	return avg
 
 func spawn_death_particles():
+	if active_death_particles >= MAX_DEATH_PARTICLES:
+		return
+	active_death_particles += 1
 	var particles = CPUParticles2D.new()
 	particles.global_position = global_position
 	particles.z_index = z_index
@@ -183,7 +202,9 @@ func spawn_death_particles():
 	get_tree().current_scene.add_child(particles)
 	particles.emitting = true
 
-	get_tree().create_timer(particles.lifetime + 0.2).timeout.connect(particles.queue_free)
+	get_tree().create_timer(particles.lifetime + 0.2).timeout.connect(func():
+		active_death_particles -= 1
+		particles.queue_free())
 
 func death():
 	if is_dead:
@@ -192,6 +213,12 @@ func death():
 	is_dead = true
 	emit_signal("remove_from_array", self)
 	velocity = Vector2.ZERO
+	# a dying enemy no longer needs physics: stop moving/colliding while the death delay runs
+	set_physics_process(false)
+	set_deferred("collision_layer", 0)
+	set_deferred("collision_mask", 0)
+	hitBox.set_deferred("monitorable", false)
+	hitBox.set_deferred("monitoring", false)
 
 	await get_tree().create_timer(0.05).timeout
 

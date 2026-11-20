@@ -241,7 +241,6 @@ func attack():
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	hp -= clamp(damage-armor, 1.0, 999.0)
-	print(hp)
 	healthBar.max_value = maxhp
 	healthBar.value = hp
 	if hp <= 0:
