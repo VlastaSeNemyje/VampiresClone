@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnkg3jeyy4uo8"
-path="res://.godot/imported/Candle_003.png-bd25361f89868461944409e594138faf.ctex"
+uid="uid://dhpvfqf2dfoau"
+path="res://.godot/imported/Grass2.png-4a2cc80fd7139fd91ac72687bb7ab3de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Sprites/Menu/Candle_sprites/Candle_003.png"
-dest_files=["res://.godot/imported/Candle_003.png-bd25361f89868461944409e594138faf.ctex"]
+source_file="res://Textures/Tiles/Grass2.png"
+dest_files=["res://.godot/imported/Grass2.png-4a2cc80fd7139fd91ac72687bb7ab3de.ctex"]
 
 [params]
 

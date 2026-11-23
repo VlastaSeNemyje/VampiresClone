@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cut72yc0jtrjo"]
+
+[ext_resource type="Shader" path="res://Shaders/ground.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" uid="uid://cdt6wngteyutm" path="res://Textures/Tiles/ground_details2.png" id="2_amctf"]
+[ext_resource type="Texture2D" uid="uid://b1hmpjdalasgq" path="res://Textures/Tiles/ground_fine.png" id="2_fine"]
+
+[resource]
+shader = ExtResource("1_shader")
+shader_parameter/base_color = Color(0.23137255, 0.2784314, 0.16078432, 1)
+shader_parameter/world_seed = 0.0
+shader_parameter/patch_light_color = Color(0.24351943, 0.29565445, 0.17016077, 1)
+shader_parameter/patch_dark_color = Color(0.22334331, 0.267437, 0.15437618, 1)
+shader_parameter/patch_scale = 150.0
+shader_parameter/patch_pixel_size = 4.0
+shader_parameter/patch_light_amount = 0.30400001444
+shader_parameter/patch_dark_amount = 0.362000017195
+shader_parameter/fine_texture = ExtResource("2_fine")
+shader_parameter/fine_tint = Color(1, 1, 1, 1)
+shader_parameter/fine_coverage = 0.6000000285
+shader_parameter/fine_mask_scale = 90.0
+shader_parameter/fine_mask_pixel_size = 8.0
+shader_parameter/detail_atlas = ExtResource("2_amctf")
+shader_parameter/detail_frame_size = Vector2i(16, 16)
+shader_parameter/detail_cell_size = 40.0
+shader_parameter/detail_density = 0.30000001425
