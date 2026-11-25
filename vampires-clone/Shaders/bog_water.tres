@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://Shaders/bog_water.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" uid="uid://bb4tkt8lxvj8n" path="res://Textures/Sprites/SwampBog2reflection.png" id="2_refl"]
+
+[resource]
+shader = ExtResource("1_shader")
+shader_parameter/reflection_tex = ExtResource("2_refl")

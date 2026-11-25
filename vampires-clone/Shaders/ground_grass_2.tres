@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://Shaders/ground.gdshader" id="1_shader"]
 [ext_resource type="Texture2D" uid="uid://cdt6wngteyutm" path="res://Textures/Tiles/ground_details2.png" id="2_amctf"]
-[ext_resource type="Texture2D" uid="uid://b1hmpjdalasgq" path="res://Textures/Tiles/ground_fine.png" id="2_fine"]
+[ext_resource type="Texture2D" uid="uid://b8x42wh3q1bjj" path="res://Textures/Tiles/ground_fine2.png" id="3_amctf"]
 
 [resource]
 shader = ExtResource("1_shader")
@@ -14,7 +14,7 @@ shader_parameter/patch_scale = 150.0
 shader_parameter/patch_pixel_size = 4.0
 shader_parameter/patch_light_amount = 0.30400001444
 shader_parameter/patch_dark_amount = 0.362000017195
-shader_parameter/fine_texture = ExtResource("2_fine")
+shader_parameter/fine_texture = ExtResource("3_amctf")
 shader_parameter/fine_tint = Color(1, 1, 1, 1)
 shader_parameter/fine_coverage = 0.6000000285
 shader_parameter/fine_mask_scale = 90.0

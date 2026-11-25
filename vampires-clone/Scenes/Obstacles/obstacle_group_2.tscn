@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://pjqoy6r1a87x"]
 
-[ext_resource type="Texture2D" uid="uid://dyov61exhygqv" path="res://Textures/Sprites/SwampBog.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bh23m5qjlyyft" path="res://Textures/Sprites/SwampBog2.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://c3p8hy1l5k3rv" path="res://Textures/Sprites/SwampTree2.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://ccgdyc7oumigi" path="res://Textures/Sprites/SwampTree1.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://ba3sy8ujduehr" path="res://Textures/Sprites/SwampTree.png" id="4"]
+[ext_resource type="Material" path="res://Shaders/bog_water.tres" id="bogmat"]
+[ext_resource type="Material" path="res://Shaders/sway_grass.tres" id="grassmat"]
+[ext_resource type="Texture2D" uid="uid://b310ewq4s7wnf" path="res://Textures/Sprites/SwampBog grass.png" id="grasstex"]
+[ext_resource type="Material" path="res://Shaders/tree_leaves.tres" id="leafmat"]
+[ext_resource type="Texture2D" uid="uid://b6a88xe8yneh5" path="res://Textures/Sprites/SwampTree1 leaves.png" id="leaves_SwampTree1"]
+[ext_resource type="Texture2D" uid="uid://c4s0i7o8y3mkk" path="res://Textures/Sprites/SwampTree2 leaves.png" id="leaves_SwampTree2"]
 
 [sub_resource type="RectangleShape2D" id="shape_bog"]
 size = Vector2(33.653843, 16.46341)
@@ -19,16 +24,24 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="SwampBog_1" unique_id=302005620]
+material = ExtResource("bogmat")
 texture = ExtResource("1")
 offset = Vector2(0, -8.5)
 
+[node name="Grass" type="Sprite2D" parent="SwampBog_1" unique_id=1577694886]
+material = ExtResource("grassmat")
+texture = ExtResource("grasstex")
+offset = Vector2(0, -8.5)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwampBog_1" unique_id=76104834]
+visible = false
 position = Vector2(0.9615384, -6.0975566)
 scale = Vector2(1, 0.9999998)
 shape = SubResource("shape_bog")
 
 [node name="SwampTree2_2" type="StaticBody2D" parent="." unique_id=451498642]
-position = Vector2(22, -1)
+position = Vector2(21, 1)
+scale = Vector2(1.64, 1.64)
 collision_layer = 32
 collision_mask = 0
 
@@ -36,13 +49,24 @@ collision_mask = 0
 texture = ExtResource("2")
 offset = Vector2(0, -12.5)
 
+[node name="Leaves" type="Sprite2D" parent="SwampTree2_2" unique_id=2016456011]
+material = ExtResource("leafmat")
+texture = ExtResource("leaves_SwampTree2")
+offset = Vector2(0, -12.5)
+
 [node name="SwampTree1_3" type="StaticBody2D" parent="." unique_id=1268927741]
 position = Vector2(6, 16)
+scale = Vector2(1.6795772, 1.6795772)
 collision_layer = 32
 collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="SwampTree1_3" unique_id=2124544445]
 texture = ExtResource("3")
+offset = Vector2(0, -5.5)
+
+[node name="Leaves" type="Sprite2D" parent="SwampTree1_3" unique_id=2066006252]
+material = ExtResource("leafmat")
+texture = ExtResource("leaves_SwampTree1")
 offset = Vector2(0, -5.5)
 
 [node name="SwampBog_4" type="StaticBody2D" parent="." unique_id=1035186419]
@@ -51,11 +75,18 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="SwampBog_4" unique_id=1978488683]
+material = ExtResource("bogmat")
 texture = ExtResource("1")
 offset = Vector2(0, -8.5)
 
+[node name="Grass" type="Sprite2D" parent="SwampBog_4" unique_id=1858543701]
+material = ExtResource("grassmat")
+texture = ExtResource("grasstex")
+offset = Vector2(0, -8.5)
+
 [node name="SwampTree2_5" type="StaticBody2D" parent="." unique_id=1122469228]
-position = Vector2(-32, 15)
+position = Vector2(-33, 14)
+scale = Vector2(1.6, 1.6)
 collision_layer = 32
 collision_mask = 0
 
@@ -63,11 +94,7 @@ collision_mask = 0
 texture = ExtResource("2")
 offset = Vector2(0, -12.5)
 
-[node name="SwampTree_6" type="StaticBody2D" parent="." unique_id=1815610346]
-position = Vector2(-6, 18)
-collision_layer = 32
-collision_mask = 0
-
-[node name="Sprite2D" type="Sprite2D" parent="SwampTree_6" unique_id=390065939]
-texture = ExtResource("4")
+[node name="Leaves" type="Sprite2D" parent="SwampTree2_5" unique_id=1153522351]
+material = ExtResource("leafmat")
+texture = ExtResource("leaves_SwampTree2")
 offset = Vector2(0, -12.5)

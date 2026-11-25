@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://cg4ktchkk16a8"]
 
-[ext_resource type="Texture2D" uid="uid://dyov61exhygqv" path="res://Textures/Sprites/SwampBog.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bh23m5qjlyyft" path="res://Textures/Sprites/SwampBog2.png" id="4"]
+[ext_resource type="Material" path="res://Shaders/bog_water.tres" id="bogmat"]
+[ext_resource type="Texture2D" uid="uid://b310ewq4s7wnf" path="res://Textures/Sprites/SwampBog grass.png" id="grasstex"]
+[ext_resource type="Material" path="res://Shaders/sway_grass.tres" id="grassmat"]
 
 [sub_resource type="RectangleShape2D" id="shape_bog"]
 size = Vector2(26, 11)
@@ -15,7 +18,14 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="SwampBog_7" unique_id=122540659]
+material = ExtResource("bogmat")
 texture = ExtResource("4")
+offset = Vector2(0, -8.5)
+
+
+[node name="Grass" type="Sprite2D" parent="SwampBog_7"]
+material = ExtResource("grassmat")
+texture = ExtResource("grasstex")
 offset = Vector2(0, -8.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwampBog_7" unique_id=1737381420]

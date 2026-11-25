@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cjha3lpdvm55e"]
 
 [ext_resource type="Texture2D" uid="uid://d3n431r8ya6i1" path="res://Textures/Sprites/SwampTree3.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://c8hffttcnp7dp" path="res://Textures/Sprites/SwampTree3 leaves.png" id="leaves_SwampTree3"]
+[ext_resource type="Material" path="res://Shaders/tree_leaves.tres" id="leafmat"]
 
 [sub_resource type="RectangleShape2D" id="shape_t3"]
 size = Vector2(26, 38)
@@ -16,6 +18,11 @@ collision_mask = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="SwampTree3_2" unique_id=1896358107]
 texture = ExtResource("2")
+offset = Vector2(0, -19.5)
+
+[node name="Leaves" type="Sprite2D" parent="SwampTree3_2"]
+material = ExtResource("leafmat")
+texture = ExtResource("leaves_SwampTree3")
 offset = Vector2(0, -19.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwampTree3_2" unique_id=949098989]
