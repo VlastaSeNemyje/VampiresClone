@@ -148,6 +148,11 @@ const PANEL_BUTTON_SIZE := Vector2(128, 28)
 var btnPause: TextureButton
 var pausePanel: Panel
 
+#Score (built in _build_score_gui, so every player scene gets it)
+const SCORE_PER_EXP := 10.0   # bigger numbers look more rewarding
+var score: float = 0.0
+var lblScore: Label
+
 #Signal
 signal playerdeath
 
@@ -168,8 +173,31 @@ func _style_hud_red() -> void:
 		lblTimer.get_parent().add_child(side)
 
 
+# "Score: " in the lower right corner of the 640x360 screen. Right-aligned, so it grows to the left.
+func _build_score_gui() -> void:
+	lblScore = Label.new()
+	lblScore.position = Vector2(332, 328)
+	lblScore.size = Vector2(300, 28)
+	lblScore.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	lblScore.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	lblScore.add_theme_color_override("font_color", HUD_RED)
+	lblTimer.get_parent().add_child(lblScore)
+	_update_score_label()
+
+
+# Called by every enemy that is killed, with its exp value (before experience_gain).
+func add_score(exp_value: float) -> void:
+	score += exp_value * SCORE_PER_EXP
+	_update_score_label()
+
+
+func _update_score_label() -> void:
+	lblScore.text = str("Score: ", int(score))
+
+
 func _ready():
 	_style_hud_red()
+	_build_score_gui()
 	change_time(0)   # show the full countdown before the first second ticks
 	_build_pause_gui()
 	collision_mask |= 32   # the Obstacle layer (trees and bogs)
@@ -804,6 +832,7 @@ func _on_btn_continue_click_end():
 
 func death():
 	btnPause.visible = false
+	GameProgress.submit_score(world_index, int(score))   # the run is over, won or lost
 	deathPanel.visible = true
 	deathPanel.get_node("btn_retry").grab_focus()
 	emit_signal("playerdeath")

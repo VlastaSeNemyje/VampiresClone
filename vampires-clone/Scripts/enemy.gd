@@ -211,6 +211,8 @@ func death():
 		return
 
 	is_dead = true
+	if player:
+		player.add_score(experience)
 	emit_signal("remove_from_array", self)
 	velocity = Vector2.ZERO
 	# a dying enemy no longer needs physics: stop moving/colliding while the death delay runs

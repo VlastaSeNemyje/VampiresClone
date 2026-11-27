@@ -3,20 +3,23 @@
 [ext_resource type="Texture2D" uid="uid://ccgdyc7oumigi" path="res://Textures/Sprites/SwampTree1.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://d3n431r8ya6i1" path="res://Textures/Sprites/SwampTree3.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://c3p8hy1l5k3rv" path="res://Textures/Sprites/SwampTree2.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://b6a88xe8yneh5" path="res://Textures/Sprites/SwampTree1 leaves.png" id="leaves_SwampTree1"]
 [ext_resource type="Material" path="res://Shaders/tree_leaves.tres" id="leafmat"]
+[ext_resource type="Texture2D" uid="uid://b6a88xe8yneh5" path="res://Textures/Sprites/SwampTree1 leaves.png" id="leaves_SwampTree1"]
 [ext_resource type="Texture2D" uid="uid://c4s0i7o8y3mkk" path="res://Textures/Sprites/SwampTree2 leaves.png" id="leaves_SwampTree2"]
 [ext_resource type="Texture2D" uid="uid://c8hffttcnp7dp" path="res://Textures/Sprites/SwampTree3 leaves.png" id="leaves_SwampTree3"]
 
 [sub_resource type="RectangleShape2D" id="shape_t1"]
-size = Vector2(54, 52)
+size = Vector2(50, 52)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3iypy"]
+size = Vector2(26, 25)
 
 [node name="ObstacleGroup3" type="Node2D" unique_id=66696692]
 z_index = 1
 y_sort_enabled = true
 
 [node name="SwampTree1_1" type="StaticBody2D" parent="." unique_id=1828333933]
-position = Vector2(-18, -22)
+position = Vector2(-30, -24)
 collision_layer = 32
 collision_mask = 0
 
@@ -25,18 +28,22 @@ position = Vector2(-28, 25)
 texture = ExtResource("1")
 offset = Vector2(0, -5.5)
 
-[node name="Leaves" type="Sprite2D" parent="SwampTree1_1"]
-position = Vector2(-28, 25)
+[node name="Leaves" type="Sprite2D" parent="SwampTree1_1" unique_id=1069204624]
 material = ExtResource("leafmat")
+position = Vector2(-28, 25)
 texture = ExtResource("leaves_SwampTree1")
 offset = Vector2(0, -5.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwampTree1_1" unique_id=206015811]
-position = Vector2(-11, 1)
+position = Vector2(-6, 1)
 shape = SubResource("shape_t1")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="SwampTree1_1" unique_id=587642378]
+position = Vector2(32, 13.5)
+shape = SubResource("RectangleShape2D_3iypy")
+
 [node name="SwampTree3_2" type="StaticBody2D" parent="." unique_id=180875904]
-position = Vector2(-39, -13)
+position = Vector2(-45, -13)
 collision_layer = 32
 collision_mask = 0
 
@@ -47,32 +54,16 @@ texture = ExtResource("2")
 offset = Vector2(0, -19.5)
 flip_h = true
 
-[node name="Leaves" type="Sprite2D" parent="SwampTree3_2"]
+[node name="Leaves" type="Sprite2D" parent="SwampTree3_2" unique_id=764664528]
+material = ExtResource("leafmat")
 position = Vector2(-1, 14)
 scale = Vector2(1, 1.3199998)
-material = ExtResource("leafmat")
 texture = ExtResource("leaves_SwampTree3")
 offset = Vector2(0, -19.5)
 flip_h = true
 
-[node name="SwampTree1_3" type="StaticBody2D" parent="." unique_id=314141719]
-position = Vector2(-13, -9)
-collision_layer = 32
-collision_mask = 0
-
-[node name="Sprite2D" type="Sprite2D" parent="SwampTree1_3" unique_id=1288203708]
-position = Vector2(-18, 12)
-texture = ExtResource("1")
-offset = Vector2(0, -5.5)
-
-[node name="Leaves" type="Sprite2D" parent="SwampTree1_3"]
-position = Vector2(-18, 12)
-material = ExtResource("leafmat")
-texture = ExtResource("leaves_SwampTree1")
-offset = Vector2(0, -5.5)
-
 [node name="SwampTree2_4" type="StaticBody2D" parent="." unique_id=1163345283]
-position = Vector2(39, 3)
+position = Vector2(47, 7)
 collision_layer = 32
 collision_mask = 0
 
@@ -82,15 +73,15 @@ texture = ExtResource("3")
 offset = Vector2(0, -12.5)
 flip_h = true
 
-[node name="Leaves" type="Sprite2D" parent="SwampTree2_4"]
-position = Vector2(-48, -3)
+[node name="Leaves" type="Sprite2D" parent="SwampTree2_4" unique_id=1258661598]
 material = ExtResource("leafmat")
+position = Vector2(-48, -3)
 texture = ExtResource("leaves_SwampTree2")
 offset = Vector2(0, -12.5)
 flip_h = true
 
 [node name="SwampTree3_5" type="StaticBody2D" parent="." unique_id=1908159054]
-position = Vector2(-23, 4)
+position = Vector2(-24, 3)
 collision_layer = 32
 collision_mask = 0
 
@@ -98,13 +89,13 @@ collision_mask = 0
 texture = ExtResource("2")
 offset = Vector2(0, -19.5)
 
-[node name="Leaves" type="Sprite2D" parent="SwampTree3_5"]
+[node name="Leaves" type="Sprite2D" parent="SwampTree3_5" unique_id=675109655]
 material = ExtResource("leafmat")
 texture = ExtResource("leaves_SwampTree3")
 offset = Vector2(0, -19.5)
 
 [node name="SwampTree1_6" type="StaticBody2D" parent="." unique_id=1602269722]
-position = Vector2(-8, 17)
+position = Vector2(-6, 17)
 collision_layer = 32
 collision_mask = 0
 
@@ -113,10 +104,10 @@ position = Vector2(-31, -14)
 scale = Vector2(1.3506331, 1.3884277)
 texture = ExtResource("1")
 offset = Vector2(0, -5.5)
-[node name="Leaves" type="Sprite2D" parent="SwampTree1_6"]
+
+[node name="Leaves" type="Sprite2D" parent="SwampTree1_6" unique_id=801066738]
+material = ExtResource("leafmat")
 position = Vector2(-31, -14)
 scale = Vector2(1.3506331, 1.3884277)
-material = ExtResource("leafmat")
 texture = ExtResource("leaves_SwampTree1")
 offset = Vector2(0, -5.5)
-

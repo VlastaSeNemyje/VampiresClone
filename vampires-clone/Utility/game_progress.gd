@@ -15,12 +15,31 @@ const WORLD_SCENES := [
 ]
 
 const SAVE_PATH := "user://progress.cfg"
+## High scores have their own file, so saving or deleting progress never touches them.
+const SCORES_PATH := "user://highscores.cfg"
 
 signal progress_changed
 
 
 func _ready() -> void:
 	load_progress()
+
+
+# One best score per world (each world has its own character). 0 = nothing saved yet.
+func get_high_score(index: int) -> int:
+	var cfg = ConfigFile.new()
+	cfg.load(SCORES_PATH)   # a missing file just leaves the config empty
+	return int(cfg.get_value("highscores", "world_%d" % index, 0))
+
+
+# Saves the score only if it beats the stored one.
+func submit_score(index: int, score: int) -> void:
+	if score <= get_high_score(index):
+		return
+	var cfg = ConfigFile.new()
+	cfg.load(SCORES_PATH)
+	cfg.set_value("highscores", "world_%d" % index, score)
+	cfg.save(SCORES_PATH)
 
 
 func is_unlocked(index: int) -> bool:

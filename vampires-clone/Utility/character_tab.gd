@@ -11,6 +11,7 @@ signal tab_selected(index)
 @onready var portrait: TextureRect = $Portrait
 @onready var name_label: Label = $lbl_name
 @onready var lock_label: Label = $lbl_locked
+@onready var high_score_label: Label = $lbl_highscore
 @onready var selection_border: Panel = $SelectionBorder
 
 var unlocked := false
@@ -78,6 +79,8 @@ func _ready() -> void:
 func refresh() -> void:
 	unlocked = GameProgress.is_unlocked(index)
 	focus_mode = Control.FOCUS_ALL if unlocked else Control.FOCUS_NONE   # the cursor skips locked characters
+	high_score_label.visible = unlocked
+	high_score_label.text = str("High Score: ", GameProgress.get_high_score(index))
 
 	if unlocked:
 		portrait.texture = portrait_texture
