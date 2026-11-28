@@ -16,6 +16,8 @@ extends CharacterBody2D
 @export var win_time: int = 360
 ## Multiplier on all experience picked up from gems (1.0 = full value, 0.75 = 25% less).
 @export_range(0.0, 3.0, 0.05) var experience_gain: float = 0.75
+## Extra multiplier on top of experience_gain in the endless run, after "Continue" (0.5 = half speed).
+@export_range(0.0, 1.0, 0.05) var endless_experience_gain: float = 0.5
 
 @export_group("Level-Up Draft")
 ## Most different attacks the player can hold (the starting attack counts). New attacks stop being offered at this number.
@@ -430,7 +432,10 @@ func heal(amount: float):
 func _on_collect_area_area_entered(area):
 	if area.is_in_group("loot"):
 		var gem_exp = area.collect()
-		calculate_experience(gem_exp * experience_gain)
+		var gain = experience_gain
+		if win_continued:
+			gain *= endless_experience_gain
+		calculate_experience(gem_exp * gain)
 
 func calculate_experience(gem_exp):
 	var exp_required = calculate_experiencecap()
@@ -778,6 +783,14 @@ func _build_pause_gui():
 	btn_continue.click_end.connect(_on_btn_continue_click_end)
 	pausePanel.add_child(btn_continue)
 
+	# Gives up the run: the score still counts, then back to the menu
+	var btn_end = BASIC_BUTTON.instantiate()
+	btn_end.name = "btn_end"
+	btn_end.text = "End"
+	btn_end.position = Vector2(48, 200)
+	btn_end.click_end.connect(_on_btn_end_click_end)
+	pausePanel.add_child(btn_end)
+
 	# Win screen only: return to the same run with score and upgrades intact
 	btnWinContinue = BASIC_BUTTON.instantiate()
 	btnWinContinue.name = "btn_win_continue"
@@ -787,11 +800,10 @@ func _build_pause_gui():
 	btnWinContinue.click_end.connect(_on_btn_win_continue_click_end)
 	deathPanel.add_child(btnWinContinue)
 
-	for btn in [btn_continue, btnWinContinue, deathPanel.get_node("btn_retry"), deathPanel.get_node("btn_menu")]:
+	for btn in [btn_continue, btn_end, btnWinContinue, deathPanel.get_node("btn_retry"), deathPanel.get_node("btn_menu")]:
 		_style_panel_button(btn)
 	# Keyboard: arrows / W S move between the buttons of a panel, Enter / Space confirm
-	btn_continue.link_focus([btn_continue])
-	btn_continue.link_focus([deathPanel.get_node("btn_retry"), deathPanel.get_node("btn_menu")])
+	btn_continue.link_focus([btn_continue, btn_end])
 
 func _button_style(texture: Texture2D, tint: Color) -> StyleBoxTexture:
 	var style := StyleBoxTexture.new()
@@ -846,6 +858,10 @@ func _unhandled_input(event):
 func _on_btn_continue_click_end():
 	pausePanel.visible = false
 	get_tree().paused = false
+
+func _on_btn_end_click_end():
+	GameProgress.submit_score(world_index, int(score))
+	_on_btn_menu_click_end()
 
 func death():
 	btnPause.visible = false
