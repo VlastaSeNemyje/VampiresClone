@@ -24,12 +24,18 @@ func _spawn_idiots():
 	var dir = global_position.direction_to(player.global_position)
 	var side = dir.orthogonal()
 	var count = randi_range(count_min, maxi(count_min, count_max))
+	# Respect the spawner's enemy cap and scale like the rest of the current cycle
+	var spawner = get_parent()
+	if spawner.has_method("free_slots"):
+		count = mini(count, spawner.free_slots())
+	var difficulty = get_meta("difficulty", Vector2.ONE)
 
 	for i in count:
 		var idiot = idiot_scene.instantiate()
 		idiot.charge_direction = dir.rotated(deg_to_rad(randf_range(-angle_jitter_deg, angle_jitter_deg)))
 		idiot.movement_speed *= randf_range(1.0 - speed_variation, 1.0 + speed_variation)
 		get_parent().add_child(idiot)
+		idiot.apply_difficulty(difficulty.x, difficulty.y)
 		# bell-shaped scatter so the mob is dense in the middle and straggly at the edges
 		var across = (randf() + randf() + randf() - 1.5) / 1.5 * spread_width * 0.5
 		var along = (randf() + randf() + randf() - 1.5) / 1.5 * spread_depth * 0.5

@@ -7,6 +7,8 @@ extends CharacterBody2D
 @export var enemy_damage = 1
 ## Enemies with this on are never moved back to the screen edge or pulled to the player by the spawner.
 @export var ignore_recycle := false
+## Endless mode raises hp and damage of every new enemy each cycle. Off for the Nemesis.
+@export var scales_with_difficulty := true
 var knockback = Vector2.ZERO
 
 @export var flash_duration: float = 0.3
@@ -65,6 +67,14 @@ func _ready():
 		var img = Image.create(4, 4, false, Image.FORMAT_RGBA8)
 		img.fill(Color(1, 1, 1, 1))
 		pixel_texture = ImageTexture.create_from_image(img)
+
+# Endless mode: called by the spawner right after the enemy was added to the tree.
+func apply_difficulty(hp_mult: float, damage_mult: float):
+	if not scales_with_difficulty:
+		return
+	hp = ceili(hp * hp_mult)
+	enemy_damage *= damage_mult
+	hitBox.damage = enemy_damage
 
 func apply_slow(multiplier: float, duration: float):
 	slow_multiplier = multiplier if slow_time_left <= 0.0 else minf(slow_multiplier, multiplier)

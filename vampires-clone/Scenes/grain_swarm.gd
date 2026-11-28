@@ -19,6 +19,11 @@ func _spawn_grains():
 		return
 	var dir = global_position.direction_to(player.global_position)
 	var count = randi_range(count_min, maxi(count_min, count_max))
+	# Respect the spawner's enemy cap and scale like the rest of the current cycle
+	var spawner = get_parent()
+	if spawner.has_method("free_slots"):
+		count = mini(count, spawner.free_slots())
+	var difficulty = get_meta("difficulty", Vector2.ONE)
 	var cols = ceili(sqrt(count))
 	var rows = ceili(float(count) / cols)
 
@@ -39,6 +44,7 @@ func _spawn_grains():
 			var grain = grain_scene.instantiate()
 			grain.charge_direction = dir
 			get_parent().add_child(grain)
+			grain.apply_difficulty(difficulty.x, difficulty.y)
 			grain.global_position = global_position + Vector2(xs[i], ys[j]) - center
 			made += 1
 	queue_free()

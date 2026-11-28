@@ -147,6 +147,7 @@ const PANEL_BUTTON_SIZE := Vector2(128, 28)
 @export_range(0.0, 1.0) var pause_button_opacity: float = 0.5
 var btnPause: TextureButton
 var btnWinContinue: Button
+var timerSides: Array[TextureRect] = []   # ornaments on both sides of the timer
 var deathTween: Tween
 var death_panel_start := Vector2.ZERO   # where the end panel starts before sliding in
 var win_continued := false   # true once the player chose to keep playing after winning
@@ -176,6 +177,7 @@ func _style_hud_red() -> void:
 		var x: float = lblTimer.position.x - 26.0 if i == 0 else lblTimer.position.x + lblTimer.size.x + 4.0
 		side.position = Vector2(x, lblTimer.position.y + (lblTimer.size.y - 22.0) * 0.5)
 		lblTimer.get_parent().add_child(side)
+		timerSides.append(side)
 
 
 # "Score: " in the lower right corner of the 640x360 screen. Right-aligned, so it grows to the left.
@@ -876,6 +878,10 @@ func death():
 # Win screen "Continue": back to the same run, keeping score and upgrades
 func _on_btn_win_continue_click_end():
 	win_continued = true
+	# The endless run has no countdown, so the timer leaves the screen
+	lblTimer.visible = false
+	for side in timerSides:
+		side.visible = false
 	if deathTween:
 		deathTween.kill()
 	deathPanel.visible = false

@@ -20,9 +20,22 @@ extends Node2D
 ## Moments where the crowd gets much denser around the player.
 @export var pressure_waves: Array[Pressure_wave] = []
 
+@export_group("Endless Mode")
+## After the base run the waves repeat. Seconds the last waves of a cycle keep spawning while the next cycle's first waves start.
+@export var endless_overlap: int = 30
+## Enemy hp grows by this share (0.5 = 50%) of its base value with every finished cycle.
+@export var difficulty_per_cycle: float = 0.5
+## Enemy damage grows by this share of its base value with every finished cycle.
+@export var damage_per_cycle: float = 0.25
+## Every spawn brings this share more enemies (rounded up) with every finished cycle, until the cap is reached.
+@export var count_per_cycle: float = 0.25
+## No new enemies (swarms included) appear while this many are alive, to keep the game smooth.
+@export var max_enemies: int = 250
+
 @onready var player = get_tree().get_first_node_in_group("player")
 
 var time = 0
+var _delay_counters := {}
 
 const SIDES = ["up", "down", "right", "left"]
 
@@ -33,31 +46,68 @@ func _ready():
 
 func _on_timer_timeout() -> void:
 	time += 1
+	# The run repeats: cycle 0 is the base run, every later cycle replays the same waves stronger.
+	var run_length = maxi(player.win_time, 1)
+	var cycle = (time - 1) / run_length
+	var local_time = (time - 1) % run_length + 1
 	_recycle_far_enemies()
-	_maintain_crowd()
-	var enemy_spawns = spawns
-	for i in enemy_spawns:
-		if time >= i.time_start and time <= i.time_end:
-			if i.spawn_delay_counter < i.enemy_spawn_delay:
-				i.spawn_delay_counter += 1
-			else:
-				i.spawn_delay_counter = 0
-				var new_enemy = i.enemy
-				var counter = 0
-				var group_center = get_random_position()
-				var sides = SIDES.duplicate()
-				sides.shuffle()
-				while counter < i.enemy_num:
-					var enemy_spawn = new_enemy.instantiate()
-					if i.grouped:
-						enemy_spawn.global_position = group_center + Vector2.from_angle(randf() * TAU) * randf_range(0.0, i.group_spread)
-					elif i.surround:
-						enemy_spawn.global_position = get_random_position(0.0, sides[counter % sides.size()])
-					else:
-						enemy_spawn.global_position = get_random_position()
-					add_child(enemy_spawn)
-					counter += 1
+	_maintain_crowd(local_time)
+	var alive = _count_alive()
+	alive = _spawn_cycle(cycle, local_time, alive)
+	# The last waves of the previous cycle keep coming while the first waves of the new one begin
+	if cycle >= 1 and local_time <= endless_overlap:
+		_spawn_cycle(cycle - 1, run_length, alive)
 	emit_signal("changetime", time)
+
+func _count_alive() -> int:
+	var n = 0
+	for e in get_tree().get_nodes_in_group("enemy"):
+		if not e.get("is_dead"):
+			n += 1
+	return n
+
+## How many more enemies may appear before the cap is reached (the swarms ask this too).
+func free_slots() -> int:
+	return maxi(max_enemies - _count_alive(), 0)
+
+# Runs the spawn list for one cycle at the given time of that cycle. Returns the updated enemy count.
+func _spawn_cycle(cycle: int, cycle_time: int, alive: int) -> int:
+	var mult = Vector2(1.0 + difficulty_per_cycle * cycle, 1.0 + damage_per_cycle * cycle)
+	var count_mult = 1.0 + count_per_cycle * cycle
+	for idx in spawns.size():
+		var i = spawns[idx]
+		if cycle_time < i.time_start or cycle_time > i.time_end:
+			continue
+		var key = Vector2i(idx, cycle)
+		var delay_counter = _delay_counters.get(key, 0)
+		if delay_counter < i.enemy_spawn_delay:
+			_delay_counters[key] = delay_counter + 1
+			continue
+		_delay_counters[key] = 0
+		var group_center = get_random_position()
+		var sides = SIDES.duplicate()
+		sides.shuffle()
+		for counter in ceili(i.enemy_num * count_mult):
+			var enemy_spawn = i.enemy.instantiate()
+			# Swarms (they have count_min / count_max) reserve their whole size; the Nemesis ignores the cap
+			var is_swarm = enemy_spawn.get("count_max") != null
+			if is_swarm or enemy_spawn.get("scales_with_difficulty") != false:
+				var need = enemy_spawn.get("count_min") if is_swarm else 1
+				if alive + need > max_enemies:
+					enemy_spawn.free()
+					break
+				alive += enemy_spawn.get("count_max") if is_swarm else 1
+			if i.grouped:
+				enemy_spawn.global_position = group_center + Vector2.from_angle(randf() * TAU) * randf_range(0.0, i.group_spread)
+			elif i.surround:
+				enemy_spawn.global_position = get_random_position(0.0, sides[counter % sides.size()])
+			else:
+				enemy_spawn.global_position = get_random_position()
+			enemy_spawn.set_meta("difficulty", mult)
+			add_child(enemy_spawn)
+			if enemy_spawn.has_method("apply_difficulty"):
+				enemy_spawn.apply_difficulty(mult.x, mult.y)
+	return alive
 
 func _recycle_far_enemies():
 	for e in get_tree().get_nodes_in_group("enemy"):
@@ -66,11 +116,11 @@ func _recycle_far_enemies():
 		if e.global_position.distance_to(player.global_position) > recycle_distance:
 			e.global_position = get_random_position(maxf(forward_spawn_chance, 0.8))
 
-func _maintain_crowd():
+func _maintain_crowd(cycle_time: int):
 	var fraction = min_crowd_fraction
 	var pull_rate = max_pulled_per_second
 	for wave in pressure_waves:
-		if time >= wave.time_start and time <= wave.time_end:
+		if cycle_time >= wave.time_start and cycle_time <= wave.time_end:
 			fraction = maxf(fraction, wave.crowd_fraction)
 			pull_rate = maxi(pull_rate, wave.pulled_per_second)
 	var total = 0
