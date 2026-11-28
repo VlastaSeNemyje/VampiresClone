@@ -25,3 +25,9 @@ func _ready() -> void:
 func _on_player_playerdeath():
 	_dead = true
 	playing = false
+
+
+# The player chose to keep playing after winning: bring the music back
+func _on_player_run_continued():
+	_dead = false
+	play()

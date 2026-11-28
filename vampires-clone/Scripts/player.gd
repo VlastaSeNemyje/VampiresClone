@@ -146,6 +146,10 @@ const PANEL_BUTTON_SIZE := Vector2(128, 28)
 @export var pause_button_position := Vector2(604, 26)
 @export_range(0.0, 1.0) var pause_button_opacity: float = 0.5
 var btnPause: TextureButton
+var btnWinContinue: Button
+var deathTween: Tween
+var death_panel_start := Vector2.ZERO   # where the end panel starts before sliding in
+var win_continued := false   # true once the player chose to keep playing after winning
 var pausePanel: Panel
 
 #Score (built in _build_score_gui, so every player scene gets it)
@@ -155,6 +159,7 @@ var lblScore: Label
 
 #Signal
 signal playerdeath
+signal run_continued
 
 # Timer and level in the menu red, with the button side ornaments on both sides of the timer.
 func _style_hud_red() -> void:
@@ -703,7 +708,7 @@ func change_time(argtime = 0):
 		get_s = str(0, get_s)
 	lblTimer.text = str(get_m,".",get_s)
 	# Surviving until win_time ends the run as a win
-	if time >= win_time and not deathPanel.visible:
+	if time >= win_time and not deathPanel.visible and not win_continued:
 		death()
 
 func adjust_gui_collection(upgrade):
@@ -735,6 +740,7 @@ func adjust_gui_collection(upgrade):
 
 func _build_pause_gui():
 	var gui = deathPanel.get_parent()
+	death_panel_start = deathPanel.position
 
 	# The button is paused together with the game, so it cannot be clicked
 	# while the level-up, end-game or pause panel is open.
@@ -770,7 +776,16 @@ func _build_pause_gui():
 	btn_continue.click_end.connect(_on_btn_continue_click_end)
 	pausePanel.add_child(btn_continue)
 
-	for btn in [btn_continue, deathPanel.get_node("btn_retry"), deathPanel.get_node("btn_menu")]:
+	# Win screen only: return to the same run with score and upgrades intact
+	btnWinContinue = BASIC_BUTTON.instantiate()
+	btnWinContinue.name = "btn_win_continue"
+	btnWinContinue.text = "Continue"
+	btnWinContinue.position = Vector2(48, 120)
+	btnWinContinue.visible = false
+	btnWinContinue.click_end.connect(_on_btn_win_continue_click_end)
+	deathPanel.add_child(btnWinContinue)
+
+	for btn in [btn_continue, btnWinContinue, deathPanel.get_node("btn_retry"), deathPanel.get_node("btn_menu")]:
 		_style_panel_button(btn)
 	# Keyboard: arrows / W S move between the buttons of a panel, Enter / Space confirm
 	btn_continue.link_focus([btn_continue])
@@ -833,19 +848,40 @@ func _on_btn_continue_click_end():
 func death():
 	btnPause.visible = false
 	GameProgress.submit_score(world_index, int(score))   # the run is over, won or lost
+	var won = time >= win_time
 	deathPanel.visible = true
-	deathPanel.get_node("btn_retry").grab_focus()
+	btnWinContinue.visible = won
+	var btn_retry = deathPanel.get_node("btn_retry")
+	var btn_menu = deathPanel.get_node("btn_menu")
+	if won:
+		btnWinContinue.link_focus([btnWinContinue, btn_retry, btn_menu])
+		btnWinContinue.grab_focus()
+	else:
+		btn_retry.link_focus([btn_retry, btn_menu])
+		btn_retry.grab_focus()
 	emit_signal("playerdeath")
 	get_tree().paused = true
-	var tween = deathPanel.create_tween()
-	tween.tween_property(deathPanel,"position",Vector2(220,50),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
-	if time >= win_time:
+	deathPanel.position = death_panel_start
+	deathTween = deathPanel.create_tween()
+	deathTween.tween_property(deathPanel,"position",Vector2(220,50),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	if won:
 		lblResult.text = "Your home is safe"
 		sndVictory.play()
 		GameProgress.unlock_next(world_index)
 	else:
 		lblResult.text = "You Lose"
 		sndLose.play()
+
+
+# Win screen "Continue": back to the same run, keeping score and upgrades
+func _on_btn_win_continue_click_end():
+	win_continued = true
+	if deathTween:
+		deathTween.kill()
+	deathPanel.visible = false
+	btnPause.visible = true
+	get_tree().paused = false
+	emit_signal("run_continued")
 
 
 func _on_btn_menu_click_end():

@@ -258,3 +258,4 @@ bus = &"WorldMusic"
 script = ExtResource("12_c5t2i")
 
 [connection signal="playerdeath" from="Player" to="snd_Music" method="_on_player_playerdeath"]
+[connection signal="run_continued" from="Player" to="snd_Music" method="_on_player_run_continued"]
