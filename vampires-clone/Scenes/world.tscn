@@ -1,5 +1,4 @@
 [gd_scene format=3 uid="uid://mmnk0qyj4ali"]
-[ext_resource type="Script" path="res://Utility/follow_player_ground.gd" id="99_follow"]
 
 [ext_resource type="Texture2D" uid="uid://fl018gp173cx" path="res://Textures/Tiles/Grass.png" id="1_a02cp"]
 [ext_resource type="Material" uid="uid://blycf3g6k4t4" path="res://Shaders/ground_grass.tres" id="1_ground"]
@@ -23,6 +22,7 @@
 [ext_resource type="Script" uid="uid://fml5lvkoohrr" path="res://Utility/story_line.gd" id="18_storyline"]
 [ext_resource type="PackedScene" uid="uid://b5tupvx3wxuwm" path="res://Scenes/mist.tscn" id="19_mist"]
 [ext_resource type="Script" uid="uid://c3s7dhh8tr5fe" path="res://Scenes/Objects/food_stump_field.gd" id="30_stumps"]
+[ext_resource type="Script" uid="uid://epuc8air7yjw" path="res://Utility/follow_player_ground.gd" id="99_follow"]
 
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("4_fo5ed")
@@ -257,19 +257,22 @@ fade_in = 2.0
 [node name="World" type="Node2D" unique_id=26020053]
 
 [node name="Background" type="Sprite2D" parent="." unique_id=167768035]
-script = ExtResource("99_follow")
 texture_filter = 1
 texture_repeat = 2
 material = ExtResource("1_ground")
 texture = ExtResource("1_a02cp")
 region_enabled = true
 region_rect = Rect2(0, 0, 4000, 4000)
+script = ExtResource("99_follow")
 
 [node name="Player" parent="." unique_id=1972239113 instance=ExtResource("2_go701")]
 
 [node name="EnemySpawner" parent="." unique_id=1013572439 instance=ExtResource("3_5a7ea")]
 spawns = Array[ExtResource("4_fo5ed")]([SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19"), SubResource("Spawn_20"), SubResource("Spawn_21"), SubResource("Spawn_22")])
 pressure_waves = Array[ExtResource("10_pw")]([SubResource("Wave_1"), SubResource("Wave_2"), SubResource("Wave_3"), SubResource("Wave_4")])
+difficulty_per_cycle = 1.25
+damage_per_cycle = 0.5
+count_per_cycle = 0.5
 
 [node name="FoodStumpField" type="Node2D" parent="." unique_id=431043961]
 script = ExtResource("30_stumps")

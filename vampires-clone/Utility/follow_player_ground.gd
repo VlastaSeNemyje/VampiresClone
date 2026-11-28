@@ -11,10 +11,10 @@ var _snap: Vector2 = Vector2.ONE
 var _player: Node2D
 
 func _ready() -> void:
-	_start = position
 	_player = get_tree().get_first_node_in_group("player")
-	var sprite := self as Sprite2D
-	if sprite and sprite.material == null and sprite.texture:
+	_start = position
+	var sprite = self
+	if sprite is Sprite2D and sprite.material == null and sprite.texture:
 		_snap = Vector2(sprite.texture.get_width(), sprite.texture.get_height())
 	_update()
 
